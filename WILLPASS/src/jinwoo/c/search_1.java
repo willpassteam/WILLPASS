@@ -22,10 +22,9 @@ public class search_1 implements Action {
 				String date=request.getParameter("date");
 				//Date date=(Date) request.getParameter("date");
 				
-				
-				
+				//api 검색값 결과 
 				//forward의 값만 넘어가기 때문에 controller에서 request값을 못받아옴.
-				
+				//session 으로 전송 또는 jsp 페이지로 바로 RequestDispatcher 방식으로 전송
 				
 				
 				//회원 가입 성공시.. 로그인 페이지로 이동 시킨다.
