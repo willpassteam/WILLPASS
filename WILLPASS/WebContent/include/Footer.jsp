@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="margin-top: 100px;">
 		<div class="row">
 			<div class="col-sm-2">
 				<h5>예약센터</h5>

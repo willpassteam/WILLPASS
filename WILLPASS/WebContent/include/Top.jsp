@@ -13,6 +13,7 @@ a{
 }
 nav{
 	height: 120px;
+	margin-bottom:100px;
 }
 
 .second-nav li{
