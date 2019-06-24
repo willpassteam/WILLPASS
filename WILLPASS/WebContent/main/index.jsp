@@ -14,13 +14,14 @@
 
 <style type="text/css">
 
-
+.Search{
+	
+}
 
 .subject{
 	height: 70px;
 
 }
-
 
 
 </style>
@@ -89,7 +90,7 @@
 				<div class="col-sm-12">
 					<div class="col-sm-12">
 						<form autocomplete="off" >
-							<div class="well" style="background-color: #58ACFA;" >
+							<div class="Search" style="padding:10px;border-radius: 5px; " >
 								<div class="row">
 									<div class="col-sm-12">
 										<input type="radio" name="one" value="왕복"><label for="one">왕복</label>
@@ -131,6 +132,26 @@
 						</form>
 						
 						<br>
+						<!-- <div class="row">
+							<div class="col-sm-12">
+								<div class="col-sm-3">
+									<h4>싱가포르</h4>
+									<img alt="" src="../img/01.jpg" width="250">
+								</div>
+								<div class="col-sm-3">
+									<h4>파리</h4>
+									<img alt="" src="../img/02.jpg" width="250">
+								</div>
+								<div class="col-sm-3">
+									<h4>타이페이</h4>
+									<img alt="" src="../img/03.jpg" width="250">
+								</div>
+								<div class="col-sm-3">
+									<h4>도쿄</h4>
+									<img alt="" src="../img/04.jpg" width="250">
+								</div>
+							</div>
+						</div> -->
 						<br>
 						<div class="row">
 							<div class="col-sm-12">
@@ -142,23 +163,23 @@
 							<div class="col-sm-3">
 								<h3 class="subject">공식 소셜 미디어 채널</h3>
 								
-								<h5>전세계 6천만명이 사용하고 있는 앱스토어 스카이스캐너 앱을 만나보세요. 아이폰, 안드로이드, 테블릿을 지원합니다.</h5>
+								<h5>전세계 6천만명이 사용하고 있는 앱스토어 WILLPASS 앱을 만나보세요. 아이폰, 안드로이드, 테블릿을 지원합니다.</h5>
 							
 							</div>
 							<div class="col-sm-3">
 								<h3 class="subject">인기추천 여행지 스캔하기</h3>
 								
-								<h5>여행 관련 뉴스, 사진, 그리고 이벤트에 관심이 있으시다면 스카이스캐너 공식 페이스북 과 인스타그램 을 방문해 주세요.</h5>
+								<h5>여행 관련 뉴스, 사진, 그리고 이벤트에 관심이 있으시다면 WILLPASS 공식 페이스북 과 인스타그램 을 방문해 주세요.</h5>
 							</div>
 							<div class="col-sm-3">
 								<h3 class="subject">여행 뉴스와 블로그</h3>
 								
-								<h5>스카이스캐너 뉴스 와 함께 전문 여행자가 알려주는 여행 관련 팁, 여행 블로그 포스트 를 확인하세요.</h5>
+								<h5>WILLPASS 뉴스 와 함께 전문 여행자가 알려주는 여행 관련 팁, 여행 블로그 포스트 를 확인하세요.</h5>
 							</div>
 							<div class="col-sm-3">
 								<h3 class="subject">스카이스캐너로 가격비교</h3>
 								
-								<h5>스카이스캐너는 수백만개의 항공권 가격을 국내외 항공사와 여행사로부터 비교하여 가장 저렴한 항공권을 쉽고 빠르게 찾아드립니다. 항공사, 여행사, 땡처리, 얼리버드 그리고 특가 항공권까지 검색 할 수 있습니다. 전세계 호텔과 렌터카 가격 비교도 지원합니다. 고객을 먼저 생각하는 당사의 서비스를 더 자세히 알아보세요.</h5>
+								<h5>WILLPASS는 수백만개의 항공권 가격을 국내외 항공사와 여행사로부터 비교하여 가장 저렴한 항공권을 쉽고 빠르게 찾아드립니다. 항공사, 여행사, 땡처리, 얼리버드 그리고 특가 항공권까지 검색 할 수 있습니다. 전세계 호텔과 렌터카 가격 비교도 지원합니다. 고객을 먼저 생각하는 당사의 서비스를 더 자세히 알아보세요.</h5>
 							</div>
 							
 						</div>

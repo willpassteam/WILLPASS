@@ -34,7 +34,7 @@ nav{
 	<nav class="navbar">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#"><img alt="비행기 이미지" src="../img/Logo.PNG"></a>
+          <a class="navbar-brand" href="#"><img alt="비행기 이미지" src="../img/Logo.PNG" width="400px"></a>
         </div>
         <div id="navbar">
           <ul class="nav navbar-nav navbar-right social first-nav">
