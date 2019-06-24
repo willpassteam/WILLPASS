@@ -88,7 +88,7 @@
 			
 				<div class="col-sm-12">
 					<div class="col-sm-12">
-						<form >
+						<form autocomplete="off" >
 							<div class="well" style="background-color: #58ACFA;" >
 								<div class="row">
 									<div class="col-sm-12">
@@ -107,7 +107,7 @@
 									</div>
 									<div class="col-sm-3">
 										<label for="">가는날</label>
-										<input type='text' class="form-control" id='from' name="" />
+										<input type='text' class="form-control" id='from' name=""  />
 									</div>
 									<div class="col-sm-3">
 										<label for="">오는날</label>

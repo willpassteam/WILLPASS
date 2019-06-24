@@ -7,7 +7,7 @@
 <title></title>
 
 <style type="text/css">
-a{
+nav a{
 	color: black;
 
 }
