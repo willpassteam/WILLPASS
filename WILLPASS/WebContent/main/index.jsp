@@ -6,11 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 <style type="text/css">
 
@@ -88,44 +87,61 @@
 		<div class="row" >
 			
 				<div class="col-sm-12">
-					<div class="col-sm-12">
+					<div class="col-sm-12 ">
 						<form autocomplete="off" >
-							<div class="Search" style="padding:10px;border-radius: 5px; " >
+							<div class="Search bg-light" style="padding:10px;border-radius: 5px; " >
 								<div class="row">
 									<div class="col-sm-12">
-										<input type="radio" name="one" value="왕복"><label for="one">왕복</label>
-										<input type="radio" name="one" value="편도" checked="checked"><label for="one">편도</label>
+										<div class="custom-control custom-radio custom-control-inline">
+									      <input type="radio" class="custom-control-input" id="customRadio1" name="example1" value="편도" checked="checked">
+									      <label class="custom-control-label" for="customRadio1">편도</label>
+									    </div>
+									    <div class="custom-control custom-radio custom-control-inline">
+									      <input type="radio" class="custom-control-input" id="customRadio2" name="example1" value="왕복">
+									      <label class="custom-control-label" for="customRadio2">왕복</label>
+									    </div>
+									</div>
+									 
+								</div>
+								<br>
+								<div class="row 1row" >
+									<div class="col-sm-3">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='fas fa-plane-departure' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="출발지">
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='fas fa-plane-arrival	' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="도착지">
+										</div>
+									</div>
+ 									<div class="col-sm-6">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='	far fa-calendar-alt' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="date" class="form-control" placeholder="가는날" width="50px">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='	far fa-hand-point-right' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="date" class="form-control" placeholder="오는날" width="50px">
+										</div>
 									</div>
 								</div>
-								<div class="row 1row" >
-									<div class="col-sm-2">
-										<label for="">출발지</label>
-										<input type="text" class="form-control" name="">
-									</div>
-									<div class="col-sm-2">
-										<label for="">도착지</label>
-										<input type="text" class="form-control" name="">
-									</div>
+								<div class="row">
 									<div class="col-sm-3">
-										<label for="">가는날</label>
-										<input type='text' class="form-control" id='from' name=""  />
-									</div>
-									<div class="col-sm-3">
-										<label for="">오는날</label>
-										<input type='text' class="form-control" id='to' name="" />
-									</div>
-									<div class="col-sm-1">
-										<label for="">인원수</label>
-									    <select class="form-control" id="" name="">
-									        <option>1</option>
-									        <option>2</option>
-									        <option>3</option>
-									        <option>4</option>
-									    </select>
-									</div>
-									<div class="col-sm-1">
-										<br>
-										<input type="submit" class="btn btn-success" value="검색">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='fas fa-plane-arrival	' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="성인수">
+										</div>
 									</div>
 								</div>
 							</div>	
