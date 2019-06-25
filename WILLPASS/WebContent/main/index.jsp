@@ -5,18 +5,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- Bootstrap사용을 위한것 -->
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<!-- 달력을 위한 css + js --> >
+	
+<!-- 아이콘을 위한 css -->
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 <style type="text/css">
-
-.Search{
-	
-}
-
 .subject{
 	height: 70px;
 
@@ -24,55 +20,19 @@
 
 
 </style>
-  <script>
-  $( function() {
-	  
-	  $.datepicker.setDefaults({
-	        dateFormat: 'yymmdd',
-	        prevText: '이전 달',
-	        nextText: '다음 달',
-	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-	        showMonthAfterYear: true,
-	        yearSuffix: '년'
-	    });
-	  
-	  
-      from = $( "#from" )
-        .datepicker({
-          defaultDate: "+1w",
-          changeMonth: true,
-          numberOfMonths: 2
-        })
-        .on( "change", function() {
-          to.datepicker( "option", "minDate", getDate( this ) );
-        }),
-      to = $( "#to" ).datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 2
-      })
-      .on( "change", function() {
-        from.datepicker( "option", "maxDate", getDate( this ) );
-      });
- 
-    function getDate( element ) {
-      var date;
-      try {
-        date = $.datepicker.parseDate( dateFormat, element.value );
-      } catch( error ) {
-        date = null;
-      }
- 
-      return date;
-    }
-  } );
-  </script>
-
-
+<script type="text/javascript">
+    $(function () {
+    	$('#sandbox-container .input-daterange').datepicker({
+    	    format: "yyyy/mm/dd",
+    	    maxViewMode: 1,
+    	    language: "ko",
+    	    orientation: "bottom auto",
+    	    autoclose: true,
+    	    todayHighlight: true,
+    	    datesDisabled: ['06/06/2019', '06/21/2019']
+    	});
+    });
+</script>
 
 </head>
 <body>
@@ -121,16 +81,20 @@
 										    <input type="text" class="form-control" placeholder="도착지">
 										</div>
 									</div>
- 									<div class="col-sm-6">
-										<div class="input-group mb-3">
+ 									<div class="col-sm-3" >
+										<div class="input-group mb-3 input-daterange" id="datepicker1">
 										    <div class="input-group-prepend">
 										      <span class="input-group-text"><i class='	far fa-calendar-alt' style='font-size:14px'></i></span>
 										    </div>
-										    <input type="date" class="form-control" placeholder="가는날" width="50px">
+										    <input type="text" class="form-control" id="datetimepicker6" name="start" placeholder="가는날" width="50px">
+									    </div>
+									</div>
+									<div class="col-sm-3">    
+									    <div class="input-group mb-3 rt input-daterange" id="datepicker2">	
 										    <div class="input-group-prepend">
-										      <span class="input-group-text"><i class='	far fa-hand-point-right' style='font-size:14px'></i></span>
+										      <span class="input-group-text"><i class='	far fa-calendar-alt' style='font-size:14px'></i></span>
 										    </div>
-										    <input type="date" class="form-control" placeholder="오는날" width="50px">
+										    <input type="text" class="form-control" id="datetimepicker7" name="end" placeholder="오는날" width="50px">
 										</div>
 									</div>
 								</div>
@@ -138,9 +102,9 @@
 									<div class="col-sm-3">
 										<div class="input-group mb-3">
 										    <div class="input-group-prepend">
-										      <span class="input-group-text"><i class='fas fa-plane-arrival	' style='font-size:14px'></i></span>
+										      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
 										    </div>
-										    <input type="text" class="form-control" placeholder="성인수">
+										    <input type="text" class="form-control" placeholder="인원수">
 										</div>
 									</div>
 								</div>
