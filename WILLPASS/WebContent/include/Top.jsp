@@ -40,7 +40,6 @@ nav a{
 
 </style>
 
-<jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <script type="text/javascript">
 $(function(){
 	$(".nt").on("mouseover",function(){
@@ -49,8 +48,11 @@ $(function(){
 		$(".nc").removeClass('show');
 		$(".nc:eq("+index+")").addClass('show');
 	});
-	$(".n").on("mouseout",function(){
-		$(".nc").removeClass('show');
+	
+	$(".menubar").on("mouseleave",function(){
+			
+			$(".nc").removeClass('show');
+		
 	});
 	
 })	
@@ -65,12 +67,13 @@ $(function(){
  	<div class="row " style="background-color: #0174DF"  >
  		<div class="col-sm-8"></div>
  		<div class="col-sm-2">
-	 		<h6 class="text-dack float-right">
-	 			<a class="text-light" href="#">로그인</a>|
-	 			<a class="text-light" href="#">회원가입</a>|
-	 			<a class="text-light" href="#">고객센터</a>|
+	 		<h6 class="text-dack float-right py-1">
+	 		<small>
+	 			<a class="text-light" href="../user/Userlogin.jsp">로그인</a> | 
+	 			<a class="text-light" href="../user/Userjoinimg.jsp">회원가입</a> | 
+	 			<a class="text-light" href="#">고객센터</a> | 
 	 			<a class="text-light" href="#">사이트맵</a>
-	 		
+	 		</small>
 	 		</h6>
  		</div>	
  		<div class="col-sm-2"></div>
@@ -79,9 +82,11 @@ $(function(){
  	<div class="clearfix"></div>
 	<div class="container">
 	<div class="container">
-		<div class="row" height="130px">
+		<div class="row mb-3" height="130px" style="border-bottom: 2px solid #0174DF">
 			<div class="col-sm-4">
-				<img alt="" src="../img/Logo.PNG">
+				<a href="../main/index.jsp">
+					<img alt="" src="../img/Logo.PNG">
+				</a>
 			</div>
 			<div class="col-sm-8 mt">
 				<div class="row navrow">
@@ -125,7 +130,7 @@ $(function(){
 		</div>
 	</div>
 	<div class="container menubar">
-		<div class="row w-100">
+		<div class="row w-100 menurow">
 			<div class="collapse nc w-100">
 				<div class="nv w-100" >
 					<ul class="list-group list-group-horizontal" >

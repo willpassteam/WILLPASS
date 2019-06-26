@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <script type="text/javascript">
-function fn_img(){
-	document.getElementById("con1").setAttribute('style',"display:none");
-	document.getElementById("con2").setAttribute('style',"display:inline");
-}
 
 $("#allCheck").on('toggle',function(){
 	$("[name=Check]").attr('checked','checked');
@@ -36,32 +32,20 @@ $("#allCheck").on('toggle',function(){
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
-	<div class="container" id="con1" >
-		<div class="row">
-			<div class="col-sm-12" align="center">
-				<h2>회원가입을 환영합니다.</h2>
-				<br>
-				<h5>여행의 지혜, FLY SMART 에어부산 회원가입을 시작하세요!</h5>
-				<br>
-				<h4>가입유형</h4>
-				<img id="click"alt="" src="../img/회원가입창.PNG" width="60%" onclick="fn_img();">
-			</div>
-		</div>
-	</div>
 	
 	
-	<div class="container" id="con2" style="display: none;">
+	
+	<div class="container" id="con2">
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6">
 				<div class="row">
-					
-					<form >
-						<div class="col-sm-2"></div>	
-						<div class="col-sm-8">
+				
+					<div class="col-sm-12">
+						<form >
 							<div class="box" align="left" data-toggle="buttons">
 								<label class="checkbox-inline"><input type="checkbox" autocomplete="off" name="Check" id="allCheck" ><b>아래 약관 및 개인정보 수집,이용 등에 모두 동의 합니다.</b></label><a href="#" class="pull-right">보기</a><br>
-								<label class="checkbox-inline"></span><input type="checkbox" name="Check" >서비스 약관</label><a href="#" class="pull-right">보기</a><br>
+								<label class="checkbox-inline"></span><input type="checkbox" name="Check" >서비스 약관</label><a href="#" class="">보기</a><br>
 								<label class="checkbox-inline"></span><input type="checkbox" name="Check" >개인정보 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
 								<label class="checkbox-inline"></span><input type="checkbox" name="Check" >고유식별정보의 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
 							</div>
@@ -80,11 +64,8 @@ $("#allCheck").on('toggle',function(){
 							<div align="center">
 								<input type="submit" value="회원 가입" class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-danger" value="이전 페이지로">
 							</div>
-					
-						</div>
-						<div class="col-sm-2"></div>
-					</form>	
-					
+						</form>	
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-3"></div>

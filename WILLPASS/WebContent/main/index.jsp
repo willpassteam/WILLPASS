@@ -99,13 +99,32 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-3">
+									<div class="col-sm-2">
 										<div class="input-group mb-3">
 										    <div class="input-group-prepend">
 										      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
 										    </div>
-										    <input type="text" class="form-control" placeholder="인원수">
+										    <input type="text" class="form-control" placeholder="성인">
 										</div>
+									</div>
+									<div class="col-sm-2">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="소아">
+										</div>
+									</div>
+									<div class="col-sm-2">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="유아">
+										</div>
+									</div>
+									<div class="col-sm-6">
+											<input type="submit" class="btn btn-outline-primary " value="항공권 검색">
 									</div>
 								</div>
 							</div>	

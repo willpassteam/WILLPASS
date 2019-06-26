@@ -13,46 +13,52 @@
 	<%-- Top End --%>
 	<div class="container">
 		<div class="row" align="center">
-			<h2 >로그인</h2>
-			<br>
-			<h5>개인 정보 보호를 위해 20분 동안 작동이 없으면 로그아웃 됩니다.</h5>
+			<div class="col-sm-12">
+				<h2>로그인</h2>
+				<br>
+				<h5>개인 정보 보호를 위해 20분 동안 작동이 없으면 로그아웃 됩니다.</h5>
+			</div>
 		</div>
 		<br>
-		<div class="row">
-			<h3>회원 로그인</h3>
-			<div class="row well">
-				<div class="col-sm-6">	
-					<form action="">
-						<div class="col-sm-1"></div>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" name="user_id" placeholder="이메일 주소" ><br>
-							<input type="password" class="form-control" name="user_pwd" placeholder="비밀번호"><br>
-							<input type="checkbox" name="" ><label for="">ID 저장</label>
-							<h5>* 아이디 / 비밀번호는 영문 대소문자를 구분합니다. </h5>
+		<div class="row ">
+			<div class="col-sm-12 ">
+				<h3>회원 로그인</h3>
+			</div>
+			<div class="col-sm-12 p-3">
+				<div class="row ">
+					<div class="col-sm-6">
+						<form>
+						<div class="row">
+							<div class="col-sm-1"></div>
+							<div class="col-sm-7">
+								<input type="email" class="form-control" placeholder="이메일 주소" ><br>
+								<input type="password" class="form-control" placeholder="비밀번호">
+								<br>
+								<h6>* 아이디 / 비밀번호는 영문 대소문자를 구분합니다. </h6>
+							</div>
+							<div class="col-sm-3">
+								<br>
+								<input type="submit" class="btn btn-primary btn-lg" value="로그인">
+							</div>
+							<div class="col-sm-1"></div>
 						</div>
-						<div class="col-sm-3">
-							<br>
-							<input type="submit" class="btn btn-primary btn-lg" value="로그인">
-						</div>
-						<div class="col-sm-1"></div>
 					</form>
-				</div>
-				
-				<div class="col-sm-6">	
-					<div class="col-sm-1"></div>
-					<div class="col-sm-10">
-						<br>
-						<br>
-						<h4><a href="#">아이디 찾기</a>|<a href="#">비밀번호 찾기</a></h4>
-						<a class="btn btn-default">신규회원가입</a>
 					</div>
-					<div class="col-sm-1"></div>
+					
+					<div class="col-sm-6">	
+						<div class="col-sm-12">
+							<br>
+							<br>
+							<h4><a href="../user/Userfind.jsp">아이디 찾기</a> | <a href="../user/Userfind.jsp">비밀번호 찾기</a></h4>
+						</div>
+					</div>
 				</div>
 			</div>
 			<br>
+			<br>
 			<h3>비회원 로그인</h3>
-			<div class="row well">
-				<div class="col-sm-6">
+			<div class="row  p-3">
+				<div class="col-sm-6 ">
 					<form>
 						<div class="row">
 							<div class="col-sm-1"></div>
@@ -73,12 +79,12 @@
 							<h4>SNS로그인</h4>
 							<img alt="" src="../img/naver.PNG"><img alt="" src="../img/Google.PNG"><img alt="" src="../img/kakao.PNG">
 							<ul>
-								<li><h5>비회원 로그인 시 이벤트 참여 및 스탬프 적립할 수 없습니다.</h5></li>
-								<li><h5>예약내역은 [마이페이지 > 나의 예약 조회]에서 확인 가능합니다.</h5></li>
-								<li><h5>비회원 로그인 시 계정정보를 반드시 기억해 두셔야 예약 내역을
-								<br>조회하실 수 있습니다.</h5></li>
-								<li><h5>에어부산 홈페이지 FAQ에서 비회원 로그인 및 예약조회 방법
-								<br>확인이 가능합니다.</h5></li>
+								<li><h6>비회원 로그인 시 이벤트 참여 및 스탬프 적립할 수 없습니다.</h6></li>
+								<li><h6>예약내역은 [마이페이지 > 나의 예약 조회]에서 확인 가능합니다.</h6></li>
+								<li><h6>비회원 로그인 시 계정정보를 반드시 기억해 두셔야 예약 내역을
+								<br>조회하실 수 있습니다.</h6></li>
+								<li><h6>에어부산 홈페이지 FAQ에서 비회원 로그인 및 예약조회 방법
+								<br>확인이 가능합니다.</h6></li>
 							</ul>							
 						</div>
 						<div class="col-sm-1"></div>
@@ -86,7 +92,8 @@
 				</div>
 				<div class="col-sm-6">
 					<h4>개인정보보호를 위한 이용자 동의(필수)</h4>
-					<textarea rows="10" cols="75" style="text-align: left;resize: none;" readonly="readonly">상기 개인정보의 수집, 이용 사항에 동의합니다. 비회원으로 예매하실 경우 요금 할인과 각종 이벤트 혜택의 기회가 상실 됩니다. 항공권 예매정보는 마이 페이지에서 비회원 예매정보 보기에서 보실 수 있습니다.
+					<textarea rows="10" cols="60" style="text-align: left;resize: none;" readonly="readonly">
+상기 개인정보의 수집, 이용 사항에 동의합니다. 비회원으로 예매하실 경우 요금 할인과 각종 이벤트 혜택의 기회가 상실 됩니다. 항공권 예매정보는 마이 페이지에서 비회원 예매정보 보기에서 보실 수 있습니다.
 1. 수집하는 개인정보 항목 및 수집방법1) 수집항목가. 부가 서비스 및 맞춤식 서비스 이용 과정에서 해당 서비스의 이용자에 한해서만 아래와 같은 정보들이 수집될 수 있습니다.
 &lt;비회원 항공권 예약발권&gt;
 - 필수항목 : 성명, 전화번호(휴대폰 번호), 이메일주소
@@ -133,7 +140,7 @@
 
 4. 개인정보의 수집 및 이용에 대한 동의 거부 관련
 당사는 서비스 제공에 필요한 최소한의 정보만을 수집합니다. 이용자는 개인정보의 수집 및 이용 동의에 거부하실 수 있으며, 다만 이 경우 서비스의 일부 또는 전부 이용이 어려울 수 있습니다.
-				</textarea>
+				</textarea><br>
 					<input type="checkbox" name=""><label for="">개인정보보호를 위한 이용자 동의(필수)</label>
 					
 				</div>
