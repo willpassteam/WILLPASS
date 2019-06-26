@@ -5,83 +5,193 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="../css/bootstrap.min.css">
+<!-- Bootstrap사용을 위한것 -->
+<jsp:include page="../include/Bootstrap.jsp"></jsp:include>
+<!-- 달력을 위한 css + js --> >
+	
+<!-- 아이콘을 위한 css -->
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="../js/bootstrap.min.js"></script>
 <style type="text/css">
+.subject{
+	height: 70px;
 
-.1row p{
-	color:white;
 }
-.1row span{
-	color:white;
-}
-
 
 
 </style>
 <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
-
-
+    $(function () {
+    	$('#sandbox-container .input-daterange').datepicker({
+    	    format: "yyyy/mm/dd",
+    	    maxViewMode: 1,
+    	    language: "ko",
+    	    orientation: "bottom auto",
+    	    autoclose: true,
+    	    todayHighlight: true,
+    	    datesDisabled: ['06/06/2019', '06/21/2019']
+    	});
+    });
+</script>
 
 </head>
 <body>
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
-		
+	
+ 
+
 	
 	<div class="container">
-		<div class="row 1row" >
-			<form>
-				<div class="col-sm-12" style="background-image: url('../img/searchback.jpg');">
-					<div class="col-sm-12">
+		<div class="row" >
+			
+				<div class="col-sm-12">
+					<div class="col-sm-12 ">
+						<form autocomplete="off" >
+							<div class="Search bg-light" style="padding:10px;border-radius: 5px; " >
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="custom-control custom-radio custom-control-inline">
+									      <input type="radio" class="custom-control-input" id="customRadio1" name="example1" value="편도" checked="checked">
+									      <label class="custom-control-label" for="customRadio1">편도</label>
+									    </div>
+									    <div class="custom-control custom-radio custom-control-inline">
+									      <input type="radio" class="custom-control-input" id="customRadio2" name="example1" value="왕복">
+									      <label class="custom-control-label" for="customRadio2">왕복</label>
+									    </div>
+									</div>
+									 
+								</div>
+								<br>
+								<div class="row 1row" >
+									<div class="col-sm-3">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='fas fa-plane-departure' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="출발지">
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='fas fa-plane-arrival	' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="도착지">
+										</div>
+									</div>
+ 									<div class="col-sm-3" >
+										<div class="input-group mb-3 input-daterange" id="datepicker1">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='	far fa-calendar-alt' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" id="datetimepicker6" name="start" placeholder="가는날" width="50px">
+									    </div>
+									</div>
+									<div class="col-sm-3">    
+									    <div class="input-group mb-3 rt input-daterange" id="datepicker2">	
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='	far fa-calendar-alt' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" id="datetimepicker7" name="end" placeholder="오는날" width="50px">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="성인">
+										</div>
+									</div>
+									<div class="col-sm-2">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="소아">
+										</div>
+									</div>
+									<div class="col-sm-2">
+										<div class="input-group mb-3">
+										    <div class="input-group-prepend">
+										      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
+										    </div>
+										    <input type="text" class="form-control" placeholder="유아">
+										</div>
+									</div>
+									<div class="col-sm-6">
+											<input type="submit" class="btn btn-outline-primary " value="항공권 검색">
+									</div>
+								</div>
+							</div>	
+						</form>
+						
+						<br>
+						<!-- <div class="row">
+							<div class="col-sm-12">
+								<div class="col-sm-3">
+									<h4>싱가포르</h4>
+									<img alt="" src="../img/01.jpg" width="250">
+								</div>
+								<div class="col-sm-3">
+									<h4>파리</h4>
+									<img alt="" src="../img/02.jpg" width="250">
+								</div>
+								<div class="col-sm-3">
+									<h4>타이페이</h4>
+									<img alt="" src="../img/03.jpg" width="250">
+								</div>
+								<div class="col-sm-3">
+									<h4>도쿄</h4>
+									<img alt="" src="../img/04.jpg" width="250">
+								</div>
+							</div>
+						</div> -->
+						<br>
 						<div class="row">
 							<div class="col-sm-12">
-								<input type="radio" name="one" value="왕복"><span>왕복</span>
-								<input type="radio" name="one" value="편도" checked="checked"><span>편도</span>
+								<img alt="" src="../img/MainLogo.PNG" width="100%">
 							</div>
 						</div>
+						
 						<div class="row">
 							<div class="col-sm-3">
-								<p>출발지</p>
-								<input type="text" class="form-control" name="Departures">
+								<h3 class="subject">공식 소셜 미디어 채널</h3>
+								
+								<h5>전세계 6천만명이 사용하고 있는 앱스토어 WILLPASS 앱을 만나보세요. 아이폰, 안드로이드, 테블릿을 지원합니다.</h5>
+							
 							</div>
 							<div class="col-sm-3">
-								<p>도착지</p>
-								<input type="text" class="form-control" name="Arrivals">
-							</div>
-							<div class="col-sm-2">
-								<p>가는날</p>
-								<input type='text' class="form-control" id='datetimepicker4' />
-
-
-
-
+								<h3 class="subject">인기추천 여행지 스캔하기</h3>
 								
+								<h5>여행 관련 뉴스, 사진, 그리고 이벤트에 관심이 있으시다면 WILLPASS 공식 페이스북 과 인스타그램 을 방문해 주세요.</h5>
 							</div>
-							<div class="col-sm-2"></div>
-							<div class="col-sm-2"></div>
+							<div class="col-sm-3">
+								<h3 class="subject">여행 뉴스와 블로그</h3>
+								
+								<h5>WILLPASS 뉴스 와 함께 전문 여행자가 알려주는 여행 관련 팁, 여행 블로그 포스트 를 확인하세요.</h5>
+							</div>
+							<div class="col-sm-3">
+								<h3 class="subject">스카이스캐너로 가격비교</h3>
+								
+								<h5>WILLPASS는 수백만개의 항공권 가격을 국내외 항공사와 여행사로부터 비교하여 가장 저렴한 항공권을 쉽고 빠르게 찾아드립니다. 항공사, 여행사, 땡처리, 얼리버드 그리고 특가 항공권까지 검색 할 수 있습니다. 전세계 호텔과 렌터카 가격 비교도 지원합니다. 고객을 먼저 생각하는 당사의 서비스를 더 자세히 알아보세요.</h5>
+							</div>
+							
 						</div>
 					</div>
 				</div>
-			</form>
+			
 		</div>		
 	
 	</div>
 	
-	<%-- Fotter Start --%>
-	<jsp:include page="../include/Fotter.jsp"></jsp:include>
-	<%-- Fotter End --%>
+	<%-- Footer Start --%>
+	<jsp:include page="../include/Footer.jsp"></jsp:include>
+	<%-- Footer End --%>
 	
 	
 </body>
