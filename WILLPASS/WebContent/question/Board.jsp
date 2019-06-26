@@ -4,8 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>공지 사항</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
+<style type="text/css">
+	.floatMenu{
+		position:absolute;
+		bottom: 650px;
+		left:250px; 
+		 
+		
+	}
+</style>
+
 </head>
 <body>
 

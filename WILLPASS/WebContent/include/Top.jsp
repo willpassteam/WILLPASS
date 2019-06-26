@@ -71,7 +71,7 @@ $(function(){
 	 		<small>
 	 			<a class="text-light" href="../user/Userlogin.jsp">로그인</a> | 
 	 			<a class="text-light" href="../user/Userjoinimg.jsp">회원가입</a> | 
-	 			<a class="text-light" href="#">고객센터</a> | 
+	 			<a class="text-light" href="../question/Board.jsp">고객센터</a> | 
 	 			<a class="text-light" href="#">사이트맵</a>
 	 		</small>
 	 		</h6>
