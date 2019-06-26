@@ -9,8 +9,8 @@
 <style type="text/css">
 	.floatMenu{
 		position:absolute;
-		bottom: 650px;
-		left:250px; 
+		bottom: 550px;
+		left:200px; 
 		 
 		
 	}

@@ -10,14 +10,53 @@
 <!-- 아이콘을 위한 css -->
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 	<script type="text/javascript">
+	$(function(){
 		$(".bt").on('click',function(){
-			var index = 
+			$(".card").attr("style","display:none");
+			var index = $(".bt").index(this);
+			if(index == 0){
+				for (var i = 0; i < 5; i++) {
+					for (var j = 0; j < 5; j++) {
+						$(".card:eq("+((i*5)+j)+")").attr("style","display:flex");
+					}
+					
+				}
+			}else{
+				index = index * 5;
+				for (var i = 1; i < 6; i++) {
+					$(".card:eq("+(index-i)+")").attr("style","display:flex");
+				}
+				
+			}
 			
-		})
+		});
+		$("[name=searchbtn]").on("click",function(){
+			$(".card").attr("style","display:none");
+			var leng = $(".card").length;
+			for (var i = 0; i < leng; i++) {
+				
+				var cardlink = $(".card-link:eq("+i+")").text();
+				var cardbody = $(".card-body:eq("+i+")").text();
+				var search = $("[name=search]").val();
+				if(cardlink.indexOf(search) != -1 || cardbody.indexOf(search) != -1 ){
+					$(".card:eq("+i+")").attr("style","display:flex");
+				}
+				
+				
+			}
+			
+		});
+	});	
+		
 		
 	
 	</script>
-
+<style type="text/css">
+.card{
+	
+	
+}
+</style>
 </head>
 <body>
 
@@ -40,9 +79,9 @@
 		<br>
 		<div class="row mx-2">
 			<div class="input-group">
-			    <input type="text" class="form-control" placeholder="검색어">
+			    <input type="text" class="form-control" name="search" placeholder="검색어">
 			    <div class="input-group-prepend">
-			      <span class="input-group-prepend"><button class="btn btn-success" type="button">검색</button> </span>
+			      <span class="input-group-prepend"><button class="btn btn-success" type="button" name="searchbtn">검색</button> </span>
 			    </div>
 			</div>
 		</div>
