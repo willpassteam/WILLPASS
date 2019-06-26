@@ -12,25 +12,31 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${param.start }<br>
-	${param.end }<br>
+	${param.startLine }<br>
+	${param.endLine }<br>
 	${param.date }<br>
 	
 	<%
+		String startLine=request.getParameter("startLine");
+		String endLine=request.getParameter("endLine");
+		String date=request.getParameter("date");
+		String international= request.getParameter("international");
 	    String[] arr = {"일", "월", "화", "수", "목", "금", "토"}; 
 	    Calendar cal = Calendar.getInstance(); 
 	    try{ 
-	      cal.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("date"))); 
+	      cal.setTime(new SimpleDateFormat("yyyyMMdd").parse(date)); 
 	      }catch(Exception pe){ 
 	      pe.printStackTrace(); 
 	   } 
 	%>
 	<%=arr[cal.get(cal.DAY_OF_WEEK)-1]%>
+	
 
 <%
- search_api a=new search_api();
-ArrayList List = a.getAir(request.getParameter("date"), request.getParameter("start"), request.getParameter("end"));
+search_api api=new search_api();
+ArrayList list= api.getAir(date, startLine, endLine);
 %>
+<c:set value="<%=list %>" var="alist"></c:set>
 <table>
 		<tr align="center">
 			<td>출발지</td>	
@@ -46,28 +52,23 @@ ArrayList List = a.getAir(request.getParameter("date"), request.getParameter("st
 			<td>일</td>
 			<td>항공기</td>
 		</tr>
-		<%
-			for(int i = 0; i< List.size(); i+=12){
-		%>
-		<tr>
+		<c:forEach items="${alist }" var="list" >
+			<tr align="center">
+				<td>${list.airport}</td>
+	    		<td>${list.city}</td>
+	    		<td>${list.internationalTime}</td>
+	    		<td>${list.airlineKorean}</td>
+	    		<td>${list.internationalMon}</td>
+	    		<td>${list.internationalTue}</td>
+	    		<td>${list.internationalWed}</td>
+	    		<td>${list.internationalThu}</td>
+	    		<td>${list.internationalFri}</td>
+	    		<td>${list.internationalSat}</td>
+	    		<td>${list.internationalSun}</td>
+	    		<td>${list.internationalNum}</td>
+			</tr>
+		</c:forEach>
 		
-			<td><%=List.get(i) %></td>
-			<td><%=List.get(i+1) %></td>
-			<td><%=List.get(i+2) %></td>
-			<td><%=List.get(i+3) %></td>
-			<td><%=List.get(i+4) %></td>
-			<td><%=List.get(i+5) %></td>
-			<td><%=List.get(i+6) %></td>
-			<td><%=List.get(i+7) %></td>
-			<td><%=List.get(i+8) %></td>
-			<td><%=List.get(i+9) %></td>
-			<td><%=List.get(i+10) %></td>
-			<td><%=List.get(i+11) %></td>
-			
-		</tr>		
-		<%		
-			}
-		%>
 		
 	</table>
 	

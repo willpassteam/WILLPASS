@@ -1,6 +1,6 @@
 package jinwoo.db;
 
-public class dto {
+public class searchDTO {
 	private String airport;
 	private String city;
 	private String internationalTime;

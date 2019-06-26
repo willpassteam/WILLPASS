@@ -16,6 +16,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import jinwoo.db.searchDAO;
+import jinwoo.db.searchDTO;
+
 public class search_api {
 	
 	public String getTagValue(String tag, Element eElement) {
@@ -31,8 +34,10 @@ public class search_api {
 	public ArrayList getAir(String date , String c1,String c2) throws Exception {
 		ArrayList list = new ArrayList<>(); 
 		
+		searchDAO dao= new searchDAO();
+		String id= dao.internationalCheck(c2);
 		
-	    StringBuilder urlBuilder = new StringBuilder("http://openapi.airport.co.kr/service/rest/FlightScheduleList/getIflightScheduleList"); /*URL*/
+	    StringBuilder urlBuilder = new StringBuilder("http://openapi.airport.co.kr/service/rest/FlightScheduleList/get"+id+"flightScheduleList"); /*URL*/
 	    urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=hy3yFxUxPWppB2g9c3c190BKAN8twqLLK3cwhgclxY%2F0DyS3%2FYXJMAAdT2jmUhzaGBgx1aSHaMZf8Flz5ZAUhA%3D%3D&numOfRows=300"); /*Service Key*/
 	    urlBuilder.append("&" + URLEncoder.encode("schDate","UTF-8") + "=" + URLEncoder.encode(date, "UTF-8")); /*검색일자*/
 	    urlBuilder.append("&" + URLEncoder.encode("schDeptCityCode","UTF-8") + "=" + URLEncoder.encode(c1, "UTF-8")); /*출발 도시 코드*/
@@ -42,7 +47,7 @@ public class search_api {
 	    URL url = new URL(urlBuilder.toString());
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	    //접속
-	    conn.setRequestMethod("GET");
+	    conn.setRequestMethod("POST");
 	    conn.setRequestProperty("Content-type", "application/json");
 	    
 	    System.out.println("Response code: " + conn.getResponseCode());
@@ -74,19 +79,37 @@ public class search_api {
 	    	if(nNode.getNodeType() == Node.ELEMENT_NODE){
 	    						
 	    		Element eElement = (Element) nNode;
-	    		list.add(getTagValue("airport", eElement));
-	    		list.add(getTagValue("city", eElement));
-	    		list.add(getTagValue("internationalTime", eElement));
-	    		list.add(getTagValue("airlineKorean", eElement));
-	    		list.add(getTagValue("internationalMon", eElement));
-	    		list.add(getTagValue("internationalTue", eElement));
-	    		list.add(getTagValue("internationalWed", eElement));
-	    		list.add(getTagValue("internationalThu", eElement));
-	    		list.add(getTagValue("internationalFri", eElement));
-	    		list.add(getTagValue("internationalSat", eElement));
-	    		list.add(getTagValue("internationalSun", eElement));
-	    		list.add(getTagValue("internationalNum", eElement));
-	    		
+	    		searchDTO dto= new searchDTO();
+	    		if(id.equals("D")){
+		    		dto.setAirport(getTagValue("startcity", eElement));
+		    		dto.setCity(getTagValue("arrivalcity", eElement));
+		    		dto.setInternationalTime(getTagValue("domesticStartTime", eElement));
+		    		dto.setAirlineKorean(getTagValue("airlineKorean", eElement));
+		    		dto.setInternationalMon(getTagValue("domesticMon", eElement));
+		    		dto.setInternationalTue(getTagValue("domesticTue", eElement));
+		    		dto.setInternationalWed(getTagValue("domesticWed", eElement));
+		    		dto.setInternationalThu(getTagValue("domesticThu", eElement));
+		    		dto.setInternationalFri(getTagValue("domesticFri", eElement));
+		    		dto.setInternationalSat(getTagValue("domesticSat", eElement));
+		    		dto.setInternationalSun(getTagValue("domesticSun", eElement));
+		    		dto.setInternationalNum(getTagValue("domesticNum", eElement));
+		    		
+	    		}else if(id.equals("I")){
+		    		dto.setAirport(getTagValue("airport", eElement));
+		    		dto.setCity(getTagValue("city", eElement));
+		    		dto.setInternationalTime(getTagValue("internationalTime", eElement));
+		    		dto.setAirlineKorean(getTagValue("airlineKorean", eElement));
+		    		dto.setInternationalMon(getTagValue("internationalMon", eElement));
+		    		dto.setInternationalTue(getTagValue("internationalTue", eElement));
+		    		dto.setInternationalWed(getTagValue("internationalWed", eElement));
+		    		dto.setInternationalThu(getTagValue("internationalThu", eElement));
+		    		dto.setInternationalFri(getTagValue("internationalFri", eElement));
+		    		dto.setInternationalSat(getTagValue("internationalSat", eElement));
+		    		dto.setInternationalSun(getTagValue("internationalSun", eElement));
+		    		dto.setInternationalNum(getTagValue("internationalNum", eElement));
+		    		
+	    		}
+	    		list.add(dto);
 	    	}	// for end
 	    }	
 
