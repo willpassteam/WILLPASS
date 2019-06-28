@@ -19,7 +19,7 @@
 	<%
 		String startLine=request.getParameter("startLine");
 		String endLine=request.getParameter("endLine");
-		String date=request.getParameter("date");
+		String date=request.getParameter("from");
 		String international= request.getParameter("international");
 	    String[] arr = {"일", "월", "화", "수", "목", "금", "토"}; 
 	    Calendar cal = Calendar.getInstance(); 
