@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container mx-auto footer " style="margin-top: 100px;">
+	<div class="container mx-auto footer small " style="margin-top: 100px;">
 		<div class="row">
 			<div class="col-sm-2">
 				<h6>예약센터</h6>
@@ -38,10 +38,13 @@
 				</div>
 			</div>			
 		</div>
+		</div>
+		<div class="bg-light">
 		<hr>
+		<div class="container">
 		<div class="row">
-			<div class="col-sm-12">
-				<h6>
+			<div class="col-sm-12 small text-muted">
+				
 					<a href="#">운송약관</a> | 
 					<a href="#">이용약관</a> | 
 					<a href="#">개인정보처리방침</a> | 
@@ -52,17 +55,18 @@
 					<a href="#">항공교통이용자서비스계획</a> | 
 					<a href="#">항공교통이용자피해구제신청서</a> | 
 					<a href="#">인터넷 도우미</a>
-				</h6>
+		
 			</div>
 		</div>
 		<br>
 		<div class="row">
-			<div class="col-sm-12">
-				<h6><b>WILLPASS</b> 대표 김준한 부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층</h6>
-				<h6>사업자등록번호:010-11-00000 </h6>
-				<h6>Copyright 2019 By WILL PASS CO.. LTD All Rights reserved</h6>
+			<div class="col-sm-12 small text-muted">
+				<p class="d-inline-block mb-1"><b>WILLPASS</b> 대표 김준한 부산광역시 부산진구 동천로 109 삼한골든게이트빌딩 7층</p>
+				<p class="d-inline-block mb-1">사업자등록번호:010-11-00000 </p><br>
+				<p class="d-inline-block mb-1">Copyright 2019 By WILL PASS CO.. LTD All Rights reserved</p>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

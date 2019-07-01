@@ -62,11 +62,11 @@ $(function(){
 </head>
 <body>
 	
- <div class="container-flude" >
+ <div class="col">
  	
- 	<div class="row " style="background-color: #0174DF"  >
- 		<div class="col-sm-8"></div>
- 		<div class="col-sm-2">
+ 	<div class="row bg-primary">
+ 		<div class="col-sm-7"></div>
+ 		<div class="col-sm-3 pl-5">
 	 		<h6 class="text-dack float-right py-1">
 	 		<small>
 	 			<a class="text-light" href="../user/Userlogin.jsp">로그인</a> | 
@@ -76,13 +76,15 @@ $(function(){
 	 		</small>
 	 		</h6>
  		</div>	
- 		<div class="col-sm-2"></div>
- 	</div>
+ 		<div class="col-2"></div>
+ </div>
 	</div>
+	
  	<div class="clearfix"></div>
+ 	
 	<div class="container">
 	<div class="container">
-		<div class="row mb-3" height="130px" style="border-bottom: 2px solid #0174DF">
+		<div class="row mb-3" height="130px" >
 			<div class="col-sm-4">
 				<a href="../main/index.jsp">
 					<img alt="" src="../img/Logo.PNG">
@@ -308,7 +310,8 @@ $(function(){
  						
  	
  </div>
-    
+ <hr class="bg-primary mb-0">
+ <hr class="bg-primary mt-0 mb-0">
 
 
 </body>

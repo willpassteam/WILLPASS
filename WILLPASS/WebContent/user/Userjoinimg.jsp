@@ -21,7 +21,7 @@
 				<h5>여행의 지혜, FLY SMART 에어부산 회원가입을 시작하세요!</h5>
 				<br>
 				<h4>가입유형</h4>
-				<a href="Userjoin.jsp"><img id="click"alt="" src="../img/회원가입창.PNG" width="60%" onclick="fn_img();"></a>
+				<a href="UserJoinstep1.jsp"><img id="click"alt="" src="../img/회원가입창.PNG" width="60%" onclick="fn_img();"></a>
 			</div>
 		</div>
 	</div>
