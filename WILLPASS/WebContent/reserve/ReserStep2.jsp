@@ -8,6 +8,11 @@
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <!-- 아이콘을 위한 css -->
+<style type="text/css">
+#lab1{
+ border-left: 5px solid blue;
+}
+</style>
 
 </head>
 <body>
@@ -15,7 +20,7 @@
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
-<div class="container mb-5"> 
+<div class="container mb-5 mt-3"> 
 
 	<h2 ><b>국제선 예약</b></h2>
 
@@ -125,10 +130,12 @@
   	   <div class="row">
   	   
   	   <div class="col-1 pl-0">
-  	   <div class="bg-light ml-0 mr-0">
-		<img src="../img/Reser/label_adult.png" width="125%">
+  	   <div class="bg-light ml-0 mr-0 pl-1" id="lab1">
+<!-- 		<img src="../img/Reser/label_adult.png" width="125%"> -->
+				<p class="pt-1"><b>성인</b></p>
   		</div>
   	   </div>
+  	   
   	   <div class="col-11 pl-0 small">
 			<table class="table">
 			<tr>

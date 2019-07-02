@@ -20,11 +20,9 @@
 
 }
 
-
 </style>
 <script>
   $( function() {
-	  
 	  
     var dateFormat = "mm/dd/yy",
       from = $( "#from" )
@@ -86,7 +84,6 @@
 	<%-- Top End --%>
 	
 
-	
 	<div class="container">
 		<div class="row" >
 			

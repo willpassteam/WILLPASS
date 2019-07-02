@@ -13,10 +13,10 @@
 	<%-- Top End --%>
 	
 	<div class="bg-light mt-0 pt-5 pb-5">   
-	<div class="container border bg-white pb-5 ">
+	<div class="container border bg-white pb-5 mb-5">
 <!-- 	<img src="../img/user/join1.png" class="col-12"> -->
 	
-	<div class="container border mt-5 pt-4">
+	<div class="container border mt-5 pt-4 ">
 	<h2 class="text-center text-dark ">WILLPASS 회원가입을 축하합니다!</h2> 
 	<h6  class="text-center text-muted">WILLPASS에서 제공하는 다양한 서비스를 이용할 수 있습니다.</h6>
 	<h6  class="text-center text-muted mb-4"> 감사합니다. </h6>
@@ -51,9 +51,12 @@
 	</div>
 	
 	</div>
-	
 
 	
 </div>
+	
+<%-- Footer Start --%>
+	<jsp:include page="../include/Footer.jsp"></jsp:include>
+	<%-- Footer End --%>
 </body>
 </html>

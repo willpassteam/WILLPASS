@@ -15,7 +15,7 @@
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
-	<div class="container mb-5"> 
+	<div class="container mb-5 mt-3"> 
 		<h2 ><b>국제선 예약</b></h2>
 
 		<img src="../img/Reser/step2_pr.png">
