@@ -15,12 +15,8 @@
 			$(".card").attr("style","display:none");
 			var index = $(".bt").index(this);
 			if(index == 0){
-				for (var i = 0; i < 5; i++) {
-					for (var j = 0; j < 5; j++) {
-						$(".card:eq("+((i*5)+j)+")").attr("style","display:flex");
-					}
+						$(".card").attr("style","display:flex");
 					
-				}
 			}else{
 				index = index * 5;
 				for (var i = 1; i < 6; i++) {

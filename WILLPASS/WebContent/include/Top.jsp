@@ -48,13 +48,15 @@ $(function(){
 		$(".nc").removeClass('show');
 		$(".nc:eq("+index+")").addClass('show');
 	});
-	
-	$(".menubar").on("mouseleave",function(){
-			
-			$(".nc").removeClass('show');
+	$(".nt").on("mouseleave",function(){
+		var t = 0;
+		$(".menubar").on("mouseenter",function(){
+			$(".menubar").on("mouseleave",function(){
+				$(".nc").removeClass('show');
+			});
+		});
 		
 	});
-	
 })	
 
 </script>
