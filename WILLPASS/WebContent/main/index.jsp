@@ -7,7 +7,7 @@
 <title>WILL PASS</title>
 		<!-- Bootstrap사용을 위한것 -->
 		<jsp:include page="../include/Bootstrap.jsp"></jsp:include>
-		<!-- 달력을 위한 css + js --> >
+		<!-- 달력을 위한 css + js --> 
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -20,11 +20,9 @@
 
 }
 
-
 </style>
 <script>
   $( function() {
-	  
 	  
     var dateFormat = "mm/dd/yy",
       from = $( "#from" )
@@ -85,9 +83,7 @@
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 	
- 
 
-	
 	<div class="container">
 		<div class="row" >
 			
