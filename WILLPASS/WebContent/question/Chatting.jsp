@@ -4,9 +4,86 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>1:1 문의 사이트</title>
+
+<!-- 아이콘 사용을 위한 CDN링크 -->
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
+<jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 </head>
 <body>
 
+	<%-- Top Start --%>
+	<jsp:include page="../include/Top.jsp"></jsp:include>
+	<%-- Top End --%>
+	<div class="m-3 p-3">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3"></div>
+			<div class="col-sm-6 border rounded" style="background-color: #848484">
+				<br>
+				<h4 class="bg-light shadow-sm p-2 rounded" >1:1 채팅 문의<a class="float-right btn btn-primary btn-sm" href="#">대화 종료</a></h4>
+				<br>
+				<div class="media border p-3 mb-1 bg-light rounded shadow-sm">
+					<div class="media-body">
+						<h6>관리자<small><i style="float: right;">07-03/23:30</i></small></h6>
+						<small>안녕하세요 ㅁㅁㅁ님. 문의하고 싶은 내용을 적어주세요
+						
+						</small>      
+					</div>
+				</div>
+				<div class="media border p-3 mb-1 bg-success border-success rounded shadow-sm">
+					<div class="media-body">
+						<h6>ㅁㅁㅁ 님 <small><i style="float: right;">07-03/23:46</i></small></h6>
+					    <small>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.</small>      
+				    </div>
+			 	</div>
+				<div class="media border p-3 mb-1 bg-light rounded shadow-sm" >
+					<div class="media-body">
+						<h6>관리자<small><i style="float: right;">07-03/23:30</i></small></h6>
+						<small>안녕하세요 ㅁㅁㅁ님. 
+						
+						</small>      
+					</div>
+				</div>
+				<div class="media border p-3 mb-1 bg-success border-success rounded shadow-sm">
+					<div class="media-body">
+						<h6>ㅁㅁㅁ 님 <small><i style="float: right;">07-03/23:46</i></small></h6>
+					    <small>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.</small>      
+				    </div>
+			 	</div>
+			 	<div class="media border p-3 mb-1 bg-light rounded shadow-sm">
+					<div class="media-body">
+						<h6>관리자<small><i style="float: right;">07-03/23:30</i></small></h6>
+						<small>안녕하세요 ㅁㅁㅁ님. 문의하고 싶은 내용을 적어주세요
+						
+						</small>      
+					</div>
+				</div>
+				<div class="media border p-3 mb-1 bg-success border-success rounded shadow-sm">
+					<div class="media-body">
+						<h6>ㅁㅁㅁ 님 <small><i style="float: right;">07-03/23:46</i></small></h6>
+					    <small>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.</small>      
+				    </div>
+			 	</div>
+				<form>
+					<div class="input-group mb-3">
+				      	<input type="text" class="form-control" placeholder="내용을 입력해주세요.">
+				      	<div class="input-group-append">
+				       		 <button class="btn btn-primary" type="button">전송</button>  
+				      	</div>
+				  	</div>
+				</form>
+			</div>
+			<div class="col-sm-3"></div>
+		</div>	
+		
+		
+	</div>
+	</div>
+
+	<%-- Footer Start --%>
+	<jsp:include page="../include/Footer.jsp"></jsp:include>
+	<%-- Footer End --%>
 </body>
 </html>
