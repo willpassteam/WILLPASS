@@ -16,10 +16,86 @@
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 	<div class="container mb-5 mt-3"> 
-		<h2 ><b>국제선 예약</b></h2>
-
-		<img src="../img/Reser/step2_pr.png">
-
+		<form autocomplete="off" >
+			<div class="Search bg-light" style="padding:10px;border-radius: 5px; " >
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="custom-control custom-radio custom-control-inline">
+					      <input type="radio" class="custom-control-input" id="customRadio1" name="example1" value="편도" checked="checked">
+					      <label class="custom-control-label" for="customRadio1">편도</label>
+					    </div>
+					    <div class="custom-control custom-radio custom-control-inline">
+					      <input type="radio" class="custom-control-input" id="customRadio2" name="example1" value="왕복">
+					      <label class="custom-control-label" for="customRadio2">왕복</label>
+					    </div>
+					</div>
+				</div>
+				<br>
+				<div class="row 1row" >
+					<div class="col-sm-3">
+						<div class="input-group mb-3">
+						    <div class="input-group-prepend">
+						      <span class="input-group-text"><i class='fas fa-plane-departure' style='font-size:14px'></i></span>
+						    </div>
+						    <input type="text" class="form-control" placeholder="출발지">
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="input-group mb-3">
+						    <div class="input-group-prepend">
+						      <span class="input-group-text"><i class='fas fa-plane-arrival	' style='font-size:14px'></i></span>
+						    </div>
+						    <input type="text" class="form-control" placeholder="도착지">
+						</div>
+					</div>
+						<div class="col-sm-3" >
+						<div class="input-group mb-3 input-daterange" id="datepicker1">
+						    <div class="input-group-prepend">
+						      <span class="input-group-text"><i class='	far fa-calendar-alt' style='font-size:14px'></i></span>
+						    </div>
+						    <input type="text" class="form-control" id="from" name="from" placeholder="가는날" width="50px">
+					    </div>
+					</div>
+					<div class="col-sm-3">    
+					    <div class="input-group mb-3 rt input-daterange" id="datepicker2">	
+						    <div class="input-group-prepend">
+						      <span class="input-group-text"><i class='	far fa-calendar-alt' style='font-size:14px'></i></span>
+						    </div>
+						    <input type="text" class="form-control" id="to" name="to" placeholder="오는날" width="50px">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-2">
+						<div class="input-group mb-3">
+						    <div class="input-group-prepend">
+						      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
+						    </div>
+						    <input type="text" class="form-control" placeholder="성인">
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="input-group mb-3">
+						    <div class="input-group-prepend">
+						      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
+						    </div>
+						    <input type="text" class="form-control" placeholder="소아">
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="input-group mb-3">
+						    <div class="input-group-prepend">
+						      <span class="input-group-text"><i class='far fa-user	' style='font-size:14px'></i></span>
+						    </div>
+						    <input type="text" class="form-control" placeholder="유아">
+						</div>
+					</div>
+					<div class="col-sm-6">
+							<input type="submit" class="btn btn-outline-primary " value="항공권 검색">
+					</div>
+				</div>
+			</div>	
+		</form>
 	</div>
 
 	<img src="../img/Reser/step1.png" width="100%" class="mb-3">

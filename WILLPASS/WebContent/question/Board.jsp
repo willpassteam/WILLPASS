@@ -89,7 +89,7 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<td colspan="4">
+							<td colspan="1">
 								<ul class="pagination">
 								  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
 								  <li class="page-item"><a class="page-link" h="#">1</a></li>
@@ -97,6 +97,10 @@
 								  <li class="page-item"><a class="page-link" href="#">3</a></li>
 								  <li class="page-item"><a class="page-link" href="#">Next</a></li>
 								</ul>
+								
+							</td>
+							<td colspan="3">
+								<a href="Boardwrite.jsp" class="btn btn-dark float-right btn-sm"><i class="fas fa-pen-fancy"></i>글 쓰기</a>
 							</td>
 						</tr>
 					</tfoot>
