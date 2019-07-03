@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -78,5 +79,30 @@ public class searchDAO {
 		return id;
 	}
 	
+	public void insertCode(String airport,String aircode,String airportcode,String country){
+		try {
+			con=ds.getConnection();
+			
+			String sql = "INSERT INTO airline(airline, iata, icao, country) values(?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, airport);
+			pstmt.setString(2, aircode);
+			pstmt.setString(3, airportcode);
+			pstmt.setString(4, country);
+//			String sql = "delete from airline where airline=?";
+//			pstmt = con.prepareStatement(sql);
+//			
+//			pstmt.setString(1, airport);
+			
+			pstmt.executeUpdate();
+			
+			free();
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
+	}
 
 }
