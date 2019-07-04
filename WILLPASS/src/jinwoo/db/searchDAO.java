@@ -104,5 +104,26 @@ public class searchDAO {
 		}
 		
 	}
+	public String flightcheck(String airline) {
+		String flight="";
+		try {
+			con=ds.getConnection();
+			
+			String sql = "select * from airline where airline=?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, airline);
+			
+			rs=pstmt.executeQuery();
+			rs.next();
+			flight=rs.getString("IATA");
+			
+			free();
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return flight;
+	}
 
 }

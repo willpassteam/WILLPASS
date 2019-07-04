@@ -13,124 +13,81 @@
 	<!-- 아이콘을 위한 css -->
 	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
-	<script type="text/javascript">
-		$(function(){
-			$("#startLine").change(function(){
-				var startLine=$("#startLine").val();
-				$.ajax({
-					type : 'POST',
-					url  : '${path}/endcheck',
-					dataType:'json',
-					data : { startLine : startLine }, //{parameterName, data} 형식
-					success: function(result){
-						
-						var list=result.list;
-						$("#endLineI").empty();
-						$("#endLineD").empty();
-						for(var i=0; i<list.length;i++){
-							
-							if(list[i].international=="I"){
-								$("#endLineI").append("<option value='"+list[i].endvalue+"'>"+list[i].endLine+"</option>");
-							}
-							else if(list[i].international=="D"){
-								$("#endLineD").append("<option value='"+list[i].endvalue+"'>"+list[i].endLine+"</option>");
-							}
-						}
-					}
-	
-				});
-			});
-			  
-		    var dateFormat = "mm/dd/yy",
-		      from = $( "#from" )
-		        .datepicker({
-				  dateFormat : 'yy-mm-dd',	        	
-		          minDate: 0,
-		          changeMonth: true,
-		          numberOfMonths: 2,
-		          prevText: '이전 달',
-		          nextText: '다음 달',
-		          monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		          monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		          dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-		          dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-		          dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-		          showMonthAfterYear: true,
-		          yearSuffix: '년'
-		        })
-		        .on( "change", function() {
-		          to.datepicker( "option", "minDate", getDate( this ) );
-		        }),
-		      to = $( "#to" ).datepicker({
-		         minDate: 0,
-		         maxDate: "+1M +10D",
-		        changeMonth: true,
-		        numberOfMonths: 2,
-		        prevText: '이전 달',
-		        nextText: '다음 달',
-		        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-		        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-		        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-		        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-		        showMonthAfterYear: true,
-		        yearSuffix: '년'
-		         
-		      })
-		      .on( "change", function() {
-		        from.datepicker( "option", "maxDate", getDate( this ) );
-		      });
-		 
-		    function getDate( element ) {
-		      var date;
-		      try {
-		        date = $.datepicker.parseDate( dateFormat, element.value );
-		      } catch( error ) {
-		        date = null;
-		      }
-		 
-		      return date;
-		    }
-		});
-	</script>
+	<script>
+  $( function() {
+	  
+    var dateFormat = "yymmdd",
+      from = $( "#from" )
+        .datepicker({
+          minDate: 0,
+          maxDate: "+2M",
+          changeMonth: true,
+          numberOfMonths: 2,
+          prevText: '이전 달',
+          nextText: '다음 달',
+          monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+          monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+          dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+          dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+          dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+          showMonthAfterYear: true,
+          yearSuffix: '년',
+          dateFormat : 'yymmdd'
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+         minDate: 0,
+         maxDate: "+2M",
+        changeMonth: true,
+        numberOfMonths: 2,
+        prevText: '이전 달',
+        nextText: '다음 달',
+        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+        showMonthAfterYear: true,
+        yearSuffix: '년',
+        dateFormat:'yymmdd'
+         
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+    
+  } );
+  </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 	<form action="searchpro.jin" method="post">
-	출발지 : <select name="startLine" id="startLine">
-			<optgroup label="국내공항">
-				<option value="KUV">군산</option>
-				<option value="RSU">여수</option>
-				<option value="KPO">포항</option>
-				<option value="USN">울산</option>
-				<option value="WJU">원주</option>
-				<option value="HIN">사천</option>
-				<option value="KWJ">광주</option>
-			</optgroup>
-			<optgroup label="국제공항">
-				<option value="GMP">김포</option>
-				<option value="CJU">제주</option>
-				<option value="PUS">김해</option>
-				<option value="CJJ">청주</option>
-				<option value="TAE">대구</option>
-				<option value="YNY">양양</option>
-				<option value="MWX">무한</option>
-			</optgroup>
-			</select>
-			<br>
-		목적지 : <select name="endLine" id="endLine">
-			<optgroup label="국내선" id="endLineD">
-				<option value="CJU">제주</option>
-			</optgroup>
-			<optgroup label="국제선" id="endLineI">
+		<input type="radio" class="custom-control-input" id="customRadio1" name="round_trip" value="0" checked="checked">
+		<label class="custom-control-label" for="customRadio1">편도</label>
+		<input type="radio" class="custom-control-input" id="customRadio2" name="round_trip" value="1">
+		<label class="custom-control-label" for="customRadio2">왕복</label><br>
+		출발지 : <input type="text" class="form-control" placeholder="출발지" name="starting"> 
+		
 				
-			</optgroup>
-			</select>
-			<br>
-	날짜 : <input type="text" name="from" id="from"><br>
-	<input type="submit" value="검색"> 
+		목적지 : <input type="text" class="form-control" placeholder="도착지" name="destination">
+		날짜 : <input type="text" class="form-control" id="from" name="from" placeholder="가는날" width="50px">
+		 <input type="text" class="form-control" id="to" name="to" placeholder="오는날" width="50px"><br>
+		<input type="submit" value="검색"> 
 	</form>
 </body>
 </html>

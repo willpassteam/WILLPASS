@@ -1,5 +1,4 @@
 <!doctype html>
-<%@page import="jinwoo.db.airline"%>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -52,9 +51,6 @@
 <input type="text" id="from" name="from">
 <label for="to">to</label>
 <input type="text" id="to" name="to">
- <%
- 	new airline();
- %>
  
 </body>
 </html>

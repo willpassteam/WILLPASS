@@ -4,12 +4,13 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
+@WebServlet("/jinwoo.do/*")
 public class searchcontroller extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -62,10 +63,10 @@ public class searchcontroller extends HttpServlet {
 //			
 //		//join.jsp화면에서 등록할 회원정보를 입력하고 DB에 회원 추가 요청이 들어 왔을때..
 //		}else
-			if(command.equals("/jinwoo/search.jin")){
+			if(command.equals("/jinwooo/search.jin")){
 			//회원가입 처리를 위한 부하직원(MemberJoinAction객체)생성
-			action=new search_1();
-			
+//			action=new search_1();
+			System.out.println("search.jin");
 			try {
 				//join.jsp페이지에서 입력한 회원가입 내용을 담고 있는
 				//request영역을 execute()메소드의 매개변수로 전달하여..
@@ -85,13 +86,21 @@ public class searchcontroller extends HttpServlet {
 		//top.jsp에서 login링크를 클릭하여 로그인화면으로 이동하라라는 요청이 들어 왔을때..
 		else if(command.equals("/jinwoo/searchpro.jin")){
 			//페이지 이동 방식 여부값, 이동할 페이지 주소값을 저장해서 제공해주는 객체 생성
-			forward=new ActionForward();
+			System.out.println("searchpro.jin");
+			try {
+				action=new searchFowarding();
+				forward=action.execute(req, resp);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//페이지 이동방식 여부값 false로 저장 -> 디스패치방식
 			forward.setRedirect(false);
 			//이동할 페이지 경로 (로그인 페이지)
 			forward.setPath("/jinwoo/searchpro.jsp");
-			System.out.println(req.getAttribute("start"));
-			System.out.println(req.getParameter("start"));
+		}else{
+			System.out.println("예외");
 		}
 		/*--------------------------------------------------------------------------- */
 		//주소로 이동
