@@ -58,7 +58,7 @@
 					<div class="input-group mb-3">
 				      	<input type="text" class="form-control" placeholder="내용을 입력해주세요.">
 				      	<div class="input-group-append">
-				       		 <button class="btn btn-primary" type="button">전송</button>  
+				       		 <button class="btn btn-primary" type="button">메시지입력</button>  
 				      	</div>
 				  	</div>
 				</form>
