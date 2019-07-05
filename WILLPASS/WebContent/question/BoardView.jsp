@@ -35,9 +35,9 @@
 			</div>
 			<div class="float-right mb-3">
 			<!-- 수정 삭제는 admin에게만 보임 -->
-				<a href="" class="btn btn-light">수정</a>
-				<a href="" class="btn btn-light">삭제</a>
-				<a href="" class="btn btn-light">목록</a>
+				<a href="" class="btn btn-primary">수정</a>
+				<a href="" class="btn btn-danger">삭제</a>
+				<a href="" class="btn btn-success">목록</a>
 			</div>
 			<div class="clearfix"></div>
 			

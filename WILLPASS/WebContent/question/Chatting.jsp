@@ -20,50 +20,38 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-3"></div>
-			<div class="col-sm-6 border rounded" style="background-color: #848484">
+			<div class="col-sm-6 border rounded" >
 				<br>
 				<h4 class="bg-light shadow-sm p-2 rounded" >1:1 채팅 문의<a class="float-right btn btn-primary btn-sm" href="#">대화 종료</a></h4>
 				<br>
-				<div class="media border p-3 mb-1 bg-light rounded shadow-sm">
+				<div class="media border p-1 mb-3 bg-light rounded border-success shadow-sm">
 					<div class="media-body">
-						<h6>관리자<small><i style="float: right;">07-03/23:30</i></small></h6>
-						<small>안녕하세요 ㅁㅁㅁ님. 문의하고 싶은 내용을 적어주세요
-						
-						</small>      
+						<h6>안녕하세요 ㅁㅁㅁ님. 문의하고 싶은 내용을 적어주세요<small><i style="float: right;">07-03/23:30</i></small></h6>
 					</div>
 				</div>
-				<div class="media border p-3 mb-1 bg-success border-success rounded shadow-sm">
+				<div class="media border p-1 mb-3 border-primary rounded shadow-sm">
 					<div class="media-body">
-						<h6>ㅁㅁㅁ 님 <small><i style="float: right;">07-03/23:46</i></small></h6>
-					    <small>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.</small>      
+						<h6>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.<small><i style="float: right;">07-03/23:46</i></small></h6>
 				    </div>
 			 	</div>
-				<div class="media border p-3 mb-1 bg-light rounded shadow-sm" >
+				<div class="media border p-1 mb-3 bg-light rounded border-success shadow-sm">
 					<div class="media-body">
-						<h6>관리자<small><i style="float: right;">07-03/23:30</i></small></h6>
-						<small>안녕하세요 ㅁㅁㅁ님. 
-						
-						</small>      
+						<h6><small><i style="float: right;">07-03/23:30</i></small></h6>
 					</div>
 				</div>
-				<div class="media border p-3 mb-1 bg-success border-success rounded shadow-sm">
+				<div class="media border p-1 mb-3 border-primary rounded shadow-sm">
 					<div class="media-body">
-						<h6>ㅁㅁㅁ 님 <small><i style="float: right;">07-03/23:46</i></small></h6>
-					    <small>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.</small>      
+						<h6>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.<small><i style="float: right;">07-03/23:46</i></small></h6>
 				    </div>
 			 	</div>
-			 	<div class="media border p-3 mb-1 bg-light rounded shadow-sm">
+			 	<div class="media border p-1 mb-3 bg-light rounded border-success shadow-sm">
 					<div class="media-body">
-						<h6>관리자<small><i style="float: right;">07-03/23:30</i></small></h6>
-						<small>안녕하세요 ㅁㅁㅁ님. 문의하고 싶은 내용을 적어주세요
-						
-						</small>      
+						<h6>안녕하세요 ㅁㅁㅁ님. 문의하고 싶은 내용을 적어주세요<small><i style="float: right;">07-03/23:30</i></small></h6>
 					</div>
 				</div>
-				<div class="media border p-3 mb-1 bg-success border-success rounded shadow-sm">
+				<div class="media border p-1 mb-3 border-primary rounded shadow-sm">
 					<div class="media-body">
-						<h6>ㅁㅁㅁ 님 <small><i style="float: right;">07-03/23:46</i></small></h6>
-					    <small>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.</small>      
+						<h6>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.<small><i style="float: right;">07-03/23:46</i></small></h6>
 				    </div>
 			 	</div>
 				<form>
