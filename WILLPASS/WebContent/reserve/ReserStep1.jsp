@@ -5,6 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function fntest(){
+	
+	alert("dodod");
+var test= $(this).children('.pri').text();
+alert(test);
+
+	
+}
+</script>
 <!-- 아이콘을 위한 css -->
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
@@ -119,14 +129,14 @@
 		    <td>08:35 - 10:05</td>
 		    <td>에어부산</td>
 		    <td>BX 124</td>
-		    <td><input type="radio"> 15,000 KRW</td>
+		    <td> 15,000 KRW</td>
 		    </tr>
 		    
 		    <tr>
 		    <td>10:35- 12:05</td>
 		    <td>대한항공</td>
 		    <td>KE112</td>
-		    <td><input type="radio"> 30,000 KRW</td>
+		    <td>30,000 KRW</td>
 		    </tr>		    
   		</table>	
 
@@ -135,27 +145,27 @@
 
   		<table class="table mt-3">
 
-    		<tbody>
+    		<tbody >
 			<tr class="bg-light">
 			<td>출발-도착시간</td>
 			<td>항공사</td>		
 			<td>항공편</td>		
-			<td>금액</td>
+			<td >금액</td>
 			</tr>
 												
 		    </tbody>
-		    <tr>
+		    <tr onclick="fntest();">
 		    <td>08:35 - 10:05</td>
 		    <td>에어부산</td>
 		    <td>BX 124</td>
-		    <td><input type="radio"> 15,000 KRW</td>
+		    <td class="pri">15,000 KRW</td>
 		    </tr>
 		    
-		    <tr>
+		    <tr onclick="fntest();">
 		    <td>10:35- 12:05</td>
 		    <td>대한항공</td>
 		    <td>KE112</td>
-		    <td><input type="radio"> 30,000 KRW</td>
+		    <td class="pri">30,000 KRW</td>
 		    </tr>		    
   		</table>	
  
