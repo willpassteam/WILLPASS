@@ -76,7 +76,7 @@
 </head>
 <body>
 
-	<form action="searchpro.jin" method="post">
+	<form action="searchpro1.jin" method="post">
 		<input type="radio" class="custom-control-input" id="customRadio1" name="round_trip" value="0" checked="checked">
 		<label class="custom-control-label" for="customRadio1">편도</label>
 		<input type="radio" class="custom-control-input" id="customRadio2" name="round_trip" value="1">
