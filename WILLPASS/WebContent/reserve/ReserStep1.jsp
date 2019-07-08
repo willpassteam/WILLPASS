@@ -8,10 +8,11 @@
 <script type="text/javascript">
 function fntest(){
 	
+	
 	alert("dodod");
-var test= $(this).children('.pri').text();
-alert(test);
-
+	var test= $(this).children('.pri').text();
+	alert(test);
+	
 	
 }
 </script>
