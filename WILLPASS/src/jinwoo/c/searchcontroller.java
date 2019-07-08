@@ -1,6 +1,9 @@
 package jinwoo.c;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,8 +40,6 @@ public class searchcontroller extends HttpServlet {
 		String contextPath=req.getContextPath();
 		System.out.println(contextPath);
 		
-		//컨텍스트 패스 주소길이 11
-		System.out.println(contextPath.length());
 		
 		// /MemberJoin.me 얻기 (회원가입 입력양식 화면으로 이동시켜줘~ 라는 요청 주소값)
 		// /MemberJoinAction.me 얻기 (DB와 연결하여 회원가입 insert요청 주소값)
@@ -66,7 +67,6 @@ public class searchcontroller extends HttpServlet {
 			if(command.equals("/jinwooo/search.jin")){
 			//회원가입 처리를 위한 부하직원(MemberJoinAction객체)생성
 //			action=new search_1();
-			System.out.println("search.jin");
 			try {
 				//join.jsp페이지에서 입력한 회원가입 내용을 담고 있는
 				//request영역을 execute()메소드의 매개변수로 전달하여..
@@ -101,6 +101,22 @@ public class searchcontroller extends HttpServlet {
 			forward.setPath("/jinwoo/searchpro.jsp");
 		}else{
 			System.out.println("예외");
+//			try {
+//			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+//			long time;
+//			
+//				time = (format.parse(req.getParameter("from")).getTime()-new Date().getTime());
+//				 long calDateDays = ((time / ( 24*60*60*1000))+1)%7;
+//				 if(calDateDays>3) calDateDays= calDateDays-7;
+//				 System.out.println(calDateDays);
+//				 
+//
+////				System.out.println(time);
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
 		}
 		/*--------------------------------------------------------------------------- */
 		//주소로 이동

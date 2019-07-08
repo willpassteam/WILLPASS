@@ -1,5 +1,6 @@
 package jinwoo.c;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,32 +15,43 @@ import org.jsoup.select.Elements;
 
 import jinwoo.db.searchDAO;
 import jinwoo.db.searchVO;
+import jinwoo.db.timeVO;
 
 public class searchFowarding implements Action{
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward=new ActionForward();
+		searchDAO dao= new searchDAO();
 		
 		String starting=request.getParameter("starting");
+		String st=dao.linecheck(starting);
 		String destination=request.getParameter("destination");
+		String ed=dao.linecheck(destination);
+		
 		int round_trip=Integer.parseInt(request.getParameter("round_trip"));
 		String from=request.getParameter("from");
 		String to=request.getParameter("to");
-		List list=new ArrayList();
-		if(round_trip==0){
-			Document airline=Jsoup.connect("http://www.airportal.co.kr/servlet/aips.life.airinfo.RaSkeCTL?gubun=c_getList&curr_page=1&one_page=50&one_group=10&dep_airport=RKSI&arr_airport=RKPK&srch_type=dep&current_dt_from="+from+"&current_dt_to="+from+"&regCls=0&al_icao=&fp_iata=").post();
+		
+		String date="";
+		try {
+			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+			long time;
+			
+				time = (format.parse(from).getTime()-new Date().getTime());
+				 long calDateDays = ((time / ( 24*60*60*1000))+1)%7-7;
+				 int now=Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(new Date()))+(int)calDateDays;
+				 date=Integer.toString(now);
+				 System.out.println(date);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		
+			Document airline=Jsoup.connect("http://www.airportal.co.kr/servlet/aips.life.airinfo.RaSkeCTL?gubun=c_getList&curr_page=1&one_page=70&one_group=10&dep_airport="+st+"&arr_airport="+ed+"&srch_type=dep&current_dt_from="+from+"&current_dt_to="+from+"&regCls=1&al_icao=&fp_iata=").post();
 			Elements tr=airline.getElementsByTag("tbody").get(2).getElementsByTag("tr");
 			
-			int now=Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(new Date()))+1;
-			String date=Integer.toString(now);
 			
-			String yy=date.substring(0,4);
-			String mm=date.substring(4,6);
-			String dd=date.substring(6);
-			
-			searchDAO dao= new searchDAO();
-			
+			List list=new ArrayList();
 			
 			for(int i=0; i<tr.size();i+=2){
 				searchVO vo= new searchVO();
@@ -50,79 +62,73 @@ public class searchFowarding implements Action{
 				String sDestination=tr.get(i).getElementsByTag("td").get(6).text().split("->")[1];
 				String sfFlight =dao.flightcheck(sAirline);
 				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
+				System.out.println(sfFlight);
+				System.out.println("timecheck start");
 				
 				
-				Document flight=Jsoup.connect("https://www.flightstats.com/v2/flight-details/"+sfFlight+"?year="+yy+"&month="+mm+"&date="+dd).post();
-				Elements timeblock=flight.getElementsByClass("timeBlock");
 				
-				String departure_time=timeblock.get(0).getElementsByTag("div").get(1).text();
-				String arrival_time=timeblock.get(4).getElementsByTag("div").get(1).text();
-				String time=flight.getElementsByClass("flightTimeBlock").get(0).children().get(2).text();
-				time=time.replace("h", "시간");
-				time=time.replace("m", "분");
-				System.out.println(time);
+				timeVO time= dao.timecheck(sfFlight,date);
+				
+				
 				
 				vo.setAirline(sAirline);
 				vo.setFlight(sFlight);
 				vo.setStarting(sStarting);
 				vo.setDestination(sDestination);
-				vo.setDeparture_time(departure_time);
-				vo.setArrival_time(arrival_time);
-				vo.setTime(time);
+				vo.setDeparture_time(time.getDeparture_time());
+				vo.setArrival_time(time.getArrival_time());
+				vo.setTime(time.getTime());
 				vo.setRound_trip(false);
 				vo.setDate(new SimpleDateFormat("yyyyMMdd").parse(from));
 				
 				list.add(vo);
 			}
-		}
-		else if(round_trip==1){
-			Document airline=Jsoup.connect("http://www.airportal.co.kr/servlet/aips.life.airinfo.RaSkeCTL?gubun=c_getList&curr_page=1&one_page=50&one_group=10&dep_airport=RKSI&arr_airport=RKPK&srch_type=dep&current_dt_from="+from+"&current_dt_to="+from+"&regCls=0&al_icao=&fp_iata=").post();
-			Elements tr=airline.getElementsByTag("tbody").get(2).getElementsByTag("tr");
+			request.setAttribute("list1",list );
 			
-			int now=Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(new Date()))+1;
-			String date=Integer.toString(now);
+		 if(round_trip==1){
+			 List list_1=new ArrayList();
+			Document airline_1=Jsoup.connect("http://www.airportal.co.kr/servlet/aips.life.airinfo.RaSkeCTL?gubun=c_getList&curr_page=1&one_page=70&one_group=10&dep_airport="+ed+"&arr_airport="+st+"&srch_type=dep&current_dt_from="+to+"&current_dt_to="+to+"&regCls=1&al_icao=&fp_iata=").post();
+			Elements tr_1=airline_1.getElementsByTag("tbody").get(2).getElementsByTag("tr");
+			String date_1="";
+			try {
+				SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+				long time;
+				
+					time = (format.parse(to).getTime()-new Date().getTime());
+					 long calDateDays = ((time / ( 24*60*60*1000))+1)%7-7;
+					 int now=Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(new Date()))+(int)calDateDays;
+					 date_1=Integer.toString(now);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			
-			String yy=date.substring(0,4);
-			String mm=date.substring(4,6);
-			String dd=date.substring(6);
-			
-			searchDAO dao= new searchDAO();
-			
-			
-			for(int i=0; i<tr.size();i+=2){
+			for(int i=0; i<tr_1.size();i+=2){
 				searchVO vo= new searchVO();
 				
-				String sAirline=tr.get(i).getElementsByTag("td").get(2).text();
-				String sFlight=tr.get(i).getElementsByTag("td").get(4).text();
-				String sStarting=tr.get(i).getElementsByTag("td").get(6).text().split("->")[0];
-				String sDestination=tr.get(i).getElementsByTag("td").get(6).text().split("->")[1];
+				String sAirline=tr_1.get(i).getElementsByTag("td").get(2).text();
+				String sFlight=tr_1.get(i).getElementsByTag("td").get(4).text();
+				String sStarting=tr_1.get(i).getElementsByTag("td").get(6).text().split("->")[0];
+				String sDestination=tr_1.get(i).getElementsByTag("td").get(6).text().split("->")[1];
 				String sfFlight =dao.flightcheck(sAirline);
 				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
 				
-				
-				Document flight=Jsoup.connect("https://www.flightstats.com/v2/flight-details/"+sfFlight+"?year="+yy+"&month="+mm+"&date="+dd).post();
-				Elements timeblock=flight.getElementsByClass("timeBlock");
-				
-				String departure_time=timeblock.get(0).getElementsByTag("div").get(1).text();
-				String arrival_time=timeblock.get(4).getElementsByTag("div").get(1).text();
-				String time=flight.getElementsByClass("flightTimeBlock").get(0).children().get(2).text();
-				time=time.replace("h", "시간");
-				time=time.replace("m", "분");
+				timeVO time_1= dao.timecheck(sfFlight,date_1);
 				
 				vo.setAirline(sAirline);
 				vo.setFlight(sFlight);
 				vo.setStarting(sStarting);
 				vo.setDestination(sDestination);
-				vo.setDeparture_time(departure_time);
-				vo.setArrival_time(arrival_time);
-				vo.setTime(time);
+				vo.setDeparture_time(time_1.getDeparture_time());
+				vo.setArrival_time(time_1.getArrival_time());
+				vo.setTime(time_1.getTime());
 				vo.setRound_trip(true);
-				vo.setDate(new SimpleDateFormat("yyyyMMdd").parse(from));
+				vo.setDate(new SimpleDateFormat("yyyyMMdd").parse(to));
 				
-				list.add(vo);
+				list_1.add(vo);
 			}
+			request.setAttribute("list2",list_1);
 		}
-		request.setAttribute("list",list );
+		
 		
 		return forward;
 	}

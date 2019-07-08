@@ -2,43 +2,42 @@ package jinwoo.db;
 
 public class checkDTO {
 
-	private String startLine;
-	private String startvalue;
-	private String endLine;
-	private String endvalue;
-	private String international;
+	private String airport;
+	private String iata;
+	private String icao;
+	private String country;
+	private String city;
 	
 	
-	public String getStartLine() {
-		return startLine;
+	public String getAirport() {
+		return airport;
 	}
-	public void setStartLine(String startLine) {
-		this.startLine = startLine;
+	public void setAirport(String airport) {
+		this.airport = airport;
 	}
-	public String getStartvalue() {
-		return startvalue;
+	public String getIata() {
+		return iata;
 	}
-	public void setStartvalue(String startvalue) {
-		this.startvalue = startvalue;
+	public void setIata(String iata) {
+		this.iata = iata;
 	}
-	public String getEndLine() {
-		return endLine;
+	public String getIcao() {
+		return icao;
 	}
-	public void setEndLine(String endLine) {
-		this.endLine = endLine;
+	public void setIcao(String icao) {
+		this.icao = icao;
 	}
-	public String getEndvalue() {
-		return endvalue;
+	public String getCountry() {
+		return country;
 	}
-	public void setEndvalue(String endvalue) {
-		this.endvalue = endvalue;
+	public void setCountry(String country) {
+		this.country = country;
 	}
-	public String getInternational() {
-		return international;
+	public String getCity() {
+		return city;
 	}
-	public void setInternational(String international) {
-		this.international = international;
+	public void setCity(String city) {
+		this.city = city;
 	}
-	
 	
 }
