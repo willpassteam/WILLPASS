@@ -17,7 +17,7 @@
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 	<div class="m-3 p-3">
-	<div class="container">
+	<div class="container" style="min-height: 600px;max-height: 700px;">
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-6 border rounded" >
