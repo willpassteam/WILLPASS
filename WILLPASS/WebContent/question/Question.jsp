@@ -1,10 +1,11 @@
-</div><%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>공지 사항</title>
+
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <!-- 아이콘 사용을 위한 css -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
@@ -126,7 +127,7 @@
 								</ul>
 							</td>
 							<td colspan="3">
-								<a href="Questionwrite.jsp" class="btn btn-dark float-right btn-sm"><i class="fas fa-pen-fancy"></i>문의하기</a>
+								<a href="writePage.Board" class="btn btn-dark float-right btn-sm"><i class="fas fa-pen-fancy"></i>문의하기</a>
 								
 							</td>
 						</tr>
