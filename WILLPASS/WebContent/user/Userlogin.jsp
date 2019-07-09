@@ -168,4 +168,5 @@ function emailverif() {
 	<jsp:include page="../include/Footer.jsp"></jsp:include>
 	<%-- Footer End --%>
 </body>
+
 </html>

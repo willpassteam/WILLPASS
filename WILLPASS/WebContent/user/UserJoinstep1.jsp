@@ -33,7 +33,7 @@ function emailverif() {
 	
 	<div class="container">
 	
-		<div class="row ml-0">
+		<div class="row ml-0 mr-0">
 			<div class="col-6 text-primary text-center  border pr-0 pl-0 border-bottom-0 border-top-0" >
 				<hr class="bg-primary mt-0 mb-0 pl-0 pr-0"><hr class="bg-primary mt-0">
 				<a class="text-decoration-none" href="#"><b>대한민국 국적자</b></a>

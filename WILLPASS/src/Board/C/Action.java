@@ -1,4 +1,4 @@
-package Chatting.C;
+package Board.C;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

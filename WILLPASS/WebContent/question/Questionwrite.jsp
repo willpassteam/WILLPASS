@@ -18,7 +18,7 @@
 
 	<div class="container" style="margin-top: 10px;">
 		<div class="col-sm-12">
-			<form action="bbsWriter" method="post" class="" name="bbsWriter" enctype="multipart/form-data">
+			<form action="write.Board" method="post">
 				<br>
 				<h2>문의 게시판 글 작성</h2>
 				<br>
@@ -27,14 +27,14 @@
 						<th  width="100px" style="padding: auto;"><h5>
 								<b>제목</b>
 							</h5></th>
-						<td><input type="text" class="form-control" name="bbs_title"></td>
+						<td><input type="text" class="form-control" name="board_title"></td>
 					</tr>
 					<tr>
 						<th width="100px" style="padding: auto;"><h5>
 								<b>내용</b>
 							</h5></th>
 						<td><textarea class="form-control" rows="50" name
-						="bbs_content" style="height: 300px;"></textarea></td>
+						="board_content" style="height: 300px;"></textarea></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="right">
