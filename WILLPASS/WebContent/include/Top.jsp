@@ -87,12 +87,12 @@ $(function(){
 	<div class="container">
 	<div class="container">
 		<div class="row mb-3" height="130px" >
-			<div class="col-sm-4">
+			<div class="col-xl-4">
 				<a href="../main/index.jsp">
 					<img alt="" src="../img/Logo.PNG">
 				</a>
 			</div>
-			<div class="col-sm-8 mt">
+			<div class="col-xl-8 mt">
 				<div class="row navrow">
 					<div class="col">
 						<a href="#" class="nt">예약/스케쥴</a>
