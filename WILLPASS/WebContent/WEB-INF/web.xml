@@ -12,7 +12,7 @@
   
   <servlet>
   	<servlet-name>jinwoosearch</servlet-name>
-  	<servlet-class>jinwoo.c.searchcontroller</servlet-class>
+  	<servlet-class>net.search.action.searchController</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>jinwoosearch</servlet-name>

@@ -1,6 +1,9 @@
-package jinwoo.c;
+package net.search.action;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/jinwoo.do/*")
-public class searchcontroller extends HttpServlet {
+public class searchController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doHendle(req, resp);
@@ -37,8 +40,6 @@ public class searchcontroller extends HttpServlet {
 		String contextPath=req.getContextPath();
 		System.out.println(contextPath);
 		
-		//컨텍스트 패스 주소길이 11
-		System.out.println(contextPath.length());
 		
 		// /MemberJoin.me 얻기 (회원가입 입력양식 화면으로 이동시켜줘~ 라는 요청 주소값)
 		// /MemberJoinAction.me 얻기 (DB와 연결하여 회원가입 insert요청 주소값)
@@ -66,7 +67,6 @@ public class searchcontroller extends HttpServlet {
 			if(command.equals("/jinwooo/search.jin")){
 			//회원가입 처리를 위한 부하직원(MemberJoinAction객체)생성
 //			action=new search_1();
-			System.out.println("search.jin");
 			try {
 				//join.jsp페이지에서 입력한 회원가입 내용을 담고 있는
 				//request영역을 execute()메소드의 매개변수로 전달하여..
@@ -84,7 +84,7 @@ public class searchcontroller extends HttpServlet {
 		}//회원가입에 성공후 ! 로그인화면으로 이동하라라는 요청이 들어왔을때..
 		//또는
 		//top.jsp에서 login링크를 클릭하여 로그인화면으로 이동하라라는 요청이 들어 왔을때..
-		else if(command.equals("/jinwoo/searchpro.jin")){
+		else if(command.equals("/main/searchpro.jin")){
 			//페이지 이동 방식 여부값, 이동할 페이지 주소값을 저장해서 제공해주는 객체 생성
 			System.out.println("searchpro.jin");
 			try {
@@ -98,9 +98,25 @@ public class searchcontroller extends HttpServlet {
 			//페이지 이동방식 여부값 false로 저장 -> 디스패치방식
 			forward.setRedirect(false);
 			//이동할 페이지 경로 (로그인 페이지)
-			forward.setPath("/jinwoo/searchpro.jsp");
+			forward.setPath("../jinwoo/searchpro.jsp");
 		}else{
 			System.out.println("예외");
+//			try {
+//			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+//			long time;
+//			
+//				time = (format.parse(req.getParameter("from")).getTime()-new Date().getTime());
+//				 long calDateDays = ((time / ( 24*60*60*1000))+1)%7;
+//				 if(calDateDays>3) calDateDays= calDateDays-7;
+//				 System.out.println(calDateDays);
+//				 
+//
+////				System.out.println(time);
+//			} catch (ParseException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			
 		}
 		/*--------------------------------------------------------------------------- */
 		//주소로 이동

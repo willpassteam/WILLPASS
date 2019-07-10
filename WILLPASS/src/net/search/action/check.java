@@ -1,4 +1,4 @@
-package jinwoo.c;
+package net.search.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import jinwoo.db.checkDTO;
-import jinwoo.db.searchDAO;
+import net.search.db.searchCityDTO;
+import net.search.db.searchDAO;
 
 @WebServlet("/endcheck")
 public class check extends HttpServlet{
@@ -31,22 +31,19 @@ public class check extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=utf-8");
 		
-		String startLine=req.getParameter("startLine");
+		String city=req.getParameter("city");
 		
 		searchDAO dao= new searchDAO();
 		
-		ArrayList<checkDTO> list= dao.startcheck(startLine);
-		
+		ArrayList<searchCityDTO> list= dao.citycheck(city);
 		 JSONArray jArray = new JSONArray();//배열이 필요할때
 		 try {
 			
 	            for (int i = 0; i < list.size(); i++) {
 	                JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
-	                sObject.put("startLine", list.get(i).getStartLine());
-	                sObject.put("startvalue", list.get(i).getStartvalue());
-	                sObject.put("endLine", list.get(i).getEndLine());
-	                sObject.put("endvalue", list.get(i).getEndvalue());
-	                sObject.put("international", list.get(i).getInternational());
+	                
+	                sObject.put("city", list.get(i).getCity()+"["+list.get(i).getAirport()+"]");
+	                
 	                jArray.add(sObject);
 	            }
 	 
@@ -54,14 +51,14 @@ public class check extends HttpServlet{
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-		 JSONObject jlist= new JSONObject();
-		 jlist.put("list", jArray);
-
+		 
 
 
 		PrintWriter out=resp.getWriter();
 
-		out.print(jlist.toString());
+		out.print(jArray.toString());
+		
+		out.close();
 		
 	}
 }

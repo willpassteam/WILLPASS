@@ -13,7 +13,19 @@
 <body>
 	출발 날짜 : ${param.from }<br><br>
 	
-	<c:forEach items="${list }" var="list">
+	<c:forEach items="${list1 }" var="list">
+		출발지 : ${list.starting }<br>
+		도착지 : ${list.destination }<br>
+		항공사 : ${list.airline }<br>
+		항공편 : ${list.flight }<br>
+		출발시간 : ${list.departure_time }<br>
+		소요시간 : ${list.time }<br>
+		도착시간 : ${list.arrival_time }<br>
+		왕복 여부 : ${list.round_trip }<br><br>
+		
+	</c:forEach>
+	<hr>
+	<c:forEach items="${list2 }" var="list">
 		출발지 : ${list.starting }<br>
 		도착지 : ${list.destination }<br>
 		항공사 : ${list.airline }<br>
