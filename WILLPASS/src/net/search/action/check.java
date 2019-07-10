@@ -1,4 +1,4 @@
-package jinwoo.c;
+package net.search.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import jinwoo.db.checkDTO;
-import jinwoo.db.searchDAO;
+import net.search.db.searchCityDTO;
+import net.search.db.searchDAO;
 
 @WebServlet("/endcheck")
 public class check extends HttpServlet{
@@ -35,7 +35,7 @@ public class check extends HttpServlet{
 		
 		searchDAO dao= new searchDAO();
 		
-		ArrayList<checkDTO> list= dao.citycheck(city);
+		ArrayList<searchCityDTO> list= dao.citycheck(city);
 		 JSONArray jArray = new JSONArray();//배열이 필요할때
 		 try {
 			

@@ -1,9 +1,9 @@
-package jinwoo.c;
+package net.search.action;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +13,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import jinwoo.db.searchDAO;
-import jinwoo.db.searchVO;
-import jinwoo.db.timeVO;
+import net.search.db.searchDAO;
+import net.search.db.searchDTO;
+import net.search.db.timeDTO;
 
 public class searchFowarding implements Action{
 	
@@ -38,11 +38,10 @@ public class searchFowarding implements Action{
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 			long time;
 			
-				time = (format.parse(from).getTime()-new Date().getTime());
+				time = (format.parse(from).getTime()-System.currentTimeMillis());
 				 long calDateDays = ((time / ( 24*60*60*1000))+1)%7-7;
-				 int now=Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(new Date()))+(int)calDateDays;
+				 int now=Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(System.currentTimeMillis()))+(int)calDateDays;
 				 date=Integer.toString(now);
-				 System.out.println(date);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -54,7 +53,7 @@ public class searchFowarding implements Action{
 			List list=new ArrayList();
 			
 			for(int i=0; i<tr.size();i+=2){
-				searchVO vo= new searchVO();
+				searchDTO vo= new searchDTO();
 				
 				String sAirline=tr.get(i).getElementsByTag("td").get(2).text();
 				String sFlight=tr.get(i).getElementsByTag("td").get(4).text();
@@ -62,12 +61,11 @@ public class searchFowarding implements Action{
 				String sDestination=tr.get(i).getElementsByTag("td").get(6).text().split("->")[1];
 				String sfFlight =dao.flightcheck(sAirline);
 				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
-				System.out.println(sfFlight);
 				System.out.println("timecheck start");
 				
 				
 				
-				timeVO time= dao.timecheck(sfFlight,date);
+				timeDTO time= dao.timecheck(sfFlight,date);
 				
 				
 				
@@ -79,7 +77,7 @@ public class searchFowarding implements Action{
 				vo.setArrival_time(time.getArrival_time());
 				vo.setTime(time.getTime());
 				vo.setRound_trip(false);
-				vo.setDate(new SimpleDateFormat("yyyyMMdd").parse(from));
+				vo.setDate(new Date(new SimpleDateFormat("yyyyMMdd").parse(from).getTime()));
 				
 				list.add(vo);
 			}
@@ -94,16 +92,16 @@ public class searchFowarding implements Action{
 				SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 				long time;
 				
-					time = (format.parse(to).getTime()-new Date().getTime());
+					time = (format.parse(to).getTime()-System.currentTimeMillis());
 					 long calDateDays = ((time / ( 24*60*60*1000))+1)%7-7;
-					 int now=Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(new Date()))+(int)calDateDays;
+					 int now=Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(System.currentTimeMillis()))+(int)calDateDays;
 					 date_1=Integer.toString(now);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 			
 			for(int i=0; i<tr_1.size();i+=2){
-				searchVO vo= new searchVO();
+				searchDTO vo= new searchDTO();
 				
 				String sAirline=tr_1.get(i).getElementsByTag("td").get(2).text();
 				String sFlight=tr_1.get(i).getElementsByTag("td").get(4).text();
@@ -112,7 +110,7 @@ public class searchFowarding implements Action{
 				String sfFlight =dao.flightcheck(sAirline);
 				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
 				
-				timeVO time_1= dao.timecheck(sfFlight,date_1);
+				timeDTO time_1= dao.timecheck(sfFlight,date_1);
 				
 				vo.setAirline(sAirline);
 				vo.setFlight(sFlight);
@@ -122,7 +120,7 @@ public class searchFowarding implements Action{
 				vo.setArrival_time(time_1.getArrival_time());
 				vo.setTime(time_1.getTime());
 				vo.setRound_trip(true);
-				vo.setDate(new SimpleDateFormat("yyyyMMdd").parse(to));
+				vo.setDate(new Date(new SimpleDateFormat("yyyyMMdd").parse(to).getTime()));
 				
 				list_1.add(vo);
 			}

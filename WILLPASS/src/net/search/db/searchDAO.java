@@ -1,4 +1,4 @@
-package jinwoo.db;
+package net.search.db;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -42,8 +42,8 @@ public class searchDAO {
 		}
 	}
 
-	public ArrayList<checkDTO> citycheck(String city) {
-		ArrayList<checkDTO> list= new ArrayList();
+	public ArrayList<searchCityDTO> citycheck(String city) {
+		ArrayList<searchCityDTO> list= new ArrayList();
 		try {
 			con=ds.getConnection();
 			String sql="select * from airport where city like ? or airport like ?";
@@ -53,7 +53,7 @@ public class searchDAO {
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()){
-				checkDTO dto=new checkDTO();
+				searchCityDTO dto=new searchCityDTO();
 				dto.setAirport(rs.getString("airport"));
 				dto.setIata(rs.getString("iata"));
 				dto.setIcao(rs.getString("icao"));
@@ -145,8 +145,8 @@ public class searchDAO {
 		}
 		return flight;
 	}
-	public timeVO timecheck(String sfFlight, String date) {
-		timeVO vo=new timeVO();
+	public timeDTO timecheck(String sfFlight, String date) {
+		timeDTO vo=new timeDTO();
 
 		
 		String yy=date.substring(0,4);
@@ -161,9 +161,9 @@ public class searchDAO {
 			Document flight = Jsoup.connect("https://www.flightstats.com/v2/flight-details/"+sfFlight+"?year="+yy+"&month="+mm+"&date="+dd).post();
 			Elements timeblock=flight.getElementsByClass("timeBlock");
 			
-			departure_time=timeblock.get(0).getElementsByTag("div").get(1).text();
-			arrival_time=timeblock.get(4).getElementsByTag("div").get(1).text();
-			time=flight.getElementsByClass("flightTimeBlock").get(0).children().get(2).text();
+			departure_time=timeblock.get(0).children().last().text();
+			arrival_time=timeblock.get(4).children().last().text();
+			time=flight.getElementsByClass("flightTimeBlock").get(0).children().last().text();
 			time=time.replace("h", "시간");
 			time=time.replace("m", "분");
 					

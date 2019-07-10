@@ -1,6 +1,6 @@
-package jinwoo.db;
+package net.search.db;
 
-public class checkDTO {
+public class searchCityDTO {
 
 	private String airport;
 	private String iata;

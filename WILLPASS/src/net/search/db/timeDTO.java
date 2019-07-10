@@ -1,6 +1,6 @@
-package jinwoo.db;
+package net.search.db;
 
-public class timeVO {
+public class timeDTO {
 	private String departure_time;
 	private String arrival_time;
 	private String time;

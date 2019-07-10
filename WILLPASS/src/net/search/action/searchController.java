@@ -1,4 +1,4 @@
-package jinwoo.c;
+package net.search.action;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @WebServlet("/jinwoo.do/*")
-public class searchcontroller extends HttpServlet {
+public class searchController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doHendle(req, resp);
