@@ -32,6 +32,9 @@ public class searchFowarding implements Action{
 		int round_trip=Integer.parseInt(request.getParameter("round_trip"));
 		String from=request.getParameter("from");
 		String to=request.getParameter("to");
+		String people=request.getParameter("adult");
+//		String people=request.getParameter("adult")+":";
+//		int people=Integer.parseInt(request.getParameter("adult"));
 		
 		String date="";
 		try {
@@ -78,6 +81,7 @@ public class searchFowarding implements Action{
 				vo.setTime(time.getTime());
 				vo.setRound_trip(false);
 				vo.setDate(new Date(new SimpleDateFormat("yyyyMMdd").parse(from).getTime()));
+				vo.setPeople(people);
 				
 				list.add(vo);
 			}
@@ -121,6 +125,7 @@ public class searchFowarding implements Action{
 				vo.setTime(time_1.getTime());
 				vo.setRound_trip(true);
 				vo.setDate(new Date(new SimpleDateFormat("yyyyMMdd").parse(to).getTime()));
+				vo.setPeople(people);
 				
 				list_1.add(vo);
 			}
