@@ -1,6 +1,7 @@
 package net.reservation.action;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,50 +44,64 @@ public class ReservationFrontController extends HttpServlet{
 		
 		
 		if(command.equals("/before")) { //신효 - > 소희 
-			forward = new ActionForward();
+			try {
+				
+		ReserDAO redao= new ReserDAO();
+	
+		System.out.println("dao 생성완료");
+				
+		forward = new ActionForward();
 		forward.setPath("/reserve/ReserStep2.jsp");
 		forward.setRedirect(false);
 		searchVO first = new searchVO();
-		first.setAirline("대한항공");
-		first.setArrival_time("5시간30분");
-		first.setDate(new Date(System.currentTimeMillis()));
-		first.setDeparture_time("오후3시");
-		first.setDestination("오사카");
-		first.setFlight("ke1234");
-		first.setPeople("2");
-		first.setRound_trip(true);
-		first.setStarting("김해");
-		first.setTime("오후3시");
-		
-		searchVO second = new searchVO();
-		second.setAirline("대한항공");
-		second.setArrival_time("5시간30분");
-		second.setDate(new Date(System.currentTimeMillis()));
-		second.setDeparture_time("오후3시");
-		second.setDestination("김해");
-		second.setFlight("ke1234");
-		second.setPeople("2");
-		second.setRound_trip(true);
-		second.setStarting("오사카");
-		second.setTime("오후3시");
+		first.setAirline("에어부산");
+			first.setArrival_time("10:05");
+			SimpleDateFormat transFormat = new SimpleDateFormat("yy-mm-dd");
+			first.setDate(transFormat.parse("2019-07-25"));
+			System.out.println(first.getDate());
+			first.setDeparture_time("8:35");
+			first.setDestination("오사카");
+			first.setFlight("BX124");
+			first.setPeople("2");
+			first.setRound_trip(true);
+			first.setStarting("부산");
+			first.setTime("2시간30분");
+			
+			searchVO second = new searchVO();
+			second.setAirline("에어부산");
+			second.setArrival_time("12:35");
+			second.setDate(transFormat.parse("2019-07-30"));
+			second.setDeparture_time("11:00");
+			second.setDestination("부산");
+			second.setFlight("BX123");
+			second.setPeople("2");
+			second.setRound_trip(true);
+			second.setStarting("오사카");
+			second.setTime("2시간30분");
 
-		ArrayList searcharr = new ArrayList();
-		searcharr.add(first);
-		searcharr.add(second);
-	
-		request.getSession().setAttribute("searcharr",searcharr);
-		request.getSession().setAttribute("searchprice",550000);
+			ArrayList searcharr = new ArrayList();
+			searcharr.add(first);
+			searcharr.add(second);
+		
+			request.getSession().setAttribute("searcharr",searcharr);
+			request.getSession().setAttribute("searchprice",550000);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		}else if(command.equals("/passengerInfo")) {
 			forward = new ActionForward();
 			forward.setPath("/reserve/ReserStep3.jsp");
 			forward.setRedirect(false);
 			int num=Integer.parseInt(request.getParameter("num_people"));
 			ArrayList pasinfoarr= new ArrayList();
-		String pagender;
-		 String pafname; 
-		 String paname;
-		 String paretel;
-		 String pareemail; 
+			String pagender;
+			String pafname; 
+			String paname;
+			String paretel;
+			String pareemail; 
+			
 			for (int i=0;i<num;i++) {
 				
 				
@@ -102,35 +117,41 @@ public class ReservationFrontController extends HttpServlet{
 
 			int possibleseats1[] = new int[90];	
 			int possibleseats2[] = new int[90];	
+			 ReserDAO reserdao = new ReserDAO();
+			 ArrayList searcharrlist = (ArrayList)request.getSession().getAttribute("searcharr");
 			
-			for(int i=0;i<possibleseats1.length;i++) {
-			if(i%7==0) {
-				possibleseats1[i]=1;
-			}else possibleseats1[i]=0;
-				
-			}
+			 searchVO searvo=(searchVO)searcharrlist.get(0);
+			 String searflight= searvo.getFlight();
+			  java.util.Date utilDate = searvo.getDate();
+//			  java.sql.Date seardate = new java.sql.Date(utilDate.getTime());
+			 java.sql.Date seardate= new java.sql.Date(searvo.getDate().getTime());
+			 possibleseats1=reserdao.selpossibleseat(seardate,searflight);
+			 
+//			 System.out.println("배열크기"+possibleseats1.length);
+			 
+//			 System.out.println("결과출력");
+			 for(int i=0;i<possibleseats1.length;i++){
+//				 
+				 System.out.println(possibleseats1[i]);
+			 }
+			 
+			 if(searvo.isRound_trip()){
+				 searchVO searvo2= (searchVO)searcharrlist.get(1);
+				 String searflight2= searvo2.getFlight();
+				 java.sql.Date seardate2= (java.sql.Date)searvo2.getDate();
+				 possibleseats2=reserdao.selpossibleseat(seardate2,searflight2);
+				 
+				 
+			 }
 			
-			for(int i=0;i<possibleseats2.length;i++) {
-			if(i%8==0) {
-
-				possibleseats2[i]=1;
-			}else possibleseats2[i]=0;
-				
-			}
-			
-			System.out.println(pasinfoarr.size());
+			 
 			request.setAttribute("possibleseats1", possibleseats1);
 			request.setAttribute("possibleseats2", possibleseats2);
 			request.getSession().setAttribute("pasinfoarr",pasinfoarr);
 			
 		}
 		
-		
 	
-		
-		
-		
-		
 		//이동
 		if(forward!=null){
 			if(forward.isRedirect()){//redirect방식인경우

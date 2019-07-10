@@ -11,6 +11,5 @@
 		url="jdbc:mysql://sicpanda.ipdisk.co.kr:19712/willpass"
 		username="itwill"
 		password="RyaM9b2BM6dzjrd6"
-				
 	/>
 </Context>
