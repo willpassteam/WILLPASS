@@ -9,40 +9,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WILL PASS</title>
-		<!-- Bootstrap사용을 위한것 -->
-		<jsp:include page="../include/Bootstrap.jsp"></jsp:include>
-		<!-- 달력을 위한 css + js --> 
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<!-- 아이콘을 위한 css -->
-		<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+<!-- Bootstrap사용을 위한것 -->
+<jsp:include page="../include/Bootstrap.jsp"></jsp:include>
+<!-- 달력을 위한 css + js -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 아이콘을 위한 css -->
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 <style type="text/css">
-.subject{
+.subject {
 	height: 70px;
 }
-#ma{
-/*   background-image: url("../img/mainimg1.jpg"); */
-  background-repeat: no-repeat;
-  background-size: auto;
+
+#ma {
+	/*   background-image: url("../img/mainimg1.jpg"); */
+	background-repeat: no-repeat;
+	background-size: auto;
 }
+
 input[type="text"], textarea {
-outline: none;
-box-shadow:none !important;
-/* border:1px solid #ccc !important; */
- border: none;
- 
-           background: transparent;
-            border-top: transparent !important;
-            border-left: transparent !important;
-            border-right: transparent !important;
-            border-bottem: transparent !important;
-            font-weight: 200;
-          
-            padding-left: 0;
+	outline: none;
+	box-shadow: none !important;
+	/* border:1px solid #ccc !important; */
+	border: none;
+	background: transparent;
+	border-top: transparent !important;
+	border-left: transparent !important;
+	border-right: transparent !important;
+	border-bottem: transparent !important;
+	font-weight: 200;
+	padding-left: 0;
 }
-</style>
 </style>
 	<script>
 
@@ -176,7 +175,6 @@ box-shadow:none !important;
     
   		} );
   </script>
-
 </head>
 <body>
 	<%-- Top Start --%>
@@ -197,8 +195,10 @@ box-shadow:none !important;
 <button class="btn btn-outline-primary ml-0">편도</button>
 </div>
 <div class="container pb-5">
-
 						<form autocomplete="off" action="searchpro.jin" method="post">
+						<div class="container mt-5 ">
+				<input type="radio" name="a1" class="custom-radio mr-0" checked="checked">왕복</input> <input type="radio" name="a1" class="custom-radio ml-0">편도</input>
+			</div>
 							<div class="Search border pl-5 pr-5"  >
 								<br>
 								<div class="row 1row" >
@@ -259,20 +259,11 @@ box-shadow:none !important;
 
 </div>
 	
-	
-	</div>
-	
-	
-	
-	
-
-	
-	
 	<%-- Footer Start --%>
 	<jsp:include page="../include/Footer.jsp"></jsp:include>
 	<%-- Footer End --%>
-	
-	
+
+
 </body>
 </html>
 

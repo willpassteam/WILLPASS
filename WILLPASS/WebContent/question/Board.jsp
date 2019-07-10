@@ -23,9 +23,17 @@
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 
-	<div class="container" id="con1" >
+	<div class="container-flude" id="con1" >
 		<div class="row">
-			<div class="col-sm-12" align="center">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-1 pt-5 w-100">
+				<br>
+				<a href="../question/Board.jsp" class="btn btn-primary w-100 mb-1" >공지사항</a><br>
+				<a href="../question/Chatting.jsp" class="btn btn-primary w-100 mb-1">1:1 문의</a><br>
+				<a href="../question/Cscenter.jsp" class="btn btn-primary w-100 mb-1">자주 묻는 질문</a><br>
+				<a href="../question/Question.jsp" class="btn btn-primary w-100 mb-1">문의 게시판</a>
+			</div>
+			<div class="col-sm-6" align="center">
 				<h2>공지 사항</h2>
 				<br>
 				<table class="table mx-3 table-hover">
@@ -106,14 +114,10 @@
 					</tfoot>
 				</table>
 			</div>
+			<div class="col-sm-3"></div>
 		</div>
 	</div>
-	<div class="floatMenu" style="width:200px" >
-		<a href="../question/Board.jsp" class="btn btn-primary w-100 mb-1" >공지사항</a><br>
-		<a href="../question/Chatting.jsp" class="btn btn-primary w-100 mb-1">1:1 문의</a><br>
-		<a href="../question/Cscenter.jsp" class="btn btn-primary w-100 mb-1">자주 묻는 질문</a><br>
-		<a href="../question/Question.jsp" class="btn btn-primary w-100 mb-1">문의 게시판</a>
-	</div>
+	
 	<%-- Footer Start --%>
 	<jsp:include page="../include/Footer.jsp"></jsp:include>
 	<%-- Footer End --%>

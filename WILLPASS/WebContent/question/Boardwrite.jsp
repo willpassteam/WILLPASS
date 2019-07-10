@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +6,7 @@
 <title>Insert title here</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
-		
+
 
 </head>
 <body>
@@ -24,7 +23,7 @@
 				<br>
 				<table class="table">
 					<tr>
-						<th  width="100px" style="padding: auto;"><h5>
+						<th width="100px" style="padding: auto;"><h5>
 								<b>제목</b>
 							</h5></th>
 						<td><input type="text" class="form-control" name="bbs_title"></td>
@@ -33,14 +32,10 @@
 						<th width="100px" style="padding: auto;"><h5>
 								<b>내용</b>
 							</h5></th>
-						<td><textarea class="form-control" rows="50" name
-						="bbs_content" style="height: 300px;"></textarea></td>
+						<td><textarea class="form-control" rows="50" name="bbs_content" style="height: 300px;"></textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="right">
-							<input type="submit" class="btn btn-primary" value="작성" />&nbsp;
-							<a class="btn btn-danger" onclick="location.href='Board.jsp'">취소</a>
-						</td>
+						<td colspan="2" align="right"><input type="submit" class="btn btn-primary" value="작성" />&nbsp; <a class="btn btn-danger" onclick="location.href='Board.jsp'">취소</a></td>
 					</tr>
 				</table>
 			</form>

@@ -66,15 +66,15 @@ $(function(){
 	
  <div class="col">
  	
- 	<div class="row bg-primary">
+ 	<div class="row" style="background-color: #f7f7f7;">
  		<div class="col-sm-7"></div>
  		<div class="col-sm-3 pl-5">
-	 		<h6 class="text-dack float-right py-1">
+	 		<h6 class="text-dark float-right py-1">
 	 		<small>
-	 			<a class="text-light" href="../user/Userlogin.jsp">로그인</a> | 
-	 			<a class="text-light" href="../user/Userjoinimg.jsp">회원가입</a> | 
-	 			<a class="text-light" href="../question/Board.jsp">고객센터</a> | 
-	 			<a class="text-light" href="#">사이트맵</a>
+	 			<a class="text-dark" href="../user/Userlogin.jsp">로그인</a> | 
+	 			<a class="text-dark" href="../user/Userjoinimg.jsp">회원가입</a> | 
+	 			<a class="text-dark" href="../question/Board.jsp">고객센터</a> | 
+	 			<a class="text-dark" href="#">사이트맵</a>
 	 		</small>
 	 		</h6>
  		</div>	
@@ -87,12 +87,12 @@ $(function(){
 	<div class="container">
 	<div class="container">
 		<div class="row mb-3" height="130px" >
-			<div class="col-sm-4">
+			<div class="col-xl-4">
 				<a href="../main/index.jsp">
 					<img alt="" src="../img/Logo.PNG">
 				</a>
 			</div>
-			<div class="col-sm-8 mt">
+			<div class="col-xl-8 mt">
 				<div class="row navrow">
 					<div class="col">
 						<a href="#" class="nt">예약/스케쥴</a>
@@ -312,8 +312,8 @@ $(function(){
  						
  	
  </div>
- <hr class="bg-primary mb-0">
- <hr class="bg-primary mt-0 mb-0">
+ <hr class="mb-0" style="background-color: #f7f7f7;">
+ <hr class="mt-0 mb-0" style="background-color: #f7f7f7;">
 
 
 </body>

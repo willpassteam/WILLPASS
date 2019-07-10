@@ -1,5 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,12 +12,17 @@
 <title>Insert title here</title>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 아이콘을 위한 css -->
+
+
 <style type="text/css">
 #lab1{
  border-left: 5px solid blue;
 }
 </style>
+
+	
 
 </head>
 <body>
@@ -20,11 +30,11 @@
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
+	<form action="${pageContext.request.contextPath}/reservation/passengerInfo" >
+	<input type="hidden" value="${ sessionScope.searcharr[0].people}" name="num_people">
 <div class="container mb-5 mt-3"> 
-
-	<h2 ><b>국제선 예약</b></h2>
-
-	</div>
+<h2 ><b>국제선 예약</b></h2>
+</div>
 
 	<img src="../img/Reser/step2.png" width="100%">
 
@@ -47,12 +57,24 @@
         </li>
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div class="small text-muted">
-          <b>
-        	부산 - 오사카(간사이)<br>
-			2019-06-28 (금) 11:05 → 12:35<br><br>
-			오사카(간사이) - 부산<br>
-			2019-07-09 (화) 13:30 → 15:00<br>
+          
+       <c:if test="${sessionScope.searcharr[0].round_trip eq true}">
+            <b>
+        	${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}<br>
+			${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>
+			${ sessionScope.searcharr[1].starting} - ${ sessionScope.searcharr[1].destination}<br>
+			${ sessionScope.searcharr[1].date} ${ sessionScope.searcharr[1].departure_time}  →  ${ sessionScope.searcharr[1].arrival_time}<br>
           </b>
+       
+       </c:if>
+       <c:if test="${sessionScope.searcharr[0].round_trip eq false}">
+             <b>
+        	${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}<br>
+			${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>
+          </b>
+       
+       </c:if>
+
           </div>
      
         </li>
@@ -60,7 +82,9 @@
         
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div class="small text-muted" >
-           	성인 1명
+          
+           	성인 ${sessionScope.searcharr[0].people}명
+
           </div>
           <span class="text-muted small"><b>55,000 KRW</b></span>
         </li>
@@ -83,7 +107,7 @@
           <div class="small text-muted" >
            	지불예상금액 
           </div>
-          <span class="text-muted "><b>140,700 KRW</b></span>
+          <span class="text-muted "><b>${searchprice} KRW</b></span>
         </li>         
         <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success small text-danger">
@@ -95,7 +119,7 @@
  
         <li class="list-group-item d-flex justify-content-between bg-dark text-white mt-3">
           <span>지불예상금액 </span>
-          <strong>140,700 KRW</strong>
+          <strong>${searchprice} KRW</strong>
         </li>
         
   		<li class="list-group-item d-flex justify-content-between lh-condensed pl-0 pr-0 pt-0 pb-0 mt-3">
@@ -123,16 +147,19 @@
 
         </div>
   
-<!--   잠시테스트 -->
+<!-- 탑승자 정보  -->
+<!-- 탑승자수 people이 string type이기때문에 numbertype으로 바꿈 -->
+<c:set var="num_people" value="${sessionScope.searcharr[0].people}" />
+<fmt:formatNumber value="${num_people}" type="number" var="numberpeople" />
+	<h5 class="mt-3 mb-4 text-dark" id="passengerInfo"> <i class='fas fa-plane'></i><b>탑승자 정보</b></h5>
+<c:forEach begin="1" step="1" end="${numberpeople}" varStatus="status" >
+
   	   <div class="mb-3 text-dark pl-3 pt-3 pr-3 pm-3 border">
-  	   
-  	   
-  	   <div class="row">
+ <div class="row">
   	   
   	   <div class="col-1 pl-0">
   	   <div class="bg-light ml-0 mr-0 pl-1" id="lab1">
-<!-- 		<img src="../img/Reser/label_adult.png" width="125%"> -->
-				<p class="pt-1"><b>성인</b></p>
+		<p class="pt-1"><b>성인${status.index}</b></p>
   		</div>
   	   </div>
   	   
@@ -140,19 +167,26 @@
 			<table class="table">
 			<tr>
 			<td width="20%">승객구분</td>
-			<td width="80%">
-        	<label class="radio-inline "><input type="radio" name="optradio" class="custom-control-input"checked>남</label>
-        	<label class="radio-inline "><input type="radio" name="optradio" >여</label>
+			<td width="80%">    
+
+						<div class="custom-control custom-radio custom-control-inline">
+					      <input type="radio" class="custom-control-input" id="man${status.index}" name="gender${status.index}" value="남자" checked="checked">
+					      <label class="custom-control-label" for="man${status.index}">남자</label>
+					    </div>
+					    <div class="custom-control custom-radio custom-control-inline">
+					      <input type="radio" class="custom-control-input" id="woman${status.index}" name="gender${status.index}" value="여자">
+					      <label class="custom-control-label" for="woman${status.index}">여자</label>
+					    </div>
 			</td>
 			</tr>
 			
 			<tr>
 			<td width="20%">성(Family Name)</td>
-			<td width="80%"><input type="text" class="form-control input-sm col-6" ></td>
+			<td width="80%"><input type="text" class="form-control input-sm col-6" name="familyName${status.index}"></td>
 			</tr>
 			<tr>
 			<td width="20%">이름(Given Name)</td>
-			<td width="80%"><input type="text" class="form-control input-sm col-6"></td>
+			<td width="80%"><input type="text" class="form-control input-sm col-6" name="givenName${status.index}"></td>
 			</tr>			
 			</table> 
   	   </div>
@@ -160,56 +194,10 @@
   	   </div>
   	   
   	   </div>
-<!--   잠시테스트 -->
-        <div class="mb-3 small">
-        	<h5 class="mt-3 mb-4 text-dark"> <i class='fas fa-plane'></i><b>여정 정보</b></h5>
-        
-        </div>  
-  				
-         <div class="mb-3 small">
-	<h5 class="mt-3 mb-4 text-dark"> <i class='fas fa-plane'></i><b>탑승자 정보</b></h5>
-  <table class="table">
-    <thead class="bg-light ">
-      <tr class="col row ">
-        <td class="col-1">유형</td>
-        <td class="col-2">성(Family Name)</td>
-        <td class="col-2">이름(Given Name)</td>
-        <td class="col-2">성별</td>
-        <td class="col-5">기타</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="col row">
-        <td class="border border-left-0 col-1 pt-5">성인1</td>
-        <td class="border col-2  pt-5"> <input type="text" class="form-control input-sm "></td>
-        <td class="border col-2  pt-5"><input type="text" class="form-control input-sm"></td>
-        <td class="border col-2  pt-5 pl-4">
-        <label class="radio-inline "><input type="radio" name="optradio" checked>남</label>
-        <label class="radio-inline "><input type="radio" name="optradio" >여</label>
-        
-        </td>
-        <td class="border border-right-0 col-5 pt-4">
-        <div class="row ml-1 mb-1">
-        <input type="text" class="form-control col-3 input-sm">-
-        <input type="text" class="form-control  col-3 input-sm">-
-        <input type="text" class="form-control  col-3 input-sm">
-        </div>
-        <p class="text-muted  d-inline-block pl-0 ml-0">
-           탑승자가 회원인 경우만 탑승자 휴대폰번호(회원정보상) 입력
-           </p>
-        </td>
 
-  
-      </tr>
+</c:forEach>
 
-    </tbody>
-  </table>      
-      
-      </div>
-
-		
-
- 
+<!-- 예매자정보 -->
 
     <div class="mb-3 small mt-5 ">
     <div class="mt-3 mb-4 text-dark">
@@ -224,13 +212,13 @@
 				<td width="80% ">
 				<div class="col row">
   				<select class="form-control col-4 ml-1" id="sel1">
-   				 <option>국가/지역번호</option>
-   				 <option>1</option>
-    			 <option>2</option>
+   				 <option>+82(대한민국)</option>
+   				 <option>+86(중국)</option>
+    			 <option>+81(일본)</option>
 				</select>				
-				-<input type="text" class="form-control  col-2 input-sm ml-2">- 
-				 <input type="text" class="form-control  col-2 input-sm ml-2">-
-				 <input type="text" class="form-control  col-2 input-sm ml-2">
+				-<input type="text" class="form-control  col-2 input-sm ml-2" name="tel1">- 
+				 <input type="text" class="form-control  col-2 input-sm ml-2"name="tel2">-
+				 <input type="text" class="form-control  col-2 input-sm ml-2"name="tel3">
 				</div>
 				<p class="ml-1 mt-2">
 				연락처 오기입 및 변경 발생 시, 예약센터(1666-3060)을 통해 연락처 수정 바랍니다.
@@ -243,8 +231,8 @@
 				<td width="80%">
 				<div class="col row">
 			
-				<input type="text" class="form-control  col-4 input-sm ml-2"> @
-				 <input type="text" class="form-control  col-4 input-sm ml-2">
+				<input type="text" class="form-control  col-4 input-sm ml-2" name="email1"> @
+				 <input type="text" class="form-control  col-4 input-sm ml-2" name="email2">
 				 
 				</div>
 				<p class="ml-1 mt-2">
@@ -252,17 +240,14 @@
 				</p>
 				</td>
 				</tr>
-				<tr>
-				<th width="20%" class="bg-light">인증코드인증코드</th>
-				<td  width="80%"></td>
-				</tr>								
+							
 		    </tbody>
   		</table>		
 		
 	</div>
  	<hr class="mb-4">
 
-    
+  
     <div class="mb-3 small bg-light text-dark pl-3 pt-3 pr-3 pm-3 border mt-3">
 	<b>유의사항</b><br>
 	<ul>
@@ -279,11 +264,7 @@
 
 
 </div>
-
-
-
-
-
+ </form> 
 	<%-- Footer Start --%>
 	<jsp:include page="../include/Footer.jsp"></jsp:include>
 	<%-- Footer End --%>
