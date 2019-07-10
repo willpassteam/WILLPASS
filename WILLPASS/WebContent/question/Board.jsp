@@ -26,9 +26,7 @@
 	<div class="container-flude" id="con1" >
 		<div class="row">
 			<div class="col-sm-2"></div>
-			
-			<div class="col-sm-1 pt-5" style="width:200px;" >
-				<br>
+			<div class="col-sm-1 pt-5 w-100">
 				<br>
 				<a href="../question/Board.jsp" class="btn btn-primary w-100 mb-1" >공지사항</a><br>
 				<a href="../question/Chatting.jsp" class="btn btn-primary w-100 mb-1">1:1 문의</a><br>
@@ -36,7 +34,6 @@
 				<a href="../question/Question.jsp" class="btn btn-primary w-100 mb-1">문의 게시판</a>
 			</div>
 			<div class="col-sm-6" align="center">
-				<br>
 				<h2>공지 사항</h2>
 				<br>
 				<table class="table mx-3 table-hover">
@@ -44,8 +41,8 @@
 						<tr>
 							<th width="10%" style="text-align: center">번호</th>
 							<th width="60%">제목</th>
-							<th width="20%" style="text-align: center">조회수</th>
-							<th width="20%">등록일</th>
+							<th width="15%" style="text-align: center">조회수</th>
+							<th width="15%">등록일</th>
 						</tr>
 					</thead>
 					<tbody>
