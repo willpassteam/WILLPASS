@@ -190,14 +190,12 @@ input[type="text"], textarea {
 	
 	
 <!-- 	잠시 -->
-<div class="container mt-5 ">
-<button class="btn btn-primary mr-0">왕복</button>
-<button class="btn btn-outline-primary ml-0">편도</button>
-</div>
+
 <div class="container pb-5">
 						<form autocomplete="off" action="searchpro.jin" method="post">
 						<div class="container mt-5 ">
-				<input type="radio" name="a1" class="custom-radio mr-0" checked="checked">왕복</input> <input type="radio" name="a1" class="custom-radio ml-0">편도</input>
+				<input type="radio" name="round_trip" value="0" class="custom-radio mr-0"  checked="checked">왕복</input> 
+				<input type="radio" name="round_trip" value="1" class="custom-radio ml-0">편도</input>
 			</div>
 							<div class="Search border pl-5 pr-5"  >
 								<br>
