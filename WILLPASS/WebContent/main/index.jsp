@@ -119,13 +119,12 @@ box-shadow:none !important;
 	
 	
 <!-- 	잠시 -->
-<div class="container mt-5 ">
-<button class="btn btn-primary mr-0">왕복</button>
-<button class="btn btn-outline-primary ml-0">편도</button>
-</div>
-<div class="container pb-5">
-
-						<form autocomplete="off" >
+<form autocomplete="off" >
+	<div class="container mt-5 ">
+		<input type="radio" name="a1" class="custom-radio mr-0" checked="checked" >왕복</input>
+		<input type="radio" name="a1" class="custom-radio ml-0">편도</input>
+	</div>
+						<div class="container pb-5">
 							<div class="Search border pl-5 pr-5"  >
 								<br>
 								<div class="row 1row" >
@@ -180,12 +179,8 @@ box-shadow:none !important;
 									</div>
 								</div>
 							</div>	
-						</form>
-
-
-
-</div>
-	
+						</div>
+					</form>
 	
 	</div>
 	

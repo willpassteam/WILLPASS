@@ -66,15 +66,15 @@ $(function(){
 	
  <div class="col">
  	
- 	<div class="row bg-primary">
+ 	<div class="row" style="background-color: #f7f7f7;">
  		<div class="col-sm-7"></div>
  		<div class="col-sm-3 pl-5">
-	 		<h6 class="text-dack float-right py-1">
+	 		<h6 class="text-dark float-right py-1">
 	 		<small>
-	 			<a class="text-light" href="../user/Userlogin.jsp">로그인</a> | 
-	 			<a class="text-light" href="../user/Userjoinimg.jsp">회원가입</a> | 
-	 			<a class="text-light" href="../question/Board.jsp">고객센터</a> | 
-	 			<a class="text-light" href="#">사이트맵</a>
+	 			<a class="text-dark" href="../user/Userlogin.jsp">로그인</a> | 
+	 			<a class="text-dark" href="../user/Userjoinimg.jsp">회원가입</a> | 
+	 			<a class="text-dark" href="../question/Board.jsp">고객센터</a> | 
+	 			<a class="text-dark" href="#">사이트맵</a>
 	 		</small>
 	 		</h6>
  		</div>	
@@ -312,8 +312,8 @@ $(function(){
  						
  	
  </div>
- <hr class="bg-primary mb-0">
- <hr class="bg-primary mt-0 mb-0">
+ <hr class="mb-0" style="background-color: #f7f7f7;">
+ <hr class="mt-0 mb-0" style="background-color: #f7f7f7;">
 
 
 </body>
