@@ -16,6 +16,7 @@ import org.jsoup.select.Elements;
 import net.search.db.searchDAO;
 import net.search.db.searchDTO;
 import net.search.db.timeDTO;
+import net.search.db.timeDTO;
 
 public class searchFowarding implements Action{
 	
@@ -54,7 +55,7 @@ public class searchFowarding implements Action{
 			
 			
 			List list=new ArrayList();
-			
+			timeDTO times=new timeDTO();
 			for(int i=0; i<tr.size();i+=2){
 				searchDTO vo= new searchDTO();
 				
@@ -62,29 +63,27 @@ public class searchFowarding implements Action{
 				String sFlight=tr.get(i).getElementsByTag("td").get(4).text();
 				String sStarting=tr.get(i).getElementsByTag("td").get(6).text().split("->")[0];
 				String sDestination=tr.get(i).getElementsByTag("td").get(6).text().split("->")[1];
-				String sfFlight =dao.flightcheck(sAirline);
-				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
-				System.out.println("timecheck start");
-				
-				
-				
-				timeDTO time= dao.timecheck(sfFlight,date);
-				
-				
+//				String sfFlight =dao.flightcheck(sAirline);
+//				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
+//				System.out.println("timecheck start");
 				
 				vo.setAirline(sAirline);
 				vo.setFlight(sFlight);
 				vo.setStarting(sStarting);
 				vo.setDestination(sDestination);
-				vo.setDeparture_time(time.getDeparture_time());
-				vo.setArrival_time(time.getArrival_time());
-				vo.setTime(time.getTime());
+//				vo.setDeparture_time(times.getDeparture_time());
+//				vo.setArrival_time(times.getArrival_time());
+//				vo.setTime(times.getTime());
 				vo.setRound_trip(false);
 				vo.setDate(new Date(new SimpleDateFormat("yyyyMMdd").parse(from).getTime()));
 				vo.setPeople(people);
 				
 				list.add(vo);
 			}
+			
+			timecheck dto=new timecheck();
+			list=dto.times(list); 
+			
 			request.setAttribute("list1",list );
 			
 		 if(round_trip==1){
@@ -111,24 +110,19 @@ public class searchFowarding implements Action{
 				String sFlight=tr_1.get(i).getElementsByTag("td").get(4).text();
 				String sStarting=tr_1.get(i).getElementsByTag("td").get(6).text().split("->")[0];
 				String sDestination=tr_1.get(i).getElementsByTag("td").get(6).text().split("->")[1];
-				String sfFlight =dao.flightcheck(sAirline);
-				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
-				
-				timeDTO time_1= dao.timecheck(sfFlight,date_1);
 				
 				vo.setAirline(sAirline);
 				vo.setFlight(sFlight);
 				vo.setStarting(sStarting);
 				vo.setDestination(sDestination);
-				vo.setDeparture_time(time_1.getDeparture_time());
-				vo.setArrival_time(time_1.getArrival_time());
-				vo.setTime(time_1.getTime());
 				vo.setRound_trip(true);
 				vo.setDate(new Date(new SimpleDateFormat("yyyyMMdd").parse(to).getTime()));
 				vo.setPeople(people);
 				
 				list_1.add(vo);
 			}
+			timecheck dto_1=new timecheck();
+			list_1=dto_1.times(list_1); 
 			request.setAttribute("list2",list_1);
 		}
 		

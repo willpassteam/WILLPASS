@@ -194,8 +194,8 @@ input[type="text"], textarea {
 <div class="container pb-5">
 						<form autocomplete="off" action="searchpro.jin" method="post">
 						<div class="container mt-5 ">
-				<input type="radio" name="round_trip" value="0" class="custom-radio mr-0"  checked="checked">왕복</input> 
-				<input type="radio" name="round_trip" value="1" class="custom-radio ml-0">편도</input>
+				<input type="radio" name="round_trip" value="1" class="custom-radio mr-0"  checked="checked">왕복</input> 
+				<input type="radio" name="round_trip" value="0" class="custom-radio ml-0">편도</input>
 			</div>
 							<div class="Search border pl-5 pr-5"  >
 								<br>

@@ -1,8 +1,8 @@
 package net.reservation.action;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jinwoo.db.searchVO;
 import net.reservation.db.PassengerDTO;
+import net.search.db.searchDTO;
 
 
 @WebServlet("/reservation/*")
@@ -46,7 +46,7 @@ public class ReservationFrontController extends HttpServlet{
 			forward = new ActionForward();
 		forward.setPath("/reserve/ReserStep2.jsp");
 		forward.setRedirect(false);
-		searchVO first = new searchVO();
+		searchDTO first = new searchDTO();
 		first.setAirline("대한항공");
 		first.setArrival_time("5시간30분");
 		first.setDate(new Date(System.currentTimeMillis()));
@@ -58,7 +58,7 @@ public class ReservationFrontController extends HttpServlet{
 		first.setStarting("김해");
 		first.setTime("오후3시");
 		
-		searchVO second = new searchVO();
+		searchDTO second = new searchDTO();
 		second.setAirline("대한항공");
 		second.setArrival_time("5시간30분");
 		second.setDate(new Date(System.currentTimeMillis()));
