@@ -62,7 +62,7 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-1 w-100" style="padding-top: 120px" >
 				<a href="../question/Board.jsp" class="btn btn-primary w-100 mb-1">공지사항</a><br> <a href="../question/Chatting.jsp" class="btn btn-primary w-100 mb-1">1:1 문의</a><br> <a
-					href="../question/Cscenter.jsp" class="btn btn-primary w-100 mb-1">자주 묻는 질문</a><br> <a href="../question/Question.jsp" class="btn btn-primary w-100 mb-1">문의 게시판</a>
+					href="../question/Cscenter.jsp" class="btn btn-primary w-100 mb-1">자주 묻는 질문</a><br> <a href="Question.Board" class="btn btn-primary w-100 mb-1">문의 게시판</a>
 			</div>
 
 			<div class="col-sm-6">

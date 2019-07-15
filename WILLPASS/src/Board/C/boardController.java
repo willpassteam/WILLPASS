@@ -1,6 +1,7 @@
 package Board.C;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import Board.DB.BoardDAO;
+import Board.DB.BoardDTO;
+import Board.M.boardLoginCheck;
+import Board.M.deleteBoard;
+import Board.M.getListBoard;
+import Board.M.replyBoard;
+import Board.M.viewBoard;
+import Board.M.writeBoard;
 
 @WebServlet("*.Board")
 public class boardController extends HttpServlet {
@@ -27,16 +37,19 @@ public class boardController extends HttpServlet {
 	protected void doHendle(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//현재 글작성만 이루어진 상태.
 		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("UTF-8");
+		resp.setContentType("text/html;charset=UTF-8");
+		
 		
 		String RequestURI= req.getRequestURI();
-		System.out.println(RequestURI);
+		System.out.println("ReqeustURI 요청 :"+RequestURI);
 		
 		String contextPath=req.getContextPath();
-		System.out.println(contextPath);
+		System.out.println("contextPath 요청 :"+contextPath);
 		
 		//requestURI 내용이  "프로젝트명/폴더/해당하는 jsp페이지" 로 넘어올때 split 으로 폴더 뒷부분의 값만 가져와서 사용
 		String command= RequestURI.split("question/")[1];
-		System.out.println(command);
+		System.out.println("command 요청 :"+command);
 		
 		ActionForward forward=null;
 		
@@ -73,11 +86,55 @@ public class boardController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("View.Board")){
+		}else if(command.equals("ViewTrue.Board")){// boardLoginCheck() 메소드를 거쳐  작성자와 아이디가 동일할시 넘어옴
 			System.out.println(command);
+			try {
+				action = new viewBoard();
+				forward = action.execute(req, resp);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
+			
+		}else if(command.equals("Question.Board")){// Question.jsp 로 이동 할경우
+			System.out.println("Question.Boardasdf ");
+			try {
+				action = new getListBoard();
+				forward= action.execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}else if(command.equals("Delete.Board")){// Delete.Board 작성자가 View 에 들어와 삭제할경우
+			
+			try {
+				action = new deleteBoard();
+				forward= action.execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}else if(command.equals("reply.Board")){
+			
+			try {
+				BoardDTO dto = new BoardDAO().getBoard(Integer.parseInt(req.getParameter("Board_num")));
+				req.setAttribute("BoardDTO", dto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			forward.setRedirect(false);
+			forward.setPath("./Questionreply.jsp");
+		}else if(command.equals("replyWrite.Board")){
+			try {
+				action = new replyBoard();
+				forward= action.execute(req, resp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-			
 			
 			
 			

@@ -1,4 +1,4 @@
-package Board.C;
+package Board.M;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Board.C.Action;
+import Board.C.ActionForward;
 import Board.DB.BoardDAO;
 
 
@@ -39,14 +41,14 @@ public class writeBoard implements Action {
 				if(result){
 					//작성 성공시 처리
 					forward.setRedirect(true);
-					forward.setPath("./question.jsp");
+					forward.setPath("Question.Board");
 				}else{
 					//작성 실패시 처리
 					
 					request.setAttribute("MSG", "오류가 발생했습니다.");
 					
 					forward.setRedirect(true);
-					forward.setPath("./question.jsp");
+					forward.setPath("Question.Board");
 					
 					
 				}

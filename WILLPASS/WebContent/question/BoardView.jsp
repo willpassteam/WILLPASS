@@ -21,7 +21,7 @@
 			<h2>공지 사항</h2>
 			<hr>
 			<div class="float-left">
-				<h5>제목입니다</h5>
+				<h5></h5>
 			</div>
 			<div class="float-right">
 				<h6>조회수 10 | 작성일자 2019-07-03</h6>
