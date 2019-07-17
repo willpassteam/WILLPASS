@@ -70,11 +70,12 @@ public class timecheck extends Thread{
 			time=time.replace("h", "시간");
 			time=time.replace("m", "분");
 			
-			lacth_1.countDown();
 			
 			dto1.setArrival_time(arrival_time);
 			dto1.setDeparture_time(departure_time);
 			dto1.setTime(time);
+			
+			lacth_1.countDown();
 					
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -104,6 +105,8 @@ public class timecheck extends Thread{
 		try { // lacth 의 카운트가 0이 될 때 까지 대기한다. 
 			
 			lacth.await(4000, TimeUnit.MILLISECONDS); 
+			
+			lacth_1.await();
 			
 			} catch (InterruptedException e) {
 				e.printStackTrace(); 

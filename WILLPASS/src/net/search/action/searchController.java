@@ -99,23 +99,9 @@ public class searchController extends HttpServlet {
 			forward.setRedirect(false);
 			//이동할 페이지 경로 (로그인 페이지)
 			forward.setPath("../jinwoo/searchpro.jsp");
+			
 		}else{
 			System.out.println("예외");
-//			try {
-//			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-//			long time;
-//			
-//				time = (format.parse(req.getParameter("from")).getTime()-new Date().getTime());
-//				 long calDateDays = ((time / ( 24*60*60*1000))+1)%7;
-//				 if(calDateDays>3) calDateDays= calDateDays-7;
-//				 System.out.println(calDateDays);
-//				 
-//
-////				System.out.println(time);
-//			} catch (ParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 			
 		}
 		/*--------------------------------------------------------------------------- */
