@@ -29,18 +29,21 @@ function dailyMissionTimer(duration) {
         if($('#time-min').text()=='00:00'){
         	
         	alert("인증시간을 초과하였습니다.다시 인증해주세요");
+        	self.close();
         }
 
         if (--timer < 0) {
             timer = 0;
             clearInterval(interval);
+            
         }
     }, 1000);
 }
 
 //계정인증 버튼을 클릭했을때 타이머함수 실행
 function EmailTimer(){ 
-	dailyMissionTimer(0.05); 
+	$("#fr").submit();
+	dailyMissionTimer(0.003); 
 }
 
 //확인버튼 눌렀을때 부모창으로 email값전달
@@ -66,26 +69,27 @@ function setParentText(){
  <li>재시도를 하려면 <a href="#">여기</a>를 클릭해 주세요.</li>
  </ul>
  </div>
-
+<form action="/WILLPASS/mailsend.se" method="post" name="fr" id="fr">
  <div class=" mt-4 bg-white border pb-3 pt-3">
 	<div class="row col pr-0">
+	
 	<div class="col-3 text-center"><div class="pt-2"><b>이메일주소</b></div></div>
 	<div class="col-9 input-group pr-0">
-	<input type="text" class="form-control" placeholder="willpass@gamil.com" id="user_email">
+	<input type="text" class="form-control" placeholder="willpass@gamil.com" id="user_email" name="user_email">
 	 <div class="input-group-prepend">
-       <button type="button" class="btn btn-outline-primary" onclick="EmailTimer();">계정인증</button>
+       <button type="button" class="btn btn-outline-primary"  onclick="EmailTimer();">계정인증</button>
       </div>
 	</div>
 	
 	</div>
 
  </div>
- 
+ </form>
  <div class=" mt-4 bg-white border pt-3">
 	<div class="row col pr-0">
 	<div class="col-3 text-center"><div class="pt-2"><b>인증번호</b></div></div>
 	<div class="col-7 input-group pr-0 pt-1">
-	<input type="text" class="form-control pt-2">
+	<input type="text" class="form-control pt-2" name="auth">
 	</div>
 	   <p class="text-danger text-center pt-2 pl-3 col-1" id="time-min">3:00</p>
 	
