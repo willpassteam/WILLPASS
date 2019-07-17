@@ -210,7 +210,7 @@ input[type="radio"] {
 		</h1>
 		<h4 class="text-center maintx ">두/근/거/림 가득한 여행지 대만</h4>
 		<h4 class="text-center maintx">한달에 한번 ,실속있는 가격으로 구매하는 얼리버드 이벤트</h4>
-		<p class="text-center mb-5 maintx ">이벤트 기간 : 2019.7.10~ 2019.08.10</p>
+		<p class="text-center mb-5 maintx ">이벤트 기간 : 2019.7.10~ 2019.08.11</p>
 
 
 		<!-- 	잠시 -->
