@@ -25,12 +25,14 @@
 				<h3>회원 로그인</h3>
 				<div class="row ">
 					<div class="col-sm-6">
-						<form>
+							<form action="./member/MemberloginAction.me">
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-7">
-								<input type="email" class="form-control" placeholder="이메일 주소" ><br>
-								<input type="password" class="form-control" placeholder="비밀번호">
+								<input type="email" name="user_email" id="user_email" class="form-control" placeholder="이메일 주소" ><br>
+<!--                                 	<input type="id" class="form-control" name="user_id" placeholder="아이디"> -->
+								<input type="password" id="user_pwd" name="user_pwd" class="form-control" placeholder="비밀번호">
+<!-- 					<input type="id" name="user_id" class="form-control" placeholder="id"> -->
 								<br>
 								<h6>* 아이디 / 비밀번호는 영문 대소문자를 구분합니다. </h6>
 							</div>
@@ -61,8 +63,10 @@
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-7">
-								<input type="email" class="form-control" placeholder="이메일 주소" ><br>
-								<input type="password" class="form-control" placeholder="비밀번호">
+								<input type="email" class="form-control" name="user_email" placeholder="이메일 주소" ><br>
+								<input type="password" class="form-control" name="user_pwd" placeholder="비밀번호">
+							
+								
 							</div>
 							<div class="col-sm-3">
 								<br>

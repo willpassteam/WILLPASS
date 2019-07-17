@@ -30,13 +30,16 @@
 	<table class="table mb-0">
 	<tr class="border border-right-0 border-left-0">
 	<td width="30%" class="bg-light">이름</td>
-	<td>김준한</td>
+	<td>${user_name}</td>
+<%-- 	<%=id %> --%>
 	</tr>
 	<tr class="border border-right-0 border-left-0">
 	<td width="30%" class="bg-light">아이디</td>
-	<td>willpass1</td>
+	<td>${user_id}</td>
 	</tr>
 	</table>
+	
+	
 	<hr class="mb-0 mt-0 pb-0 pt-0 bg-dark">
 	</div>
 	<div class="col-3"></div>
