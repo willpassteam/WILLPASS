@@ -10,7 +10,8 @@ public class BoardDTO {
 	private Date BOARD_DATE;//작성날짜
 	private String BOARD_EMAIL;//작성자이메일
 	private int BOARD_POS;//글의 위치
-	private int BOARD_DEPTH;// 들여쓰기
+	private int BOARD_DEPTH;//글의 위치
+	
 	
 	
 	public int getBOARD_NUM() {
@@ -55,7 +56,7 @@ public class BoardDTO {
 	public void setBOARD_DEPTH(int bOARD_DEPTH) {
 		BOARD_DEPTH = bOARD_DEPTH;
 	}
-
+	
 	
 	
 	
