@@ -43,7 +43,14 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "INSERT INTO board values(null,?,?,sysdate(),?,null)";
+			String sql = "UPDATE BOARD SET board_pos = board_pos + 1";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.executeUpdate();
+			
+			
+			sql = "INSERT INTO board values(null,?,?,sysdate(),?,1,0)";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -117,11 +124,11 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "select * from board order by board_num desc limit ?,10";
+			String sql = "select * from board order by board_pos ASC limit ?,10";
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, limit*5);
+			pstmt.setInt(1, limit*10);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -131,7 +138,8 @@ public class BoardDAO {
 				dto.setBOARD_DATE(rs.getDate("board_date"));
 				dto.setBOARD_EMAIL(rs.getString("board_email"));
 				dto.setBOARD_NUM(rs.getInt("board_num"));
-				dto.setBOARD_GROUP(rs.getInt("board_group"));
+				dto.setBOARD_POS(rs.getInt("board_pos"));
+				dto.setBOARD_DEPTH(rs.getInt("board_depth"));
 				dto.setBOARD_TITLE(rs.getString("board_title"));
 				
 				result.add(dto);
@@ -168,7 +176,9 @@ public class BoardDAO {
 				dto.setBOARD_DATE(rs.getDate("board_date"));
 				dto.setBOARD_EMAIL(rs.getString("board_email"));
 				dto.setBOARD_NUM(rs.getInt("board_num"));
-				dto.setBOARD_GROUP(rs.getInt("board_group"));
+				dto.setBOARD_POS(rs.getInt("board_pos"));
+				dto.setBOARD_DEPTH(rs.getInt("board_depth"));
+				
 				dto.setBOARD_TITLE(rs.getString("board_title"));
 			}
 		} catch (Exception e) {
@@ -226,22 +236,32 @@ public class BoardDAO {
 		
 		return result;
 	}
-	public boolean replyWrite(int board_num, String board_title, String board_content) {
+	public boolean replyWrite(int board_num, String board_title, String board_content) {// 이전보드의 정보 + 새로운 보드 정보
 		System.out.println("replyWrite Start");
+		BoardDTO dto = new BoardDAO().getBoard(board_num);
 		boolean result = false;
 		try {
 			con = ds.getConnection();
 			
-			String sql = "insert into board values(null,?,?,sysdate(),?,?)";
+			String sql = "UPDATE board set board_pos = board_pos +1 where board_pos > ? ";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, dto.getBOARD_POS());
+			
+			pstmt.executeUpdate();
+			
+			sql = "insert into board values(null,?,?,sysdate(),?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, board_title);
 			pstmt.setString(2, board_content);
-			pstmt.setString(3, "admin");
-			pstmt.setInt(4, board_num);
+			pstmt.setString(3, dto.getBOARD_EMAIL());
+			pstmt.setInt(4, dto.getBOARD_POS()+1);
+			pstmt.setInt(5, dto.getBOARD_DEPTH()+1);
 			
-			pstmt.executeUpdate();
+			if(pstmt.executeUpdate()==1)result = true;
 			
 			
 		} catch (Exception e) {
@@ -253,6 +273,7 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
 	
 
 }

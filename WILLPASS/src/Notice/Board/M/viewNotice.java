@@ -1,4 +1,4 @@
-package Board.M;
+package Notice.Board.M;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,25 +6,25 @@ import javax.servlet.http.HttpServletResponse;
 import Board.C.Action;
 import Board.C.ActionForward;
 import Board.DB.BoardDAO;
-import Board.DB.BoardDTO;
+import Notice.Board.DB.NoticeDAO;
+import Notice.Board.DB.NoticeDTO;
 
-public class viewBoard implements Action {
+public class viewNotice implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
 		
 		
-		int Board_num = (int)request.getAttribute("board_num");
+		int Notice_num = Integer.parseInt(request.getParameter("Notice_num"));
+		new NoticeDAO().addCountBoard(Notice_num);
 		//한개의 보드 정보를 얻어옴
-		BoardDTO result = new BoardDAO().getBoard(Board_num );
-		
-		
+		NoticeDTO result = new NoticeDAO().getBoard(Notice_num );
 		
 		//dto에 저장하여 보냄
-		request.setAttribute("BoardDTO", result);
+		request.setAttribute("NoticeDTO", result);
 		//View페이지로
-		forward.setPath("./QuestionView.jsp");
+		forward.setPath("./BoardView.jsp");
 		forward.setRedirect(false);
 		
 		

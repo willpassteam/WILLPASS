@@ -34,11 +34,21 @@
 				<p >${BoardDTO.BOARD_CONTENT }</p>
 			</div>
 			<div class="float-right mb-3">
-				<c:if test="${User_email == admin }">
-				</c:if>
-				<a href="reply.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-danger">답글</a>	
-				<a href="Delete.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-danger">삭제</a>
-				<a href="Question.Board?Board_page_num=${Board_page_num }" class="btn btn-light">목록</a>
+				<c:if test="${User_email == 'admin' }">
+					<a href="reply.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-danger">답글</a>
+				</c:if>	
+				<c:choose>
+					<c:when test="${BoardDTO.BOARD_DEPTH == 1}">
+						<c:if test="${User_email =='admin' }">
+							<a href="Delete.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-danger">삭제</a>		
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<a href="Delete.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-danger">삭제</a>	
+					</c:otherwise>
+				</c:choose>
+				
+				<a href="Question.Board?Board_page_num=${Board_page_num }" class="btn btn-light border">목록</a>
 			</div>
 			<div class="clearfix"></div>
 			

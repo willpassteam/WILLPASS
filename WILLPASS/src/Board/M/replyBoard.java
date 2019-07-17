@@ -20,21 +20,13 @@ public class replyBoard implements Action{
 		
 		
 		boolean result = new BoardDAO().replyWrite(board_num,board_title,board_content);
-		PrintWriter out =response.getWriter();
 		if(result){
-			out.println("<script>");
-			out.println("alert('답글 완료')");
-			out.println("</script>");
-			
-			
-			
+			request.setAttribute("MSG", "답글 완료");
 		}else{
-			out.println("<script>");
-			out.println("alert('답글 실패')");
-			out.println("</script>");
+			request.setAttribute("MSG", "답글 실패");
 		}
 		forward.setPath("Question.Board");
-		forward.setRedirect(true);
+		forward.setRedirect(false);
 		return forward;
 	}
 	

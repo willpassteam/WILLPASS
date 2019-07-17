@@ -25,15 +25,11 @@ public class deleteBoard implements Action {
 		
 		
 		if(result){
-			out.println("<script>");
-			out.println("alert('삭제 완료되었습니다.'");
-			out.println("</script>");
+			request.setAttribute("MSG", "삭제 완료되었습니다");
 			forward.setPath("Question.Board");
-			forward.setRedirect(true);
+			forward.setRedirect(false);
 		}else{
-			out.println("<script>");
-			out.println("alert('삭제에 실패하였습니다.'");
-			out.println("</script>");
+			request.setAttribute("MSG", "삭제에 실패하였습니다.");
 			forward.setPath("Question.Board");
 			forward.setRedirect(true);
 		}

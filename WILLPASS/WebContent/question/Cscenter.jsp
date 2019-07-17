@@ -61,24 +61,26 @@
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-1 w-100" style="padding-top: 120px" >
-				<a href="../question/Board.jsp" class="btn btn-primary w-100 mb-1">공지사항</a><br> <a href="../question/Chatting.jsp" class="btn btn-primary w-100 mb-1">1:1 문의</a><br> <a
-					href="../question/Cscenter.jsp" class="btn btn-primary w-100 mb-1">자주 묻는 질문</a><br> <a href="Question.Board" class="btn btn-primary w-100 mb-1">문의 게시판</a>
+				<a href="Board.Notice" class="btn btn-dark w-100 mb-1" >공지사항</a><br>
+				<a href="" class="btn btn-dark w-100 mb-1">1:1 문의</a><br>
+				<a href="../question/Cscenter.jsp" class="btn btn-dark w-100 mb-1">자주 묻는 질문</a><br>
+				<a href="Question.Board" class="btn btn-dark w-100 mb-1">문의 게시판</a>
 			</div>
 
-			<div class="col-sm-6">
+			<div class="col-sm-6 border pb-3 mt-2">
 				<br>
-				<h2 class="ml-3">자주 묻는 질문</h2>
+				<h2 class="ml-3" align="center">자주 묻는 질문</h2>
 				<br> <br>
 				<div class="btn-group w-100">
-					<a href="#" class="btn btn-primary btn-lg bt">전체</a> <a href="#" class="btn btn-primary btn-lg bt">예약/변경</a> <a href="#" class="btn btn-primary btn-lg bt">서비스</a> <a href="#"
-						class="btn btn-primary btn-lg bt">결제</a> <a href="#" class="btn btn-primary btn-lg bt">기타</a>
+					<a href="#" class="btn btn-dark btn-lg bt">전체</a> <a href="#" class="btn btn-dark btn-lg bt">예약/변경</a> <a href="#" class="btn btn-dark btn-lg bt">서비스</a> <a href="#"
+						class="btn btn-dark btn-lg bt">결제</a> <a href="#" class="btn btn-dark btn-lg bt">기타</a>
 				</div>
 				<br> <br>
 				<div class="row mx-2">
 					<div class="input-group">
 						<input type="text" class="form-control" name="search" placeholder="검색어">
 						<div class="input-group-prepend">
-							<span class="input-group-prepend"><button class="btn btn-success" type="button" name="searchbtn">검색</button> </span>
+							<span class="input-group-prepend"><button class="btn btn-danger" type="button" name="searchbtn">검색</button> </span>
 						</div>
 					</div>
 				</div>

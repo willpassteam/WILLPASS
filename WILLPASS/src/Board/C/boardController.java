@@ -1,6 +1,7 @@
 package Board.C;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -37,8 +38,10 @@ public class boardController extends HttpServlet {
 	protected void doHendle(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//현재 글작성만 이루어진 상태.
 		req.setCharacterEncoding("utf-8");
-		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=UTF-8");
+		
+		
+		
 		
 		
 		String RequestURI= req.getRequestURI();
@@ -60,89 +63,91 @@ public class boardController extends HttpServlet {
 			action = new boardLoginCheck();
 			forward= action.execute(req, resp);
 			
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
-		if(command.equals("writePage.Board")){//게시판 작성 페이지로 이동
+			if(command.equals("writePage.Board")){//게시판 작성 페이지로 이동
+					
+				forward = new ActionForward();
+				forward.setPath("./Questionwrite.jsp");
+				forward.setRedirect(true);
+			}
+			else if(command.equals("write.Board")){//게시판 작성 페이지 작성후 DB 연동 후 -> View 페이지로
 				
-			forward = new ActionForward();
-			forward.setPath("./Questionwrite.jsp");
-			forward.setRedirect(true);
-		}
-		else if(command.equals("write.Board")){//게시판 작성 페이지 작성후 DB 연동 후 -> View 페이지로
-			
-			//else if 문 안으로 들어왔는지 확인용 
-			System.out.println("write.Board");
-			
-			try {
-				// action 인터페이스를 구현하고있는 writeBoard 를 action 인터페이스 객체에 넣어주고
-				// action 인터페이스에 구현되어있는 execute 메소드를 이용해 request,response를 넘겨줘서 DB작업이 가능하도록한다.
-				action=new writeBoard();
-				forward=action.execute(req, resp);
+				//else if 문 안으로 들어왔는지 확인용 
+				System.out.println("write.Board");
 				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}else if(command.equals("ViewTrue.Board")){// boardLoginCheck() 메소드를 거쳐  작성자와 아이디가 동일할시 넘어옴
-			System.out.println(command);
-			try {
-				action = new viewBoard();
-				forward = action.execute(req, resp);
+				try {
+					// action 인터페이스를 구현하고있는 writeBoard 를 action 인터페이스 객체에 넣어주고
+					// action 인터페이스에 구현되어있는 execute 메소드를 이용해 request,response를 넘겨줘서 DB작업이 가능하도록한다.
+					action=new writeBoard();
+					forward=action.execute(req, resp);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
-			} catch (Exception e) {
-				e.printStackTrace();
+			}else if(command.equals("ViewTrue.Board")){// boardLoginCheck() 메소드를 거쳐  작성자와 아이디가 동일할시 넘어옴
+				System.out.println(command);
+				try {
+					action = new viewBoard();
+					forward = action.execute(req, resp);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+			}else if(command.equals("Question.Board")){// Question.jsp 로 이동 할경우
+				try {
+					action = new getListBoard();
+					forward= action.execute(req, resp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+			}else if(command.equals("Delete.Board")){// Delete.Board 작성자가 View 에 들어와 삭제할경우
+				
+				try {
+					action = new deleteBoard();
+					forward= action.execute(req, resp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				
+			}else if(command.equals("reply.Board")){ //답글 작성시
+				
+				try {
+					BoardDTO dto = new BoardDAO().getBoard(Integer.parseInt(req.getParameter("Board_num")));
+					req.setAttribute("BoardDTO", dto);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				forward.setRedirect(false);
+				forward.setPath("./Questionreply.jsp");
+			}else if(command.equals("replyWrite.Board")){
+				try {
+					action = new replyBoard();
+					forward= action.execute(req, resp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-			
-			
-		}else if(command.equals("Question.Board")){// Question.jsp 로 이동 할경우
-			System.out.println("Question.Boardasdf ");
-			try {
-				action = new getListBoard();
-				forward= action.execute(req, resp);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			
-		}else if(command.equals("Delete.Board")){// Delete.Board 작성자가 View 에 들어와 삭제할경우
-			
-			try {
-				action = new deleteBoard();
-				forward= action.execute(req, resp);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			
-		}else if(command.equals("reply.Board")){
-			
-			try {
-				BoardDTO dto = new BoardDAO().getBoard(Integer.parseInt(req.getParameter("Board_num")));
-				req.setAttribute("BoardDTO", dto);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			forward.setRedirect(false);
-			forward.setPath("./Questionreply.jsp");
-		}else if(command.equals("replyWrite.Board")){
-			try {
-				action = new replyBoard();
-				forward= action.execute(req, resp);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 			
 			
 			
 		if(forward != null){//new ActrionForward()객체가 저장되어 있고
 			
+			
 			if(forward.isRedirect()){ //true ->Response.sendRedirect()
-				
 				resp.sendRedirect(forward.getPath());
+				
 				
 			}else {//false->dis.forward(request,response)
 				
@@ -151,6 +156,8 @@ public class boardController extends HttpServlet {
 			}
 			
 		}
+		
+		
 		
 	}
 }

@@ -29,8 +29,8 @@
 }
 
 #ma {
-	background-image: url("../img/Main/1.jpg");
-	min-height: 800px;
+	background-image: url("../img/Main/2번.jpg");
+	height: 800px;
 	background-repeat: no-repeat;
 	background-size: 100% 60%;
 }
@@ -48,10 +48,24 @@ input[type="text"], textarea {
 	font-weight: 200;
 	padding-left: 0;
 }
+.maintx-1{
+	color:	#FF4500;
+}
+.maintx{
+	color: 	#F8F8FF;
+}
 
 input[type="radio"] {
 	display: none;
 }
+.pushimg:HOVER{
+	cursor: pointer;
+	
+}
+.pushimg img{
+	-webkit-filter:brightness(80%);
+}
+
 </style>
 <script>
 	$(function() {
@@ -190,26 +204,26 @@ input[type="radio"] {
 	<%-- Top End --%>
 
 
-	<div class="border pt-5" id="ma">
-		<h1 class="text-center text-danger ">
+	<div class="pt-5" id="ma">
+		<h1 class="text-center maintx-1 ">
 			<b>푸동푸동 타이완</b>
 		</h1>
-		<h4 class="text-center text-light ">두/근/거/림 가득한 여행지 대만</h4>
-		<h4 class="text-center text-light">한달에 한번 ,실속있는 가격으로 구매하는 얼리버드 이벤트</h4>
-		<p class="text-center mb-5 text- ">이벤트 기간 : 2019.7.10~ 2019.08.10</p>
+		<h4 class="text-center maintx ">두/근/거/림 가득한 여행지 대만</h4>
+		<h4 class="text-center maintx">한달에 한번 ,실속있는 가격으로 구매하는 얼리버드 이벤트</h4>
+		<p class="text-center mb-5 maintx ">이벤트 기간 : 2019.7.10~ 2019.08.10</p>
 
 
 		<!-- 	잠시 -->
 
 		<div class="container pb-5">
-			<form autocomplete="off" action="searchpro.jin" method="post">
+			<form autocomplete="off" action="searchpro.jin" method="post" name="search">
 				<div class="container mt-5 ">
 					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-						<label for="round_trip" class="btn btn-outline-dark btn-light"><input type="radio" name="round_trip" value="0" class="custom-radio mr-0" checked="checked">왕복</input></label> <label
+						<label for="round_trip" class="btn btn-outline-dark btn-light active"><input type="radio" name="round_trip" value="0" class="custom-radio mr-0" checked="checked">왕복</input></label> <label
 							for="round_trip" class="btn btn-outline-dark btn-light"><input type="radio" name="round_trip" value="1" class="custom-radio ml-0">편도</input></label>
 					</div>
 				</div>
-				<div class="Search border pl-5 pr-5 bg-light round">
+				<div class="Search border pl-5 pr-5 bg-light rounded">
 					<br>
 					<div class="row 1row">
 						<div class="col-sm-3">
@@ -261,26 +275,34 @@ input[type="radio"] {
 			<br>
 			<div class="Air mt-5">
 
-				<h3>추천 여행지</h3>
+				<h3 class="text-dark">추천 여행지</h3>
 				<br>
-				<div class="row">
-					<div class="col-sm-3">
-						<img alt="" src="../img/Main/뉴욕.jpg" width="100%">
-						<a class="text-light" style="font-size:25px;position: absolute;bottom: 20px;left: 40%">뉴욕</a>
+				<div class="row ">
+					<div class="col-sm-3 pushimg">
+						<img alt="" src="../img/Main/바르셀로나.jpg" width="100%">
+						<a class="text-light" style="font-size:25px;position: absolute;bottom:20px;left:28%;">바로셀로나</a>
 					</div>
-					<div class="col-sm-3">
-						<img alt="" src="../img/Main/뉴욕.jpg" width="100%">
+					<div class="col-sm-3 pushimg">
+						<img alt="" src="../img/Main/로스앤젤레스.jpg" width="100%">
+						<a class="text-light" style="font-size:25px;position: absolute;bottom: 20px;left:24%;">로스앤젤레스</a>
 					</div>
-					<div class="col-sm-3">
-						<img alt="" src="../img/Main/뉴욕.jpg" width="100%">
+					<div class="col-sm-3 pushimg">
+						<img alt="" src="../img/Main/런던.jpg" width="100%">
+						<a class="text-light" style="font-size:25px;position: absolute;bottom: 20px;left:40%;">런던</a>
 					</div>
-					<div class="col-sm-3">
-						<img alt="" src="../img/Main/뉴욕.jpg" width="100%">
+					<div class="col-sm-3 pushimg">
+						<img alt="" src="../img/Main/샌프란시스코.jpg" width="100%">
+						<a class="text-light" style="color:white;font-size:25px;position: absolute;bottom: 20px;left:40%;">로마</a>
 					</div>
+					
 				</div>
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
+	<br>
+	
 
 	<%-- Footer Start --%>
 	<jsp:include page="../include/Footer.jsp"></jsp:include>

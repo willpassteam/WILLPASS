@@ -15,17 +15,18 @@
 <!-- 아이콘 사용을 위한 css -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 <style type="text/css">
-	.floatMenu{
-		position:absolute;
-		bottom: 550px;
-		left:200px; 
-		 
-		
-	}
+	
+	
+	
 </style>
-
 </head>
 <body>
+	<c:if test="${MSG != null }">
+		<script type="text/javascript">
+			alert("${MSG}");
+		</script>
+		
+	</c:if>
 	<c:set var="Board_page_num" value="${Board_page_num }" scope="request"></c:set>
 	
 	<%-- Top Start --%>
@@ -37,22 +38,23 @@
 	<div class="container-flude" id="con1" >
 		<div class="row">
 			<div class="col-sm-2"></div>
-			<div class="col-sm-1  w-100" style="padding-top: 70px" >
-				<a href="../question/Board.jsp" class="btn btn-primary w-100 mb-1" >공지사항</a><br>
-				<a href="../question/Chatting.jsp" class="btn btn-primary w-100 mb-1">1:1 문의</a><br>
-				<a href="../question/Cscenter.jsp" class="btn btn-primary w-100 mb-1">자주 묻는 질문</a><br>
-				<a href="Question.Board" class="btn btn-primary w-100 mb-1">문의 게시판</a>
+			<div class="col-sm-1  w-100" style="padding-top: 85px" >
+				<a href="Board.Notice" class="btn btn-dark w-100 mb-1" >공지사항</a><br>
+				<a href="" class="btn btn-dark w-100 mb-1">1:1 문의</a><br>
+				<a href="../question/Cscenter.jsp" class="btn btn-dark w-100 mb-1">자주 묻는 질문</a><br>
+				<a href="Question.Board" class="btn btn-dark w-100 mb-1">문의 게시판</a>
 			</div>
 			<div class="col-sm-6" align="center">
-				<h2>문의 게시판</h2>
+				<br>
+				<h2 align="center">문의 게시판</h2>
 				<br>
 				<table class="table mx-3 table-hover">
 					<thead class="thead-light">
 						<tr>
-							<th width="10%" style="text-align: center">번호</th>
+							<th width="7%" style="text-align: center">번호</th>
 							<th width="60%">제목</th>
-							<th width="10%" style="text-align: center">작성자</th>
-							<th width="10%" style="text-align: center">작성일</th>
+							<th width="20%" style="text-align: center">작성자</th>
+							<th width="15%" style="text-align: center">작성일</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -60,8 +62,21 @@
 							<tr>
 								
 								<td align="center">${boardList.BOARD_NUM}</td>
-								<td><i class="fas fa-unlock"></i><a href="View.Board?Board_num=${boardList.BOARD_NUM}&Board_page_num=${Board_page_num}">${boardList.BOARD_TITLE}</a></td>
-								<td align="center">${boardList.BOARD_EMAIL}</td>
+								<td>
+									<c:if test="${boardList.BOARD_DEPTH == 1 }">
+										&nbsp;&nbsp;<i class="fas fa-caret-up" style="color: red"></i>
+									</c:if>
+									<i class="fas fa-unlock"></i><a href="View.Board?Board_num=${boardList.BOARD_NUM}&Board_page_num=${Board_page_num}">${boardList.BOARD_TITLE}</a></td>
+								<td align="center">
+									<c:choose>
+										<c:when test="${boardList.BOARD_DEPTH == 1 }">
+											관리자
+										</c:when>
+										<c:otherwise>
+											${boardList.BOARD_EMAIL}
+										</c:otherwise>
+									</c:choose>
+									</td>
 								<td align="center">${boardList.BOARD_DATE}</td>
 								
 							</tr>

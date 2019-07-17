@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Board.C.Action;
 import Board.C.ActionForward;
@@ -22,12 +23,9 @@ public class boardLoginCheck implements Action {
 		board_email = "asdsad";
 
 		
-		if(board_email == null){// 비로그인시 바로
+		if(board_email == null && !(request.getRequestURI().split("question/")[1].equals("Question.Board"))){// 비로그인시 바로
 			
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('로그인후 이용가능한 페이지 입니다.')");
-			out.println("</script>");
+			request.setAttribute("MSG", "로그인후 이용가능한 페이지입니다.");
 			
 			result.setPath("../user/Userlogin.jsp");
 			result.setRedirect(true);
@@ -43,7 +41,7 @@ public class boardLoginCheck implements Action {
 				//게시판 고유 넘버 얻어오기
 				int board_num = Integer.parseInt(request.getParameter("Board_num"));
 				
-				if(new BoardDAO().checkBoard(board_num, board_email)){// 값이 true 는 작성자와 로그인한 사람이 같은경우
+				if(new BoardDAO().checkBoard(board_num, board_email) || board_email.equals("admin")){// 값이 true 는 작성자와 로그인한 사람이 같은경우
 					//Attribute로 board_num을 지정해줘서 해당하는 페이지에서 board_num을 이용할수 있도록 한다.
 					request.setAttribute("board_num", board_num);
 					
@@ -52,13 +50,9 @@ public class boardLoginCheck implements Action {
 					
 				}else{
 					// 로그인은 하였으나 본인의 글이 아닌경우 게시판 페이지로 다시 이동.
-					PrintWriter out = response.getWriter();
-					out.println("<script>");
-					out.println("alert('본인이 작성한 글이 아닙니다.')");
-					out.println("</script>");
-					
+					request.setAttribute("MSG", "본인의 글만 읽을수 있습니다.");
 					result.setPath("Question.Board?Board_page_num="+board_page_num);
-					result.setRedirect(true);
+					result.setRedirect(false);
 					
 				}
 			}
