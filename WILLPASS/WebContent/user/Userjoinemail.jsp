@@ -42,8 +42,20 @@ function dailyMissionTimer(duration) {
 
 //계정인증 버튼을 클릭했을때 타이머함수 실행
 function EmailTimer(){ 
-	$("#fr").submit();
-	dailyMissionTimer(0.003); 
+	var user_email=$("#user_email").val();
+	alert(user_email);
+	$.ajax({
+		type : 'POST',
+		url  : '/WILLPASS/mailsend.se',
+		data: { user_email : user_email }, //{parameterName, data} 형식
+		success: function(result){
+			
+		},
+		error : function() {
+			alert("aa");
+		}
+	});
+	dailyMissionTimer(0.05); 
 }
 
 //확인버튼 눌렀을때 부모창으로 email값전달
@@ -69,7 +81,6 @@ function setParentText(){
  <li>재시도를 하려면 <a href="#">여기</a>를 클릭해 주세요.</li>
  </ul>
  </div>
-<form action="/WILLPASS/mailsend.se" method="post" name="fr" id="fr">
  <div class=" mt-4 bg-white border pb-3 pt-3">
 	<div class="row col pr-0">
 	
@@ -84,7 +95,6 @@ function setParentText(){
 	</div>
 
  </div>
- </form>
  <div class=" mt-4 bg-white border pt-3">
 	<div class="row col pr-0">
 	<div class="col-3 text-center"><div class="pt-2"><b>인증번호</b></div></div>

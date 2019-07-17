@@ -17,7 +17,7 @@ import net.search.db.searchDTO;
 import net.search.db.timeDTO;
 
 public class timecheck extends Thread{
-	final static int THREADS = 10; 
+	final static int THREADS = 15; 
 	private static CountDownLatch lacth = new CountDownLatch(THREADS);
 
 	int THREADS_1 ; 
@@ -104,7 +104,7 @@ public class timecheck extends Thread{
 			} 
 		try { // lacth 의 카운트가 0이 될 때 까지 대기한다. 
 			
-			lacth.await(4000, TimeUnit.MILLISECONDS); 
+			lacth.await(10000, TimeUnit.MILLISECONDS); 
 			
 			lacth_1.await();
 			
