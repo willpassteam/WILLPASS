@@ -157,6 +157,8 @@ public class searchDAO {
 		String arrival_time="";
 		String time="";
 		
+		
+		
 		try {
 			Document flight = Jsoup.connect("https://www.flightstats.com/v2/flight-details/"+sfFlight+"?year="+yy+"&month="+mm+"&date="+dd).post();
 			Elements timeblock=flight.getElementsByClass("timeBlock");
