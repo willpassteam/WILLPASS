@@ -43,25 +43,39 @@ function dailyMissionTimer(duration) {
 //계정인증 버튼을 클릭했을때 타이머함수 실행
 function EmailTimer(){ 
 	var user_email=$("#user_email").val();
-	alert(user_email);
 	$.ajax({
 		type : 'POST',
 		url  : '/WILLPASS/mailsend.se',
 		data: { user_email : user_email }, //{parameterName, data} 형식
 		success: function(result){
-			
-		},
-		error : function() {
-			alert("aa");
+			var auth=${sessionScope.authNum};
 		}
 	});
+	
 	dailyMissionTimer(0.05); 
 }
 
 //확인버튼 눌렀을때 부모창으로 email값전달
 function setParentText(){
-    opener.location="UserJoinstep2.jsp?email="+$("#user_email").val();
-    window.close();
+	var num=$("#auth").val();
+	alert()
+	
+	
+	if(num==""){
+		alert("인증번호를 입력하세요");
+		return false;
+	}
+	if( num != auth){
+		alert("틀린 인증번호 입니다. 인증번호를 확인하여 다시 입력해주세요");
+		$("#auth").val("");
+		return false;
+	}
+	if(num==auth){
+		alert("인증 되었습니다.");
+		opener.location="UserJoinstep2.jsp?email="+$("#user_email").val();
+	    window.close();
+	}
+    
 }
 
 
@@ -99,7 +113,7 @@ function setParentText(){
 	<div class="row col pr-0">
 	<div class="col-3 text-center"><div class="pt-2"><b>인증번호</b></div></div>
 	<div class="col-7 input-group pr-0 pt-1">
-	<input type="text" class="form-control pt-2" name="auth">
+	<input type="text" class="form-control pt-2" name="auth" id="auth">
 	</div>
 	   <p class="text-danger text-center pt-2 pl-3 col-1" id="time-min">3:00</p>
 	

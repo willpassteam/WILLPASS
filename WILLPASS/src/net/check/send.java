@@ -1,4 +1,4 @@
-package net.mail;
+package net.check;
 
 import java.io.IOException;
 import java.util.Date;
@@ -46,11 +46,9 @@ public class send  extends HttpServlet{
 		
 		sendEmail(email,authNum);
 		
-		req.setAttribute("email", email);
-		req.setAttribute("authNum", authNum);
+		req.getSession().setAttribute("authNum", authNum);
 		
-		RequestDispatcher dis=req.getRequestDispatcher("/user/Userjoinemail.jsp");
-		dis.forward(req, resp);
+		
 	}
 	private void sendEmail(String email, String authNum) {
 		String host="smtp.gmail.com";

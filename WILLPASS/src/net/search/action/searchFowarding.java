@@ -84,6 +84,12 @@ public class searchFowarding implements Action{
 			timecheck dto=new timecheck();
 			list=dto.times(list); 
 			
+			for(int i=0; i<list.size();i++){
+				searchDTO vo= (searchDTO)list.get(i);
+				if(vo.getArrival_time()==null){
+					list.remove(list.get(i));
+				}
+			}
 			request.setAttribute("list1",list );
 			
 		 if(round_trip==1){
@@ -123,6 +129,13 @@ public class searchFowarding implements Action{
 			}
 			timecheck dto_1=new timecheck();
 			list_1=dto_1.times(list_1); 
+			
+			for(int i=0; i<list_1.size();i++){
+				searchDTO vo= (searchDTO)list_1.get(i);
+				if(vo.getArrival_time()==null){
+					list_1.remove(list_1.get(i));
+				}
+			}
 			request.setAttribute("list2",list_1);
 		}
 		

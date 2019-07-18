@@ -205,8 +205,8 @@ input[type="radio"] {
 			<form autocomplete="off" action="searchpro.jin" method="post" name="search">
 				<div class="container mt-5 ">
 					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-						<label for="round_trip" class="btn btn-outline-dark btn-light active"><input type="radio" name="round_trip" value="0" class="custom-radio mr-0" checked="checked">왕복</input></label> <label
-							for="round_trip" class="btn btn-outline-dark btn-light"><input type="radio" name="round_trip" value="1" class="custom-radio ml-0">편도</input></label>
+						<label for="round_trip" class="btn btn-outline-dark btn-light active"><input type="radio" name="round_trip" value="1" class="custom-radio mr-0" checked="checked">왕복</input></label> <label
+							for="round_trip" class="btn btn-outline-dark btn-light"><input type="radio" name="round_trip" value="0" class="custom-radio ml-0">편도</input></label>
 					</div>
 				</div>
 				<div class="Search border pl-5 pr-5 bg-light rounded">
