@@ -1,6 +1,7 @@
 package net.check;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -18,6 +19,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 
 @WebServlet("/mailsend.se")
@@ -46,7 +49,14 @@ public class send  extends HttpServlet{
 		
 		sendEmail(email,authNum);
 		
-		req.getSession().setAttribute("authNum", authNum);
+		JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
+		sObject.put("authNum", authNum);
+		PrintWriter out=resp.getWriter();
+
+		out.print(sObject.toString());
+		
+		out.close();
+		
 		
 		
 	}
