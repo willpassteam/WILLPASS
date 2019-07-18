@@ -8,8 +8,7 @@
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-
-
+var authNum="";
 //계정인증 버튼 클릭했을때 timer 
 function dailyMissionTimer(duration) {
     
@@ -42,13 +41,16 @@ function dailyMissionTimer(duration) {
 
 //계정인증 버튼을 클릭했을때 타이머함수 실행
 function EmailTimer(){ 
+	
 	var user_email=$("#user_email").val();
 	$.ajax({
 		type : 'POST',
 		url  : '/WILLPASS/mailsend.se',
 		data: { user_email : user_email }, //{parameterName, data} 형식
+		dataType : "json",
 		success: function(result){
-			var auth=${sessionScope.authNum};
+			authNum=result.authNum;
+
 		}
 	});
 	
@@ -58,19 +60,19 @@ function EmailTimer(){
 //확인버튼 눌렀을때 부모창으로 email값전달
 function setParentText(){
 	var num=$("#auth").val();
-	alert()
+	
 	
 	
 	if(num==""){
 		alert("인증번호를 입력하세요");
 		return false;
 	}
-	if( num != auth){
+	if( num != authNum){
 		alert("틀린 인증번호 입니다. 인증번호를 확인하여 다시 입력해주세요");
 		$("#auth").val("");
 		return false;
 	}
-	if(num==auth){
+	if(num==authNum){
 		alert("인증 되었습니다.");
 		opener.location="UserJoinstep2.jsp?email="+$("#user_email").val();
 	    window.close();
@@ -100,7 +102,7 @@ function setParentText(){
 	
 	<div class="col-3 text-center"><div class="pt-2"><b>이메일주소</b></div></div>
 	<div class="col-9 input-group pr-0">
-	<input type="text" class="form-control" placeholder="willpass@gamil.com" id="user_email" name="user_email">
+	<input type="email" class="form-control" placeholder="willpass@gamil.com" id="user_email" name="user_email">
 	 <div class="input-group-prepend">
        <button type="button" class="btn btn-outline-primary"  onclick="EmailTimer();">계정인증</button>
       </div>
