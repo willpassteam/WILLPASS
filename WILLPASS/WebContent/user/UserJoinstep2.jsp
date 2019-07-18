@@ -34,6 +34,16 @@
 	            },
 	        }).open();
 	    }
+	    
+function check(){
+	if(!$("input[name='check']").attr('checked')){
+		   alert("개인정보이용을 동의하셔야 함여하실수 있습니다.");
+		   $("#allCheck").focus();
+		   return false;
+
+		   }
+}
+   
 </script>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <!-- 아이콘을 위한 css -->
@@ -43,7 +53,7 @@
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
-	<form action="./member/MemberJoinAction.me">
+	<form action="./member/MemberJoinAction.me" method="post" onsubmit="check()">
 	<input type="hidden" value="1" name="user_non">
 	<div class="bg-light mt-0 pt-5 pb-5">   
 	<div class="container border bg-white pb-5 ">
