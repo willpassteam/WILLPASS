@@ -84,7 +84,7 @@ public class searchFowarding implements Action{
 			timecheck dto=new timecheck();
 			list=dto.times(list); 
 			
-			request.setAttribute("list1",list );
+			request.getSession().setAttribute("list1",list );
 			
 		 if(round_trip==1){
 			 List list_1=new ArrayList();
@@ -123,7 +123,8 @@ public class searchFowarding implements Action{
 			}
 			timecheck dto_1=new timecheck();
 			list_1=dto_1.times(list_1); 
-			request.setAttribute("list2",list_1);
+			request.getSession().setAttribute("list2",list_1);
+//			request.setAttribute("list2",list_1);
 		}
 		
 		

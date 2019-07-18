@@ -98,7 +98,7 @@ public class searchController extends HttpServlet {
 			//페이지 이동방식 여부값 false로 저장 -> 디스패치방식
 			forward.setRedirect(false);
 			//이동할 페이지 경로 (로그인 페이지)
-			forward.setPath("../jinwoo/searchpro.jsp");
+			forward.setPath("/reserve1/ReserStep1.do");
 			
 		}else{
 			System.out.println("예외");
