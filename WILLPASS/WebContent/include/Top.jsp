@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="path" value="${pageContext.request.contextPath }"></c:set>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -74,10 +75,20 @@ $(function(){
  		<div class="col-sm-3 pl-5">
 	 		<h6 class="text-dark float-right py-1">
 	 		<small>
-	 			<a class="text-dark" href="${path }/user/Userlogin.jsp">로그인</a> | 
-	 			<a class="text-dark" href="${path }/user/Userjoinimg.jsp">회원가입</a> | 
-	 			<a class="text-dark" href="${path }/question/Board.Notice">고객센터</a> | 
+
+	 		<c:if test="${user_email ==null }">
+	 			<a class="text-dark" href="${contextPath }/user/Userlogin.jsp">로그인</a> | 
+	 			<a class="text-dark" href="${contextPath }/user/Userjoinimg.jsp">회원가입</a> | 
+	 			<a class="text-dark" href="${contextPath }/question/Board.Notice">고객센터</a> | 
 	 			<a class="text-dark" href="#">사이트맵</a>
+	 			</c:if>
+	 			<c:if test="${user_email !=null }">
+	 			<a class="text-dark" href="${contextPath }/user/member/Usermodify.me">${user_id }님</a> | 
+	 			<a class="text-dark" href="${contextPath }/user/member/logout.me">로그아웃</a> | 
+	 			<a class="text-dark" href="${contextPath }/question/Board.Notice">고객센터</a> | 
+	 			<a class="text-dark" href="#">사이트맵</a>
+	 			</c:if>
+
 	 		</small>
 	 		</h6>
  		</div>	
