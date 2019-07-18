@@ -43,7 +43,28 @@ function check(){
 
 		   }
 }
-   
+
+function idcheck() {
+	var id=$("#user_id").val();
+	$.ajax({
+		type : 'POST',
+		url  : '/WILLPASS/idcheck',
+		data: { id : id }, //{parameterName, data} 형식
+		success: function(result){
+			if(result==0){ //결과가 1이면 사용할수 있는 아이디
+				$("#checklabel").removeClass("text-danger");
+				$("#checklabel").addClass("text-success");
+				$("#checklabel").html("<b class='text-info'>√ </b>사용할 수 있는 아이디입니다.");
+			
+			}else{//결과가 1이 아니라면 사용할수 없는 아이디
+				$("#checklabel").removeClass("text-success");
+				$("#checklabel").addClass("text-danger");
+				$("#checklabel").html("<b class='text-info'>√ </b>사용할 수 없는 아이디입니다.");
+			}				
+		}
+	});
+}
+
 </script>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <!-- 아이콘을 위한 css -->
@@ -76,16 +97,16 @@ function check(){
         <td width="80%" class="pb-0 pt-0">
         <div class="row mb-0 pb-0 pt-2">
       <div class="input-group col-5 pl-0 pt-1 pb-1 mr-0 pr-3 ml-3">
- 			<input type="text" class="form-control col-7" name="user_id" required/>
+
+ 			<input type="text" class="form-control col-7" name="user_id" id="user_id">
 			 <div class="input-group-prepend col-5 pl-0 pr-0">
-      	 <button type="button" class="btn btn-outline-primary  pt-0 pb-0 pr-3">중복확인</button>
-      	 
-<!--       	 12/july 중복성체크 애플민트에 서 copy -->
-<!--       	 7.사용가능한 ID이면 사용함 버튼을 눌러서 부모창(join.jsp)에 사용가능한 ID뿌려주기 -->
-<!-- 		<input type="button" value="사용함" onclick="result()">  여기까지 -->
+      	 <button type="button" class="btn btn-outline-primary  pt-0 pb-0 pr-3" onclick="idcheck()">중복확인</button>
+
+ 			
+
       </div>
   	</div>
-        <p class=" d-inline-block col-6 ml-4 pt-2 small text-success "><b class="text-info">√ </b>사용 가능한 아이디.  6~15자의 영문 소문자 ,숫자만 사용가능</p>
+        <p class=" d-inline-block col-6 ml-4 pt-2 small text-success " id="checklabel"><b class="text-info">√ </b>사용 가능한 아이디.  6~15자의 영문 소문자 ,숫자만 사용가능</p>
         </div>
         </td>
       </tr>

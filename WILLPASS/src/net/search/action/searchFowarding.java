@@ -84,8 +84,16 @@ public class searchFowarding implements Action{
 			timecheck dto=new timecheck();
 			list=dto.times(list); 
 			
+
+			for(int i=0; i<list.size();i++){
+				searchDTO vo= (searchDTO)list.get(i);
+				if(vo.getArrival_time()==null){
+					list.remove(list.get(i));
+				}
+			}
+
 			request.getSession().setAttribute("list1",list );
-			
+
 		 if(round_trip==1){
 			 List list_1=new ArrayList();
 			Document airline_1=Jsoup.connect("http://www.airportal.co.kr/servlet/aips.life.airinfo.RaSkeCTL?gubun=c_getList&curr_page=1&one_page=70&one_group=10&dep_airport="+ed+"&arr_airport="+st+"&srch_type=dep&current_dt_from="+to+"&current_dt_to="+to+"&regCls=1&al_icao=&fp_iata=").post();
@@ -123,8 +131,19 @@ public class searchFowarding implements Action{
 			}
 			timecheck dto_1=new timecheck();
 			list_1=dto_1.times(list_1); 
+
+			
+			for(int i=0; i<list_1.size();i++){
+				searchDTO vo= (searchDTO)list_1.get(i);
+				if(vo.getArrival_time()==null){
+					list_1.remove(list_1.get(i));
+				}
+			}
+			request.setAttribute("list2",list_1);
+
 			request.getSession().setAttribute("list2",list_1);
 //			request.setAttribute("list2",list_1);
+
 		}
 		
 		
