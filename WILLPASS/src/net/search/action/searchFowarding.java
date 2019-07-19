@@ -22,8 +22,11 @@ import net.search.db.timeDTO;
 public class searchFowarding implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		ActionForward forward = new ActionForward();
 		searchDAO dao = new searchDAO();
+    request.getSession().removeAttribute("list1");
+		request.getSession().removeAttribute("list2");
 		String starting = request.getParameter("starting");
 		String st = dao.linecheck(starting);
 		String destination = request.getParameter("destination");
@@ -35,6 +38,7 @@ public class searchFowarding implements Action {
 		// String people=request.getParameter("adult")+":";
 		// int people=Integer.parseInt(request.getParameter("adult"));
 		String date = "";
+
 
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -216,8 +220,8 @@ public class searchFowarding implements Action {
 				}
 			}
 
-			request.getSession().setAttribute("list2", list_1);
-			// request.setAttribute("list2",list_1);
+			request.getSession().setAttribute("list2",list_1);
+
 		}
 		return forward;
 	}
