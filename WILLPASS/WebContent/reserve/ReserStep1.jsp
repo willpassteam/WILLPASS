@@ -1,5 +1,4 @@
-
-<%@page import="java.util.ArrayList"%>
+%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -31,15 +30,17 @@
 				
 		$(function () {
 			$(".select").click(function () {
+				
 			 var index = $(".select").index(this);
 			 var td1 = $(".select:eq("+ index +") >td")[0].innerHTML; //출발-도착시간
 				 var dep1 = td1.split("-"); //출발시간 - 도착시간 분리 저장
-						 
 			 var td3 = $(".select:eq("+ index +") >td")[1].innerHTML; //항공사
 			 var td5 = $(".select:eq("+ index +") >td")[2].innerHTML; //항공편
 			 var td7 = $(".select:eq("+ index +") >td")[4].innerHTML; //잔여석
 			 var td9 = $(".select:eq("+ index +") >td")[5].innerHTML; //소요시간
-			 								 
+			 
+			 if(!(td7 == "마감" || td7 == "예약불가")){
+			 				 				 								 
 			 	$(".reserve1").html("${newlist[0].starting} -> ${newlist[0].destination}"+ "&nbsp;/&nbsp;" +  "${newlist[0].date}" + "<br>"
 			 						+ td3 + "&nbsp;"+ td1);
 		
@@ -89,8 +90,9 @@
 			$(".round_trip1").val("${newlist[0].round_trip}");
 			$(".flight1").val(td5);
 			$(".leftseat1").val(td7); 
-					
+			 	}		
 			});
+			
 		});
 			
 		$(function () {
@@ -103,13 +105,12 @@
 			 var td6 = $(".select2:eq("+ index2 +") >td")[2].innerHTML; //항공편
 			 var td8 = $(".select2:eq("+ index2 +") >td")[4].innerHTML; //잔여석
 			 var td10 = $(".select2:eq("+ index2 +") >td")[5].innerHTML; //소요시간
-
+			 
+			 if(!(td8 == "마감" || td8 == "예약불가")){
 			 	$(".reserve2").html("${newlist2[0].starting} -> ${newlist2[0].destination}" + "&nbsp;/&nbsp;" + "${newlist2[0].date}" +"<br>" 
 			 							+ td4 + "&nbsp;"+ td2);
-
  				$(".select2:eq("+ index2 +") >td").css("background-color","lavender");
 				$(".select2:not(:eq("+ index2 +")) >td").css("background-color","white");
-
 				//항공편요금
 				depart2 = parseInt($(".select2:eq("+ index2 +") >td")[3].innerHTML);
 				$("#subtotal").html((depart1 + depart2)*"${newlist2[0].people}");
@@ -138,6 +139,7 @@
 				$(".round_trip2").val("${newlist2[0].round_trip}");
 				$(".flight2").val(td6);
 				$(".leftseat2").val(td8); 
+			 }
 			});
 		});
 		
@@ -269,6 +271,7 @@
   		<input type="hidden" name="flight2" class="flight2">
   		<input type="hidden" name="price2" class="price2">
   		<input type="hidden" name="leftseat2" class="leftseat2">
+  		<input type="hidden" name="time2" value="">
     	
     	<%-- </c:if> --%>
     		
@@ -284,10 +287,10 @@
 	<p class="text-danger small mt-2 mb-4">운임규정은 항공권에 따라 상이하며, 자세한 내용은 하단의 운임규정 ‘필독사항’를 통해 확인 바랍니다.</p>
 	<!-- 가격 정렬 버튼 -->
 	<div>
-<%-- 		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
+		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
 			<input type="hidden" name="order" value="null">
 			<input type="submit" value="시간순" >
-		</form> --%>
+		</form> 
 		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
 			<input type="hidden" name="order" value="1">
 			<input type="submit" value="낮은 가격순">
@@ -306,7 +309,7 @@
 
     		<tbody>
 			<tr class="bg-light">
-			<td>출발-도착시간</td>
+			<td>출발-도착시간 (소요시간)</td>
 			<td>항공사</td>		
 			<td>항공편</td>	
 			<td>금액</td>
@@ -327,11 +330,21 @@
 
 		<c:forEach var="air" items="${newlist}">
 			<tr class="select">
-				<td >${air.departure_time} - ${air.arrival_time}</td>
+				<td >${air.departure_time} - ${air.arrival_time} (${air.time})</td>
 				<td >${air.airline}</td>
 				<td >${air.flight}</td>
 				<td >${air.price}</td>
-				<td >${air.leftseat}</td>	
+			<c:if test="${air.checkseat}">
+				<td >${air.leftseat}</td>
+			</c:if>	
+			<c:if test="${!air.checkseat}">
+				<c:if test="${air.leftseat <= 0}">
+						<td >마감</td>
+				</c:if>
+				<c:if test="${air.leftseat > 0}">
+						<td >예약불가</td>
+				</c:if>
+			</c:if>	
 				<td style="display: none;">${air.time}</td>				
 			</tr>				
 		</c:forEach>
@@ -352,7 +365,7 @@
 
     		<tbody>
 			<tr class="bg-light">
-			<td>출발-도착시간</td>
+			<td>출발-도착시간 (소요시간)</td>
 			<td>항공사</td>		
 			<td>항공편</td>
 			<td>금액</td>
@@ -373,24 +386,27 @@
 		<c:when test="${newlist2 != null}">
 		<c:forEach var="air2" items="${newlist2}">
 			<tr class="select2">
-				<td >${air2.departure_time} - ${air2.arrival_time}</td>
+				<td >${air2.departure_time} - ${air2.arrival_time} (${air2.time})</td>
 				<td >${air2.airline}</td>
 				<td >${air2.flight}</td>
 				<td >${air2.price}</td>	
-				<td >${air2.leftseat}</td>	
+			<c:if test="${air2.checkseat}">
+				<td >${air2.leftseat}</td>
+			</c:if>	
+			<c:if test="${!air2.checkseat}">
+				<c:if test="${air2.leftseat <= 0}">
+						<td >마감</td>
+				</c:if>
+				<c:if test="${air2.leftseat > 0}">
+						<td >예약불가</td>
+				</c:if>
+			</c:if>		
 				<td style="display: none;">${air2.time}</td>					
 			</tr>				
 		</c:forEach>
 	</c:when>		
 	</c:choose>		
-	<%-- </c:if>	    
-	<c:if test="${newlist[0].round_trip == 'false'}">
-			<tr>
-				<td colspan="5">
-				검색된 항공편이 없습니다.
-				</td>
-			</tr>
-	</c:if>  --%>
+
   		</table>	
   	</div>
  	</c:if>

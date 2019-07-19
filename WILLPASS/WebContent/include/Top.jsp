@@ -83,7 +83,7 @@ $(function(){
 	 			<a class="text-dark" href="#">사이트맵</a>
 	 			</c:if>
 	 			<c:if test="${user_email !=null }">
-	 			<a class="text-dark" href="${contextPath }/user/member/Usermodify.me">${user_id }님</a> | 
+	 			<a class="text-dark" href="${contextPath }/user/member/Usermodify.me">${user_email}님</a> | 
 	 			<a class="text-dark" href="${contextPath }/user/member/logout.me">로그아웃</a> | 
 	 			<a class="text-dark" href="${contextPath }/question/Board.Notice">고객센터</a> | 
 	 			<a class="text-dark" href="#">사이트맵</a>
@@ -171,7 +171,7 @@ $(function(){
 			<div class="collapse nc w-100">
 				<div class="nv w-100" >
 					<ul class="list-group list-group-horizontal">
-						<li class="list-group-item w-50"><a href="#">나의 예약조회</a></li>
+						<li class="list-group-item w-50"><a href="${contextPath}/reservationcheck/viewall">나의 예약조회</a></li>
 						<li class="list-group-item w-50"><a href="#">구매내역</a></li>
 						<li class="list-group-item w-50">
 							<dl>

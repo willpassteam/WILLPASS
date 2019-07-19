@@ -43,6 +43,7 @@ public class SearchPriceAction implements Action {
 		List list = (ArrayList)request.getSession().getAttribute("list1");
 		List list2 = (ArrayList)request.getSession().getAttribute("list2");
 		
+		System.out.println("액션에서 진우스가 보내준 편도 왕복유무"+((searchDTO)list.get(0)).isRound_trip());
 		int pck1, pck2;
 		SearchDAO sdao = new SearchDAO();
 		searchDTO svo = new searchDTO();
@@ -91,6 +92,8 @@ public class SearchPriceAction implements Action {
 			Collections.sort(newlist, priceCompare2);
 			request.getSession().setAttribute("newlist", newlist);
 		}
+		
+		System.out.println("액션에서 왕복 편도 "+newlist.get(0).isRound_trip());
 		
 //======================================================================
 

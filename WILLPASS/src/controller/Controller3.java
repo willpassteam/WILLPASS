@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.search.db.searchDTO;
 
 @WebServlet("/reserve1/*")
 public class Controller3 extends HttpServlet{
@@ -49,7 +52,11 @@ public class Controller3 extends HttpServlet{
 			action = new Searcharr();
 			
 			try {
+
 				forward = action.execute(request, response);
+				ArrayList list=(ArrayList)request.getSession().getAttribute("searcharr");
+				searchDTO dto=(searchDTO)list.get(0);
+	       		System.out.print("왕복인지 편도인지  컨트롤로 1번"+dto.isRound_trip());			
 				System.out.println(forward.getPath()+"여기서 어디로 보내는거징");
 				System.out.println("555");
 			} catch (Exception e) {

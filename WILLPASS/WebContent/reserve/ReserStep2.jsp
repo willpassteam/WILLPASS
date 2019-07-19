@@ -1,4 +1,6 @@
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="net.search.db.searchDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
@@ -157,7 +159,8 @@ $(function(){
           	
           	<div class="small text-muted">
       		 
-      		 <c:if test="${sessionScope.searcharr[0].round_trip eq true}">
+      		
+      		 <c:if test="${not empty sessionScope.searcharr[1]}">
           		<b>
         		1구간:${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}<br>
 				${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>
@@ -165,8 +168,10 @@ $(function(){
 				${ sessionScope.searcharr[1].date} ${ sessionScope.searcharr[1].departure_time}  →  ${ sessionScope.searcharr[1].arrival_time}<br>
          	 	</b>
        		</c:if>
+  
+ 
        		
-      		 <c:if test="${sessionScope.searcharr[0].round_trip eq false}">
+      		 <c:if test="${empty sessionScope.searcharr[1]}">
             	 <b>
         			1구간: ${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}<br>
 					${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>

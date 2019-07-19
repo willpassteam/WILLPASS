@@ -20,9 +20,6 @@
 <link rel="stylesheet" href="/path/to/slick.css">
 <link rel="stylesheet" href="/path/to/slick-theme.css">
 
-
-
-
 <style type="text/css">
 .subject {
 	height: 70px;
@@ -46,6 +43,7 @@ input[type="text"], textarea {
 	font-weight: 200;
 	padding-left: 0;
 }
+
 .maintx-1{
 	color:	#FF4500;
 }

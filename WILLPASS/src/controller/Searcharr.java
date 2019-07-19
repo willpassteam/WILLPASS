@@ -17,6 +17,9 @@ public class Searcharr implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		
+		request.getSession().removeAttribute("searcharr");
+		
 		System.out.println("전달");
 		
 		ArrayList searcharr = new ArrayList();

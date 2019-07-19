@@ -109,9 +109,7 @@ public class ReservationFrontController extends HttpServlet{
 				         action =new PassengerInfoaction(); 
 				         
 				         try {
-				        	 System.out.println("여기가안되는거여?1");
 				        	 forward= action.execute(request, response);
-				        	 System.out.println("여기가안되는거여?2");
 							
 						} catch (Exception e) {
 							// TODO: handle exception
