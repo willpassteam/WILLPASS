@@ -78,12 +78,13 @@ public class searchFowarding implements Action {
 			vo.setPeople(people);
 
 			int seat=dao.seatcheck(new Date(new SimpleDateFormat("yyyyMMdd").parse(from).getTime()),sFlight);
-			if(seat==90 || 90-seat-Integer.parseInt(people)<0){
+			int seatcheck=90-seat;
+			if(seatcheck==0 || seatcheck-Integer.parseInt(people)<0){
 				vo.setCheckseat(false);
 			}else{
 				vo.setCheckseat(true);
 			}
-			vo.setLeftseat(90-seat);
+			vo.setLeftseat(seatcheck);
 			
 			list.add(vo);
 		}
@@ -167,13 +168,14 @@ public class searchFowarding implements Action {
 				vo.setDate(new Date(new SimpleDateFormat("yyyyMMdd").parse(to).getTime()));
 				vo.setPeople(people);
 				
-				int seat=dao.seatcheck(new Date(new SimpleDateFormat("yyyyMMdd").parse(from).getTime()),sFlight);
-				if(seat==90 || 90-seat-Integer.parseInt(people)<0){
+				int seat_1=dao.seatcheck(new Date(new SimpleDateFormat("yyyyMMdd").parse(to).getTime()),sFlight);
+				int seatcheck_1=90-seat_1;
+				if(seatcheck_1==0 || seatcheck_1-Integer.parseInt(people)<0){
 					vo.setCheckseat(false);
 				}else{
 					vo.setCheckseat(true);
 				}
-				vo.setLeftseat(90-seat);
+				vo.setLeftseat(seatcheck_1);
 
 				list_1.add(vo);
 			}
