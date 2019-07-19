@@ -255,6 +255,9 @@
   		<input type="hidden" name="leftseat1" class="leftseat1">
   		
   	  <!-- 오는 항공  -->	
+  	  
+  	  <%-- 	<c:if test="${sessionScope.newlist2 != null}"> --%>
+  	  
   		<input type="hidden" name="starting2" class="starting2">
   		<input type="hidden" name="destination2" class="destination2">
   		<input type="hidden" name="date2" class="date2">
@@ -266,6 +269,8 @@
   		<input type="hidden" name="flight2" class="flight2">
   		<input type="hidden" name="price2" class="price2">
   		<input type="hidden" name="leftseat2" class="leftseat2">
+    	
+    	<%-- </c:if> --%>
     		
         <input class="btn  btn-lg btn-block btn-primary" type="submit" value="다음단계 ">
         </li>	
@@ -337,6 +342,7 @@
   		</table>	
 </div>
  	<br>
+ 	<c:if test="${sessionScope.newlist2 != null}">
 	<i class='fas fa-plane' style='font-size:30px'></i>
 	<!-- 2구간 부산 큐슈(후쿠오카) 07/14(일) -->
 	${newlist2[0].starting} -> ${newlist2[0].destination} : ${newlist2[0].date}
@@ -355,6 +361,7 @@
 			</tr>
 												
 		    </tbody>
+	 
 	<c:choose>
 		<c:when test="${newlist2 == null}">
 			<tr>
@@ -375,9 +382,18 @@
 			</tr>				
 		</c:forEach>
 	</c:when>		
-	</c:choose>			    
+	</c:choose>		
+	<%-- </c:if>	    
+	<c:if test="${newlist[0].round_trip == 'false'}">
+			<tr>
+				<td colspan="5">
+				검색된 항공편이 없습니다.
+				</td>
+			</tr>
+	</c:if>  --%>
   		</table>	
- 	</div>
+  	</div>
+ 	</c:if>
  		<div class="border bg-light small text-dark">
  		<ul class="mt-3">
 	<li>상기 운임은 인터넷 전용 운임이며 예약센터, 공항을 통한 결제 및 변경 시 해당운임이 적용되지 않습니다.</li>

@@ -22,6 +22,8 @@ public class searchFowarding implements Action{
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.getSession().removeAttribute("list1");
+		request.getSession().removeAttribute("list2");
 		ActionForward forward=new ActionForward();
 		searchDAO dao= new searchDAO();
 		
@@ -139,8 +141,7 @@ public class searchFowarding implements Action{
 					list_1.remove(list_1.get(i));
 				}
 			}
-			request.setAttribute("list2",list_1);
-
+		
 			request.getSession().setAttribute("list2",list_1);
 //			request.setAttribute("list2",list_1);
 
