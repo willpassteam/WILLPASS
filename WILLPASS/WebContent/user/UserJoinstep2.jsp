@@ -189,9 +189,9 @@ function idcheck() {
 	<div class="border bg-light mt-0 border-top-0" >
 	<div class="col-7 pl-5 pt-2">
 	  <label class="checkbox-inline pl-3"><input type="checkbox" autocomplete="off" name="Check" id="allCheck" ><b>아래 약관 및 개인정보 수집,이용 등에 모두 동의 합니다.</b></label><a href="#" class="pull-right">보기</a><br>
-                        <label class="checkbox-inline  pl-3"></span><input type="checkbox" name="Check" >서비스 약관</label><a href="#" class="">보기</a><br>
-                        <label class="checkbox-inline  pl-3"></span><input type="checkbox" name="Check" >개인정보 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
-                        <label class="checkbox-inline  pl-3"></span><input type="checkbox" name="Check" >고유식별정보의 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
+                        <label class="checkbox-inline  pl-3"><input type="checkbox" name="Check" >서비스 약관</label><a href="#" class="">보기</a><br>
+                        <label class="checkbox-inline  pl-3"><input type="checkbox" name="Check" >개인정보 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
+                        <label class="checkbox-inline  pl-3"><input type="checkbox" name="Check" >고유식별정보의 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
 	</div>
 	</div>
 	<div class="row mt-3">

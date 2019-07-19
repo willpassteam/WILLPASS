@@ -22,6 +22,8 @@
 		소요시간 : ${list.time }<br>
 		도착시간 : ${list.arrival_time }<br>
 		왕복 여부 : ${list.round_trip }<br><br>
+		예약 가능여부 : ${list.checkseat }<br>
+		예약 가능좌석 : ${list.leftseat }<br><br>
 		
 	</c:forEach>
 	<hr>
@@ -34,7 +36,8 @@
 		소요시간 : ${list.time }<br>
 		도착시간 : ${list.arrival_time }<br>
 		왕복 여부 : ${list.round_trip }<br><br>
-		
+		예약 가능여부 : ${list.checkseat }<br>
+		예약 가능좌석 : ${list.leftseat }<br><br>
 	</c:forEach>
 	
 

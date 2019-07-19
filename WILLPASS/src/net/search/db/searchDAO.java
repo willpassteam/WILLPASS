@@ -180,5 +180,28 @@ public class searchDAO {
 		
 		return vo;
 	}
+	public int seatcheck(java.sql.Date date, String sFlight) {
+		int cnt=0;
+		try {
+			con=ds.getConnection();
+			
+			String sql = "select count(*) cnt from reservationtbl where reser_date=? and reser_flight=?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setDate(1, date);
+			pstmt.setString(2, sFlight);
+			
+			rs=pstmt.executeQuery();
+			rs.next();
+			cnt=rs.getInt("cnt");
+			free();
+		} catch (Exception e) {
+			System.out.println("seatcheck 오류");
+			e.printStackTrace();
+			
+		}
+		
+		return cnt;
+	}
 
 }
