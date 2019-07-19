@@ -21,14 +21,19 @@
 			
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8 p-3">
-				<form>
+				<form action="./MemberUpdateAction.me" method="post">
+				
+				
+<!-- 				<form action="./member/MemberUpdateAction.me"> -->
+<!-- 				<input type="hidden" value="1" name="user_non"> -->
+
 				<div class="row ">
 					<div class="col-sm-6">
 						<div class="input-group mb-3">
 						    <div class="input-group-prepend">
 						      <span class="input-group-text">아이디</span>
 						    </div>
-						    <input type="text" class="form-control" value="Userid" readonly="readonly">
+						    <input type="text" class="form-control" value="${mem.user_id}" name="user_id"  readonly="readonly">
 						</div>
 					</div>	
 					<div class="col-sm-6">
@@ -36,7 +41,7 @@
 						    <div class="input-group-prepend">
 						      <span class="input-group-text">비밀번호</span>
 						    </div>
-						    <input type="password" class="form-control" value="Userpwd">
+						    <input type="password" class="form-control" value="${mem.user_pwd}" name="user_pwd">
 						    <div class="input-group-prepend">
 						      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#modifypwd">비밀번호 수정</button>
 						    </div>
@@ -67,7 +72,7 @@
 						    <div class="input-group-prepend">
 						      <span class="input-group-text">휴대폰번호</span>
 						    </div>
-						    <input type="text" class="form-control" value="Usermobile">
+						    <input type="text" class="form-control" value="${mem.user_mobile}" name="user_mobile">
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -85,7 +90,7 @@
 						    <div class="input-group-prepend">
 						      <span class="input-group-text">이메일</span>
 						    </div>
-						    <input type="text" class="form-control" value="Useremail" readonly="readonly">
+						    <input type="text" class="form-control" value="${mem.user_email}" name="user_email" readonly="readonly">
 						</div>
 					</div>	
 				</div>
@@ -95,7 +100,7 @@
 						    <div class="input-group-prepend">
 						      <span class="input-group-text">주소</span>
 						    </div>
-						    <input type="text" class="form-control" value="Useraddress">
+						    <input type="text" class="form-control" value="${mem.user_address}" name="user_address">
 						</div>
 					</div>	
 				</div>

@@ -199,7 +199,7 @@ input[type="radio"] {
 		<p class="text-center mb-5 maintx ">이벤트 기간 : 2019.7.10~ 2019.08.11</p>
 
 
-		<!-- 	잠시 -->
+		<!--잠시 -->
 
 		<div class="container pb-5">
 			<form autocomplete="off" action="searchpro.jin" method="post" name="search">
