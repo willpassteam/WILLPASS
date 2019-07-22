@@ -290,19 +290,17 @@
  <div class="col-md-9 order-md-1">
 	<p class="text-danger small mt-2 mb-4">운임규정은 항공권에 따라 상이하며, 자세한 내용은 하단의 운임규정 ‘필독사항’를 통해 확인 바랍니다.</p>
 	<!-- 가격 정렬 버튼 -->
-	<div>
-		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
-			<input type="hidden" name="order" value="null">
-			<input type="submit" value="시간순" >
-		</form> 
-		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
-			<input type="hidden" name="order" value="1">
-			<input type="submit" value="낮은 가격순">
-		</form>
-		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
-			<input type="hidden" name="order" value="2">
-			<input type="submit" value="높은 가격순">
-		</form>
+
+ 	<div align="right">
+ 		<form action="${contextPath}/reserve1/ReserStep1.do">
+ 		정렬 순서: 
+	 		<select name="order" class="custom-select col-2" >
+	 			<option value="3">시간순</option>
+	 			<option value="1">낮은 가격순</option>
+	 			<option value="2">높은 가격순</option> 		
+	 		</select>
+	 		<input type="submit" value="재검색" class="btn btn-outline-dark">
+ 		</form>
  	</div>
  	
 	<i class='fas fa-plane' style='font-size:30px'></i>
