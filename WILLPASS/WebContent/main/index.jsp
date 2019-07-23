@@ -115,6 +115,8 @@ input[type="radio"] {
 			}
 			return date;
 		}
+		
+		
 		$("#starting").autocomplete({
 			source : function(request, response) { //많이 봤죠? jquery Ajax로 비동기 통신한 후 
 				var city = $("#starting").val();
