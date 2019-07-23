@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,11 +24,8 @@ import net.search.db.timeDTO;
 public class searchFowarding implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		ActionForward forward = new ActionForward();
 		searchDAO dao = new searchDAO();
-    request.getSession().removeAttribute("list1");
-		request.getSession().removeAttribute("list2");
 		String starting = request.getParameter("starting");
 		String st = dao.linecheck(starting);
 		String destination = request.getParameter("destination");
@@ -39,7 +37,6 @@ public class searchFowarding implements Action {
 		// String people=request.getParameter("adult")+":";
 		// int people=Integer.parseInt(request.getParameter("adult"));
 		String date = "";
-
 
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -94,37 +91,41 @@ public class searchFowarding implements Action {
 			
 			list.add(vo);
 		}
+		
+		System.out.println(list.size());
 		/*
 		 * Thread 시작
 		 */
 		ExecutorService threadPool = Executors.newFixedThreadPool(list.size());
 		// 아직 못 쓴거입니다.
 
-		timecheck dto = new timecheck();
-		System.out.println("Thread검색시작");
 		Thread thread = new Thread();
+		System.out.println("Thread검색시작");
 
 		for (int i = 0; i < list.size(); i++) {
+			
 			searchDTO searchDTO_for = (searchDTO) list.get(i);
-			String sfFlight = new searchDAO().flightcheck(searchDTO_for.getAirline());
+			String sfFlight = dao.flightcheck(searchDTO_for.getAirline());
 			String sFlight = searchDTO_for.getFlight();
 			sfFlight = sFlight.replace(sfFlight, sfFlight + "/");
 
 			String date_for = new SimpleDateFormat("yyyyMMdd").format(searchDTO_for.getDate());
 			
-
-			thread = new Thread(new timecheck(sfFlight, date_for, i, list), "string");
+			thread = new Thread(new timecheck(sfFlight, date_for, i, list));
 			
 			System.out.println("나시작");
-
 			
-			thread.start();
+//			thread.start();
+			threadPool.submit(thread);
+			
 		}
-		try {
-			thread.join();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		
+//		try {
+//			thread.join();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		// 동기화 synchronizedList를 다시 list로 바꿔줌
 
 		System.out.println("Thread검색종료");
@@ -133,14 +134,15 @@ public class searchFowarding implements Action {
 		 * Thread 끝
 		 * 왕복의 경우 시작
 		 */
-		for (int i = 0; i < list.size(); i++) {
-			searchDTO vo = (searchDTO) list.get(i);
-			if (vo.getArrival_time() == null) {
-				list.remove(list.get(i));
-			}
-		}
+//		System.out.println("null제거전"+list.size());
+//		for (int i = 0; i < list.size(); i++) {
+//			searchDTO vo = (searchDTO) list.get(i);
+//			if (vo.getArrival_time() == null) {
+//				list.remove(list.get(i));
+//			}
+//		}
+//		System.out.println("null제거후"+list.size());
 		request.getSession().setAttribute("list1", list);
-
 
 		if (round_trip == 1) {
 			ArrayList list_1 = new ArrayList<>();
@@ -151,7 +153,6 @@ public class searchFowarding implements Action {
 					.post();
 			Elements tr_1 = airline_1.getElementsByTag("tbody").get(2).getElementsByTag("tr");
 			String date_1 = "";
-
 			try {
 				SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 				long time;
@@ -190,11 +191,10 @@ public class searchFowarding implements Action {
 				list_1.add(vo);
 			}
 
-
 			// Thread 시작
 			timecheck dto_1 = new timecheck();
 			Thread thread1 = new Thread();
-			System.out.println("Thread검색시작");
+			System.out.println("왕복 Thread검색시작");
 
 			for (int i = 0; i < list_1.size(); i++) {
 				searchDTO searchDTO_for = (searchDTO) list_1.get(i);
@@ -205,31 +205,34 @@ public class searchFowarding implements Action {
 				String date_for = new SimpleDateFormat("yyyyMMdd").format(searchDTO_for.getDate());
 				thread1 = new Thread(new timecheck(sfFlight, date_for, i, list_1));
 
-				thread1.start();
+//				thread1.start();
+				threadPool.submit(thread1);
 
-				System.out.println("나시작");
+//				System.out.println("나시작");
 			}
 
-			try {
-				thread1.join();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+//			try {
+//				thread1.join();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 
 			// 동기화 synchronizedList를 다시 list로 바꿔줌
 			System.out.println("Thread검색종료");
 			// Thread 저
-			for (int i = 0; i < list_1.size(); i++) {
-				searchDTO vo = (searchDTO) list_1.get(i);
-				if (vo.getArrival_time() == null) {
-
-					list_1.remove(list_1.get(i));
-				}
-			}
-
-			request.getSession().setAttribute("list2",list_1);
-
+//			for (int i = 0; i < list_1.size(); i++) {
+//				searchDTO vo = (searchDTO) list_1.get(i);
+//				if (vo.getArrival_time() == null) {
+//					list_1.remove(list_1.get(i));
+//				}
+//			}
+//예외
+			request.getSession().setAttribute("list2", list_1);
+			// request.setAttribute("list2",list_1);
 		}
+		threadPool.shutdown();
+		threadPool.awaitTermination(20, TimeUnit.SECONDS);
 		return forward;
 	}
 }
+

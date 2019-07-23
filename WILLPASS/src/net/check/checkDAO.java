@@ -57,4 +57,29 @@ public void free() {
 		}
 		return result;
 	}//id중복체크 메소드
+	public int searchingemail(String email) {
+		int result=0;
+		try {
+			con=ds.getConnection();
+			
+			String sql="select count(*) cnt from user where user_email=?";
+			
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs=pstmt.executeQuery();
+			
+			rs.next();
+			
+			result=rs.getInt("cnt");
+			System.out.println("메소드 안"+result);
+			
+			
+		} catch (Exception e) {
+			System.out.println("회원 검색 오류"+e.getMessage());
+		}finally {
+			free();
+			
+		}
+		return result;
+	}//email중복체크 메소드
 }
