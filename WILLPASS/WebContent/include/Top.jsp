@@ -80,7 +80,7 @@ $(function(){
 	 			<a class="text-light" href="#">사이트맵</a>
 	 			</c:if>
 	 			<c:if test="${user_email !=null }">
-	 			<a class="text-light" href="${contextPath }/user/member/Usermodify.me">${user_id }님</a> | 
+	 			<a class="text-light" href="${contextPath }/user/member/Usermodify.me">${user_id}님</a> | 
 	 			<a class="text-light" href="${contextPath }/user/member/logout.me">로그아웃</a> | 
 	 			<a class="text-light" href="${contextPath }/question/Board.jsp">고객센터</a> | 
 	 			<a class="text-light" href="#">사이트맵</a>
