@@ -40,14 +40,14 @@ nav a{
 	position: absolute;
 	
 }
-.menubar>a,dt,li{
+.menubar>a,.menubar>dt,.menubar>li{
 	text-align: center;
 	margin-bottom: 5px
 }
 
 
 
-.menubar> a,dt,dd:HOVER{
+.menubar> a:Hover,.menubar>dt:Hover,.menubar>dd:HOVER{
 	cursor: pointer;
 }
 
