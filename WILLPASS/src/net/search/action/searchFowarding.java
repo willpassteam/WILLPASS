@@ -225,7 +225,7 @@ public class searchFowarding implements Action {
 //					list_1.remove(list_1.get(i));
 //				}
 //			}
-
+//예외
 			request.getSession().setAttribute("list2", list_1);
 			// request.setAttribute("list2",list_1);
 		}
