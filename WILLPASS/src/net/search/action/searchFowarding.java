@@ -24,6 +24,10 @@ import net.search.db.timeDTO;
 public class searchFowarding implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		request.getSession().removeAttribute("list1");
+		request.getSession().removeAttribute("list2");
+		
 		ActionForward forward = new ActionForward();
 		searchDAO dao = new searchDAO();
 		String starting = request.getParameter("starting");
