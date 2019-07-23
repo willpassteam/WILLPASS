@@ -93,7 +93,10 @@ function checkAll(){
       var getId= RegExp(/^[a-z0-9]{6,15}$/);
       
       //var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;    
-      var getMobile = RegExp(/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/);
+      var getMobile = RegExp(/^01([0|1|6|7|8|9]?)[0-9]{7,8}$/);
+      
+     // /^\d{3}-\d{3,4}-\d{4}$/;
+     
       
       //ID 이거 맞는지 잘 몰겟음 
      // var isPwd =/^[a-z0-9][a-z0-9_\-]{3,15}$/;
@@ -109,7 +112,7 @@ function checkAll(){
       
     //getId를 이용해서 트라이해봄 23 july
       if (!getId.test($("#user_id").val())) {
-          alert("한글성명은 2자에서 6자 사이입니다");
+          alert("아이디는  6~15자의 영문 소문자,숫자만 사용가능합니다.");
           $("#user_id").val("");
           $("#user_id").focus();
           return false;
@@ -121,7 +124,15 @@ function checkAll(){
 //           $("#user_id").val("");
 //           $("#user_id").focus();
 //           return false;
+           //비밀번호
+          if(!getCheck.test($("#user_pwd").val())) {
+          alert("10-15자의 영문,숫자조합으로 가능합니다 ");
+       // alert("비밀번호가10-15자의 영문,숫자로 구성되어있지않습니다 .");
           
+          $("#user_pwd").val("");
+          $("#user_pwd").focus();
+          return false;
+          }
           
           if (!getName.test($("#user_name").val())) {
               alert("한글성명은 2자에서 6자 사이입니다");
@@ -131,15 +142,7 @@ function checkAll(){
             }
           
           
-        //비밀번호
-          if(!getCheck.test($("#user_pwd").val())) {
-          alert("10-15자의 영문,숫자조합으로 가능합니다 ");
-       // alert("비밀번호가10-15자의 영문,숫자로 구성되어있지않습니다 .");
-          
-          $("#user_pwd").val("");
-          $("#user_pwd").focus();
-          return false;
-          }
+       
        
       
         
