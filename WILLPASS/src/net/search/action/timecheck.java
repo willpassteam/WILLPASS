@@ -1,3 +1,4 @@
+
 package net.search.action;
 
 import java.io.IOException;
@@ -22,8 +23,8 @@ public class timecheck extends Thread {
 	String dd = "";
 	int index;
 	int end;
-	String sfFlight;
-
+	String sfFlight="";
+	
 	public timecheck(String sfFlight, String date, int index, ArrayList list) {
 		this.sfFlight = sfFlight;
 		this.index = index;
@@ -84,3 +85,4 @@ public class timecheck extends Thread {
 		}
 	}
 }
+

@@ -22,6 +22,25 @@
 
 <!-- jQuery 라이브러리 파일 사용을 위한 CDN 링크 주소 작성-->
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<style type="text/css">
+		input[type="text"], textarea {
+		outline: none;
+		box-shadow: none !important;
+		/* border:1px solid #ccc !important; */
+		border: none;
+		background: transparent;
+		border-top: transparent !important;
+		border-left: transparent !important;
+		border-right: transparent !important;
+		border-bottem: transparent !important;
+		font-weight: 200;
+		padding-left: 0;
+		
+	}
+	input[type="radio"] {
+		display: none;
+	}
+	</style>
 	<script type="text/javascript">
 //항공편 선택 함수 	
 		
@@ -163,7 +182,62 @@
 	<div class="container mb-5 mt-3"> 
 		<h2 ><b>국제선 예약</b></h2>
 
-		<img src="../img/Reser/step2_pr.png">
+		<form autocomplete="off" onkeydown="return captureReturnKey(event)" action="searchpro.jin" method="post" name="search" >
+				<div class="container mt-5 bg-light">
+					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+						<label for="round_trip" class="btn btn-outline-dark btn-light active"><input type="radio" name="round_trip" value="1" class="custom-radio mr-0" checked="checked">왕복</input></label> <label
+							for="round_trip" class="btn btn-outline-dark btn-light"><input type="radio" name="round_trip" value="0" class="custom-radio ml-0">편도</input></label>
+					</div>
+				</div>
+				<div class="Search border pl-5 pr-5 bg-light rounded">
+					<br>
+					<div class="row 1row">
+						<div class="col-sm-3">
+							<div class="input-group mb-3 border border-top-0 border-right-0 border-left-0">
+								<i class='fas fa-plane-departure pt-3'></i> <input type="text" class="form-control shadow-none" name="starting" id="starting" placeholder="출발지">
+							</div>
+						</div>
+						<div class="col-sm-3 ">
+							<div class="input-group mb-3 border border-top-0 border-right-0 border-left-0 ">
+								<i class='fas fa-plane-arrival pt-3'></i> <input type="text" class="form-control" name="destination" id="destination" placeholder="도착지">
+							</div>
+						</div>
+						<div class="col-sm-6 row pt-0">
+							<div class="col-6">
+								<div class="input-group mb-3 input-daterange border border-top-0 border-right-0 border-left-0" id="datepicker1">
+									<i class='	far fa-calendar-alt pt-3'></i> <input type="text" class="form-control" id="from" name="from" placeholder="가는날" width="50px">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="input-group mb-3 rt input-daterange border border-top-0 border-right-0 border-left-0" id="datepicker2">
+
+									<input type="text" class="form-control" id="to" name="to" placeholder="오는날" width="50px">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-2">
+							<div class="input-group mb-3 border border-top-0 border-right-0 border-left-0">
+								<i class='far fa-user pt-3'></i> <input type="text" class="form-control" name="adult" placeholder="성인">
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="input-group mb-3 border border-top-0 border-right-0 border-left-0">
+								<i class='far fa-user pt-3'></i> <input type="text" class="form-control" name="child" placeholder="소아">
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="input-group mb-3 border border-top-0 border-right-0 border-left-0">
+								<i class='far fa-user pt-3'></i> <input type="text" class="form-control" name="baby" placeholder="유아">
+							</div>
+						</div>
+						<div class="col-sm-6 border border-top-0 border-right-0 border-left-0 border">
+							<input type="submit" class="btn btn-outline-primary " value="항공권 검색">
+						</div>
+					</div>
+				</div>
+			</form>
 
 	</div>
 
