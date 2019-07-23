@@ -42,7 +42,7 @@ public class ReservationFrontController extends HttpServlet{
 		response.setContentType("text/html;charset=utf-8");
 
 		String command = request.getPathInfo();
-		System.out.println("command = "+command);
+		System.out.println("sohee:command = "+command);
 		
 		
 		if(command.equals("/before")) { //신효 - > 소희 
@@ -109,9 +109,7 @@ public class ReservationFrontController extends HttpServlet{
 				         action =new PassengerInfoaction(); 
 				         
 				         try {
-				        	 System.out.println("여기가안되는거여?1");
 				        	 forward= action.execute(request, response);
-				        	 System.out.println("여기가안되는거여?2");
 							
 						} catch (Exception e) {
 							// TODO: handle exception

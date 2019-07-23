@@ -18,58 +18,24 @@ public class Resercompleteaction implements Action{
 		// TODO Auto-generated method stub
 		ActionForward forward= new ActionForward();
 		ReserDAO reserdao = new ReserDAO();
-		forward.setPath("/main/index.jsp");
-		forward.setRedirect(false);
+		forward.setPath(request.getContextPath()+"/main/index.jsp");
+		forward.setRedirect(true);
 
 		ArrayList pasinfoarr=(ArrayList)request.getSession().getAttribute("pasinfoarr"); //PassengerDTO 들어있음 승객수별로 
 		ArrayList seatsinfoarr=(ArrayList)request.getSession().getAttribute("seatsinfoarr"); //String[] 들어있음 왕복 편도 여부따라서 
 		ArrayList searcharr = (ArrayList)request.getSession().getAttribute("searcharr"); //선택된 항공편에대한 정보 
-		ArrayList Reservationarr= new ArrayList();
 		
+		ArrayList Reservationarr1= new ArrayList();
+		ArrayList Reservationarr2= new ArrayList();
 		
-		try {
-			System.out.println("좌석정보 "+seatsinfoarr.size());
-			String seatinfo1[]= (String[])seatsinfoarr.get(0);
-			String seatinfo2[]= (String[])seatsinfoarr.get(1);
-			
-			
-			for(int i=0;i<seatinfo1.length;i++){
-				System.out.println("좌석정보1"+seatinfo1[i]);
-				
-			}
-			
-			for(int i=0;i<seatinfo2.length;i++){
-				
-				System.out.println("좌석정보2"+seatinfo2[i]);
-			}
-			
-			searchDTO ssd= new searchDTO();
-			for(int i=0;i<searcharr.size();i++){
-				
-				ssd=(searchDTO)searcharr.get(i);
-				System.out.println("출발지"+ssd.getStarting());
-				System.out.println("도착지"+ssd.getDestination());
-			}
-			
-			System.out.println("항공편에대한정보"+searcharr.size());
-			System.out.println("승객정보"+pasinfoarr.size());
-			
-		} catch (Exception e) {
-			System.out.println("오류났당 ================="+e);
-		}
-		
-		
-	
 		ReservationDTO reserdto ;
 		PassengerDTO psdto;
 		String[] onepartseat;
 		searchDTO sreardt;
 		
-		
-		
-			
-			sreardt = (searchDTO)searcharr.get(0); 
-			onepartseat=(String[])seatsinfoarr.get(0);
+		String seatinfo1[]= (String[])seatsinfoarr.get(0);
+		sreardt = (searchDTO)searcharr.get(0); 
+		onepartseat=(String[])seatsinfoarr.get(0);
 			
 			for(int i=0;i<pasinfoarr.size();i++)
 			{
@@ -88,17 +54,16 @@ public class Resercompleteaction implements Action{
 				String v12= sreardt.getArrival_time();
 				int v13=sreardt.getPrice();
 				String v14=searnum;
-				boolean v15=sreardt.isRound_trip();
-				reserdto= new ReservationDTO(v1,v2,v3,v4,v5,v6,v7,v8,v9,v11,v12,v13,v14,v15);
+//				boolean v15=sreardt.isRound_trip();
+				reserdto= new ReservationDTO(v1,v2,v3,v4,v5,v6,v7,v8,v9,v11,v12,v13,v14);
+				Reservationarr1.add(reserdto);
 		
-				
-				Reservationarr.add(reserdto);
-			
-				
 			}
+			reserdao.insertreserresult(Reservationarr1,1); //1구간에 대한 예약정보를 디비에 넣기 
 			
-			if(seatsinfoarr.size()==2){
-				
+			if(searcharr.size()==2){
+				System.out.println("왕복이라는 의미자나");
+				String seatinfo2[]= (String[])seatsinfoarr.get(1);
 				System.out.println("if문2인경우");
 				sreardt = (searchDTO)searcharr.get(1);
 				System.out.println(sreardt.getStarting());
@@ -120,18 +85,19 @@ public class Resercompleteaction implements Action{
 				String v12= sreardt.getArrival_time();
 				int v13=sreardt.getPrice();
 				String v14=searnum;
-				boolean v15=sreardt.isRound_trip();
+//				boolean v15=sreardt.isRound_trip();
 					
-				reserdto= new ReservationDTO(v1,v2,v3,v4,v5,v6,v7,v8,v9,v11,v12,v13,v14,v15);
-				Reservationarr.add(reserdto);
+				reserdto= new ReservationDTO(v1,v2,v3,v4,v5,v6,v7,v8,v9,v11,v12,v13,v14);
+				Reservationarr2.add(reserdto);
 					
 				}
 				
-				
+				reserdao.insertreserresult(Reservationarr2,2);  //2구간에 대한 예약정보를 디비에 넣기 
+					
 			}
-			reserdao.insertreserresult(Reservationarr);
-			System.out.println(Reservationarr.size()+"넘어갈 배열의 사이즈인데 설마 5?");
+			
 		
+			
 		
 		
 		return forward;

@@ -312,6 +312,53 @@ public class MemberDAO {
 				
 			return check;
 	}
+
+		public String getUserId(String user_email) {
+			String user_id="";
+			//return user_id;
+			
+			
+			con=null;
+			pstmt=null;
+			rs=null;
+			
+			try {
+				getConnection();
+				
+				//sql = "select * from member where user_email=?";
+				pstmt = con.prepareStatement("select * from user where user_email=?");
+				pstmt.setString(1, user_email);
+				rs = pstmt.executeQuery();
+				
+				rs.next();
+				user_id=rs.getString("user_id");
+				
+//				if(rs.next()){	//검색한 레코드가 있으면
+//					if (user_email.equals(rs.getString("user_email"))) {
+//					check = 1;	//중복
+//				}else {			//검색한 레코드가 없으면
+//					check = 0;	//중복아님
+//				}
+				
+//			}
+				
+			} catch (Exception e) {
+				System.out.println("userCheck에서 오류 : "+e.getMessage());
+			}finally {
+				//자원 해제
+				try {
+					if(pstmt != null) pstmt.close();
+					if(con != null) con.close();
+					if(rs != null) rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+				
+			return user_id;
+			
+			
+		}
 }
 	
 	

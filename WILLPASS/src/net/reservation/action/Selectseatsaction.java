@@ -10,7 +10,6 @@ public class Selectseatsaction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		System.out.println("이거실행되는거맞아?1");
 		ActionForward forward= new ActionForward();
 		forward.setPath("/reserve/ReserStep4.jsp");
 		forward.setRedirect(false);
@@ -21,7 +20,6 @@ public class Selectseatsaction implements Action {
 		
 		String isroundtrip=request.getParameter("isroundtrip");
 		seatsinfoarr.add(result1);
-		System.out.println("이거실행되는거맞아?2");
 		if(isroundtrip.equals("true")){
 			
 			String result2[]=request.getParameterValues("selected_2");

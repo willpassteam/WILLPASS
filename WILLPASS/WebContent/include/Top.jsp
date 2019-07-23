@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -17,11 +18,11 @@ nav a{
 }
 
 
-.second-nav li{
+.second-nav> li{
 	padding:10px 50px;
 	font-size: 25px;
 }
-.second-nav li:HOVER{
+.second-nav> li:HOVER{
 	color: #FACC2E;
 	cursor: pointer
 	
@@ -40,14 +41,14 @@ nav a{
 	position: absolute;
 	
 }
-.menubar a,dt{
+.menubar>a,dt,li{
 	text-align: center;
 	margin-bottom: 5px
 }
 
 
 
-.menubar a,dt,dd:HOVER{
+.menubar> a,dt,dd:HOVER{
 	cursor: pointer;
 }
 
@@ -339,3 +340,4 @@ $(function(){
 
 </body>
 </html>
+

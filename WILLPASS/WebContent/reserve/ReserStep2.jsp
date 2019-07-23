@@ -1,4 +1,6 @@
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="net.search.db.searchDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
@@ -102,9 +104,9 @@ $(function(){
 		
 	});
 	
-	$(".emailc2").on("blur",function(){//이메일 유효성검사1
+	$(".emailc2").on("blur",function(){//이메일 유효성검사2
 		
-		var emailc1ref =/^[a-zA-Z]{3,10}$/;
+		var emailc1ref =/^((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		if(emailc1ref.test($(this).val())==false){
 			
 // 			alert("올바른 이메일을 입력하세요.");
@@ -157,7 +159,8 @@ $(function(){
           	
           	<div class="small text-muted">
       		 
-      		 <c:if test="${sessionScope.searcharr[0].round_trip eq true}">
+      		
+      		 <c:if test="${not empty sessionScope.searcharr[1]}">
           		<b>
         		1구간:${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}<br>
 				${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>
@@ -165,8 +168,10 @@ $(function(){
 				${ sessionScope.searcharr[1].date} ${ sessionScope.searcharr[1].departure_time}  →  ${ sessionScope.searcharr[1].arrival_time}<br>
          	 	</b>
        		</c:if>
+  
+ 
        		
-      		 <c:if test="${sessionScope.searcharr[0].round_trip eq false}">
+      		 <c:if test="${empty sessionScope.searcharr[1]}">
             	 <b>
         			1구간: ${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}<br>
 					${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>
@@ -261,11 +266,11 @@ $(function(){
 			
 			<tr>
 			<td width="20%" style="background-color: #6D6E71" class="text-white ">성(Family Name)</td>
-			<td width="80%"><input type="text" class="mr-5 form-control input-sm col-6 border rebo namecheck" name="familyName${status.index}" required></td>
+			<td width="80%"><input type="text"   style="text-transform:uppercase"  class="mr-5 form-control input-sm col-6 border rebo namecheck" name="familyName${status.index}" required></td>
 			</tr>
 			<tr>
 			<td width="20%" style="background-color: #6D6E71" class="text-white">이름(Given Name)</td>
-			<td width="80%"><input type="text" class="form-control input-sm col-6 border rebo namecheck" name="givenName${status.index}" required ></td>
+			<td width="80%"><input type="text"   style="text-transform:uppercase"  class="form-control input-sm col-6 border rebo namecheck" name="givenName${status.index}" required ></td>
 			</tr>
 			
 			</table> 
