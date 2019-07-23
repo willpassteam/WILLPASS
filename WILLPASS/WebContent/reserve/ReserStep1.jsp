@@ -183,13 +183,13 @@
 		<h2 ><b>국제선 예약</b></h2>
 
 		<form autocomplete="off" onkeydown="return captureReturnKey(event)" action="searchpro.jin" method="post" name="search" >
-				<div class="container mt-5 bg-light">
+				<div class="container mt-5 ">
 					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
 						<label for="round_trip" class="btn btn-outline-dark btn-light active"><input type="radio" name="round_trip" value="1" class="custom-radio mr-0" checked="checked">왕복</input></label> <label
 							for="round_trip" class="btn btn-outline-dark btn-light"><input type="radio" name="round_trip" value="0" class="custom-radio ml-0">편도</input></label>
 					</div>
 				</div>
-				<div class="Search border pl-5 pr-5 bg-light rounded">
+				<div class="Search border pl-5 pr-5  rounded">
 					<br>
 					<div class="row 1row">
 						<div class="col-sm-3">
