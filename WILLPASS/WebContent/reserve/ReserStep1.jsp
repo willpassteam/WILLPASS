@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    <%
    		request.setCharacterEncoding("UTF-8");
    %>
@@ -50,51 +51,53 @@
 				
 		$(function () {
 			$(".select").click(function () {
+				
 			 var index = $(".select").index(this);
 			 var td1 = $(".select:eq("+ index +") >td")[0].innerHTML; //출발-도착시간
 				 var dep1 = td1.split("-"); //출발시간 - 도착시간 분리 저장
-						 
 			 var td3 = $(".select:eq("+ index +") >td")[1].innerHTML; //항공사
 			 var td5 = $(".select:eq("+ index +") >td")[2].innerHTML; //항공편
 			 var td7 = $(".select:eq("+ index +") >td")[4].innerHTML; //잔여석
 			 var td9 = $(".select:eq("+ index +") >td")[5].innerHTML; //소요시간
-			 								 
-			 	$(".reserve1").html("${newlist[0].starting} -> ${newlist[0].destination}"+ "&nbsp;/&nbsp;" +  "${newlist[0].date}" + "<br>"
+			 
+			 if(!(td7 == "마감" || td7 == "예약불가")){
+			 				 				 								 
+			 	$(".reserve1").html("${newlist[0].starting} -> ${newlist[0].destination}"+ "&nbsp;/" +"<br>"+  "${newlist[0].date}" + "<br>"
 			 						+ td3 + "&nbsp;"+ td1);
 		
-				$(".select:eq("+ index +") >td").css("background-color","lavender");
+				$(".select:eq("+ index +") >td").css("background-color","Gainsboro");
 				$(".select:not(:eq("+ index +")) >td").css("background-color","white");
 			 	
 			//항공편요금
-			depart1 = parseInt($(".select:eq("+ index +") >td")[3].innerHTML );
+			depart1 = parseInt($(".select:eq("+ index +") >td")[6].innerHTML );
 			if(depart2 == null){
-				$("#subtotal").html((depart1)* "${newlist[0].people}");
+				$("#subtotal").html(makeComma((depart1)* "${newlist[0].people}"));
 				$(".price1").val(depart1);
 			}else{
-				$("#subtotal").html((depart1 + depart2)*"${newlist[0].people}");
+				$("#subtotal").html(makeComma((depart1 + depart2)*"${newlist[0].people}"));
 				$(".price1").val(depart1);
 			}
 			
 			//항공사용료
 			usage1 = 32000;
 			if(usage2 == null){
-				$("#usage").html((usage1)*"${newlist[0].people}");
+				$("#usage").html(makeComma((usage1)*"${newlist[0].people}"));
 			}else{
-				$("#usage").html((usage1 + usage2)*"${newlist[0].people}");
+				$("#usage").html(makeComma((usage1 + usage2)*"${newlist[0].people}"));
 			}			
 			//유류할증료
 			fuelfee1 = 9000;
 			if(fuelfee2 == null){
-				$("#fuelfee").html((fuelfee1)*"${newlist[0].people}");
+				$("#fuelfee").html(makeComma((fuelfee1)*"${newlist[0].people}"));
 			}else{
-				$("#fuelfee").html((fuelfee1 + fuelfee2)*"${newlist[0].people}");
+				$("#fuelfee").html(makeComma((fuelfee1 + fuelfee2)*"${newlist[0].people}"));
 			}				
 			//지불예상금액
 			sum1 = depart1 + usage1 + fuelfee1;
 			if(sum2 == null){
-				$(".sum").html((sum1)*"${newlist[0].people}");
+				$(".sum").html(makeComma((sum1)*"${newlist[0].people}"));
 			}else{
-				$(".sum").html((sum1 + sum2)*"${newlist[0].people}");
+				$(".sum").html(makeComma((sum1 + sum2)*"${newlist[0].people}"));
 			} 		
 			
 			//ReserStep2 전달 값
@@ -108,8 +111,9 @@
 			$(".round_trip1").val("${newlist[0].round_trip}");
 			$(".flight1").val(td5);
 			$(".leftseat1").val(td7); 
-					
+			 	}		
 			});
+			
 		});
 			
 		$(function () {
@@ -122,29 +126,31 @@
 			 var td6 = $(".select2:eq("+ index2 +") >td")[2].innerHTML; //항공편
 			 var td8 = $(".select2:eq("+ index2 +") >td")[4].innerHTML; //잔여석
 			 var td10 = $(".select2:eq("+ index2 +") >td")[5].innerHTML; //소요시간
+			 
+			 if(!(td8 == "마감" || td8 == "예약불가")){
 
-			 	$(".reserve2").html("${newlist2[0].starting} -> ${newlist2[0].destination}" + "&nbsp;/&nbsp;" + "${newlist2[0].date}" +"<br>" 
+			 	$(".reserve2").html("${newlist2[0].starting} -> ${newlist2[0].destination}" + "&nbsp;/" +"<br>"+ "${newlist2[0].date}" +"<br>" 
 			 							+ td4 + "&nbsp;"+ td2);
 
- 				$(".select2:eq("+ index2 +") >td").css("background-color","lavender");
+ 				$(".select2:eq("+ index2 +") >td").css("background-color","Gainsboro");
 				$(".select2:not(:eq("+ index2 +")) >td").css("background-color","white");
 
 				//항공편요금
-				depart2 = parseInt($(".select2:eq("+ index2 +") >td")[3].innerHTML);
-				$("#subtotal").html((depart1 + depart2)*"${newlist2[0].people}");
+				depart2 = parseInt($(".select2:eq("+ index2 +") >td")[6].innerHTML);
+				$("#subtotal").html(makeComma((depart1 + depart2)*"${newlist2[0].people}"));
 				$(".price2").val(depart2);
 				
 				//항공사용료
 				usage2 = 32000;
-				$("#usage").html((usage1 + usage2)*"${newlist2[0].people}");
+				$("#usage").html(makeComma((usage1 + usage2)*"${newlist2[0].people}"));
 			
 				//유류할증료
 				fuelfee2 = 9000;
-					$("#fuelfee").html((fuelfee1 + fuelfee2)*"${newlist2[0].people}");
-					$(".totalperperson").html((fuelfee1 + fuelfee2)*"${newlist2[0].people}");
+					$("#fuelfee").html(makeComma((fuelfee1 + fuelfee2)*"${newlist2[0].people}"));
+					
 				//지불예상금액				
 				sum2 = depart2 + usage2 + fuelfee2;
-					$(".sum").html((sum1 + sum2)*"${newlist2[0].people}"); 
+					$(".sum").html(makeComma((sum1 + sum2)*"${newlist2[0].people}")); 
 					
 				//ReserStep2 전달 값
 	 			$(".starting2").val("${newlist2[0].starting}");
@@ -157,9 +163,14 @@
 				$(".round_trip2").val("${newlist2[0].round_trip}");
 				$(".flight2").val(td6);
 				$(".leftseat2").val(td8); 
+			 }
 			});
 		});
 		
+		function makeComma(str) {
+			var str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
 	</script>
 
 </head>
@@ -265,13 +276,12 @@
      
         </li>
         
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <li class="list-group-item d-flex justify-content-between lh-condensed" >
           <div class="small text-muted" >
            	성인 ${newlist[0].people} 명
           </div>
-          <span class="text-muted small" id="subtotal"></span>
+          <span class="text-muted small" id="subtotal" ></span>
           <span class="text-muted small" ><b>KRW</b></span>
-          
         </li>
 
         <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -343,10 +353,11 @@
   		<input type="hidden" name="flight2" class="flight2">
   		<input type="hidden" name="price2" class="price2">
   		<input type="hidden" name="leftseat2" class="leftseat2">
+  		<input type="hidden" name="time2" value="">
     	
     	<%-- </c:if> --%>
     		
-        <input class="btn  btn-lg btn-block btn-primary" type="submit" value="다음단계 ">
+        <input class="btn  btn-lg btn-block text-white" type="submit" value="다음단계 " style="background-color: #D60815">
         </li>	
       </ul>
      </form> 
@@ -357,19 +368,17 @@
  <div class="col-md-9 order-md-1">
 	<p class="text-danger small mt-2 mb-4">운임규정은 항공권에 따라 상이하며, 자세한 내용은 하단의 운임규정 ‘필독사항’를 통해 확인 바랍니다.</p>
 	<!-- 가격 정렬 버튼 -->
-	<div>
-<%-- 		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
-			<input type="hidden" name="order" value="null">
-			<input type="submit" value="시간순" >
-		</form> --%>
-		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
-			<input type="hidden" name="order" value="1">
-			<input type="submit" value="낮은 가격순">
-		</form>
-		<form action="${contextPath}/reserve1/ReserStep1.do" method="post">
-			<input type="hidden" name="order" value="2">
-			<input type="submit" value="높은 가격순">
-		</form>
+
+ 	<div align="right">
+ 		<form action="${contextPath}/reserve1/ReserStep1.do">
+ 		정렬 순서: 
+	 		<select name="order" class="custom-select col-2" >
+	 			<option value="3">시간순</option>
+	 			<option value="1">낮은 가격순</option>
+	 			<option value="2">높은 가격순</option> 		
+	 		</select>
+	 		<input type="submit" value="재검색" class="btn btn-outline-dark">
+ 		</form>
  	</div>
  	
 	<i class='fas fa-plane' style='font-size:30px'></i>
@@ -380,12 +389,13 @@
 
     		<tbody>
 			<tr class="bg-light">
-			<td>출발-도착시간</td>
+			<td>출발-도착시간 (소요시간)</td>
 			<td>항공사</td>		
 			<td>항공편</td>	
 			<td>금액</td>
 			<td>잔여석</td>
 			<td style="display: none;">소요시간</td>
+			<td style="display: none;">금액</td>
 			</tr>
 												
 		    </tbody>
@@ -401,12 +411,23 @@
 
 		<c:forEach var="air" items="${newlist}">
 			<tr class="select">
-				<td >${air.departure_time} - ${air.arrival_time}</td>
+				<td >${air.departure_time} - ${air.arrival_time} (${air.time})</td>
 				<td >${air.airline}</td>
 				<td >${air.flight}</td>
-				<td >${air.price}</td>
-				<td >${air.leftseat}</td>	
-				<td style="display: none;">${air.time}</td>				
+				<td ><fmt:formatNumber>${air.price}</fmt:formatNumber></td>
+			<c:if test="${air.checkseat}">
+				<td >${air.leftseat}</td>
+			</c:if>	
+			<c:if test="${!air.checkseat}">
+				<c:if test="${air.leftseat <= 0}">
+						<td >마감</td>
+				</c:if>
+				<c:if test="${air.leftseat > 0}">
+						<td >예약불가</td>
+				</c:if>
+			</c:if>	
+				<td style="display: none;">${air.time}</td>
+				<td style="display: none;">${air.price}</td>				
 			</tr>				
 		</c:forEach>
 
@@ -426,7 +447,7 @@
 
     		<tbody>
 			<tr class="bg-light">
-			<td>출발-도착시간</td>
+			<td>출발-도착시간 (소요시간)</td>
 			<td>항공사</td>		
 			<td>항공편</td>
 			<td>금액</td>
@@ -447,24 +468,28 @@
 		<c:when test="${newlist2 != null}">
 		<c:forEach var="air2" items="${newlist2}">
 			<tr class="select2">
-				<td >${air2.departure_time} - ${air2.arrival_time}</td>
+				<td >${air2.departure_time} - ${air2.arrival_time} (${air2.time})</td>
 				<td >${air2.airline}</td>
 				<td >${air2.flight}</td>
-				<td >${air2.price}</td>	
-				<td >${air2.leftseat}</td>	
-				<td style="display: none;">${air2.time}</td>					
+				<td ><fmt:formatNumber>${air2.price}</fmt:formatNumber></td>	
+			<c:if test="${air2.checkseat}">
+				<td >${air2.leftseat}</td>
+			</c:if>	
+			<c:if test="${!air2.checkseat}">
+				<c:if test="${air2.leftseat <= 0}">
+						<td >마감</td>
+				</c:if>
+				<c:if test="${air2.leftseat > 0}">
+						<td >예약불가</td>
+				</c:if>
+			</c:if>		
+				<td style="display: none;">${air2.time}</td>
+				<td style="display: none;">${air2.price}</td>					
 			</tr>				
 		</c:forEach>
 	</c:when>		
 	</c:choose>		
-	<%-- </c:if>	    
-	<c:if test="${newlist[0].round_trip == 'false'}">
-			<tr>
-				<td colspan="5">
-				검색된 항공편이 없습니다.
-				</td>
-			</tr>
-	</c:if>  --%>
+
   		</table>	
   	</div>
  	</c:if>
