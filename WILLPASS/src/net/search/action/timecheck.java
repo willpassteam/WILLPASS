@@ -15,6 +15,7 @@ import net.search.db.searchDAO;
 import net.search.db.searchDTO;
 import net.search.db.timeDTO;
 
+
 public class timecheck extends Thread {
 	ArrayList<searchDTO> list = null;
 	String yy = "";
@@ -53,10 +54,12 @@ public class timecheck extends Thread {
 	public timecheck() {
 	};
 
+
 	@Override
 	public void run() {
 		try {
 			Long starttime = System.currentTimeMillis();
+
 			Document flight = Jsoup.connect("https://www.flightstats.com/v2/flight-details/" + sfFlight + "?year=" + yy
 					+ "&month=" + mm + "&date=" + dd).post();
 			Elements timeblock = flight.getElementsByClass("timeBlock");
@@ -84,3 +87,4 @@ public class timecheck extends Thread {
 		}
 	}
 }
+

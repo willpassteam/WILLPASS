@@ -1,4 +1,4 @@
-package jinwoo.c;
+package net.search.action;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

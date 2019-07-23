@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
@@ -111,9 +112,11 @@ public class searchFowarding implements Action {
 
 			String date_for = new SimpleDateFormat("yyyyMMdd").format(searchDTO_for.getDate());
 			
+
 			thread = new Thread(new timecheck(sfFlight, date_for, i, list), "string");
 			
 			System.out.println("나시작");
+
 			
 			thread.start();
 		}
@@ -138,6 +141,7 @@ public class searchFowarding implements Action {
 		}
 		request.getSession().setAttribute("list1", list);
 
+
 		if (round_trip == 1) {
 			ArrayList list_1 = new ArrayList<>();
 			Document airline_1 = Jsoup.connect(
@@ -147,6 +151,7 @@ public class searchFowarding implements Action {
 					.post();
 			Elements tr_1 = airline_1.getElementsByTag("tbody").get(2).getElementsByTag("tr");
 			String date_1 = "";
+
 			try {
 				SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 				long time;
@@ -185,6 +190,7 @@ public class searchFowarding implements Action {
 				list_1.add(vo);
 			}
 
+
 			// Thread 시작
 			timecheck dto_1 = new timecheck();
 			Thread thread1 = new Thread();
@@ -216,6 +222,7 @@ public class searchFowarding implements Action {
 			for (int i = 0; i < list_1.size(); i++) {
 				searchDTO vo = (searchDTO) list_1.get(i);
 				if (vo.getArrival_time() == null) {
+
 					list_1.remove(list_1.get(i));
 				}
 			}

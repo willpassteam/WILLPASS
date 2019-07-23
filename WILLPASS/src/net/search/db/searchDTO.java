@@ -1,8 +1,10 @@
 package net.search.db;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class searchDTO {
+public class searchDTO  {
+	
 	private String starting;	//출발지
 	private String destination;	//목적지
 	private Date date;			//날짜
