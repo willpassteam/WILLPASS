@@ -14,6 +14,7 @@ import net.search.db.searchDTO;
 
 public class SearchPriceAction implements Action {
 
+		
 	//가격정렬 함수
 	Comparator<searchDTO> priceCompare1 = new Comparator<searchDTO>() {
 		@Override
@@ -32,6 +33,9 @@ public class SearchPriceAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		request.getSession().removeAttribute("newlist");
+		request.getSession().removeAttribute("newlist2");
+		
 		System.out.println("엑션");
 		ArrayList<searchDTO> newlist = new ArrayList<searchDTO>();
 		
@@ -90,8 +94,9 @@ public class SearchPriceAction implements Action {
 		
 //======================================================================
 
+		if(list2 != null){
 		ArrayList<searchDTO> newlist2 = new ArrayList<searchDTO>();
-		
+			
 		int min2 = 0;
 		int hour2 = 0;
 		for (int i=0; i<list2.size(); i++){
@@ -133,7 +138,8 @@ public class SearchPriceAction implements Action {
 			request.getSession().setAttribute("newlist2", newlist2);
 		}
 
-
+	}
+	
 	ActionForward forward = new ActionForward();
 	
 	forward.setRedirect(false);

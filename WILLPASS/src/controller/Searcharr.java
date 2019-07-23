@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.jdbc.BlobFromLocator;
+
 import net.search.db.searchDTO;
 
 public class Searcharr implements Action {
@@ -17,19 +19,17 @@ public class Searcharr implements Action {
 
 		System.out.println("전달");
 		
-		//날짜 변환
-		String from1 = request.getParameter("date1");
-		String from2 = request.getParameter("date2");
+		ArrayList searcharr = new ArrayList();
 		SimpleDateFormat trans = new SimpleDateFormat("yyyyMMdd");
-		Date date1 = Date.valueOf(from1);
-		Date date2 = Date.valueOf(from2);
-	 	
-	 	//왕복 여부
-	 	String round1 = request.getParameter("round_trip1");
-	 	Boolean round_trip1 = true;
-	 	String round2 = request.getParameter("round_trip2");
-	 	Boolean round_trip2 = true;
 
+		//가는 항공편
+		
+		String from1 = request.getParameter("date1");
+		Date date1 = Date.valueOf(from1);
+		
+	 	String round1 = request.getParameter("round_trip1");
+	 	Boolean round_trip1 = Boolean.valueOf(round1).booleanValue();
+	
 		searchDTO sdto = new searchDTO();
 		sdto.setStarting(request.getParameter("starting1"));
 		sdto.setDestination(request.getParameter("destination1"));
@@ -42,8 +42,18 @@ public class Searcharr implements Action {
 		sdto.setFlight(request.getParameter("flight1"));
 		sdto.setPrice(Integer.parseInt(request.getParameter("price1")));
 		sdto.setLeftseat(Integer.parseInt(request.getParameter("leftseat1")));
+		
+		searcharr.add(sdto);
+		
 				
-
+		//오는 항공편
+		if(request.getSession().getAttribute("newlist2") != null) {
+					
+		String from2 = request.getParameter("date2");
+		Date date2 = Date.valueOf(from2);
+		String round2 = request.getParameter("round_trip2");
+	 	Boolean round_trip2 = Boolean.valueOf(round2).booleanValue();
+		
 		searchDTO sdto2 = new searchDTO();
 		sdto2.setStarting(request.getParameter("starting2"));
 		sdto2.setDestination(request.getParameter("destination2"));
@@ -57,12 +67,10 @@ public class Searcharr implements Action {
 		sdto2.setPrice(Integer.parseInt(request.getParameter("price2")));
 		sdto2.setLeftseat(Integer.parseInt(request.getParameter("leftseat2")));
 		
-		ArrayList searcharr = new ArrayList();
-		searcharr.add(sdto);
 		searcharr.add(sdto2);
 		
+		}
 		System.out.println(searcharr.size()+"사이즈");
-		
 		//세션저장
 		HttpSession session = request.getSession();
 		session.setAttribute("searcharr", searcharr);
