@@ -1,3 +1,4 @@
+
 package net.search.action;
 
 import java.io.IOException;
@@ -84,3 +85,4 @@ public class timecheck extends Thread {
 		}
 	}
 }
+

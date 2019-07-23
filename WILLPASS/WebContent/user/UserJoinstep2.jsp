@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -209,4 +210,5 @@ function idcheck() {
 	<jsp:include page="../include/Footer.jsp"></jsp:include>
 	<%-- Footer End --%>
 </body>
+
 </html>

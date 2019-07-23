@@ -181,7 +181,14 @@ input[type="radio"] {
 				return false;
 			}
 		});
+		
+
+
 	});
+	function captureReturnKey(e) {
+	    if(e.keyCode==13)
+	    return false;
+	}
 </script>
 </head>
 <body>
@@ -199,10 +206,10 @@ input[type="radio"] {
 		<p class="text-center mb-5 maintx ">이벤트 기간 : 2019.7.10~ 2019.08.11</p>
 
 
-		<!-- 	잠시 -->
+		<!--잠시 -->
 
 		<div class="container pb-5">
-			<form autocomplete="off" action="searchpro.jin" method="post" name="search">
+			<form autocomplete="off" onkeydown="return captureReturnKey(event)" action="searchpro.jin" method="post" name="search">
 				<div class="container mt-5 ">
 					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
 						<label for="round_trip" class="btn btn-outline-dark btn-light active"><input type="radio" name="round_trip" value="1" class="custom-radio mr-0" checked="checked">왕복</input></label> <label

@@ -178,7 +178,9 @@ public class searchDAO {
 		vo.setArrival_time(arrival_time);
 		vo.setTime(time);
 		
+		free();
 		return vo;
+		
 	}
 	public int seatcheck(java.sql.Date date, String sFlight) {
 		int cnt=0;

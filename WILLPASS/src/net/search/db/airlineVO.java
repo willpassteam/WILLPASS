@@ -1,4 +1,4 @@
-package jinwoo.db;
+package net.search.db;
 
 public class airlineVO {
 	private String airport;

@@ -1,3 +1,4 @@
+
 package net.search.action;
 
 import java.sql.Date;
@@ -234,3 +235,4 @@ public class searchFowarding implements Action {
 		return forward;
 	}
 }
+

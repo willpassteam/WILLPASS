@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="path" value="${pageContext.request.contextPath }"></c:set>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,8 +39,18 @@ nav a{
 	z-index: 5;
 	position: absolute;
 	
-	
 }
+.menubar a,dt{
+	text-align: center;
+	margin-bottom: 5px
+}
+
+
+
+.menubar a,dt,dd:HOVER{
+	cursor: pointer;
+}
+
 
 </style>
 
@@ -51,16 +62,13 @@ $(function(){
 		$(".nc").removeClass('show');
 		$(".nc:eq("+index+")").addClass('show');
 	});
-	$(".nt").on("mouseleave",function(){
-		var t = 0;
-		$(".menubar").on("mouseenter",function(){
-			$(".menubar").on("mouseleave",function(){
-				$(".nc").removeClass('show');
-			});
+	$(".menurow").on("mouseleave",function(){
+		$(".menubar").on("mouseleave",function(){
+			$(".nc").removeClass('show');
 		});
-		
 	});
-})	
+	
+})
 
 </script>
 
@@ -74,10 +82,20 @@ $(function(){
  		<div class="col-sm-3 pl-5">
 	 		<h6 class="text-dark float-right py-1">
 	 		<small>
-	 			<a class="text-dark" href="${path }/user/Userlogin.jsp">로그인</a> | 
-	 			<a class="text-dark" href="${path }/user/Userjoinimg.jsp">회원가입</a> | 
-	 			<a class="text-dark" href="${path }/question/Board.Notice">고객센터</a> | 
+
+	 		<c:if test="${user_email ==null }">
+	 			<a class="text-dark" href="${contextPath }/user/Userlogin.jsp">로그인</a> | 
+	 			<a class="text-dark" href="${contextPath }/user/Userjoinimg.jsp">회원가입</a> | 
+	 			<a class="text-dark" href="${contextPath }/question/Board.Notice">고객센터</a> | 
 	 			<a class="text-dark" href="#">사이트맵</a>
+	 			</c:if>
+	 			<c:if test="${user_email !=null }">
+	 			<a class="text-dark" href="${contextPath }/user/member/Usermodify.me">${user_id }님</a> | 
+	 			<a class="text-dark" href="${contextPath }/user/member/logout.me">로그아웃</a> | 
+	 			<a class="text-dark" href="${contextPath }/question/Board.Notice">고객센터</a> | 
+	 			<a class="text-dark" href="#">사이트맵</a>
+	 			</c:if>
+
 	 		</small>
 	 		</h6>
  		</div>	
@@ -89,7 +107,7 @@ $(function(){
  	
 	<div class="container">
 	<div class="container">
-		<div class="row mb-3" height="130px" >
+		<div class="row menurow" height="130px" >
 			<div class="col-xl-4">
 				<a href="../main/index.jsp">
 					<img alt="" src="../img/Logo.PNG">
@@ -137,15 +155,15 @@ $(function(){
 		</div>
 	</div>
 	<div class="container menubar">
-		<div class="row w-100 menurow">
+		<div class="row w-100 menurow" style="font-size: 12px">
 			<div class="collapse nc w-100">
 				<div class="nv w-100" >
 					<ul class="list-group list-group-horizontal" >
-						<li class="list-group-item w-25"><a href="#">항공권예약</a></li>
-						<li class="list-group-item w-25"><a href="#">번개 간편 예약</a></li>
-						<li class="list-group-item w-25"><a href="#">단체 예약문의</a></li>
-						<li class="list-group-item w-25"><a href="#">실시간출도착</a></li>
-						<li class="list-group-item w-25"><a href="#">취향노선</a></li>
+						<li class="list-group-item w-25"><a href="#" class="font-weight-bold">항공권예약</a></li>
+						<li class="list-group-item w-25"><a href="#" class="font-weight-bold" >번개 간편 예약</a></li>
+						<li class="list-group-item w-25"><a href="#" class="font-weight-bold">단체 예약문의</a></li>
+						<li class="list-group-item w-25"><a href="#" class="font-weight-bold">실시간출도착</a></li>
+						<li class="list-group-item w-25"><a href="#" class="font-weight-bold">취향노선</a></li>
 						<li class="list-group-item w-25">
 							<dl>
 								<dt>운임 안내</dt>
@@ -153,15 +171,15 @@ $(function(){
 								<dd>국제선</dd>
 							</dl>
 						</li>
-						<li class="list-group-item w-25"><a href="#">스케줄 조회</a></li>	
+						<li class="list-group-item w-25"><a href="#" class="font-weight-bold">스케줄 조회</a></li>	
 					</ul>
 				</div>
 			</div>
 			<div class="collapse nc w-100">
 				<div class="nv w-100" >
 					<ul class="list-group list-group-horizontal">
-						<li class="list-group-item w-50"><a href="#">나의 예약조회</a></li>
-						<li class="list-group-item w-50"><a href="#">구매내역</a></li>
+						<li class="list-group-item w-50"><a href="#" class="font-weight-bold">나의 예약조회</a></li>
+						<li class="list-group-item w-50"><a href="#" class="font-weight-bold">구매내역</a></li>
 						<li class="list-group-item w-50">
 							<dl>
 								<dt>제휴사 예약조회</dt>
@@ -194,13 +212,13 @@ $(function(){
 							</dl>
 						</li>
 						<li class="list-group-item w-25">
-							<a href="#">STAMP 구매/환불</a>
+							<a href="#" class="font-weight-bold">STAMP 구매/환불</a>
 						</li>
 						<li class="list-group-item w-25">
-							<a href="#">STAMP 양도</a>
+							<a href="#" class="font-weight-bold">STAMP 양도</a>
 						</li>
 						<li class="list-group-item w-25">
-							<a href="#">누적 STAMP 적립</a>
+							<a href="#" class="font-weight-bold">누적 STAMP 적립</a>
 						</li>
 					</ul>
 				</div>
@@ -294,7 +312,7 @@ $(function(){
 								<dd>웹진</dd>
 							</dl>
 						</li>
-						<li class="list-group-item w-50"><a href="#">이벤트</a></li>
+						<li class="list-group-item w-50"><a href="#" class="font-weight-bold">이벤트</a></li>
 						<li class="list-group-item w-50">
 							<dl>
 								<dt>여행상품</dt>

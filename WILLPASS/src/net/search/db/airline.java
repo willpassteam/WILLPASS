@@ -1,4 +1,4 @@
-package jinwoo.db;
+package net.search.db;
 
 
 import java.util.ArrayList;
