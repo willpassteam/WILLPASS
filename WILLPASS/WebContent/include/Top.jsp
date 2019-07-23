@@ -40,7 +40,7 @@ nav a{
 	position: absolute;
 	
 }
-.menubar a,dt{
+.menubar a,dt,li{
 	text-align: center;
 	margin-bottom: 5px
 }
