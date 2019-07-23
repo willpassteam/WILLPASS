@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -17,23 +18,21 @@ import net.search.db.searchDTO;
 import net.search.db.timeDTO;
 
 public class timecheck extends Thread{
-	final static int THREADS = 15; 
-	private static CountDownLatch lacth = new CountDownLatch(THREADS);
 
-	int THREADS_1 ; 
-	private CountDownLatch lacth_1 = new CountDownLatch(THREADS_1);
-	
-	
-	timeDTO dto1=null;
+	ArrayList<searchDTO> list = null;
 	
 	String yy="";
 	String mm="";
 	String dd="";
+	int index;
+	int end;
+	
 	
 	String sfFlight;
-	
-	public timecheck(String sfFlight,String date) {
+	public timecheck(String sfFlight,String date,int index, ArrayList list ) {
 		this.sfFlight=sfFlight;
+		this.index= index;
+		this.list = list;
 		String date_1="";
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -49,18 +48,20 @@ public class timecheck extends Thread{
 		this.yy=date_1.substring(0,4);
 		this.mm=date_1.substring(4,6);
 		this.dd=date_1.substring(6);
+	
+	
 		
-		dto1=new timeDTO();
 		
 		
 		
 	}
-	public timecheck() {
-	}
+	//기본생성자
+	public timecheck() {};
+	
 	@Override
 	public void run() {
 		try {
-			
+			Long starttime = System.currentTimeMillis();
 			Document flight = Jsoup.connect("https://www.flightstats.com/v2/flight-details/"+sfFlight+"?year="+yy+"&month="+mm+"&date="+dd).post();
 			Elements timeblock=flight.getElementsByClass("timeBlock");
 			
@@ -69,60 +70,29 @@ public class timecheck extends Thread{
 			String time=flight.getElementsByClass("flightTimeBlock").get(0).children().last().text();
 			time=time.replace("h", "시간");
 			time=time.replace("m", "분");
+			System.out.println(arrival_time +":"+ index);
+			System.out.println(departure_time +":"+ index);
+			System.out.println(time +":"+ index);
+			
+			System.out.println(list.size());
+			list.get(index).setArrival_time(arrival_time);
+			list.get(index).setDeparture_time(departure_time);
+			list.get(index).setTime(time);
 			
 			
-			dto1.setArrival_time(arrival_time);
-			dto1.setDeparture_time(departure_time);
-			dto1.setTime(time);
 			
-			lacth_1.countDown();
+			
+			Long endtime = System.currentTimeMillis();
+			System.out.println("검색 시간 :"+(endtime - starttime));
+			
 					
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
-	public List times(List list) {
-		THREADS_1=list.size();
-		searchDAO dao= new searchDAO();
-		List list_1=new ArrayList();
-		System.out.println("b"+list_1.size());
-		for(int i = 0; i < list.size(); ++i) { 
-			searchDTO dto=(searchDTO)list.get(i);
-			String sfFlight =dao.flightcheck(dto.getAirline());
-			String sFlight=dto.getFlight();
-			sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
-			String date=new SimpleDateFormat("yyyyMMdd").format(dto.getDate());
-			timecheck tcheck= new timecheck(sfFlight,date);
-			
-			
-			tcheck.start();
-			
-			list_1.add(tcheck.dto1);
-			
-			} 
-		try { // lacth 의 카운트가 0이 될 때 까지 대기한다. 
-			
-			lacth.await(10000, TimeUnit.MILLISECONDS); 
-			
-			lacth_1.await();
-			
-			} catch (InterruptedException e) {
-				e.printStackTrace(); 
-			}
-
-		System.out.println("c"+list_1.size());
-		for(int i=0; i<list.size();i++){
-			searchDTO dto=(searchDTO)list.get(i);
-			timeDTO dto2=(timeDTO)list_1.get(i);
-			
-			dto.setArrival_time(dto2.getArrival_time());
-			System.out.println("times2"+dto2.getArrival_time());
-			dto.setDeparture_time(dto2.getDeparture_time());
-			dto.setTime(dto2.getTime());
-		}
-		
-		return list;
-	}
+	
+	
+	
 }

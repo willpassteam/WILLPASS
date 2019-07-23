@@ -4,7 +4,10 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,7 +57,7 @@ public class searchFowarding implements Action{
 			Elements tr=airline.getElementsByTag("tbody").get(2).getElementsByTag("tr");
 			
 			
-			List list=new ArrayList();
+			ArrayList list= new ArrayList<>();
 			timeDTO times=new timeDTO();
 			for(int i=0; i<tr.size();i+=2){
 				searchDTO vo= new searchDTO();
@@ -81,8 +84,51 @@ public class searchFowarding implements Action{
 				list.add(vo);
 			}
 			
+			
+			/*
+			 *   Thread 시작  
+			 *  */
+			ExecutorService threadPool = Executors.newFixedThreadPool(list.size());
+			//아직 못 쓴거입니다.
+
 			timecheck dto=new timecheck();
-			list=dto.times(list); 
+			System.out.println("Thread검색시작");
+			Thread thread = new Thread();
+			for (int i = 0; i < list.size(); i++) {
+				
+				searchDTO searchDTO_for = (searchDTO)list.get(i);
+				
+				String sfFlight = new searchDAO().flightcheck(searchDTO_for.getAirline());
+				String sFlight= searchDTO_for.getFlight();
+				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
+				
+				String date_for = new SimpleDateFormat("yyyyMMdd").format(searchDTO_for.getDate());
+				
+				thread = new Thread(new timecheck(sfFlight,date_for,i,list),"string");
+				System.out.println("나시작");
+				thread.start();
+			}
+			try {
+				
+				
+
+				thread.join();
+				
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+				
+			}
+			//동기화 synchronizedList를 다시 list로 바꿔줌
+			 
+			System.out.println("Thread검색종료");
+			
+			
+			/*
+			 *   Thread 끝
+			 *   왕복의 경우 시작
+			 *  */
+			
 			
 
 			for(int i=0; i<list.size();i++){
@@ -95,7 +141,7 @@ public class searchFowarding implements Action{
 			request.getSession().setAttribute("list1",list );
 
 		 if(round_trip==1){
-			 List list_1=new ArrayList();
+			 ArrayList list_1= new ArrayList<>();
 			Document airline_1=Jsoup.connect("http://www.airportal.co.kr/servlet/aips.life.airinfo.RaSkeCTL?gubun=c_getList&curr_page=1&one_page=70&one_group=10&dep_airport="+ed+"&arr_airport="+st+"&srch_type=dep&current_dt_from="+to+"&current_dt_to="+to+"&regCls=1&al_icao=&fp_iata=").post();
 			Elements tr_1=airline_1.getElementsByTag("tbody").get(2).getElementsByTag("tr");
 			String date_1="";
@@ -129,9 +175,35 @@ public class searchFowarding implements Action{
 				
 				list_1.add(vo);
 			}
+			
+			//Thread 시작 
 			timecheck dto_1=new timecheck();
-			list_1=dto_1.times(list_1); 
-
+			
+			Thread thread1 = new Thread();
+			System.out.println("Thread검색시작");
+			
+			for (int i = 0; i < list_1.size(); i++) {
+				searchDTO searchDTO_for = (searchDTO)list_1.get(i);
+				String sfFlight = new searchDAO().flightcheck(searchDTO_for.getAirline());
+				String sFlight= searchDTO_for.getFlight();
+				sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
+				String date_for = new SimpleDateFormat("yyyyMMdd").format(searchDTO_for.getDate());
+				thread1 = new Thread(new timecheck(sfFlight,date_for,i,list_1));
+				thread1.start();
+				System.out.println("나시작");
+			}
+			try {
+				thread1.join();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+			//동기화 synchronizedList를 다시 list로 바꿔줌
+			 
+			System.out.println("Thread검색종료");
+			
+			//Thread 저 
 			
 			for(int i=0; i<list_1.size();i++){
 				searchDTO vo= (searchDTO)list_1.get(i);
@@ -139,7 +211,6 @@ public class searchFowarding implements Action{
 					list_1.remove(list_1.get(i));
 				}
 			}
-			request.setAttribute("list2",list_1);
 
 			request.getSession().setAttribute("list2",list_1);
 //			request.setAttribute("list2",list_1);
