@@ -37,8 +37,8 @@ public class PassengerInfoaction implements Action{
            
            
             pagender=(String)request.getParameter("gender"+(i+1));
-            pafname=(String)request.getParameter("familyName"+(i+1));
-            paname=(String)request.getParameter("givenName"+(i+1));
+            pafname=(String)request.getParameter("familyName"+(i+1)).toUpperCase();
+            paname=(String)request.getParameter("givenName"+(i+1)).toUpperCase();
             paretel=(String)request.getParameter("tel1")+(String)request.getParameter("tel2")+(String)request.getParameter("tel3");
             pareemail=(String)request.getParameter("email1")+"@"+(String)request.getParameter("email2");
             PassengerDTO dto = new PassengerDTO(pagender, pafname, paname, paretel, pareemail);
@@ -58,20 +58,25 @@ public class PassengerInfoaction implements Action{
     	
         ArrayList searcharrlist = (ArrayList)request.getSession().getAttribute("searcharr");
         
+        System.out.println(searcharrlist.size()+"넘어오는 사이즈 확인하기");
         searchDTO searvo=(searchDTO)searcharrlist.get(0);
+        
         String searflight= searvo.getFlight();
+        System.out.println("searflight: "+searflight);
         Date seardate = searvo.getDate();
+        System.out.println("seardate: "+seardate.toString());
 
         possibleseats1=reserdao.selpossibleseat(seardate,searflight);
 
 
-        if(searvo.isRound_trip()){
+        if(searcharrlist.size()==2){
         	searchDTO searvo2= (searchDTO)searcharrlist.get(1);
            String searflight2= searvo2.getFlight();
            Date seardate2 = searvo2.getDate();
            possibleseats2=reserdao.selpossibleseat(seardate2,searflight2);
         }
-
+        
+   
       
         request.setAttribute("possibleseats1", possibleseats1);
         request.setAttribute("possibleseats2", possibleseats2);

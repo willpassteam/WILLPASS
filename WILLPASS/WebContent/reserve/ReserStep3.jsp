@@ -24,6 +24,7 @@
 <!-- 아이콘을 위한 css -->
 <style type="text/css">
 
+
 input{
 	display: none;
 }
@@ -239,9 +240,13 @@ $(".2partbtn").on("click",function(){
    <%-- Top Start --%>
    <jsp:include page="../include/Top.jsp"></jsp:include>
    <%-- Top End --%>
-<form action="${pageContext.request.contextPath}/reservation//selectseatsaction" method="get" name="formt" onsubmit="return fncheck();" >   
-<input type="hidden" value="${sessionScope.searcharr[0].round_trip}" name="isroundtrip">
-
+<form action="${pageContext.request.contextPath}/reservation/selectseatsaction" method="get" name="formt" onsubmit="return fncheck();" > 
+      <c:if test="${not empty sessionScope.searcharr[1]}">
+		<input type="hidden" value="true" name="isroundtrip">
+	 </c:if>
+	  <c:if test="${empty sessionScope.searcharr[1]}">
+		<input type="hidden" value="false" name="isroundtrip">
+	 </c:if>
 
 <div class="container mt-5">
   <div class="row">
@@ -265,7 +270,7 @@ $(".2partbtn").on("click",function(){
          ${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>
           </b>
 
-       <c:if test="${sessionScope.searcharr[0].round_trip eq true}">
+       <c:if test="${not empty sessionScope.searcharr[1]}">
             <b>
          ${ sessionScope.searcharr[1].starting} - ${ sessionScope.searcharr[1].destination}<br>
          ${ sessionScope.searcharr[1].date} ${ sessionScope.searcharr[1].departure_time}  →  ${ sessionScope.searcharr[1].arrival_time}<br>
@@ -338,7 +343,7 @@ $(".2partbtn").on("click",function(){
 <!-- 선택된 좌석배정 -->
 <div class="mb-3">
 <h4 class="pt-2 mb-2 mb-3"><b>좌석배정</b></h4>
-	    <c:if test="${sessionScope.searcharr[0].round_trip eq true}">
+	    <c:if test="${not empty sessionScope.searcharr[1]}">
 	    <div class="row">       
 	    	<div class="col-6 " >
           <h6 class="text-muted pb-1"><b class="text-dark">01.</b>${ sessionScope.searcharr[0].starting}  - ${ sessionScope.searcharr[0].destination} |&nbsp;&nbsp; ${ sessionScope.searcharr[0].date} 
@@ -363,9 +368,18 @@ $(".2partbtn").on("click",function(){
        </div>
  
      </c:if>
-     <c:if test="${sessionScope.searcharr[0].round_trip eq false}">
-       <div class="col-6 border text-center  mr-0 pt-1 pb-2"><h5 class="text-muted">${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}</h5></div>
-       </c:if>	
+   <c:if test="${empty sessionScope.searcharr[1]}">
+	    	<div class="col-12 " >
+          <h6 class="text-muted pb-1"><b class="text-dark">01.</b>${ sessionScope.searcharr[0].starting}  - ${ sessionScope.searcharr[0].destination} |&nbsp;&nbsp; ${ sessionScope.searcharr[0].date} 
+          </h6>
+          
+        <table class="table">
+        <c:forEach items="${sessionScope.pasinfoarr}" var="data" varStatus="varstatus">
+      	 <tr><td class="border border-left-0" width="50%">${data.pafname} ${data.paname}</td><td class="border border-right-0 fre1_${varstatus.index}" width="50%"></td></tr>
+        </c:forEach>
+       </table>
+          
+       </div>       </c:if>	
 </div>
 <!-- 선택된 좌석배정끝 -->        
         
@@ -374,7 +388,7 @@ $(".2partbtn").on("click",function(){
 <!-- 구간선택부분 -->
 <div class="col-12 border text-center">
 <div class="row border">
-	    <c:if test="${sessionScope.searcharr[0].round_trip eq true}">
+	     <c:if test="${not empty sessionScope.searcharr[1]}">
        <div class="col-6 border  1partbtn mr-0 pt-1 pb-2" >
           <h5 class="text-muted">${ sessionScope.searcharr[0].starting}  <i class='fas fa-plane-departure pt-3'></i> ${ sessionScope.searcharr[0].destination}</h5>
        </div>
@@ -382,7 +396,7 @@ $(".2partbtn").on("click",function(){
           <h5 class="text-muted">${ sessionScope.searcharr[1].starting} <i class='fas fa-plane-departure pt-3'></i> ${ sessionScope.searcharr[1].destination}</h5>
        </div>
      </c:if>
-     <c:if test="${sessionScope.searcharr[0].round_trip eq false}">
+      <c:if test="${empty sessionScope.searcharr[1]}">
        <div class="col-6 border text-center 1partbtn mr-0 pt-1 pb-2"><h5 class="text-muted">${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}</h5></div>
        </c:if>		
  </div>

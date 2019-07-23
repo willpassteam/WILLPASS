@@ -56,7 +56,7 @@ $(function(){
         <td>${sessionScope.searcharr[0]. airline}/${sessionScope.searcharr[0].flight}</td>
      	</tr>
 
-        <c:if test="${sessionScope.searcharr[0].round_trip eq true}">
+   	 <c:if test="${not empty sessionScope.searcharr[1]}">
 		<tr>
         <td>${sessionScope.searcharr[1].starting}- ${ sessionScope.searcharr[1].destination}</td>
         <td> ${sessionScope.searcharr[1].date} ${ sessionScope.searcharr[1].departure_time}  →  ${ sessionScope.searcharr[1].arrival_time}</td>
