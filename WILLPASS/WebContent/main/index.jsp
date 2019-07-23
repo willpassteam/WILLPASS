@@ -22,7 +22,6 @@
 
 
 
-
 <style type="text/css">
 .subject {
 	height: 70px;

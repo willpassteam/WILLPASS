@@ -90,8 +90,10 @@ public class SearchPriceAction implements Action {
 		}else if(order.equals("2")){
 			Collections.sort(newlist, priceCompare2);
 			request.getSession().setAttribute("newlist", newlist);
+			
+		}else if(order.equals("3")){
+			request.getSession().setAttribute("newlist", newlist);
 		}
-		
 //======================================================================
 
 		if(list2 != null){
@@ -135,6 +137,9 @@ public class SearchPriceAction implements Action {
 			
 		}else if(order.equals("2")){
 			Collections.sort(newlist2, priceCompare2);
+			request.getSession().setAttribute("newlist2", newlist2);
+			
+		}else if(order.equals("3")){
 			request.getSession().setAttribute("newlist2", newlist2);
 		}
 
