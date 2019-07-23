@@ -61,9 +61,37 @@ input[type="radio"] {
 .pushimg img{
 	-webkit-filter:brightness(80%);
 }
+#loading {
+ width: 100%;  
+ height: 100%;  
+ top: 0px;
+ left: 0px;
+ position: fixed;  
+ display: block;  
+ opacity: 0.7;  
+ background-color: #fff;  
+ z-index: 99;  
+ text-align: center; } 
+  
+#loading-image {  
+ position: absolute;  
+ top: 50%;  
+ left: 50%; 
+ z-index: 100; }
+
+
 </style>
 <script>
+$(window).load(function() {//로딩이미지    
+    $('#loading').hide();  
+   });
 	$(function() {
+		$("[name=search]").submit(function(){
+			$('#loading').show();		
+		})
+		
+
+
 		var dateFormat = "yymmdd", from = $("#from").datepicker(
 				{
 					minDate : 0,
@@ -114,6 +142,18 @@ input[type="radio"] {
 			}
 			return date;
 		}
+		// 편도 왕복 기능 
+		$(".round_trip_div").on("click",function(){
+			var temp = $(':radio[name="round_trip"]:checked').val();
+			if(temp == "1"){
+				
+				$(".to_div").attr("style","display:none");
+			}else{
+				$(".to_div").attr("style","display:flex");
+			}
+			
+
+		})
 		
 		
 		$("#starting").autocomplete({
@@ -196,6 +236,7 @@ input[type="radio"] {
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
+	<div id="loading"><img id="loading-image" src="../img/loading.gif" alt="Loading..." /></div>
 
 
 	<div class="pt-5" id="ma">
@@ -212,7 +253,7 @@ input[type="radio"] {
 		<div class="container pb-5">
 			<form autocomplete="off" onkeydown="return captureReturnKey(event)" action="searchpro.jin" method="post" name="search">
 				<div class="container mt-5 ">
-					<div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+					<div class="btn-group btn-group-toggle mb-2 round_trip_div" data-toggle="buttons">
 						<label for="round_trip" class="btn btn-outline-dark btn-light active"><input type="radio" name="round_trip" value="1" class="custom-radio mr-0" checked="checked">왕복</input></label> <label
 							for="round_trip" class="btn btn-outline-dark btn-light"><input type="radio" name="round_trip" value="0" class="custom-radio ml-0">편도</input></label>
 					</div>
@@ -237,7 +278,7 @@ input[type="radio"] {
 								</div>
 							</div>
 							<div class="col-6">
-								<div class="input-group mb-3 rt input-daterange border border-top-0 border-right-0 border-left-0" id="datepicker2">
+								<div class="input-group mb-3 rt input-daterange border border-top-0 border-right-0 border-left-0 to_div" id="datepicker2">
 
 									<input type="text" class="form-control" id="to" name="to" placeholder="오는날" width="50px">
 								</div>
