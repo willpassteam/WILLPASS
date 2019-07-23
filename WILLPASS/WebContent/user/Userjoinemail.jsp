@@ -49,12 +49,20 @@ function EmailTimer(){
 		data: { user_email : user_email }, //{parameterName, data} 형식
 		dataType : "json",
 		success: function(result){
+			if(result.msg!=null){
+				alert(result.msg);
+				return false;
+			}
+			else{
 			authNum=result.authNum;
+			dailyMissionTimer(0.05);
+			}
+			
 
 		}
 	});
 	
-	dailyMissionTimer(0.05); 
+	 
 }
 
 //확인버튼 눌렀을때 부모창으로 email값전달

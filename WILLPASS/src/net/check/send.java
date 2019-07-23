@@ -40,31 +40,43 @@ public class send  extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=utf-8");
 		
-		String path=req.getContextPath();
 		String email=req.getParameter("user_email");
-		System.out.println(email);
-		String authNum="";
-		
-		authNum=ReandomNum();
-		
-		sendEmail(email,authNum);
-		
-		JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
-		sObject.put("authNum", authNum);
-		PrintWriter out=resp.getWriter();
+		checkDAO check=new checkDAO();
+		int emailcheck=check.searchingemail(email);
+		System.out.println(emailcheck);
+		if(emailcheck==0){
+			System.out.println(email);
+			String authNum="";
+			
+			authNum=ReandomNum();
+			
+			sendEmail(email,authNum);
+			
+			JSONObject sObject = new JSONObject();
+			sObject.put("authNum", authNum);
+			PrintWriter out=resp.getWriter();
 
-		out.print(sObject.toString());
+			out.print(sObject.toString());
+			
+			out.close();
+		}else{
+			JSONObject sObject = new JSONObject();
+			sObject.put("msg", "중복된 E-Mail 입니다.");
+			PrintWriter out=resp.getWriter();
+
+			out.print(sObject.toString());
+			
+			out.close();
+		}
 		
-		out.close();
+		
 		
 		
 		
 	}
 	private void sendEmail(String email, String authNum) {
-		String host="smtp.gmail.com";
 		String subject="WILLPASS 인증번호 전달";
 		String fromName="WILLPASS 관리자";
-		String from="sicpanda88@gmail.com";
 		String to=email;
 		
 		String content="인증번호 ["+authNum+"]";
