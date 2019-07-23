@@ -27,7 +27,7 @@ function idcheck() {
 			}else{//결과가 1이 아니라면 사용할수 없는 아이디
 				$("#checklabel").removeClass("text-success");
 				$("#checklabel").addClass("text-danger");
-				$("#checklabel").html("<b class='text-info'>√ </b>사용할 수 없는 아이디입니다.");
+				$("#checklabel").html("사용할 수 없는 아이디입니다.");
 			}				
 		}
 	});
