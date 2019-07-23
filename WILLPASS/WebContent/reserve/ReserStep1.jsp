@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
    <%
    		request.setCharacterEncoding("UTF-8");
    %>
@@ -42,42 +43,42 @@
 			 
 			 if(!(td7 == "마감" || td7 == "예약불가")){
 			 				 				 								 
-			 	$(".reserve1").html("${newlist[0].starting} -> ${newlist[0].destination}"+ "&nbsp;/&nbsp;" +  "${newlist[0].date}" + "<br>"
+			 	$(".reserve1").html("${newlist[0].starting} -> ${newlist[0].destination}"+ "&nbsp;/" +"<br>"+  "${newlist[0].date}" + "<br>"
 			 						+ td3 + "&nbsp;"+ td1);
 		
-				$(".select:eq("+ index +") >td").css("background-color","lavender");
+				$(".select:eq("+ index +") >td").css("background-color","Gainsboro");
 				$(".select:not(:eq("+ index +")) >td").css("background-color","white");
 			 	
 			//항공편요금
-			depart1 = parseInt($(".select:eq("+ index +") >td")[3].innerHTML );
+			depart1 = parseInt($(".select:eq("+ index +") >td")[6].innerHTML );
 			if(depart2 == null){
-				$("#subtotal").html((depart1)* "${newlist[0].people}");
+				$("#subtotal").html(makeComma((depart1)* "${newlist[0].people}"));
 				$(".price1").val(depart1);
 			}else{
-				$("#subtotal").html((depart1 + depart2)*"${newlist[0].people}");
+				$("#subtotal").html(makeComma((depart1 + depart2)*"${newlist[0].people}"));
 				$(".price1").val(depart1);
 			}
 			
 			//항공사용료
 			usage1 = 32000;
 			if(usage2 == null){
-				$("#usage").html((usage1)*"${newlist[0].people}");
+				$("#usage").html(makeComma((usage1)*"${newlist[0].people}"));
 			}else{
-				$("#usage").html((usage1 + usage2)*"${newlist[0].people}");
+				$("#usage").html(makeComma((usage1 + usage2)*"${newlist[0].people}"));
 			}			
 			//유류할증료
 			fuelfee1 = 9000;
 			if(fuelfee2 == null){
-				$("#fuelfee").html((fuelfee1)*"${newlist[0].people}");
+				$("#fuelfee").html(makeComma((fuelfee1)*"${newlist[0].people}"));
 			}else{
-				$("#fuelfee").html((fuelfee1 + fuelfee2)*"${newlist[0].people}");
+				$("#fuelfee").html(makeComma((fuelfee1 + fuelfee2)*"${newlist[0].people}"));
 			}				
 			//지불예상금액
 			sum1 = depart1 + usage1 + fuelfee1;
 			if(sum2 == null){
-				$(".sum").html((sum1)*"${newlist[0].people}");
+				$(".sum").html(makeComma((sum1)*"${newlist[0].people}"));
 			}else{
-				$(".sum").html((sum1 + sum2)*"${newlist[0].people}");
+				$(".sum").html(makeComma((sum1 + sum2)*"${newlist[0].people}"));
 			} 		
 			
 			//ReserStep2 전달 값
@@ -109,28 +110,28 @@
 			 
 			 if(!(td8 == "마감" || td8 == "예약불가")){
 
-			 	$(".reserve2").html("${newlist2[0].starting} -> ${newlist2[0].destination}" + "&nbsp;/&nbsp;" + "${newlist2[0].date}" +"<br>" 
+			 	$(".reserve2").html("${newlist2[0].starting} -> ${newlist2[0].destination}" + "&nbsp;/" +"<br>"+ "${newlist2[0].date}" +"<br>" 
 			 							+ td4 + "&nbsp;"+ td2);
 
- 				$(".select2:eq("+ index2 +") >td").css("background-color","lavender");
+ 				$(".select2:eq("+ index2 +") >td").css("background-color","Gainsboro");
 				$(".select2:not(:eq("+ index2 +")) >td").css("background-color","white");
 
 				//항공편요금
-				depart2 = parseInt($(".select2:eq("+ index2 +") >td")[3].innerHTML);
-				$("#subtotal").html((depart1 + depart2)*"${newlist2[0].people}");
+				depart2 = parseInt($(".select2:eq("+ index2 +") >td")[6].innerHTML);
+				$("#subtotal").html(makeComma((depart1 + depart2)*"${newlist2[0].people}"));
 				$(".price2").val(depart2);
 				
 				//항공사용료
 				usage2 = 32000;
-				$("#usage").html((usage1 + usage2)*"${newlist2[0].people}");
+				$("#usage").html(makeComma((usage1 + usage2)*"${newlist2[0].people}"));
 			
 				//유류할증료
 				fuelfee2 = 9000;
-					$("#fuelfee").html((fuelfee1 + fuelfee2)*"${newlist2[0].people}");
-					$(".totalperperson").html((fuelfee1 + fuelfee2)*"${newlist2[0].people}");
+					$("#fuelfee").html(makeComma((fuelfee1 + fuelfee2)*"${newlist2[0].people}"));
+					
 				//지불예상금액				
 				sum2 = depart2 + usage2 + fuelfee2;
-					$(".sum").html((sum1 + sum2)*"${newlist2[0].people}"); 
+					$(".sum").html(makeComma((sum1 + sum2)*"${newlist2[0].people}")); 
 					
 				//ReserStep2 전달 값
 	 			$(".starting2").val("${newlist2[0].starting}");
@@ -147,6 +148,10 @@
 			});
 		});
 		
+		function makeComma(str) {
+			var str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
 	</script>
 
 </head>
@@ -197,13 +202,12 @@
      
         </li>
         
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <li class="list-group-item d-flex justify-content-between lh-condensed" >
           <div class="small text-muted" >
            	성인 ${newlist[0].people} 명
           </div>
-          <span class="text-muted small" id="subtotal"></span>
+          <span class="text-muted small" id="subtotal" ></span>
           <span class="text-muted small" ><b>KRW</b></span>
-          
         </li>
 
         <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -279,7 +283,7 @@
     	
     	<%-- </c:if> --%>
     		
-        <input class="btn  btn-lg btn-block btn-primary" type="submit" value="다음단계 ">
+        <input class="btn  btn-lg btn-block text-white" type="submit" value="다음단계 " style="background-color: #D60815">
         </li>	
       </ul>
      </form> 
@@ -317,6 +321,7 @@
 			<td>금액</td>
 			<td>잔여석</td>
 			<td style="display: none;">소요시간</td>
+			<td style="display: none;">금액</td>
 			</tr>
 												
 		    </tbody>
@@ -335,7 +340,7 @@
 				<td >${air.departure_time} - ${air.arrival_time} (${air.time})</td>
 				<td >${air.airline}</td>
 				<td >${air.flight}</td>
-				<td >${air.price}</td>
+				<td ><fmt:formatNumber>${air.price}</fmt:formatNumber></td>
 			<c:if test="${air.checkseat}">
 				<td >${air.leftseat}</td>
 			</c:if>	
@@ -347,7 +352,8 @@
 						<td >예약불가</td>
 				</c:if>
 			</c:if>	
-				<td style="display: none;">${air.time}</td>				
+				<td style="display: none;">${air.time}</td>
+				<td style="display: none;">${air.price}</td>				
 			</tr>				
 		</c:forEach>
 
@@ -391,7 +397,7 @@
 				<td >${air2.departure_time} - ${air2.arrival_time} (${air2.time})</td>
 				<td >${air2.airline}</td>
 				<td >${air2.flight}</td>
-				<td >${air2.price}</td>	
+				<td ><fmt:formatNumber>${air2.price}</fmt:formatNumber></td>	
 			<c:if test="${air2.checkseat}">
 				<td >${air2.leftseat}</td>
 			</c:if>	
@@ -403,7 +409,8 @@
 						<td >예약불가</td>
 				</c:if>
 			</c:if>		
-				<td style="display: none;">${air2.time}</td>					
+				<td style="display: none;">${air2.time}</td>
+				<td style="display: none;">${air2.price}</td>					
 			</tr>				
 		</c:forEach>
 	</c:when>		
