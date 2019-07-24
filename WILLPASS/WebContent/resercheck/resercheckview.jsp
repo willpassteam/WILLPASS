@@ -18,6 +18,15 @@
 <!-- 캐러셀을 위한 css -->
 <link rel="stylesheet" href="/path/to/slick.css">
 <link rel="stylesheet" href="/path/to/slick-theme.css">
+<style type="text/css">
+
+input[type="text"], textarea {
+	box-shadow: none !important;
+
+	font-weight: 200;
+	padding-left: 0;
+}
+</style>
 <script type="text/javascript">
 
 function fnpage(clickpage,clickrange){
@@ -169,43 +178,61 @@ function fnpage(clickpage,clickrange){
 	<div class="container pl-5 border">
 
 	<div class="mt-3 col-12">
-	
+			<form action="${pageContext.request.contextPath}/reservationcheck/showreservations"  >
 			<div>
+		
 			<table class="table  pt-0 border border-right-0">
 			<tr>
 			<td width="20%"  class=" bg-light ">예약상태</td>
 			<td width="80%">    
 			<div class="row pl-3 pr-3">
-			
+		<label for="total" class="small">전체</label>	<input type="radio" name="selectoption" id="total" value="1" class="mt-1">
+		    <div class="custom-control custom-radio">
+
+ 
+    </div> 
 			</div>
 			</td>
 			</tr>
 			
 			<tr>
-			<td width="20%" class="bg-light">검색기간</td>
+			<td width="20%" class="bg-light">탑승날짜</td>
 			<td width="80%">
-			<div class="row">
+			<div class="row pl-1 pb-2">
 			<button class="btn btn-outline-dark col-1 mr-1 ml-2">3개월</button>
 			<button class="btn btn-outline-dark col-1 mr-1">6개월</button>
 			<button class="btn btn-outline-dark col-1 mr-1">1년</button>
 			</div>
-				<form action="#">
+	
 				<div class="row">
-				<input type="text" class="ml-2 form-control col-3 mt-2" id="from" name="from" width="50px">
-				<input type="text" class="ml-2 form-control col-3 mt-2" id="to" name="to" width="50px">	
+	
+				<div class="input-group mb-3 col-4">
+    			<div class="input-group-prepend">
+     				<span class="input-group-text"><i class='far fa-calendar-alt'></i></span>
+   				 </div>
+				<input type="text" class=" form-control" id="from" name="from" width="50px" autocomplete="off">
+  				</div>
+					~
+				  <div class="input-group mb-3 col-4">
+    				<div class="input-group-prepend">
+     					 <span class="input-group-text"><i class='far fa-calendar-alt'></i></span>
+   				 </div>
+				<input type="text" class=" form-control" id="to" name="to" width="50px" autocomplete="off">	
+  				</div>
+
 				</div>
-				</form>
+				
 			</td>
 			</tr>
 	
 			
 			</table> 
 	</div>
-	<div class="row mt-3">
+	<div class="row ">
 	<div class="col-4"></div>
-	<button class="btn col-4 text-white mt-5 mb-5" style="background-color: #D60815">확인</button>
+	<input type="submit"  class="btn col-4 text-white mt-5 mb-5" style="background-color: #D60815" value="조회">
 	<div class="col-4"></div>
-	</div>	<table class="table text-center">
+	</div>	<table class="table text-center table-hover">
 	
 	<tr style="background-color: #6D6E71" class="text-white">
 	<td>예약번호</td> 
@@ -239,10 +266,11 @@ function fnpage(clickpage,clickrange){
 	 </c:forEach>
 	 
 	 </table>
-	 
+
+	</form> 
 </div>
 	
-	<!-- 페이지 -->
+<!-- 	페이지 -->
 <div class="d-flex justify-content-center  mb-3 mt-5">
 	<c:if test="${paginginfo.prev eq true}">	
 		<button class="btn col-1" onclick="fnprev(${paginginfo.startpage},${paginginfo.range})" >prev</button>
@@ -270,7 +298,6 @@ function fnpage(clickpage,clickrange){
 	
 
 <!-- </div> -->
-
 
 
 

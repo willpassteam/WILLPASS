@@ -33,17 +33,19 @@ $(function(){
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
-		<div class="container mb-5 mt-3"> 
-			<h2 ><b>운임 확인</b></h2>
-		</div>
+	<div class="border">step3</div>
+		<div class="bg-light mt-0 pt-5 pb-5">   
+	<div class="container border bg-white pb-5 ">
+	<h2 class="text-center mt-5 mb-4">항공권 예약/결제</h2>
+	<div class="container pl-5 border">
+
 	
 	<div class="container mb-5"> 
 
-	<h4><b>여정</b></h4>
 
-	<table class="table">
+	<table class="table mt-5">
     <thead>
-      <tr class="bg-secondary text-white">
+      <tr class="bg-light text-dark">
         <th>여정</th>
         <th>출발도착시간</th>
         <th>항공사/편명</th>
@@ -65,10 +67,10 @@ $(function(){
       </c:if>
     </tbody>
   </table>
-	<h4 class="mt-5"><b>가격</b></h4>
+	<h5 class="mt-5 text-dark mb-3"><b>탑승자별 운임 정보</b></h5>
 	<table class="table">
     <thead>
-      <tr class="bg-secondary text-white">
+      <tr class="bg-light">
         <th>승객명</th>
       	<th>항공권 운임</th>
         <th>항공사용료</th>
@@ -99,13 +101,36 @@ $(function(){
      	
     </tbody>
  	</table>
-	
-	<button id="final" class="btn bg-primary text-white">결제하기</button>
 
-
+ 	
+	<div class="border bg-dark text-white mt-0">
+	<div class="row pt-2 pb-2">
+	<div class="col-2 pl-5 pt-1"><h6><b>지불총액</b></h6></div>
+	<div class="col-6"></div>
+	<div class="col-4 pr-5" align="right"><h5><b>${12200+sessionScope.searchprice}원</b></h5></div>
+	</div>
 	</div>
 	
+	 	<h5 class="mt-3 text-dark mb-3"><b>결제하기</b></h5>
+	<p class="small text-muted">상기 금액은 홈페이지 구매 시 적용되는 운임이며 지점,공항을 통하여 구매하시면 운임이 달라질 수 있습니다.</p>
+	<div class="border">
+	<ul class="list-group">
+	<li class="list-group-item border-right-0"><input type="radio"> 신용카드 [카드사 연결]</li>
+	<li class="list-group-item"><input type="radio"> 해외발행 카드결제</li>
+	<li class="list-group-item"><input type="radio"> 실시간 계좌이체</li>
+	<li class="list-group-item"><input type="radio">네이버페이</li>
+	</ul>
+	</div>
 	
+	<div align="right" class="mt-3">
+	<button id="final" class="btn text-white  " style="background-color: #D60815"><b >결제하기</b></button>
+	</div>
+
+	</div>
+	</div>
+	</div>
+	
+
 	
 	   <%-- Footer Start --%>
    		<jsp:include page="../include/Footer.jsp"></jsp:include>

@@ -11,7 +11,7 @@ public class Selectseatsaction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		ActionForward forward= new ActionForward();
-		forward.setPath("/reserve/ReserStep4.jsp");
+		forward.setPath("/reservation/reserstep4forward");
 		forward.setRedirect(false);
 		ArrayList pasinfoarr= (ArrayList)request.getSession().getAttribute("pasinfoarr");
 		String result1[]=request.getParameterValues("selected_1");
@@ -28,7 +28,6 @@ public class Selectseatsaction implements Action {
 		
 		request.getSession().setAttribute("seatsinfoarr",seatsinfoarr);
 
-	
 		
 		return forward;
 	}

@@ -35,7 +35,7 @@ public class ReservationCheckFrontController extends HttpServlet{
 
 		String command = request.getPathInfo();
 		System.out.println("command = "+command);
-		if(command.equals("/viewall")) {
+		if(command.equals("/viewall")) { //나의 예약 
 			
 			forward = new ActionForward(); 
 	         action =new ShowAllReserAction();
@@ -48,7 +48,7 @@ public class ReservationCheckFrontController extends HttpServlet{
 				// TODO: handle exception
 			}
 			
-		}else if(command.equals("/onereser")) {
+		}else if(command.equals("/onereser")) { //예약상세 
 			
 			forward = new ActionForward(); 
 			
@@ -59,6 +59,10 @@ public class ReservationCheckFrontController extends HttpServlet{
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+		}else if(command.equals("/showreservations")){
+			
+			forward = new ActionForward(); 
+			
 		}
 			
 		
