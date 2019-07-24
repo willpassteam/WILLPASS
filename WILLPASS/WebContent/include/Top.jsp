@@ -48,14 +48,16 @@ nav a{
 
 
 
-.menubar> a,dt,dd:HOVER{
+.menubar a:Hover,.menubar dt:HOVER,.menubar dd:HOVER{
 	cursor: pointer;
+	color: #FACC2E;
 }
 
 
 </style>
 
 <script type="text/javascript">
+//f
 $(function(){
 	$(".nt").on("mouseover",function(){
 		var index = $(".nt").index(this);

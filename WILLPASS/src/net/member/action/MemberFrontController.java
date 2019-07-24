@@ -26,11 +26,11 @@ public class MemberFrontController extends HttpServlet{
 	}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getPathInfo();
+	
 		String command =request.getPathInfo();
 		System.out.println(command);
 		ActionForward forward = null;
-	
+		String ContextPath = request.getContextPath();
 		Action action = null;
 		
 	if(command.equals("/MemberJoin.me")){
@@ -115,7 +115,7 @@ public class MemberFrontController extends HttpServlet{
 		//페이지 이동 방식 여부 값,이동페이지 경로 값 저장 하여 리턴 해주는 객체 생성 
 		forward=new ActionForward();
 		//페이지 이동 방식 여부 값 false로 저장-> RequestDispatcher  forward() 방식
-		forward.setRedirect(false); //주소값 노출 안됨
+		forward.setRedirect(true); //주소값 노출 안됨
 		//이동할 페이지 경로(로그인 페이지) 주소값 저장
 		//forward.setPath("Userlogin.jsp"); 
 		//forward.setPath("/user/Userlogin.jsp"); 
@@ -123,7 +123,7 @@ public class MemberFrontController extends HttpServlet{
 		
 		//forward.setPath("/user/UserJoinstep3.jsp");12july위쪽 에서 DB작업이 필요없는 login.me만 가져와서 로그인뒤 설정된
 		//main.me 경로와 willpass의 메인페이지인 index로 연걸을 시켜주는 거임 1**
-		forward.setPath("/main/index.jsp");
+		forward.setPath(ContextPath+"/main/index.jsp");
 		
 		
 ////////////////////////////////////////////////

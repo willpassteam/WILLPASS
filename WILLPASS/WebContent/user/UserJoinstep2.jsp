@@ -262,7 +262,7 @@ function checkAll(){
         
         <td width="80%" class="pb-0 pt-0">
         <div class="row mb-0 pb-0 pt-2">
-        <input type="password" placeholder="" id="user_pwd2" name="user_pwd2"class="form-control col-5 ml-3">
+        <input type="password" placeholder="" id="user_pwd2" name="user_pwd2"class="form-control col-5 ml-3" required>
         <p id="passcheck" class=" d-inline-block col-6 ml-4 pt-2 small text-success "></p>
         </div>
         </td>
@@ -280,7 +280,7 @@ function checkAll(){
    <td width="20%" class="bg-light">한글성명<b class="text-danger">*</b></td>
    <td width="40%">
    		<div class="row mb-0 pb-0 pt-2">
-        <input type="text" placeholder="" class="form-control col-10 ml-3" id="user_name" name="user_name" >
+        <input type="text" placeholder="" class="form-control col-10 ml-3" id="user_name" name="user_name" required>
         </div>
    </td>
    <td width="20%" class="bg-light">성별<b class="text-danger">*</b></td>
@@ -302,8 +302,8 @@ function checkAll(){
         
         <td width="80%" class="pb-0 pt-0" colspan="3">
         <div class="row mb-0 pb-0 pt-2">
-        <input type="text" placeholder="성(LAST NAME)" class="form-control col-2 ml-3">
-        <input type="text" placeholder="성명(FIRST NAME)" class="form-control col-3 ml-1">
+        <input type="text" placeholder="성(LAST NAME)" class="form-control col-2 ml-3" required>
+        <input type="text" placeholder="성명(FIRST NAME)" class="form-control col-3 ml-1" required>
        <p class=" d-inline-block col-6 ml-4 pt-2 small text-muted ">여권상의 영문 이름과 동일하게 기재해 주시기 바랍니다.</p>
 
         </div>
@@ -325,7 +325,7 @@ function checkAll(){
         
         <td width="80%" class="pb-0 pt-0" colspan="3">
         <div class="row mb-0 pb-0 pt-2 pb-1">
-        <input type="text" class="form-control-plaintext col-5 ml-3 border pb-1" id="user_email" name="user_email">
+        <input type="text" class="form-control-plaintext col-5 ml-3 border pb-1" id="user_email" name="user_email" >
          <p class=" d-inline-block col-6 ml-4 pt-2 small text-success "><b>√ </b>이메일 계정 인증 완료</p>
      	 </div>
      </td>
@@ -351,9 +351,9 @@ function checkAll(){
        <tr>
         <td width="20%" class="bg-light" >상세주소<b class="text-danger">*</b></td>
         
-     <td width="80%" class="pb-0 pt-1" colspan="3">
+     <td width="80%" class="pb-0 pt-1" colspan="3" >
     <div class="row col-12">
-    <input type="text" class="form-control col-6" id="user_address2" name="user_address">
+    <input type="text" class="form-control col-6" id="user_address2" name="user_address" required>
 <!-- 박스뺏음 	<input type="text" class="form-control col-5 ml-2" name="user_address1"> -->
   	</div> 
   	 </td>

@@ -190,7 +190,7 @@ function checkAll(){
         }
       
       
-      if(!($("input[name='Check']:checked").length==4)){
+      if(!($("input[name='Check']:checked").length>=3)){
 		   alert("개인정보이용을 동의하셔야 함여하실수 있습니다.");
 		   $("#allCheck").focus();
 		   return false;
