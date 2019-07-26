@@ -51,19 +51,14 @@
 }
 </style>
 
-
-
-
 <script type="text/javascript">
-
 
 $(function(){
 	
 	$(".namecheck").on("blur",function(){ //이름 유효성검사
 		var nameref=/^[a-zA-Z]{2,10}$/;
 		if(nameref.test($(this).val())==false){
-			
-// 			alert("영문자를 입력해주세요!");
+		alert("영문자를 입력해주세요!");
 			$(this).val("");
 			
 		}
@@ -74,7 +69,7 @@ $(function(){
 		var tel2ref =/^[0-9]{3,4}$/;
 		if(tel2ref.test($(this).val())==false){
 			
-// 			alert("올바른 전화번호를 입력하세요!");
+			alert("올바른 전화번호를 입력하세요!");
 			$(this).val("");
 			
 		}
@@ -85,7 +80,7 @@ $(function(){
 		var tel3ref =/^[0-9]{4}$/;
 		if(tel3ref.test($(this).val())==false){
 			
-// 			alert("올바른 전화번호를 입력하세요.");
+			alert("올바른 전화번호를 입력하세요.");
 			$(this).val("");
 			
 		}
@@ -96,8 +91,7 @@ $(function(){
 		
 		var emailc1ref =/^[0-9a-zA-Z]{2,15}$/;
 		if(emailc1ref.test($(this).val())==false){
-			
-// 			alert("올바른 이메일을 입력하세요.");
+			alert("올바른 이메일을 입력하세요.");
 			$(this).val("");
 			
 		}
@@ -109,44 +103,28 @@ $(function(){
 		var emailc1ref =/^((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		if(emailc1ref.test($(this).val())==false){
 			
-// 			alert("올바른 이메일을 입력하세요.");
+			alert("올바른 이메일을 입력하세요.");
 			$(this).val("");
-			
 		}
-		
 	});	
-	
 	
 });
 
-
-
 </script>
 	
-
 </head>
 <body>
 
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
+	<c:set var="sear0" value="${sessionScope.searcharr[0]}"/>
+	
 	<form action="${pageContext.request.contextPath}/reservation/passengerInfoaction" >
 	<input type="hidden" value="${ sessionScope.searcharr[0].people}" name="num_people">
-
-<!-- 잠시주석처리하기 -->
-<!-- <div class="bg-light"> -->
-<!-- <div class="container"> -->
-<!-- <p class="mb-0"><i class="material-icons  pt-1" style="color:#D60815">error</i>항공권은 타인양도 및 명의 변경이 불가합니다.</p> -->
-<!-- <p class="mb-0"><i class="material-icons  pt-1" style="color:#D60815">error</i>항공권은 타인양도 및 명의 변경이 불가합니다.</p> -->
-<!-- <p class="mb-0"><i class="material-icons  pt-1" style="color:#D60815">error</i>항공권은 타인양도 및 명의 변경이 불가합니다.</p> -->
-<!-- </div> -->
-<!-- </div> -->
-<!-- 잠시주석처리하기 -->
-
 <div class="container mt-5">
 
   <div class="row">
-  
  
 <!--오른쪽 /전체 예약정보 --> 
 <div class="col-md-3 order-md-2 mb-4">
@@ -154,75 +132,72 @@ $(function(){
         	<li class="list-group-item d-flex justify-content-between lh-condensed bg-light text-center ">
           		<div><h5 class="ml-5 text-muted"> <b>전체 예약정보</b></h5></div>
 			</li>
-       	    
        	    <li class="list-group-item d-flex justify-content-between lh-condensed">
-          	
           	<div class="small text-muted">
-      		 
-      		
-      		 <c:if test="${not empty sessionScope.searcharr[1]}">
-          		<b>
-        		1구간:${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}<br>
-				${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>
-				2구간: ${ sessionScope.searcharr[1].starting} - ${ sessionScope.searcharr[1].destination}<br>
-				${ sessionScope.searcharr[1].date} ${ sessionScope.searcharr[1].departure_time}  →  ${ sessionScope.searcharr[1].arrival_time}<br>
+      			<b>
+        		1구간:${sear0.starting}- ${sear0.destination}<br>
+				${sear0.date} ${sear0.departure_time}  →  ${sear0.arrival_time} <br><br>
+      			<c:if test="${not empty sessionScope.searcharr[1]}">
+      			<c:set var="sear1" value="${sessionScope.searcharr[1]}"/>
+				2구간: ${sear1.starting} - ${sear1.destination}<br>
+				${sear1.date} ${sear1.departure_time}  →  ${sear1.arrival_time}<br>
+         	 	</c:if>
          	 	</b>
-       		</c:if>
-  
- 
-       		
-      		 <c:if test="${empty sessionScope.searcharr[1]}">
-            	 <b>
-        			1구간: ${ sessionScope.searcharr[0].starting}- ${ sessionScope.searcharr[0].destination}<br>
-					${ sessionScope.searcharr[0].date} ${ sessionScope.searcharr[0].departure_time}  →  ${ sessionScope.searcharr[0].arrival_time} <br><br>
-        		 </b>
-     		</c:if>
+ 		 </div>
+     	 </li>
+     	  <!--항공권 가격 계산/ format 시작-->
+         <c:choose>
+         <c:when test="${not empty sessionScope.searcharr[1]}"> <!-- 왕복일경우 -->
+         <fmt:formatNumber value="${sear0.price *sear0.people +sear1.price * sear1.people}" pattern="#,###" var="price1" />
+         <fmt:formatNumber value="${32000*sear0.people*2}" pattern="#,###" var="price2" />
+         <fmt:formatNumber value="${9000*sear0.people*2}" pattern="#,###" var="price3" />
+         <fmt:formatNumber value="${sear0.price * sear0.people +sear1.price * sear1.people
+         +32000*sear0.people*2 + 9000*sear0.people*2
+         }" pattern="#,###" var="price4" />
+         
+         </c:when>
+         
+         <c:otherwise> <!-- 편도일경우 -->
+         <fmt:formatNumber value="${sear0.price * sear0.people}" pattern="#,###" var="price1" />
+         <fmt:formatNumber value="${32000*sear0.people}" pattern="#,###" var="price2" />
+         <fmt:formatNumber value="${9000*sear0.people}" pattern="#,###" var="price3" />
+         <fmt:formatNumber value="${sear0.price * sear0.people
+ 			+32000*sear0.people + 9000*sear0.people
+         }" pattern="#,###" var="price4" />
+         
+        </c:otherwise>
+         </c:choose>
+        <!--항공권 가격 계산/ format 끝-->
+    	 <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div class="small text-muted" >성인 ${sear0.people}명</div>
+          <span class="text-muted small"><b>${price1} KRW</b></span>
+ 		 </li>
 
-          </div>
-     	
-     	  </li>
-        
-        
         <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div class="small text-muted" >
-          
-           	성인 ${sessionScope.searcharr[0].people}명
-
-          </div>
-          <span class="text-muted small"><b>55,000 KRW</b></span>
-        </li>
-
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div class="small text-muted" >
-           	항공사용료
-          </div>
-          <span class="text-muted small"><b>66,900 KRW</b></span>
-        </li>      
+          <div class="small text-muted" >항공사용료</div>
+          <span class="text-muted small"><b>${price2} KRW</b></span>
+		</li>      
  
          <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div class="small text-muted" >
-           	유류할증료 
-          </div>
-          <span class="text-muted small"><b>18,800 KRW</b></span>
-        </li>       
+          <div class="small text-muted" >유류할증료 </div>
+          <span class="text-muted small"><b>${price3} KRW</b></span>
+		 </li>       
 
          <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div class="small text-muted" >
-           	지불예상금액 
-          </div>
-          <span class="text-muted "><b>${searchprice} KRW</b></span>
-        </li>         
+          <div class="small text-muted" >지불예상금액 </div>
+          <span class="text-muted "><b>${price4} KRW</b></span>
+        </li> 
+                
         <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success small text-danger">
 			상기 운임은 결제완료 전까지 좌석상황에 따라 실시간 변동될 수 있습니다.<br><br>
 			※한국출발 세금(BP)은 국제여객공항이용료 12,000원, 출국납부금 10,000원, 국제빈곤퇴치기여금 1,000원이 포함되어 있습니다.
           </div>
-   
-        </li>
+		</li>
  
         <li class="list-group-item d-flex justify-content-between bg-dark text-white mt-3">
           <span>지불예상금액 </span>
-          <strong>${searchprice} KRW</strong>
+          <strong>${price4}KRW</strong>
         </li>
         
   		<li class="list-group-item d-flex justify-content-between lh-condensed pl-0 pr-0 pt-0 pb-0 mt-3">
@@ -250,20 +225,18 @@ $(function(){
 			<td width="20%" style="background-color: #6D6E71" class="text-white">승객구분</td>
 			<td width="80%">    
 				<div class="row pl-3 pr-3">
-						     <div class="form-check pr-3">
-      							<label class="form-check-label" for="woman${status.index}">
-       							 <input type="radio" class="form-check-input" id="woman${status.index}" name="gender${status.index}"  value="남자" checked="checked">남자
-     						 </label>
-    						</div>
-    												
-						     <div class="form-check">
-      							<label class="form-check-label" for="man${status.index}">
-       							 <input type="radio" class="form-check-input" id="man${status.index}" name="gender${status.index}"  value="여자">여자     						 </label>
-    						</div>
-			</div>
+					<div class="form-check pr-3">
+      				<label class="form-check-label" for="woman${status.index}">
+       				<input type="radio" class="form-check-input" id="woman${status.index}" name="gender${status.index}"  value="남자" checked="checked">남자
+     				</label>
+    				</div>
+    				<div class="form-check">
+      				<label class="form-check-label" for="man${status.index}">
+       				<input type="radio" class="form-check-input" id="man${status.index}" name="gender${status.index}"  value="여자">여자</label>
+    				</div>
+				</div>
 			</td>
 			</tr>
-			
 			<tr>
 			<td width="20%" style="background-color: #6D6E71" class="text-white ">성(Family Name)</td>
 			<td width="80%"><input type="text"   style="text-transform:uppercase"  class="mr-5 form-control input-sm col-6 border rebo namecheck" name="familyName${status.index}" required></td>
@@ -272,12 +245,9 @@ $(function(){
 			<td width="20%" style="background-color: #6D6E71" class="text-white">이름(Given Name)</td>
 			<td width="80%"><input type="text"   style="text-transform:uppercase"  class="form-control input-sm col-6 border rebo namecheck" name="givenName${status.index}" required ></td>
 			</tr>
-			
-			</table> 
+	   </table> 
   	   </div>
-  	   
-  	   </div>
-  	   
+ 	   </div>
   	   </div>
 
 </c:forEach> 	<!-- 탑승자 정보 끝-->
@@ -290,8 +260,7 @@ $(function(){
 
     </div>
   		<table class="table">
-
-    		<tbody>
+			<tbody>
 				<tr>
 				<td width="20%" class="text-white" style="background-color: #6D6E71" >SMS수신 연락처</td>
 				<td width="80%">
@@ -331,8 +300,6 @@ $(function(){
 		
 	</div> <!-- 예매자정보끝-->
  	<hr class="mb-4">
-
-  
     <div class="mb-3 small bg-light text-dark pl-3 pt-3 pr-3 pm-3 border mt-3 mb-5">
 	<b>유의사항</b><br>
 	<ul>

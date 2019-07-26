@@ -10,7 +10,7 @@ public class Paging {
 	private int range; //현재페이지 범위
 	private int listcnt; //전체개시물의개수
 	private int pagecnt;//총 페이지범위의 개수 
-	private int listsize=4; //한페이지당 보여질 list의 개수 
+	private int listsize=10; //한페이지당 보여질 list의 개수 
 	private int rangesize=3; //한페이지당 보여질 페이지의 개수 
 	private int startpage; //각페이지 범위 시작번호 
 	private int startlist; // 게시판시작번호 

@@ -287,13 +287,8 @@ function fnpage(clickpage,clickrange){
 
 </div>
 	<div class="mt-4 col-12">
-	
-	
 	</div>
-
-
 	</div>
-	
 	</div>
 	
 

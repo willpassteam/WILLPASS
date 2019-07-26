@@ -33,6 +33,8 @@ public class Resercompleteaction implements Action{
 		String[] onepartseat;
 		searchDTO sreardt;
 		
+		String email="";
+		
 		String seatinfo1[]= (String[])seatsinfoarr.get(0);
 		sreardt = (searchDTO)searcharr.get(0); 
 		onepartseat=(String[])seatsinfoarr.get(0);
@@ -56,6 +58,7 @@ public class Resercompleteaction implements Action{
 				String v14=searnum;
 //				boolean v15=sreardt.isRound_trip();
 				reserdto= new ReservationDTO(v1,v2,v3,v4,v5,v6,v7,v8,v9,v11,v12,v13,v14);
+				email=v5;
 				Reservationarr1.add(reserdto);
 		
 			}
@@ -96,9 +99,12 @@ public class Resercompleteaction implements Action{
 					
 			}
 			
-		
 			
+			SendResermail sendResermail = new SendResermail();
+			 sendResermail.sendEmail(email,Reservationarr1,Reservationarr2);
+				
 		
+			 
 		
 		return forward;
 	}
