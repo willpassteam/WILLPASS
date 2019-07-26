@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div align="center">
-	<img src="${pageContext.request.contextPath}/img/alert.png"><br>
+	<img src="${pageContext.request.contextPath}/img/alert.png" width="200" style="padding-top: 100px"><br>
 
 	<h1>죄송합니다. 서비스 실행 중에 오류가 발생했습니다.</h1>
 	<h1>잠시 후 다시 시도해 보세요.</h1>

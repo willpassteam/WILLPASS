@@ -10,7 +10,7 @@
 <body>
 	<%-- 404오류를 처리하는 jsp 페이지 --%>
 	<div align="center">
-	<img src="${pageContext.request.contextPath}/img/alert.png"><br>
+	<img src="${pageContext.request.contextPath}/img/alert.png" width="200" style="padding-top: 100px"><br>
 
 	<h1>요청한 페이지는 존재하지 않습니다.</h1>
 	<a href="${pageContext.request.contextPath}/main/index.jsp">메인 페이지로 돌아가기</a> 
