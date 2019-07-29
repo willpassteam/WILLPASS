@@ -75,21 +75,28 @@ $(function() {
 			</div>
 			<div class="col-xl-7 border pt-3 bg-light" style="overflow-y: auto;max-height: 600px;">
 				<!-- 관리자 문자 -->
-				<div class="float-left">
-					<div class="header">
-						<small>상담사</small>
+				<div class="chatting" style="min-height: 450px; overflow-y:auto;">
+					<div class="float-left">
+						<div class="header">
+							<small>상담사</small>
+						</div>
+						<div class="body">
+							<p class="border p-1 float-left">안녕하세요 ooo 님 무엇을 도와드릴까요.</p><small class="float-left align-bottom mx-2 ">07-29/5:13</small>
+						</div>
 					</div>
-					<div class="body">
-						<p class="border p-1 float-left">안녕하세요 ooo 님 무엇을 도와드릴까요.</p><small class="float-left align-bottom mx-2 ">07-29/5:13</small>
+					<div class="clearfix"></div>
+					
+					<!-- 사용자 문자 -->
+					<div class="float-right">
+						<small class="float-left align-bottom mx-2">07-29/5:13</small><pre class="border border-success p-1"> 안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</pre>
 					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div class="clearfix"></div>
-				
-				<!-- 사용자 문자 -->
-				<div class="float-right">
-					<small class="float-left align-bottom mx-2">07-29/5:13</small><pre class="border border-success p-1"> 안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</pre>
+				<div class="chttingbutton mb-3">
+					<form action="">
+						<textarea type="text" name="content" style="width: 550px; height: 80px"></textarea><input type="button" class="btn btn-danger mb-5" value="전송">
+					</form>
 				</div>
-				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
