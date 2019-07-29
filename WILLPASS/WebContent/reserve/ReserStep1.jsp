@@ -9,6 +9,13 @@
    <%
    		request.setCharacterEncoding("UTF-8");
    %>
+
+<c:if test="${!empty newlist2}">
+	<c:set var="roundtrip" value="true"/>
+</c:if>
+<c:if test="${empty newlist2}">
+	<c:set var="roundtrip" value="false"/>
+</c:if>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -166,11 +173,42 @@
 			 }
 			});
 		});
+	
+	$(function () {
+			$("#nextBtn").click(function() {
+				if("${roundtrip}" == "true"){
+					if(depart2 != ""){
+		 				if($(".airline1").val() == "" || $(".airline2").val() == ""){
+		 					alert("항공편을 선택해 주세요!");
+						}else if($(".airline1").val() == "" && $(".airline2").val() == ""){
+							alert("항공편을 선택해 주세요!");
+						}else{
+							$("#nextRes").submit();
+						}	
+					}else if(depart1 != ""){
+		 				if($(".airline1").val() == ""){
+		 					alert("항공편을 선택해 주세요!");
+						}else{
+							$("#nextRes").submit();
+						}
+					}
+				}else{
+					if($(".airline1").val() == ""){
+	 					alert("항공편을 선택해 주세요!");
+					}else{
+						$("#nextRes").submit();
+					}
+				} 
+			
+			});
+		}); 
 		
 		function makeComma(str) {
 			var str = String(str);
 			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		}
+		
+		
 	</script>
 
 </head>
@@ -252,7 +290,7 @@
      
   <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
       
-	<form action="${contextPath}/reserve1/ReserStep2.do" method="post" > 
+	<form id="nextRes" action="${contextPath}/reserve1/ReserStep2.do" method="post" > 
       	
       <ul class="list-group mb-3" >
               
@@ -357,7 +395,7 @@
     	
     	<%-- </c:if> --%>
     		
-        <input class="btn  btn-lg btn-block text-white" type="submit" value="다음단계 " style="background-color: #D60815">
+        <input class="btn  btn-lg btn-block text-white" id="nextBtn" type="button" value="다음단계 " style="background-color: #D60815" >
         </li>	
       </ul>
      </form> 
