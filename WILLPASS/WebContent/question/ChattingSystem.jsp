@@ -7,23 +7,19 @@
 <title>채팅 관리 시스템</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <style type="text/css">
-
+.chatHead > div,.chatBody{
+	background-color: white;
+	
+}
 
 </style>
 <script type="text/javascript">
 $(function() {
 	var body = document.body
-
-
-
 	var height = Math.max( body.scrollHeight, body.offsetHeight);
-
 	if(height < 802){
 		
 	}
-	
-
-	alert(height);
 	
 })
 
@@ -37,35 +33,35 @@ $(function() {
 	<div class="container my-3" style="background-color:#f7f7f7 ">
 		<h1 align="center" style="color:#dc3545;">채팅 관리 시스템</h1>
 		<div class="row" >
-			<div class="col-xl-5 scroll " style="overflow-y: auto;max-height: 600px;">
-				<div class="border bg-light">
+			<div class="col-xl-5 scroll chatHead " style="overflow-y: auto;max-height: 600px;">
+				<div class="border">
 					<a href="#">
 						<h4>sovla<span class="badge badge-danger">3</span></h4>
 						<h6>안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</h6>
 						
 					</a>
 				</div>
-				<div class="border bg-light">
+				<div class="border">
 					<h4>아이디</h4>
 					<h6>님 이게 궁금합니다</h6>
 				</div>
-				<div class="border bg-light">
+				<div class="border">
 					<h4>아이디</h4>
 					<h6>님 이게 궁금합니다</h6>
 				</div> 
-				<div class="border bg-light">
+				<div class="border">
 					<h4>아이디</h4>
 					<h6>님 이게 궁금합니다</h6>
 				</div>
-				<div class="border bg-light">
+				<div class="border">
 					<h4>아이디</h4>
 					<h6>님 이게 궁금합니다</h6>
 				</div>
-				<div class="border bg-light">
+				<div class="border">
 					<h4>아이디</h4>
 					<h6>님 이게 궁금합니다</h6>
 				</div>
-				<div class="border bg-light">
+				<div class="border">
 					<h4>아이디</h4>
 					<h6>님 이게 궁금합니다</h6>
 				</div>
@@ -73,7 +69,7 @@ $(function() {
 				
 				
 			</div>
-			<div class="col-xl-7 border pt-3 bg-light" style="overflow-y: auto;max-height: 600px;">
+			<div class="col-xl-7 border pt-3 chatBody " style="overflow-y: auto;max-height: 600px;">
 				<!-- 관리자 문자 -->
 				<div class="chatting" style="min-height: 450px; overflow-y:auto;">
 					<div class="float-left">
@@ -81,20 +77,20 @@ $(function() {
 							<small>상담사</small>
 						</div>
 						<div class="body">
-							<p class="border p-1 float-left">안녕하세요 ooo 님 무엇을 도와드릴까요.</p><small class="float-left align-bottom mx-2 ">07-29/5:13</small>
+							<p class="border p-1 float-left">안녕하세요 ooo 님 무엇을 도와드릴까요.</p><small class="float-left align-bottom mx-2 mt-3 ">07-29/5:13</small>
 						</div>
 					</div>
 					<div class="clearfix"></div>
 					
 					<!-- 사용자 문자 -->
 					<div class="float-right">
-						<small class="float-left align-bottom mx-2">07-29/5:13</small><pre class="border border-success p-1"> 안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</pre>
+						<small class="float-left align-bottom mx-2" style="margin-top:10px">07-29/5:13</small><pre class="border border-success p-1"> 안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</pre>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="chttingbutton mb-3">
 					<form action="">
-						<textarea type="text" name="content" style="width: 550px; height: 80px"></textarea><input type="button" class="btn btn-danger mb-5" value="전송">
+						<input type="text" name="content" style="width: 550px; height: 40px"><input type="button" class="btn btn-danger mb-1" value="전송">
 					</form>
 				</div>
 			</div>

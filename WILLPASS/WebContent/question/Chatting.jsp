@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,63 +10,41 @@
 
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 </head>
+<script type="text/javascript">
+function fnchatStart() {
+	   
+	   window.open("Chatting_popup.jsp", "회원가입","width=500 height=640 menubar=no status=no");
+
+}
+</script>
 <body>
 
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 	<div class="m-3 p-3">
-	<div class="container" style="min-height: 600px;max-height: 700px;">
-		<div class="row">
-			<div class="col-sm-3"></div>
-			<div class="col-sm-6 border rounded" >
-				<br>
-				<h4 class="bg-light shadow-sm p-2 rounded" >1:1 채팅 문의<a class="float-right btn btn-primary btn-sm" href="#">대화 종료</a></h4>
-				<br>
-				<div class="media border p-1 mb-3 bg-light rounded border-light shadow-sm">
-					<div class="media-body">
-						<h6>안녕하세요 ㅁㅁㅁ님. 문의하고 싶은 내용을 적어주세요<small><i style="float: right;">07-03/23:30</i></small></h6>
+		<div class="container" style="min-height: 600px; max-height: 700px;">
+			<div class="row">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-3 border rounded p-2">
+					<div class="border p-2" style="height: 60px">
+						<h6 class="float-left align-center pt-2">나의 문의내역</h6>
+						<a href="javascript:fnchatStart()" class="btn btn-primary float-right">문의하기</a>
+					</div>
+					<div class="border" style="height: 600px;overflow-y:auto">
+						<div class="ChatLog" >
+							<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 265px" >2019-07-29/22:14</a>
+									
+						</div>
 					</div>
 				</div>
-				<div class="media border p-1 mb-3 border-primary rounded shadow-sm">
-					<div class="media-body">
-						<h6>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.<small><i style="float: right;">07-03/23:46</i></small></h6>
-				    </div>
-			 	</div>
-				<div class="media border p-1 mb-3 bg-light rounded border-success shadow-sm">
-					<div class="media-body">
-						<h6><small><i style="float: right;">07-03/23:30</i></small></h6>
-					</div>
-				</div>
-				<div class="media border p-1 mb-3 border-primary rounded shadow-sm">
-					<div class="media-body">
-						<h6>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.<small><i style="float: right;">07-03/23:46</i></small></h6>
-				    </div>
-			 	</div>
-			 	<div class="media border p-1 mb-3 bg-light rounded border-success shadow-sm">
-					<div class="media-body">
-						<h6>안녕하세요 ㅁㅁㅁ님. 문의하고 싶은 내용을 적어주세요<small><i style="float: right;">07-03/23:30</i></small></h6>
-					</div>
-				</div>
-				<div class="media border p-1 mb-3 border-primary rounded shadow-sm">
-					<div class="media-body">
-						<h6>예약번호 조회가 안되네요 예약번호는 2019070320154 입니다.<small><i style="float: right;">07-03/23:46</i></small></h6>
-				    </div>
-			 	</div>
-				<form>
-					<div class="input-group mb-3">
-				      	<input type="text" class="form-control" placeholder="내용을 입력해주세요.">
-				      	<div class="input-group-append">
-				       		 <button class="btn btn-primary" type="button">메시지입력</button>  
-				      	</div>
-				  	</div>
-				</form>
+				<div class="col-sm-7 border rounded p-2"></div>
+				<div class="col-sm-1"></div>
+
 			</div>
-			<div class="col-sm-3"></div>
-		</div>	
-		
-		
-	</div>
+
+
+		</div>
 	</div>
 
 	<%-- Footer Start --%>
