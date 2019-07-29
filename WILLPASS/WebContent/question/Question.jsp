@@ -73,7 +73,7 @@
 											관리자
 										</c:when>
 										<c:otherwise>
-											${boardList.BOARD_EMAIL}
+											${boardList.BOARD_ID}
 										</c:otherwise>
 									</c:choose>
 									</td>

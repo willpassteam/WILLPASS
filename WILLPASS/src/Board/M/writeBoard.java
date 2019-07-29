@@ -22,20 +22,20 @@ public class writeBoard implements Action {
 				// 제목 / 내용 / 작성자 이메일받아오기
 				String board_title=request.getParameter("board_title");
 				String board_content=request.getParameter("board_content");
-				String board_email= (String)request.getSession(true).getAttribute("user_email");
+				String board_id= (String)request.getSession(true).getAttribute("user_id");
 				//임시로 사용하는 아이디
-				if(board_email == null){
-					board_email = "asdsad";
+				if(board_id == null){
+					board_id = "asdsad";
 				}
 				
 				System.out.println(board_title);
 				System.out.println(board_content);
-				System.out.println(board_email);
+				System.out.println(board_id);
 				
 				
 				
 				//메소드 호출 매개변수 전달 그리고 결과값저장
-				boolean result = new BoardDAO().writeBoard(board_title, board_content, board_email);
+				boolean result = new BoardDAO().writeBoard(board_title, board_content, board_id);
 				
 				ActionForward forward= new ActionForward();
 				if(result){

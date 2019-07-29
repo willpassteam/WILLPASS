@@ -24,7 +24,7 @@
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 
-	<div class="container-flude" id="con1" >
+	<div class="container-flude" style="min-height: 630px" id="con1" >
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-1 w-100" style="padding-top: 92px">
@@ -89,7 +89,7 @@
 								
 							</td>
 							<td colspan="2">
-								<c:if test="${user_email == 'admin' }">
+								<c:if test="${user_id == 'admin' }">
 									<a href="writePage.Notice" class="btn btn-dark float-right btn-sm"><i class="fas fa-pen-fancy"></i>글 쓰기</a>
 								</c:if>
 							</td>

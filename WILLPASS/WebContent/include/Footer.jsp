@@ -41,7 +41,7 @@
 
 
 	<div class="clear-both"></div>
-	<div class="bg-white">
+	<div class="bg-white Footer">
 		<hr class="mt-0 mb-3 pt-0 pb-0">
 		<div class="container">
 			<div class="row">
