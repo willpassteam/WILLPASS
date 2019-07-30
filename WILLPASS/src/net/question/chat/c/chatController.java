@@ -20,7 +20,10 @@ import Board.M.getListBoard;
 import Board.M.replyBoard;
 import Board.M.viewBoard;
 import Board.M.writeBoard;
+import net.question.chat.m.ajaxGetAllList;
 import net.question.chat.m.chatLogin;
+import net.question.chat.m.closeChat;
+import net.question.chat.m.writeChat;
 
 @WebServlet("*.chat")
 public class chatController extends HttpServlet {
@@ -68,29 +71,26 @@ public class chatController extends HttpServlet {
 			e.printStackTrace();
 		}
 		if(forward == null){
-			if(command.equals("ChatStart.chat")){//로그인후 팝업처리 
-				forward.setRedirect(false);
+			if(command.equals("ChatStart.chat")){//로그인후 팝업처리
+				forward = new ActionForward();
+				forward.setRedirect(true);
 				forward.setPath("./Chatting.jsp");
 				
 				
 			}
-			else if(command.equals("write.Board")){//게시판 작성 페이지 작성후 DB 연동 후 -> View 페이지로
-				
-				//else if 문 안으로 들어왔는지 확인용 
-				System.out.println("write.Board");
+			else if(command.equals("getChatContent.chat")){//게시판 작성 페이지 작성후 DB 연동 후 -> View 페이지로
 				
 				try {
-					// action 인터페이스를 구현하고있는 writeBoard 를 action 인터페이스 객체에 넣어주고
-					// action 인터페이스에 구현되어있는 execute 메소드를 이용해 request,response를 넘겨줘서 DB작업이 가능하도록한다.
+					action = new ajaxGetAllList();
 					forward=action.execute(req, resp);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
-			}else if(command.equals("ViewTrue.Board")){// boardLoginCheck() 메소드를 거쳐  작성자와 아이디가 동일할시 넘어옴
-				System.out.println(command);
+			}else if(command.equals("writeChat.chat")){// boardLoginCheck() 메소드를 거쳐  작성자와 아이디가 동일할시 넘어옴
 				try {
+					action = new writeChat();
 					forward = action.execute(req, resp);
 					
 				} catch (Exception e) {
@@ -98,8 +98,9 @@ public class chatController extends HttpServlet {
 				}
 				
 				
-			}else if(command.equals("Question.Board")){// Question.jsp 로 이동 할경우
+			}else if(command.equals("close.chat")){// Question.jsp 로 이동 할경우
 				try {
+					action = new closeChat();
 					forward= action.execute(req, resp);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -153,6 +154,7 @@ public class chatController extends HttpServlet {
 			}
 			
 		}
+		return;
 		
 		
 		

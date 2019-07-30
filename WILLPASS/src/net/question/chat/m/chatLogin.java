@@ -14,13 +14,13 @@ public class chatLogin implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
 		
-		if(request.getSession(true).getAttribute("user_email") == null && false ){
+		if(request.getSession(true).getAttribute("user_email") == null  ){
 			PrintWriter out =  response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인후 이용가능한 페이지 입니다.')");
+			out.println("location.href='../user/Userlogin.jsp'");
 			out.println("</script>");
-			forward.setPath("../user/Userlogin.jsp");
-			forward.setRedirect(true);
+			out.close();
 		}else{
 			forward = null;
 		}
@@ -30,3 +30,4 @@ public class chatLogin implements Action{
 	
 
 }
+

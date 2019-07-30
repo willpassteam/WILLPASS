@@ -7,6 +7,14 @@ public class chat_refDTO {
 	private int chat_no; 
 	private boolean chat_userjoin,chat_adminjoin;
 	private Timestamp chat_adminouttime;
+	private String user_email;
+	
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
 	public int getChat_no() {
 		return chat_no;
 	}

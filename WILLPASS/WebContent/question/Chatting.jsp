@@ -34,7 +34,6 @@ function fnchatStart() {
 					<div class="border" style="height: 600px;overflow-y:auto">
 						<div class="ChatLog" >
 							<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 265px" >2019-07-29/22:14</a>
-									
 						</div>
 					</div>
 				</div>
