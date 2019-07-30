@@ -75,7 +75,7 @@ public class MemberJoinAction implements Action{
 		forward.setRedirect(true);
 		// ./member/login.jsp 이동할 페이지 주소 저장
 		//forward.setPath("./CC.me");
-		forward.setPath("./MemberLogin.me");
+		forward.setPath("./Memberlogin.me");
 		
 		//페이지 이동 방식 여부 값 true와...
 		// 이동할페이지 주소 (./member/login.jsp)를 담고 있는..

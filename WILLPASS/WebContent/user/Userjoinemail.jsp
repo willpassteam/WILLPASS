@@ -54,6 +54,7 @@ function EmailTimer(){
 				return false;
 			}
 			else{
+				alert("메일이 발송되었습니다. 인증번호를 확인해주세요.");
 			authNum=result.authNum;
 			dailyMissionTimer(0.05);
 			}
