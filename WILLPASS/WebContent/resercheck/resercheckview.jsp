@@ -1,33 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>WILL PASS</title>
-<!-- Bootstrap»ç¿ëÀ» À§ÇÑ°Í -->
+<!-- Bootstrapì‚¬ìš©ì„ ìœ„í•œê²ƒ -->
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
-<!-- ´Ş·ÂÀ» À§ÇÑ css + js -->
+<!-- ë‹¬ë ¥ì„ ìœ„í•œ css + js -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- ¾ÆÀÌÄÜÀ» À§ÇÑ css -->
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-<!-- Ä³·¯¼¿À» À§ÇÑ css -->
-<link rel="stylesheet" href="/path/to/slick.css">
-<link rel="stylesheet" href="/path/to/slick-theme.css">
-<style type="text/css">
+<!-- ì•„ì´ì½˜ì„ ìœ„í•œ css -->
+<link rel='stylesheet'
+	href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
+	integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ'
+	crossorigin='anonymous'>
 
+<style type="text/css">
 input[type="text"], textarea {
 	box-shadow: none !important;
-
 	font-weight: 200;
 	padding-left: 0;
 }
 </style>
-<script type="text/javascript">
+<script type="text/javascript" src="${pageContext.request.contextPath}/resercheck/resercheckjs.js"></script>
+<script type="text/javascript" >
+function fncheckresult(){ //ë‚ ì§œë¡œ ì˜ˆì•½ ê²€ìƒ‰ í• ë•Œ 
+	
+	if(($("#to").val()=="") &&($("#from").val()=="")){
+		
+		return true;
+	}
+	
+	if(($("#to").val()!="") &&($("#from").val()!="")){
+		
+		return true;
+	}
+	alert("ë‚ ì§œë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”.");
+	return false;
+}
 
 function fnpage(clickpage,clickrange){
 
@@ -42,261 +56,320 @@ function fnpage(clickpage,clickrange){
 		location.href="${pageContext.request.contextPath}/reservationcheck/viewall?page="+(startpage-5)+"&range="+(nowrange-1);
 		
 	}
+	
+	function changeSeat(seatnum){ // ì¢Œì„ìˆ«ìë¥¼ ë¬¸ì+ìˆ«ìë¡œ ë°”ê¿”ì¤Œ
+		var col;
+		switch (seatnum%6) {
+		case 0:col='A';break;
+		case 1:col='B';break;
+		case 2:col='C';break;
+		case 3:col='D';break;
+		case 4:col='E';break;
+		case 5:col='F';break;
+	}
+		return col;
+	}
+	
+	
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 
-</script>
-<script>
-	$(function() {
-		var dateFormat = "yymmdd", from = $("#from").datepicker(
-				{
-					minDate : 0,
-					maxDate : "+12M",
-					changeMonth : true,
-					numberOfMonths : 2,
-					prevText : 'ÀÌÀü ´Ş',
-					nextText : '´ÙÀ½ ´Ş',
-					monthNames : [ '1¿ù', '2¿ù', '3¿ù', '4¿ù', '5¿ù', '6¿ù', '7¿ù',
-							'8¿ù', '9¿ù', '10¿ù', '11¿ù', '12¿ù' ],
-					monthNamesShort : [ '1¿ù', '2¿ù', '3¿ù', '4¿ù', '5¿ù', '6¿ù',
-							'7¿ù', '8¿ù', '9¿ù', '10¿ù', '11¿ù', '12¿ù' ],
-					dayNames : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±İ', 'Åä' ],
-					dayNamesShort : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±İ', 'Åä' ],
-					dayNamesMin : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±İ', 'Åä' ],
-					showMonthAfterYear : true,
-					yearSuffix : '³â',
-					dateFormat : 'yymmdd'
-				}).on("change", function() {
-			to.datepicker("option", "minDate", getDate(this));
-		}), to = $("#to").datepicker(
-				{
-					minDate : 0,
-					maxDate : "+12M",
-					changeMonth : true,
-					numberOfMonths : 2,
-					prevText : 'ÀÌÀü ´Ş',
-					nextText : '´ÙÀ½ ´Ş',
-					monthNames : [ '1¿ù', '2¿ù', '3¿ù', '4¿ù', '5¿ù', '6¿ù', '7¿ù',
-							'8¿ù', '9¿ù', '10¿ù', '11¿ù', '12¿ù' ],
-					monthNamesShort : [ '1¿ù', '2¿ù', '3¿ù', '4¿ù', '5¿ù', '6¿ù',
-							'7¿ù', '8¿ù', '9¿ù', '10¿ù', '11¿ù', '12¿ù' ],
-					dayNames : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±İ', 'Åä' ],
-					dayNamesShort : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±İ', 'Åä' ],
-					dayNamesMin : [ 'ÀÏ', '¿ù', 'È­', '¼ö', '¸ñ', '±İ', 'Åä' ],
-					showMonthAfterYear : true,
-					yearSuffix : '³â',
-					dateFormat : 'yymmdd'
-				}).on("change", function() {
-			from.datepicker("option", "maxDate", getDate(this));
+
+	function fnview(num){ //ì˜ˆì•½ìƒì„¸ ëª¨ë‹¬ì— ì¶œë ¥ 
+
+		$.ajax({
+			type : 'POST',
+			url  : '${pageContext.request.contextPath}/reservationcheck/onereser',
+			data: {num : num},
+		    dataType: "json",
+			success: function(result){
+				$("#tbodyresult").text("");
+				$("#tbodyresult1").text("");
+				
+				  var aa="<tr class='text-center'>"+
+				  "<td>1êµ¬ê°„</td>"+
+				  "<td>"+result[0].reser_date+"</td>"+
+				  "<td>"+ result[0].reser_Starting +"&nbsp;&nbsp;<i class='fas fa-plane-departure pt-3 text-muted '></i>&nbsp;&nbsp;"+
+				  result[0].reser_destination +"<br> <small>"+result[0].reser_departure_time+" â†’"+ result[0].reser_arrival_time+" </small></td>"+
+				  
+				  "<td>"+result[0].reser_airline+"</td>"+
+				  "<td>"+result[0].reser_flight+"</td>"+
+				  "</tr>";
+				  var part2="";
+					  $("#tbodyresult1").append(aa);
+				  if(result[0].isrou=="true"){
+				  
+					  part2="<tr>"+
+					  "<td>2êµ¬ê°„</td>"+
+					  "<td>"+result[result.length-1].reser_date+"</td>"+
+					  "<td>"+ result[result.length-1].reser_Starting +"&nbsp;&nbsp;<i class='fas fa-plane-departure pt-3 text-muted '></i>&nbsp;&nbsp;"+
+					  result[result.length-1].reser_destination +"<br> <small>"+result[result.length-1].reser_departure_time+" â†’"+ result[result.length-1].reser_arrival_time+" </small></td>"+
+					 
+					  "<td>"+result[result.length-1].reser_airline+"</td>"+
+					  "<td>"+result[result.length-1].reser_flight+"</td>"+
+					  "</tr>";
+					  $("#tbodyresult1").append(part2);
+					  
+					  
+				  }
+				  
+				  var totalprice = 0;
+				
+				for(var i=0;i<result.length;i++){
+					  var value=result[i].reser_familyname;
+					  var value1=result[i].reser_airline;
+					  var value2=result[i].reser_destination;
+					  var value3=result[i].reser_flight;
+					  var value4=result[i].reser_givename;
+					  var value5=result[i].reser_Starting;
+					  var value6=result[i].reser_departure_time;
+					  var value7=result[i].reser_reserved_seat;
+					  value7 =changeSeat(value7)+parseInt((value7/6)+1);
+					  var value8=result[i].reser_date;
+					  var value9=result[i].reser_price;
+					  totalprice +=value9;
+					  value9=  numberWithCommas(value9);
+					  var value10=result[i].isrou;
+					  
+			
+					$("#tbodyresult").append( "<tr><td>"+value8+"</td>"+ "<td>"+value5+"->"+value2+"</td>"+"<td>"+value+" "+value4+"</td>"+"<td>"+value7+"</td>"+"<td>"+value9+"</td>"+"</tr>");
+					  
+				}
+				
+				totalprice=  numberWithCommas(totalprice);
+				$("#totalpr").text(totalprice+"KRW");
+				$("#resernum").text("ì˜ˆì•½ë²ˆí˜¸:"+num);
+				
+				$("#tribtn").trigger("click");
+			 
+			},
+			error:function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
 		});
-		function getDate(element) {
-			var date;
-			try {
-				date = $.datepicker.parseDate(dateFormat, element.value);
-			} catch (error) {
-				date = null;
-			}
-			return date;
-		}
-		$("#starting").autocomplete({
-			source : function(request, response) { //¸¹ÀÌ ºÃÁÒ? jquery Ajax·Î ºñµ¿±â Åë½ÅÇÑ ÈÄ 
-				var city = $("#starting").val();
-				//json°´Ã¼¸¦ ¼­¹ö¿¡¼­ ³»·Á¹Ş¾Æ¼­ ¸®½ºÆ® »Ì´Â ÀÛ¾÷
-				$.ajax({
-					//È£ÃâÇÒ URL 
-					url : "${path}/endcheck",
-					//¿ì¼± jsontype jsonÀ¸·Î 
-					dataType : "json",
-					// parameter °ªÀÌ´Ù. ¿©·¯°³¸¦ ÁÙ¼öµµ ÀÖ´Ù. 
-					data : { //request.term >> ÀÌ°Å ÀÚÃ¼°¡ text¹Ú½º³»¿¡ ÀÔ·ÂµÈ °ªÀÌ´Ù. 
-						city : city
-					},
-					success : function(result) { //return µÈ³ğÀ» response() ÇÔ¼ö³»¿¡ ´ÙÀ½°ú °°ÀÌ Á¤ÀÇÇØ¼­ »Ì¾Æ¿Â´Ù. 
-						response($.map(result, function(item) {
-							return {
-								label : item.city,
-								value : item.city
-							}
-						}));
-					}
-				});
-			},
-			//ÃÖ¼Ò ¸îÀÚ ÀÌ»óµÇ¸é Åë½ÅÀ» ½ÃÀÛÇÏ°Ú´Ù¶ó´Â ¿É¼Ç 
-			minLength : 1,
-			//ÀÚµ¿¿Ï¼º ¸ñ·Ï¿¡¼­ Æ¯Á¤ °ª ¼±ÅÃ½Ã Ã³¸®ÇÏ´Â µ¿ÀÛ ±¸Çö 
-			//±¸Çö¾øÀ¸¸é ´Ü¼ø textÅÂ±×³»¿¡ °ªÀÌ µé¾î°£´Ù. 
-			select : function(event, ui) {
-			},
-			focus : function(event, ui) {
-				return false;
-			}
-		});
-		$("#destination").autocomplete({
-			source : function(request, response) { //¸¹ÀÌ ºÃÁÒ? jquery Ajax·Î ºñµ¿±â Åë½ÅÇÑ ÈÄ 
-				var city = $("#destination").val();
-				//json°´Ã¼¸¦ ¼­¹ö¿¡¼­ ³»·Á¹Ş¾Æ¼­ ¸®½ºÆ® »Ì´Â ÀÛ¾÷
-				$.ajax({
-					//È£ÃâÇÒ URL 
-					url : "${path}/endcheck",
-					//¿ì¼± jsontype jsonÀ¸·Î 
-					dataType : "json",
-					// parameter °ªÀÌ´Ù. ¿©·¯°³¸¦ ÁÙ¼öµµ ÀÖ´Ù. 
-					data : { //request.term >> ÀÌ°Å ÀÚÃ¼°¡ text¹Ú½º³»¿¡ ÀÔ·ÂµÈ °ªÀÌ´Ù. 
-						city : city
-					},
-					success : function(result) { //return µÈ³ğÀ» response() ÇÔ¼ö³»¿¡ ´ÙÀ½°ú °°ÀÌ Á¤ÀÇÇØ¼­ »Ì¾Æ¿Â´Ù. 
-						response($.map(result, function(item) {
-							return {
-								label : item.city,
-								value : item.city
-							}
-						}));
-					}
-				});
-			},
-			//ÃÖ¼Ò ¸îÀÚ ÀÌ»óµÇ¸é Åë½ÅÀ» ½ÃÀÛÇÏ°Ú´Ù¶ó´Â ¿É¼Ç 
-			minLength : 1,
-			//ÀÚµ¿¿Ï¼º ¸ñ·Ï¿¡¼­ Æ¯Á¤ °ª ¼±ÅÃ½Ã Ã³¸®ÇÏ´Â µ¿ÀÛ ±¸Çö 
-			//±¸Çö¾øÀ¸¸é ´Ü¼ø textÅÂ±×³»¿¡ °ªÀÌ µé¾î°£´Ù. 
-			select : function(event, ui) {
-			},
-			focus : function(event, ui) {
-				return false;
-			}
-		});
-	});
+		
+	}
+
 </script>
 </head>
 <body>
-	<%-- Top Start --%>
+<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
-	<%-- Top End --%>
+<%-- Top End --%>
+	<div class="bg-light mt-0 pb-5 mb-5">
+		<div class="container border bg-white pb-5 mt-0 pt">
+			<h2 class="text-center mt-5 mb-4">ì˜ˆì•½ ì¡°íšŒ/ë³€ê²½</h2>
+			<div class="container pl-5 border">
+				<div class="mt-3 col-12 mb-5 pb-5">
 
+<!-- ì˜ˆì•½ëª©ë¡ ê²€ìƒ‰ë¶€ë¶„ ì‹œì‘ -->
+					<form
+						action="${pageContext.request.contextPath}/reservationcheck/showreservations"method="post" onsubmit="return fncheckresult();">
+						<div class="pt-2">
+							<table class="table  pt-0 border border-right-0">
+								<tr>
+									<td width="20%" class=" bg-light ">ìƒíƒœ</td>
+									<td width="80%"><label for="defaultRadio0">ì „ì²´</label> <input
+										type="radio" id="defaultRadio0" name="resersta" value="0"
+										checked="checked"> <label for="defaultRadio1">ì˜ˆì•½ì™„ë£Œ</label>
+										<input type="radio" id="defaultRadio1" name="resersta"
+										value="1"> <label for="defaultRadio2">íƒ‘ìŠ¹ì™„ë£Œ</label> <input
+										type="radio" id="defaultRadio2" name="resersta" value="2">
+									</td>
+								</tr>
 
-	
-	<div class="bg-light mt-0 pt-5 pb-5">   
-	<div class="container border bg-white pb-5 ">
-	<h2 class="text-center mt-5 mb-4">¿¹¾à Á¶È¸/º¯°æ</h2>
-	<div class="container pl-5 border">
+								<tr>
+									<td width="20%" class="bg-light">íƒ‘ìŠ¹ë‚ ì§œ</td>
+									<td width="80%">
+										<div class="row">
+											<div class="input-group mb-3 col-4">
+												<input type="text" class=" form-control" id="from"
+													name="from" width="50px" autocomplete="off">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+														class='far fa-calendar-alt'></i></span>
+												</div>
+											</div>
+											<b>â€•</b>
+											<div class="input-group mb-3 col-4">
+												<input type="text" class=" form-control" id="to" name="to"
+													width="50px" autocomplete="off">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><i
+														class='far fa-calendar-alt'></i></span>
+												</div>
+											</div>
 
-	<div class="mt-3 col-12">
-			<form action="${pageContext.request.contextPath}/reservationcheck/showreservations"  >
-			<div>
-		
-			<table class="table  pt-0 border border-right-0">
-			<tr>
-			<td width="20%"  class=" bg-light ">¿¹¾à»óÅÂ</td>
-			<td width="80%">    
-			<div class="row pl-3 pr-3">
-		<label for="total" class="small">ÀüÃ¼</label>	<input type="radio" name="selectoption" id="total" value="1" class="mt-1">
-		    <div class="custom-control custom-radio">
+											<div class="col-2">
+												<input type="submit" class="btn text-white" style="background-color: #D60815" value="ì¡°íšŒ">
+											</div>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</form>
+<!-- ì˜ˆì•½ëª©ë¡ ê²€ìƒ‰ë¶€ë¶„ ë -->
 
- 
-    </div> 
-			</div>
-			</td>
-			</tr>
-			
-			<tr>
-			<td width="20%" class="bg-light">Å¾½Â³¯Â¥</td>
-			<td width="80%">
-			<div class="row pl-1 pb-2">
-			<button class="btn btn-outline-dark col-1 mr-1 ml-2">3°³¿ù</button>
-			<button class="btn btn-outline-dark col-1 mr-1">6°³¿ù</button>
-			<button class="btn btn-outline-dark col-1 mr-1">1³â</button>
-			</div>
-	
-				<div class="row">
-	
-				<div class="input-group mb-3 col-4">
-    			<div class="input-group-prepend">
-     				<span class="input-group-text"><i class='far fa-calendar-alt'></i></span>
-   				 </div>
-				<input type="text" class=" form-control" id="from" name="from" width="50px" autocomplete="off">
-  				</div>
-					~
-				  <div class="input-group mb-3 col-4">
-    				<div class="input-group-prepend">
-     					 <span class="input-group-text"><i class='far fa-calendar-alt'></i></span>
-   				 </div>
-				<input type="text" class=" form-control" id="to" name="to" width="50px" autocomplete="off">	
-  				</div>
+<!-- ì˜ˆì•½ëª©ë¡ ì¶œë ¥ë¶€ë¶„ ì‹œì‘ -->
+					<table class="table text-center table-hover mt-5 pt-5">
+						<tr style="background-color: #6D6E71" class="text-white">
+							<td>ì˜ˆì•½ë²ˆí˜¸</td>
+							<td>íƒ‘ìŠ¹ì¼</td>
+							<td>ì—¬ì •</td>
+							<td>ìƒíƒœ</td>
+							<td>ì˜ˆì•½ìƒì„¸</td>
+						</tr>
+
+						<c:if test="${empty reserresult}">
+							<tr class="small">
+								<td class="pt-3" colspan="5">ì˜ˆì•½ì¤‘ì¸ í•­ê³µê¶Œì´ ì—†ìŠµë‹ˆë‹¤.</td>
+							</tr>
+						</c:if>
+
+						<c:forEach items="${reserresult}" varStatus="varstatus" var="reser">
+<%-- 							<c:if test="${varstatus.index !=0}"> --%>
+							<c:if test="${reserresult[varstatus.index].reser_round_trip != reserresult[varstatus.index -1].reser_round_trip}">
+							<c:set var="now" value="<%=new java.util.Date()%>" />
+							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="fmtnow" />
+
+							<tr class="small">
+								<td class="pt-3" width="10%">${reser.reser_round_trip}</td>
+								<td class="pt-3" width="15%">${reser.reser_date}</td>
+								<td class="pt-3 " width="20%">${reser.reser_Starting}-
+									${reser.reser_destination}</td>
+								<c:choose>
+									<c:when test="${fmtnow <= reser.reser_date}">
+										<td class="pt-3 text-dark" width="20%">ì˜ˆì•½ì™„ë£Œ</td>
+									</c:when>
+									<c:otherwise>
+										<td class="pt-3 " width="20%">íƒ‘ìŠ¹ì™„ë£Œ</td>
+									</c:otherwise>
+								</c:choose>
+								<td width="15%" onclick="fnview(${reser.reser_round_trip});">
+									<button type="button" class="btn"><b class="small">ì˜ˆì•½ìƒì„¸</b></button>
+								</td>
+										
+							</tr>
+<%-- 							</c:if> --%>
+							</c:if>
+						</c:forEach>
+
+					</table>
+<!-- ì˜ˆì•½ëª©ë¡ ì¶œë ¥ë¶€ë¶„ ë -->
 
 				</div>
-				
-			</td>
-			</tr>
-	
-			
-			</table> 
+
+<!-- ì˜ˆì•½ìƒì„¸ ëª¨ë‹¬ë¶€ë¶„ -->
+				<button style="display: none;" data-toggle="modal" data-target="#myModal" id="tribtn"></button>
+				<div class="modal fade" id="myModal">
+					<div class="modal-dialog  modal-lg">
+						<div class="modal-content">
+
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body border bg-light">
+								<div class="container">
+									<div class="row">
+										<div class="col-12">
+											<div class="card">
+												<div class="card-body p-0">
+													<div class="row pt-5 pl-3 pr-3">
+														<div class="col-md-3 mt-0">
+															<img
+																src="${pageContext.request.contextPath}/img/Logoicon.png"
+																class="col">
+														</div>
+														<div class="col-md-6  text-center pt-3">
+															<h4>
+																<b>ì˜ˆì•½ìƒì„¸</b>
+															</h4>
+														</div>
+
+														<div class="col-md-3 text-right  ">
+															<p class="font-weight-bold mb-1">Invoice #550</p>
+															<p class="text-muted" id="resernum">Due to: 4 Dec,
+																2019</p>
+														</div>
+													</div>
+
+													<hr class="my-5">
+
+													<div class="row">
+
+														<table class="table  text-center col-10" align="center">
+															<thead>
+																<tr class="bg-light text-dark">
+																	<th>êµ¬ê°„</th>
+																	<th>ì¶œë°œì¼</th>
+																	<th>ì¶œë°œë„ì°©ì‹œê°„</th>
+																	<th>í•­ê³µì‚¬</th>
+																	<th>í¸ëª…</th>
+																</tr>
+															</thead>
+															<tbody id="tbodyresult1">
+
+															</tbody>
+														</table>
+
+													</div>
+
+													<div class="row p-5">
+														<div class="col-md-12">
+															<table class="table">
+																<thead>
+																	<tr>
+
+																		<th
+																			class="border-0 text-uppercase small font-weight-bold">íƒ‘ìŠ¹ì¼</th>
+																		<th
+																			class="border-0 text-uppercase small font-weight-bold">ì—¬ì •</th>
+																		<th
+																			class="border-0 text-uppercase small font-weight-bold">íƒ‘ìŠ¹ê°</th>
+																		<th
+																			class="border-0 text-uppercase small font-weight-bold">ì¢Œì„ë²ˆí˜¸</th>
+																		<th
+																			class="border-0 text-uppercase small font-weight-bold">
+																			ê°€ê²©</th>
+																	</tr>
+																</thead>
+																<tbody id="tbodyresult">
+
+																</tbody>
+															</table>
+														</div>
+													</div>
+
+													<div class="bg-dark text-white p-4" align="right">
+														<div class=" text-right">
+															<div class="mb-2">ì´ì•¡</div>
+															<div class="h2 font-weight-light" id="totalpr">$234,234</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">Close</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+<!-- ì˜ˆì•½ìƒì„¸ ëª¨ë‹¬ë¶€ë¶„ë -->
+			</div>
+		</div>
 	</div>
-	<div class="row ">
-	<div class="col-4"></div>
-	<input type="submit"  class="btn col-4 text-white mt-5 mb-5" style="background-color: #D60815" value="Á¶È¸">
-	<div class="col-4"></div>
-	</div>	<table class="table text-center table-hover">
-	
-	<tr style="background-color: #6D6E71" class="text-white">
-	<td>¿¹¾à¹øÈ£</td> 
-	<td>Å¾½ÂÀÏ</td>
-	<td>Å¾½ÂÀÚ </td>
-	<td>¿©Á¤</td>
-	<td>»óÅÂ </td>
-	<td> </td>
-	</tr>
 
-	 
-	 <c:forEach items="${reserresult}" varStatus="varstatus" var="reser" >
-	 
-	 <fmt:formatNumber value="${reser.reser_reserved_seat}" type="number" var="seatnum" />
-	 <fmt:parseNumber integerOnly="true" value="${seatnum div 6}" var="seatnum2"  />
-	 <tr class="small" >
-	 <fmt:formatNumber value="${varstatus.index}" type="number" var="strnum" />
-
-
-	 <td class="pt-3" width="10%">${reser.reser_round_trip}</td>
-	
-	 <td class="pt-3" width="15%">${reser.reser_date}</td>	 
-	 <td width="20%">${reser.reser_familyname} ${reser.reser_givenname}</td>
-	 <td class="pt-3 " width="20%">${reser.reser_Starting} - ${reser.reser_destination}</td>
-	 <td class="pt-3" width="20%">¿¹¾à¿Ï·á</td>
-	 <td width="15%"> <a href="${pageContext.request.contextPath}/reservationcheck/onereser?reser_round_trip=?${reser.reser_round_trip}" onclick="window.open(this.href);return false;">¿¹¾à»ó¼¼</a> 
-	 </td>
-	
-
-	 </tr>
-	 </c:forEach>
-	 
-	 </table>
-
-	</form> 
-</div>
-	
-<!-- 	ÆäÀÌÁö -->
-<div class="d-flex justify-content-center  mb-3 mt-5">
-	<c:if test="${paginginfo.prev eq true}">	
-		<button class="btn col-1" onclick="fnprev(${paginginfo.startpage},${paginginfo.range})" >prev</button>
-	</c:if>
-	
-	<c:forEach var="data2"  begin="${paginginfo.startpage}" step="1"  end="${paginginfo.endpage}">
-		<button class="btn col-1" onclick="fnpage(${data2},${paginginfo.range})">${data2}</button>
-	</c:forEach>
-
-	<c:if test="${paginginfo.next eq true}">	
-		<button class="btn col-1" onclick="fnnext(${paginginfo.startpage},${paginginfo.range})">next</button>
-	</c:if>
-</div>
-
-</div>
-	<div class="mt-4 col-12">
-	</div>
-	</div>
-	</div>
-	
-
-<!-- </div> -->
-
-
-
-	 <div class="pb-5"></div>
+	<div class="pb-5"></div>
 	<%-- Footer Start --%>
 	<jsp:include page="../include/Footer.jsp"></jsp:include>
 	<%-- Footer End --%>

@@ -33,7 +33,6 @@ public class ReservationFrontController extends HttpServlet{
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
 		
 		ActionForward forward=null;
 		Action action=null;
@@ -44,7 +43,7 @@ public class ReservationFrontController extends HttpServlet{
 		String command = request.getPathInfo();
 		System.out.println("sohee:command = "+command);
 		
-		if(command.equals("/passengerInfoaction")) { //사용자에게 입력받은 예약자 정보들을 저장
+		if(command.equals("/passengerInfoaction")) {//사용자에게 입력받은 예약자 정보들을 저장
 				
 				         forward = new ActionForward(); 
 				         action =new PassengerInfoaction(); 
@@ -57,7 +56,7 @@ public class ReservationFrontController extends HttpServlet{
 						}
 			
 			
-		}else if(command.equals("/selectseatsaction")){ //사용자가 선택한 예약좌석정보들을 받아옴. 
+		}else if(command.equals("/selectseatsaction")){//사용자가 선택한 예약좌석정보들을 받아옴. 
 					forward = new ActionForward(); 
 					action= new Selectseatsaction();
 					
@@ -70,7 +69,7 @@ public class ReservationFrontController extends HttpServlet{
 					}
 			
 			
-		}else if(command.equals("/resercompleteaction")){ 
+		}else if(command.equals("/resercompleteaction")){ //예약 완료 
 			
 				forward = new ActionForward();
 				action= new Resercompleteaction();
@@ -82,8 +81,7 @@ public class ReservationFrontController extends HttpServlet{
 				
 				}
 
-			
-		}else if(command.equals("/showseatsinfoaction")){ //좌석정보들 db에서 검색해서 예약가능한 좌석들만 예약가능하게 하는 기능 
+		}else if(command.equals("/showseatsinfoaction")){//좌석정보들 db에서 검색해서 예약가능한 좌석들만 예약가능하게 하는 기능 
 			
 			forward = new ActionForward();
 			action= new Showseatsinfoaction();
@@ -94,13 +92,24 @@ public class ReservationFrontController extends HttpServlet{
 			
 			}
 			
-		}else if(command.equals("/reserstep4forward")){  //Reserstep4.jsp로 이동
+		}else if(command.equals("/reserstep4forward")){//Reserstep4.jsp로 이동
 			
 			forward = new ActionForward();
 			
 			forward.setPath(request.getContextPath()+"/reserve/ReserStep4.jsp");
 			forward.setRedirect(true);
 			
+		}else if(command.equals("/backtoReserStep2")){
+			
+			 	request.getSession().removeAttribute("pasinfoarr");
+				forward = new ActionForward();
+				forward.setPath(request.getContextPath()+"/reserve/ReserStep2.jsp");
+				forward.setRedirect(false);
+		}else if(command.equals("/backtoReserStep3")){
+			request.getSession().removeAttribute("seatsinfoarr");
+			forward = new ActionForward();
+			forward.setPath(request.getContextPath()+"/reserve/ReserStep3.jsp");
+			forward.setRedirect(false);
 		}
 		
 	

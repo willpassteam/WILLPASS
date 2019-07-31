@@ -40,6 +40,16 @@ $(window).load(function() {//로딩이미지
    });
 $(function(){
 	
+	
+	  window.onbeforeunload = function(){
+
+		  
+		  location.href="${pageContext.request.contextPath}/reservation/backtoReserStep3";
+	    
+	  };
+
+	
+	
 	$("#final").on("click",function(){
 		$('#loading').show();	
 		location.href="${pageContext.request.contextPath}/reservation/resercompleteaction";
@@ -108,7 +118,7 @@ $(function(){
          <fmt:formatNumber value="${9000*2}" pattern="#,###" var="price3" />
          <fmt:formatNumber value="${sear0.price  +sear1.price+32000*2 + 9000*2
          }" pattern="#,###" var="price4" />
-                 <fmt:formatNumber value="${sear0.price * sear0.people +sear1.price *sear1.people
+         <fmt:formatNumber value="${sear0.price * sear0.people +sear1.price *sear1.people
          +32000*sear0.people*2 + 9000*sear0.people*2
          }" pattern="#,###" var="price5" />
          
@@ -175,6 +185,7 @@ $(function(){
 	</div>
 	<div align="right" class="mt-3">
 	<button id="final" class="btn text-white  " style="background-color: #D60815"><b >결제하기</b></button>
+	</div>
 	</div>
 	</div>
 	</div>

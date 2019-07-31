@@ -25,11 +25,11 @@
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- 아이콘을 위한 css -->
-<style type="text/css">
- input{ 
- 	display: none; 
- } 
- </style>
+ <style type="text/css"> 
+input{  
+ 	display: none;  
+ }  
+  </style> 
  
 <script type="text/javascript">
 
@@ -46,7 +46,6 @@ if(isroundtr==true){ //왕복인지 편도인지에 따라 check박스 선택가
 }else{
 	totalse=maxChecked;
 }
-
 
 function changeSeat(seatnum){ //선택된 좌석보여주는 부분에 보여주기 위해서 좌석숫자를 문자+숫자로 바꿔줌
 	var col;
@@ -75,13 +74,17 @@ function fncheck(){ //좌석수가 일치하는지 안하는지 확인해주는 
 	}
 }
 
-
 $(function(){
    
+	//뒤로가기로 돌아왔을때 check된거 지워주기
+	$('input[name=selected_1]').prop('checked', false);
+	if(isroundtr==true){
+	$('input[name=selected_2]').prop('checked', false);
+			}
 	
 	$(".engseat").html("<div class='col-2'></div>"+
 			   "<div class='col-1 text-center'><b>A</b></div>"+
-			  " <div class='col-1 text-center'><b>B</b></div>"+
+			  " <div class='col-1 text-centerㅋㅋ'><b>B</b></div>"+
 			   "<div class='col-1 text-center'><b>C</b></div>"+
 			   "<div class='col-1 text-center'></div>"+
 			   "<div class='col-1 text-center'><b>D</b></div>"+
@@ -506,7 +509,9 @@ $(".partbtn").on("click",function(){ //구간 선택부분 함수
 </div>
 </div> <!--왼쪽  / 좌석 선택부분 끝-->  
 </div>
-</div>
+
+
+
 
 </form>     
 <div class="mb-5"></div>

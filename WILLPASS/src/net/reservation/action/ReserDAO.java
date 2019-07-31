@@ -70,6 +70,7 @@ public class ReserDAO {
 		
 	}
 	
+	
 
 	public int[] selpossibleseat(Date reser_date,String reser_flight) {
 		
@@ -87,7 +88,6 @@ public class ReserDAO {
 		         while(rs.next()){
 		        	 count++;
 		        	 
-		        	 System.out.println("번호들"+rs.getInt("reser_reserved_seat"));
 		        	 seat[rs.getInt("reser_reserved_seat")]=1;
 		        	 
 		         }
@@ -104,61 +104,42 @@ public class ReserDAO {
 		return seat;
 	}
 	
-	
-	 public void inserttemp(){
-	      System.out.println("얍얍");
-	      java.sql.Date d=java.sql.Date.valueOf("2019-07-27");
-	      
-	      try {
-	         con = ds.getConnection();
-	         
-	         String sql = "INSERT INTO reservationtbl(reser_Starting,reser_destination,reser_date,reser_flight,reser_Reserved_seat) values(?,?,?,?,?)";
-	         for(int i =0;i<89;i++){
-	         pstmt = con.prepareStatement(sql);
-	         pstmt.setString(1,"김해(PUS)");
-	         pstmt.setString(2,"간사이(KIX)");
-	         pstmt.setDate(3,d);
-	         pstmt.setString(4,"LJ215");
-	         pstmt.setInt(5,i);
 
-	         pstmt.executeUpdate();
-
-	         }
-	         
-	      } catch (Exception e) {
-	         System.out.println(" inserttemp에서 오류남"+e);
-	      }finally {
-	         free();
-	      }
-	      
-	      
-	   }
+	public int getmaxresernum() { //예약번호중 가장 큰 수 return하는함수
+		
+		 int maxnum=0;
+		  try {
+		         con = ds.getConnection();
+		         String getmaxsql= "select max(reser_num) from reservationtbl";
+		    	
+       		 pstmt=con.prepareStatement(getmaxsql);
+       		 rs=pstmt.executeQuery();
+       			while(rs.next()) {
+       				
+       				maxnum=rs.getInt(1);
+       				
+       			}
+		         
+		  }catch (Exception e) {
+			 System.out.println("getmaxresernum()에서 오류남"+e);
+		}finally {
+			free();
+		}
+		return maxnum;
+	}
 	 
-	 public void insertreserresult(ArrayList Reservationarr,int roundnum){
+	
+	 public void insertreserresult(ArrayList Reservationarr,int maxnum){
 		 
 		  try {
 		         con = ds.getConnection();
 		         
-		         String getmaxsql= "select max(reser_num) from reservationtbl";
 		         String sql = "INSERT INTO reservationtbl (reser_Starting,reser_destination,reser_date,"+
 		        		 	 "reser_departure_time,reser_arrival_time,reser_airline,reser_flight,reser_price,reser_reserved_seat,reser_round_trip,reser_email,reser_gender,reser_familyname,reser_givename)"+
 		        		 	 "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		        
-		        
-		         
-		         
-		         if(roundnum==1){ //1구간 예약일때
-		        
+	       
 		        	 for(int i=0;i<Reservationarr.size();i++){
-		        		 int maxnum=0;
-		        		 pstmt=con.prepareStatement(getmaxsql);
-		        		 rs=pstmt.executeQuery();
-		        		 
-		        			while(rs.next()) {
 		        				
-		        				maxnum=rs.getInt(1);
-		        				
-		        			}
 		        		pstmt = con.prepareStatement(sql);
 			        	 ReservationDTO  reserdto =(ReservationDTO)Reservationarr.get(i);
 			        	 pstmt.setString(1,reserdto.getReser_Starting());
@@ -175,58 +156,10 @@ public class ReserDAO {
 			        	 pstmt.setString(12,reserdto.getReser_gender());
 			        	 pstmt.setString(13,reserdto.getReser_familyname());
 			        	 pstmt.setString(14,reserdto.getReser_givenname());
-			        	 
 			        	 pstmt.executeUpdate();
 			        	 
-			        	 
 			         }
-		        	 
-		        	 
-		         }else{//2구간예약할때 (왕복일때 )
-		        	 
-		        	 for(int i=0;i<Reservationarr.size();i++){
-		        		 int maxnum=0;
-		        		 pstmt=con.prepareStatement(getmaxsql);
-		        		 rs=pstmt.executeQuery();
-		        		 
-		        			while(rs.next()) {
-		        				
-		        				maxnum=rs.getInt(1);
-		        				
-		        			}
-		        		pstmt = con.prepareStatement(sql);
-			        	 ReservationDTO  reserdto =(ReservationDTO)Reservationarr.get(i);
-			        	 pstmt.setString(1,reserdto.getReser_Starting());
-			        	 pstmt.setString(2,reserdto.getReser_destination());
-			        	 pstmt.setDate(3,reserdto.getReser_date());
-			        	 pstmt.setString(4,reserdto.getReser_departure_time());
-			        	 pstmt.setString(5,reserdto.getReser_arrival_time());
-			        	 pstmt.setString(6,reserdto.getReser_airline());
-			        	 pstmt.setString(7,reserdto.getReser_flight());
-			        	 pstmt.setInt(8,reserdto.getReser_price());
-			        	 pstmt.setString(9,reserdto.getReser_reserved_seat());
-			        	 pstmt.setString(10,Integer.toString(maxnum+1-Reservationarr.size()));
-			        	 pstmt.setString(11,reserdto.getReser_email());
-			        	 pstmt.setString(12,reserdto.getReser_gender());
-			        	 pstmt.setString(13,reserdto.getReser_familyname());
-			        	 pstmt.setString(14,reserdto.getReser_givenname());
-			        	 
-			        	 pstmt.executeUpdate();
-			        	 
-			        	 
-			         }
-		        	 
-		        	 
-		        	 
-		        	 
-		        	 
-		         }
 		         
-		        
-		         
-		   
-		         
-		     
 		  	} catch (Exception e) {
 		  			System.out.println("insertreserresult에서 오류남"+e);
 		  	}finally {

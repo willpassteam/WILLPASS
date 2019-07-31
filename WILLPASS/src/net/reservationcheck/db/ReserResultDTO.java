@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ReserResultDTO {
 
-	  private int reser_num;//에약번호 
+	  private int reser_round_trip;//에약번호 
 	  private String  reser_Starting; //출발지
 	  private String reser_destination; //도착지
 	  private String reser_familyname; // 탑승자이름 
@@ -20,7 +20,7 @@ public class ReserResultDTO {
 	public ReserResultDTO(int reser_num, String reser_Starting, String reser_destination, String reser_familyname,
 			String reser_givenname, String reser_date) {
 		super();
-		this.reser_num = reser_num;
+		this.reser_round_trip = reser_num;
 		this.reser_Starting = reser_Starting;
 		this.reser_destination = reser_destination;
 		this.reser_familyname = reser_familyname;
@@ -30,12 +30,19 @@ public class ReserResultDTO {
 
 
 
-	public int getReser_num() {
-		return reser_num;
+
+	public int getReser_round_trip() {
+		return reser_round_trip;
 	}
-	public void setReser_num(int reser_num) {
-		this.reser_num = reser_num;
+
+
+
+	public void setReser_round_trip(int reser_round_trip) {
+		this.reser_round_trip = reser_round_trip;
 	}
+
+
+
 	public String getReser_Starting() {
 		return reser_Starting;
 	}

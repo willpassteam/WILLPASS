@@ -24,9 +24,6 @@ public class ReservationCheckFrontController extends HttpServlet{
 	}
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-
-		
 		ActionForward forward=null;
 		Action action=null;
 		
@@ -49,9 +46,10 @@ public class ReservationCheckFrontController extends HttpServlet{
 			}
 			
 		}else if(command.equals("/onereser")) { //예약상세 
+			System.out.println("잠시 넘엉");
+		
 			
 			forward = new ActionForward(); 
-			
 		    try {
 		    	 action =new ShowOneReserAction();
 	        	forward= action.execute(request, response);
@@ -59,9 +57,16 @@ public class ReservationCheckFrontController extends HttpServlet{
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-		}else if(command.equals("/showreservations")){
+		}else if(command.equals("/showreservations")){  //예약조회에서 조건검색
 			
 			forward = new ActionForward(); 
+		    try {
+		    	 action =new ShowreservationsAction();
+	        	forward= action.execute(request, response);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			
 		}
 			
@@ -76,6 +81,9 @@ public class ReservationCheckFrontController extends HttpServlet{
 				System.out.println("여기까진잘된다구");
 				dispatcher.forward(request, response);
 			}
+		}else {
+			
+			System.out.println("에이젝스 이동임");
 		}
 		
 	}

@@ -15,14 +15,12 @@ public class PassengerInfoaction implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		ActionForward forward = new ActionForward();
-		
-        forward.setPath(request.getContextPath()+"/reservation/showseatsinfoaction");
+		forward.setPath(request.getContextPath()+"/reservation/showseatsinfoaction");
         forward.setRedirect(true);
         	
-        	int num=Integer.parseInt(request.getParameter("num_people"));
-        	
-        	ArrayList pasinfoarr= new ArrayList();
-        	
+        	int num=Integer.parseInt(request.getParameter("num_people")); //예약자수 
+        
+        	ArrayList pasinfoarr= new ArrayList(); //예약자들의 대한 정보를 저장할 배열 
         	String pagender;
         	String pafname; 
         	String paname;
@@ -30,8 +28,7 @@ public class PassengerInfoaction implements Action{
         	String pareemail; 
         
         	
-        for (int i=0;i<num;i++) {
-           
+        for (int i=0;i<num;i++) {//예약자들의 대한 정보를 저장
             pagender=(String)request.getParameter("gender"+(i+1));
             pafname=(String)request.getParameter("familyName"+(i+1)).toUpperCase();
             paname=(String)request.getParameter("givenName"+(i+1)).toUpperCase();
