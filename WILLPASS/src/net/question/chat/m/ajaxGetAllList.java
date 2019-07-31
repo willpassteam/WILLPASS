@@ -35,7 +35,7 @@ public class ajaxGetAllList implements Action {
 			obj.put("chat_no", "\""+result.get(i).getChat_no()+"\"");
 			obj.put("user_email", result.get(i).getUser_email());
 			obj.put("chat_who", "\""+result.get(i).isChat_who()+"\"");
-			
+			obj.put("size", result.size());
 			array.add(obj);
 		}
 		

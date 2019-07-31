@@ -21,15 +21,20 @@ div {
 </style>
 <script type="text/javascript">
 $(function() {
+	var start = 0;
+	var end = 0;
 	timer = setInterval( function () {
 		$.ajax ({
 			url : "getChatContent.chat",
 			dataType:"json",
 			data : {chat_no :'<%=chat_no%>'},
-			success : function (data) { 
-				for ( var i in data) {
-					fnJson(data[i].chat_who,data[i].chat_date,data[i].chat_content);
-				}
+			success : function (data) {
+				end = data[0].size;
+				$(".chatting").text("");
+					for ( var i = start; i < end; i++) {
+						start++; 					
+						fnJson(data[i].chat_who,data[i].chat_date,data[i].chat_content);
+					}
 				
 				
 				
@@ -49,19 +54,19 @@ $(function() {
 function fnJson(who,date,content){
 	console.log(who+","+date+","+content);
 	if(who == "\"false\""){
+		$(".clearfix:last").append("<div class='float-left w-75'><div class='header'><small>상담사</small></div><div class='body'>	<div class='row ml-1'><small class='border w-75 float-left p-1'>"+content+"</small><small class='float-right w-25' style='margin-top: auto'>"+date+"</small></div></div></div><div class='clearfix my-2 Jul'></div>");	
+	}else{
+		$(".clearfix:last").append("<div class='float-right w-75'><div class='row' style='width: 360px'><small class='' style='margin-top: auto'>"+date+"</small>&nbsp;<small class='border border-success w-75 p-1'>"+content+"</small></div></div><div class='clearfix my-2'></div>")
 		
-		$(".chatting").append("<div class='float-left w-75'><div class='header'><small>상담사</small></div><div class='body'>	<div class='row ml-1'><small class='border w-75 float-left p-1'>"+content+"</small><small class='float-right w-25' style='margin-top: auto'>"+date+"</small></div></div></div><div class='clearfix my-2 Jul'></div>");	
 	}
 }
 function fnSubmit(){
 	var content = $("[name=content]").val();
-	alert('hi');
 	$.ajax ({
 		type:"post",
 		url : "writeChat.chat",
 		data : {chat_no :'<%=chat_no%>',content : content},
 		success : function (result){ 
-			alert("성공");
 			$("[name=content]").val("");
 			
 		}
@@ -86,81 +91,13 @@ function fnclose(){
 		<hr>
 			<!-- 관리자 문자 -->
 		<div class="chatting w-100" style="min-height: 475px; overflow-y: auto;">
-			<div class="float-left w-75">
-				<div class="header">
-					<small>상담사</small>
-				</div>
-				<div class="body">
-					<div class="row ml-1">
-						<small class="border w-75 float-left p-1">안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.</small><small class="float-right w-25 " style="margin-top: auto">07-29/5:13</small>
-					</div>
-
-				</div>
-			</div>
-			<div class="clearfix my-2 Jul"></div>
-
-			<!-- 사용자 문자 -->
-			<div class="float-right w-75">
-
-				<div class="row" style="width: 360px">
-					<small class="" style="margin-top: auto">07-29/5:13</small>&nbsp;<small class="border border-success w-75 p-1">안녕하세요 항공 예매번호 0000 관련 문의 드립니다.안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</small>
-				</div>
-			</div>
 			<div class="clearfix my-2"></div>
 			<!--  -->
-			<div class="float-left w-75">
-				<div class="header">
-					<small>상담사</small>
-				</div>
-				<div class="body">
-					<div class="row ml-1">
-						<small class="border w-75 float-left p-1">안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.</small><small class="float-right w-25 " style="margin-top: auto">07-29/5:13</small>
-					</div>
-
-				</div>
-			</div>
-			<div class="clearfix my-2"></div>
-
-			<!-- 사용자 문자 -->
-			<div class="float-right w-75">
-
-				<div class="row" style="width: 360px">
-					<small class="" style="margin-top: auto">07-29/5:13</small>&nbsp;<small class="border border-success w-75 p-1">안녕하세요 항공 예매번호 0000 관련 문의 드립니다.안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</small>
-
-				</div>
-			</div>
-			<div class="clearfix my-2"></div>
-			<!--  -->
-			<div class="float-left w-75">
-				<div class="header">
-					<small>상담사</small>
-				</div>
-				<div class="body">
-					<div class="row ml-1">
-						<small class="border w-75 float-left p-1">안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.안녕하세요 ooo 님 무엇을 도와드릴까요.</small><small class="float-right w-25 " style="margin-top: auto">07-29/5:13</small>
-					</div>
-
-				</div>
-			</div>
-			<div class="clearfix my-2"></div>
-
-			<!-- 사용자 문자 -->
-			<div class="float-right w-75">
-
-				<div class="row" style="width: 360px">
-					<small class="" style="margin-top: auto">07-29/5:13</small>&nbsp;<small class="border border-success w-75 p-1">안녕하세요 항공 예매번호 0000 관련 문의 드립니다.안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</small>
-
-				</div>
-			</div>
-			<div class="clearfix my-2"></div>
-			<!--  -->
-			<div class="chttingbutton mb-3">
-				<input type="text" name="content" class=" mx-2" style="width: 360px; height: 40px"><input type="button" class="btn btn-danger mb-1" value="전송" onclick="fnSubmit()">
-			</div>
-			
-			
-			
 		</div>
+		<div class="chttingbutton mb-3">
+			<input type="text" name="content" class=" mx-2" style="width: 360px; height: 40px"><input type="button" class="btn btn-danger mb-1" value="전송" onclick="fnSubmit()">
+		</div>
+			
 	</div>
 
 </body>

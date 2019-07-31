@@ -20,8 +20,10 @@ public class chatDAO {
 	
 	public chatDAO() {
 		try {
+			
 			Context ctx=new InitialContext();
 			ds=(DataSource) ctx.lookup("java:comp/env/jdbc/willpass");
+			free();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -404,6 +406,7 @@ public class chatDAO {
 		System.out.println(result);
 		return result;
 	}
+	//작성 유저용 
 	public void writeChat(int chat_no, String content,String user_email) {
 		int result = 0;
 		try {
@@ -431,4 +434,61 @@ public class chatDAO {
 		// TODO Auto-generated method stub
 		
 	}
+	//작성 어드민용 
+	public void writeChat(int chat_no, String content,String user_email,int admin) {
+		System.out.println(chat_no+":"+content+":"+user_email+":");
+		int result = 0;
+		try {
+			con = ds.getConnection();
+			
+			String sql = "insert into chat(chat_no,chat_who,user_email,chat_date,chat_content) values(?,?,?,sysdate(),?)";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, chat_no);
+			pstmt.setBoolean(2, false);
+			pstmt.setString(3, user_email);
+			pstmt.setString(4, content);
+			
+			if(pstmt.executeUpdate() == 1 ){
+				System.out.println("메시지 db저장완료");
+			}
+					
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}finally{
+			free();
+		}
+		// TODO Auto-generated method stub
+		
+	}
+	//어드민이 나간후 온 메세지 갯수 확인용 
+	public int adminChatCount(int chat_no) {
+		int result = 0;
+		try {
+			con = ds.getConnection();
+			
+			String sql = "select count(a.chat_no) from chat a JOIN chat_ref b ON a.chat_no = b.chat_no where b.chat_adminjoin = false and b.chat_adminouttime < a.chat_date AND a.chat_no = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, chat_no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+					
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}finally{
+			free();
+		}
+		return result;
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

@@ -25,31 +25,31 @@ public class ajaxGetAdminList implements Action {
 		ArrayList<ArrayList> list = new chatDAO().getAllChat_List();
 		JSONArray resultarray = new JSONArray();
 		for (int i = 0; i < list.size(); i++) {
-			 
+			
 			JSONArray array = new JSONArray();
 			for (int j = 0; j < list.get(i).size(); j++) {
 				ArrayList<chatDTO> result = list.get(i);	
 				JSONObject obj = new JSONObject();
-				
-				obj.put("chat_content", result.get(i).getChat_content());
-				obj.put("chat_date",result.get(i).getChat_date().toString());
-				obj.put("chat_no", Integer.toString(result.get(i).getChat_no()));
-				obj.put("user_email", result.get(i).getUser_email());
-				obj.put("chat_who", Boolean.toString(result.get(i).isChat_who()));
-				
+				String date = result.get(j).getChat_date().toString().substring(5,16);
+				obj.put("chat_content", result.get(j).getChat_content());
+				obj.put("chat_date",date);
+				obj.put("chat_no", Integer.toString(result.get(j).getChat_no()));
+				obj.put("user_email", result.get(j).getUser_email());
+				obj.put("chat_who", Boolean.toString(result.get(j).isChat_who()));
+				obj.put("chat_count", result.size());
+				obj.put("allsize", list.size());
 				array.add(obj);
 				
 			}
-			JSONObject obj1 = new JSONObject();
+			
 			
 			resultarray.add(array);
 			
 		}
-		System.out.println(resultarray);
+		
 		
 		PrintWriter out = response.getWriter();
 		
-		System.out.println(resultarray.toString());
 		out.print(resultarray.toString());
 		out.close();
 		
