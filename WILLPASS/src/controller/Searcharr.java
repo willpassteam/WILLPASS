@@ -17,8 +17,7 @@ public class Searcharr implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("전달");
-		
+				
 		ArrayList searcharr = new ArrayList();
 		SimpleDateFormat trans = new SimpleDateFormat("yyyyMMdd");
 
@@ -70,7 +69,7 @@ public class Searcharr implements Action {
 		searcharr.add(sdto2);
 		
 		}
-		System.out.println(searcharr.size()+"사이즈");
+		
 		//세션저장
 		HttpSession session = request.getSession();
 		session.setAttribute("searcharr", searcharr);
@@ -78,7 +77,7 @@ public class Searcharr implements Action {
 		ActionForward forward = new ActionForward();
 		
 		forward.setRedirect(false);
-		System.out.println("삼촌 액션 실행 ~~!!!");
+		
 		forward.setPath("/reserve/ReserStep2.jsp");
 		
 		return forward;

@@ -36,7 +36,6 @@ public class SearchPriceAction implements Action {
 		request.getSession().removeAttribute("newlist");
 		request.getSession().removeAttribute("newlist2");
 		
-		System.out.println("엑션");
 		ArrayList<searchDTO> newlist = new ArrayList<searchDTO>();
 		
 		String order = request.getParameter("order");

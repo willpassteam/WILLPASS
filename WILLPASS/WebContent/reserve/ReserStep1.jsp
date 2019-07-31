@@ -448,6 +448,9 @@
 		<c:when test="${newlist != null}">
 
 		<c:forEach var="air" items="${newlist}">
+			<c:if test="${air.departure_time == null}">
+			</c:if>
+			<c:if test="${air.departure_time != null}">
 			<tr class="select">
 				<td >${air.departure_time} - ${air.arrival_time} (${air.time})</td>
 				<td >${air.airline}</td>
@@ -466,7 +469,9 @@
 			</c:if>	
 				<td style="display: none;">${air.time}</td>
 				<td style="display: none;">${air.price}</td>				
-			</tr>				
+			</tr>			
+			
+			</c:if>	
 		</c:forEach>
 
 	</c:when>
@@ -505,6 +510,9 @@
 		</c:when>
 		<c:when test="${newlist2 != null}">
 		<c:forEach var="air2" items="${newlist2}">
+			<c:if test="${air2.departure_time == null}">
+			</c:if>
+			<c:if test="${air2.departure_time != null}">
 			<tr class="select2">
 				<td >${air2.departure_time} - ${air2.arrival_time} (${air2.time})</td>
 				<td >${air2.airline}</td>
@@ -523,7 +531,8 @@
 			</c:if>		
 				<td style="display: none;">${air2.time}</td>
 				<td style="display: none;">${air2.price}</td>					
-			</tr>				
+			</tr>	
+		</c:if>			
 		</c:forEach>
 	</c:when>		
 	</c:choose>		
