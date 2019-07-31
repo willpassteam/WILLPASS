@@ -28,7 +28,7 @@ public class Controller3 extends HttpServlet{
 		response.setContentType("text/html;charset=utf-8");
 		
 		String command = request.getPathInfo();
-		
+		System.out.println(command);
 		ActionForward forward = null;
 		Action action = null;
 		
