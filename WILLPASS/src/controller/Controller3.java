@@ -28,18 +28,17 @@ public class Controller3 extends HttpServlet{
 		response.setContentType("text/html;charset=utf-8");
 		
 		String command = request.getPathInfo();
-		System.out.println(command);
+		
 		ActionForward forward = null;
 		Action action = null;
 		
 		if(command.equals("/ReserStep1.do")){
 			String order = request.getParameter("order");
-			System.out.println(order);
 			action = new SearchPriceAction();
 			
 			try {
 				forward = action.execute(request, response);
-				System.out.println("234");
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -50,8 +49,7 @@ public class Controller3 extends HttpServlet{
 			
 			try {
 				forward = action.execute(request, response);
-				System.out.println(forward.getPath()+"여기서 어디로 보내는거징");
-				System.out.println("555");
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}			

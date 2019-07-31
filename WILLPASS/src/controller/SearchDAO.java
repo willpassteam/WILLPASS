@@ -105,7 +105,7 @@ public class SearchDAO {
 	
 	public int pricecheck(String airline) {
 		int price = 0;
-		System.out.println(airline);
+		
 		try {
 			con=ds.getConnection();
 			String sql = "select * from price where airline=?";
