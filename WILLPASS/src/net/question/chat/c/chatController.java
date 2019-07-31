@@ -12,14 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Board.DB.BoardDAO;
-import Board.DB.BoardDTO;
-import Board.M.boardLoginCheck;
-import Board.M.deleteBoard;
-import Board.M.getListBoard;
-import Board.M.replyBoard;
-import Board.M.viewBoard;
-import Board.M.writeBoard;
+
+import net.question.chat.m.ajaxGetAdminList;
 import net.question.chat.m.ajaxGetAllList;
 import net.question.chat.m.chatLogin;
 import net.question.chat.m.closeChat;
@@ -88,7 +82,7 @@ public class chatController extends HttpServlet {
 					e.printStackTrace();
 				}
 				
-			}else if(command.equals("writeChat.chat")){// boardLoginCheck() 메소드를 거쳐  작성자와 아이디가 동일할시 넘어옴
+			}else if(command.equals("writeChat.chat")){// write ㅐㅊㅅ
 				try {
 					action = new writeChat();
 					forward = action.execute(req, resp);
@@ -98,7 +92,7 @@ public class chatController extends HttpServlet {
 				}
 				
 				
-			}else if(command.equals("close.chat")){// Question.jsp 로 이동 할경우
+			}else if(command.equals("close.chat")){// popup창 제거 
 				try {
 					action = new closeChat();
 					forward= action.execute(req, resp);
@@ -107,31 +101,16 @@ public class chatController extends HttpServlet {
 				}
 				
 				
-			}else if(command.equals("Delete.Board")){// Delete.Board 작성자가 View 에 들어와 삭제할경우
+			}else if(command.equals("getChatAdmin.chat")){// 갯쳇어드민~
 				
 				try {
+					action = new ajaxGetAdminList();
 					forward= action.execute(req, resp);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
 				
-			}else if(command.equals("reply.Board")){ //답글 작성시
-				
-				try {
-					BoardDTO dto = new BoardDAO().getBoard(Integer.parseInt(req.getParameter("Board_num")));
-					req.setAttribute("BoardDTO", dto);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				forward.setRedirect(false);
-				forward.setPath("./Questionreply.jsp");
-			}else if(command.equals("replyWrite.Board")){
-				try {
-					forward= action.execute(req, resp);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		}
 		

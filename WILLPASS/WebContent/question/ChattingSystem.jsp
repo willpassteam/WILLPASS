@@ -20,6 +20,26 @@ $(function() {
 	if(height < 802){
 		
 	}
+	timer = setInterval( function () {
+		$.ajax ({
+			url : "getChatAdmin.chat",
+			dataType:"json",
+			success : function (data) { 
+				for ( var i in data) {
+					for(var j in data[i]){
+					fnJson(data[i].chat_who,data[i].chat_date,data[i].chat_content);
+					}
+				}
+				
+				
+				
+			}
+				
+			,error:function(e){
+				console.log('실패'+e.status+":"+e.responseText);
+			}
+		});
+	},3000);
 	
 })
 
@@ -38,7 +58,6 @@ $(function() {
 					<a href="#">
 						<h4>sovla<span class="badge badge-danger">3</span></h4>
 						<h6>안녕하세요 항공 예매번호 0000 관련 문의 드립니다.</h6>
-						
 					</a>
 				</div>
 				<div class="border">

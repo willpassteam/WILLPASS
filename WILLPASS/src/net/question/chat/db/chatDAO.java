@@ -296,23 +296,20 @@ public class chatDAO {
 	}
 	// 모든 chat_no을 가져오는 메소드
 	public int[] getAll_chat_no(){
-		int[] result = null;
+		ArrayList<Integer> result = new ArrayList<>();
 		try {
 			con = ds.getConnection();
 			
 		
-			String sql = "select chat_no,count(chat_no) as Max from chat_ref";
+			String sql = "select chat_no from chat_ref";
 			
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
-			ResultSetMetaData metaData = (ResultSetMetaData)rs;
-			int maxsize = metaData.getColumnCount();
-			result = new int[maxsize];
-			for (int i = 0; i < result.length; i++) {
-				rs.next();
+			
+			while(rs.next()){
 				
-				result[i] = rs.getInt("chat_no");
+				result.add(rs.getInt("chat_no"));
 				
 			}
 			/*private String user_email;
@@ -328,7 +325,11 @@ public class chatDAO {
 		}finally {
 			free();
 		}
-		return result;
+		int[] resultint = new int[result.size()];
+		for (int i = 0; i < resultint.length; i++) {
+			resultint[i] = result.get(i);
+		}
+		return resultint;
 	}
 	
 	
@@ -363,10 +364,12 @@ public class chatDAO {
 	//Admin모든 대화내용을 가져오는 메소드 
 	public ArrayList<ArrayList> getAllChat_List(){
 		ArrayList<ArrayList> result = new ArrayList();
-		ArrayList<chatDTO> dtoList = new ArrayList<>();
+		
 		try {
-			con = ds.getConnection();
+			
 			int[] max = getAll_chat_no();
+			
+			con = ds.getConnection();
 			for (int i= 0;  i< max.length; i++) {
 				int chat_no = max[i];
 				
@@ -374,7 +377,9 @@ public class chatDAO {
 				
 				pstmt = con.prepareStatement(sql);
 				
+				pstmt.setInt(1, chat_no);
 				rs = pstmt.executeQuery();
+				ArrayList<chatDTO> dtoList = new ArrayList<>();
 				while(rs.next()){
 					chatDTO dto = new chatDTO();
 					dto.setChat_content(rs.getString("chat_content"));
@@ -396,6 +401,7 @@ public class chatDAO {
 		}finally {
 			free();
 		}
+		System.out.println(result);
 		return result;
 	}
 	public void writeChat(int chat_no, String content,String user_email) {

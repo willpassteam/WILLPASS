@@ -29,6 +29,7 @@ public class ajaxGetAllList implements Action {
 		for (int i = 0; i < result.size(); i++) {
 			JSONObject obj = new JSONObject();
 			
+			
 			obj.put("chat_content", result.get(i).getChat_content());
 			obj.put("chat_date","\""+result.get(i).getChat_date()+"\"");
 			obj.put("chat_no", "\""+result.get(i).getChat_no()+"\"");
