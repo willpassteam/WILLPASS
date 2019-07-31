@@ -20,7 +20,7 @@ public class boardLoginCheck implements Action {
 		String board_email = (String) request.getSession(true).getAttribute("user_email");
 		// 게시판 번호 가져오기
 		//임시로 사용하는 아이디
-		board_email = "asdsad";
+		
 
 		
 		if(board_email == null && !(request.getRequestURI().split("question/")[1].equals("Question.Board"))){// 비로그인시 바로

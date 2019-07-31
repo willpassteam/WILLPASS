@@ -11,8 +11,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 $(function() {
-	
-
 	$("#user_pwd2").keyup(function(){
 		
 		 if($("#user_pwd").val() != ($("#user_pwd2").val())){ 	
@@ -27,40 +25,42 @@ $(function() {
 	});
 
 });
+function idcheck() {
+	var id=$("#user_id").val();
+	$.ajax({
+		type : 'POST',
+		url  : '/WILLPASS/idcheck',
+		data: { id : id }, //{parameterName, data} 형식
+		success: function(result){
+			if(result==0){ //결과가 1이면 사용할수 있는 아이디
+				$("#checklabel").removeClass("text-danger");
+				$("#checklabel").addClass("text-success");
+				$("#checklabel").html("<b class='text-info'>√ </b>사용할 수 있는 아이디입니다.");
+			
+			}else{//결과가 1이 아니라면 사용할수 없는 아이디
+				$("#checklabel").removeClass("text-success");
+				$("#checklabel").addClass("text-danger");
+				$("#checklabel").html("사용할 수 없는 아이디입니다.");
+			}				
+		}
+	});}
+
+	
 
 
-//////////////////////daum api
+
+
 
 function getAddressInfo(){
 	        new daum.Postcode({
 	        	oncomplete: function(data) {
  	 				var fullAddress = data.zonecode + ', ' + data.address+ ', ' + data.buildingName ;
-	 		    //var fullAddress = data.address + ', ' + data.buildingName +', '+ data.zonecode;
-	 				//var extraAddress =  data.buildingName;
 	 				$('#user_address').val(fullAddress);
-	 		      // $('#user_address2').val(extraAddress);
 	            },
 	        }).open();
 	    }
 
 
-//18july error need double checkup
-//check
-// var idReg = /^[A-Za-z]{1}[A-Za-z0-9]{4,99}$/;
-
-/////////////////////// function validationCheck() {
-
-//     if( !idReg.test( $('#user_id').val() )){
-//           alert("아이디는 영문자로 시작하는 영문 혹은 영문+숫자로 5자리 이상이어야 합니다."); // 메세지창
-// 		  id.focus(); // 해당 InputBox로 커서 이동 
-// 		  return false;
-//     }
-
-
-
-
-	
-//20/july
 
 function checkAll(){
     if( $("#allCheck").is(':checked') ){
@@ -70,18 +70,6 @@ function checkAll(){
     }
 }
 
-
-
-
-
-// if($("input:radio[name='user_name']").is(":checked")==false){	
-// //if($("input:radio[name='gender']").is(":checked")==false){
-//     alert("남자 또는 여자를 꼭 선택하세요!");
-//     return false;
-// }
-
-
-////////////////////////////////valication
 
 	 function checkz() {
       var hobbyCheck = false;
@@ -93,12 +81,7 @@ function checkAll(){
       
       var getId= RegExp(/^[a-z0-9]{6,15}$/);
       
-      //var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;    
-      var getMobile = RegExp(/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/);
-      
-      //ID 이거 맞는지 잘 몰겟음 
-     // var isPwd =/^[a-z0-9][a-z0-9_\-]{3,15}$/;
-      ///^[A-Za-z0-9]{6,15}$/;
+      var getMobile = RegExp(/^01([0|1|6|7|8|9]?)[0-9]{7,8}$/);
       
       //아이디 공백 확인
       if($("#user_id").val() == ""){
@@ -108,7 +91,6 @@ function checkAll(){
       }		
       
       
-    //getId를 이용해서 트라이해봄 23 july
       if (!getId.test($("#user_id").val())) {
           alert("한글성명은 2자에서 6자 사이입니다");
           $("#user_id").val("");
@@ -116,13 +98,6 @@ function checkAll(){
           return false;
         }
       
-//       //이름이라는 데 음 아이디 인듯 다시함체크해야함
-//       if(!getCheck.test($("#user_id").val())){
-//           alert("형식에 맞게 입력해주세요");
-//           $("#user_id").val("");
-//           $("#user_id").focus();
-//           return false;
-          
           
           if (!getName.test($("#user_name").val())) {
               alert("한글성명은 2자에서 6자 사이입니다");
@@ -135,41 +110,12 @@ function checkAll(){
         //비밀번호
           if(!getCheck.test($("#user_pwd").val())) {
           alert("10-15자의 영문,숫자조합으로 가능합니다 ");
-       // alert("비밀번호가10-15자의 영문,숫자로 구성되어있지않습니다 .");
           
           $("#user_pwd").val("");
           $("#user_pwd").focus();
           return false;
           }
-       
-      
-        
-//       if($("#user_pwd").val() != ($("#user_pwd2").val())){ 
-//           alert("동일한 비밀번호로 적어주세요.");
-//           $("#user_pwd").val("");
-//           $("#user_pwd2").val("");
-//           $("#user_pwd").focus();
-//           return false;
-//          }
-      
     
-      
-    //아이디랑 비밀번호랑 같은지
-    
-     //이메일 공백 확인
-     
-     
-     
-//       if($("#user_email").val() == ""){
-//           alert("이메일을 입력해주세요");
-//           $("#user_email").focus();
-//           return false;
-//         }
-    
-    
-    
-    
-      //이메일 유효성 검사 // 아마도 안필요한듯 하군 
       
       if(!getMail.test($("#user_email").val())){
         alert("이메일형식에 맞게 입력해주세요")
@@ -181,14 +127,13 @@ function checkAll(){
       //mobile
       if (!getMobile.test($("#user_mobile").val())) {
           alert("-없이  쓰세용");
-        //alert("-없이  쓰세용");
           $("#user_mobile").val("");
           $("#user_mobile").focus();
           return false;
         }
       
       
-      if(!($("input[name='Check']:checked").length==4)){
+      if(!($("input[name='Check']:checked").length>=3)){
 		   alert("개인정보이용을 동의하셔야 함여하실수 있습니다.");
 		   $("#allCheck").focus();
 		   return false;
@@ -197,7 +142,7 @@ function checkAll(){
 
 
 
-//$("#user_id").keydown(function(){
+
 
 </script>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
@@ -215,7 +160,6 @@ function checkAll(){
 	<h2 class="text-center mt-5 mb-4">회원가입</h2>
 	<h6 class="text-center text-muted">WILLPASS 회원가입을 환영합니다!</h6>
 	<h6 class="text-center text-muted mb-4 small">회원으로 가입하시면 할인쿠폰 등 다양한 혜택을 받으실 수 있으며, 항공권 특가 정보와 이벤트 소식을 이메일로 받아보실 수 있습니다.</h6>
-	<!-- 	<img src="../img/user/join1.png" class="col-12"> -->
 	<div class="container pl-5 border">
 	<div class="row pl-3 mt-4">
 	<h5 class=" d-inline-block col-9">회원정보 입력</h5>
@@ -223,7 +167,7 @@ function checkAll(){
 	</div>
 	<div class="mt-3 col-12">
 	 <table class="table table-bordered">
-    <tbody>-
+    <tbody>
       <tr>
       
         <td width="20%" class="bg-light" >아이디 <b class="text-danger">*</b></td>
@@ -233,14 +177,11 @@ function checkAll(){
       <div class="input-group col-5 pl-0 pt-1 pb-1 mr-0 pr-3 ml-3">
  			<input type="text" class="form-control col-7" id="user_id" name="user_id" autofocus required/>
 			 <div class="input-group-prepend col-5 pl-0 pr-0">
-      	 <button type="button" class="btn btn-outline-primary  pt-0 pb-0 pr-3">중복확인</button>
+      	 <button type="button" class="btn btn-outline-primary  pt-0 pb-0 pr-3" onclick="idcheck()">중복확인</button>
       	 
-<!--       	 12/july 중복성체크 애플민트에 서 copy -->
-<!--       	 7.사용가능한 ID이면 사용함 버튼을 눌러서 부모창(join.jsp)에 사용가능한 ID뿌려주기 -->
-<!-- 		<input type="button" value="사용함" onclick="result()">  여기까지 -->
       </div>
   	</div>
-        <p class=" d-inline-block col-6 ml-4 pt-2 small text-success "><b class="text-info">√ </b>사용 가능한 아이디.  6~15자의 영문 소문자 ,숫자만 사용가능</p>
+        <p class=" d-inline-block col-6 ml-4 pt-2 small text-success " id="checklabel"><b class="text-info">√ </b>사용 가능한 아이디.  6~15자의 영문 소문자 ,숫자만 사용가능</p>
         </div>
         </td>
       </tr>
@@ -258,7 +199,7 @@ function checkAll(){
       </tr>
       
        <tr>
-        <td width="20%" class="bg-light">비밀번호 확인<b class="text-danger"  required/>*</b></td>
+        <td width="20%" class="bg-light">비밀번호 확인<b class="text-danger">*</b></td>
         
         <td width="80%" class="pb-0 pt-0">
         <div class="row mb-0 pb-0 pt-2">
@@ -370,9 +311,9 @@ function checkAll(){
 	<div class="col-7 pl-5 pt-2">
 	  <label class="checkbox-inline pl-3">
 	  					<input type="checkbox" autocomplete="on" onclick="checkAll()" name="Check" class="press" id="allCheck" ><b>아래 약관 및 개인정보 수집,이용 등에 모두 동의 합니다.</b></label><a href="#" class="pull-right">보기</a><br>
-                        <label class="checkbox-inline" class="press" pl-3"></span><input type="checkbox" name="Check" >서비스 약관</label><a href="#" class="">보기</a><br>
-                        <label class="checkbox-inline" class="press" pl-3"></span><input type="checkbox" name="Check" >개인정보 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
-                        <label class="checkbox-inline" class="press" pl-3"></span><input type="checkbox" name="Check" >고유식별정보의 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
+                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >서비스 약관</label><a href="#" class="">보기</a><br>
+                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >개인정보 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
+                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >고유식별정보의 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
 	</div>
 	</div>
 	<div class="row mt-3">
@@ -387,7 +328,6 @@ function checkAll(){
 	</div>
 	
 
-</div>
 </form>
 <%-- Footer Start --%>
 	<jsp:include page="../include/Footer.jsp"></jsp:include>
