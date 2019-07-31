@@ -359,6 +359,58 @@ public class MemberDAO {
 			
 			
 		}
+		
+		
+		
+		
+	//////////////////////////////////////////////////////////25/ JULY 전번으로 아디찾기
+//		
+//		public String getUserMobile(String user_mobile) {
+//			String user_id="";
+//			//return user_id;
+//			
+//			
+//			con=null;
+//			pstmt=null;
+//			rs=null;
+//			
+//			try {
+//				getConnection();
+//				
+//				//sql = "select * from member where user_email=?";
+//				pstmt = con.prepareStatement("select * from user where user_mobile=?");
+//				pstmt.setString(1, user_mobile);
+//				rs = pstmt.executeQuery();
+//				
+//				rs.next();
+//				user_mobile=rs.getString("user_mobile");
+//				
+////				아마도 이걸써야할듯 음 25/july
+//				
+////				if(rs.next()){	//검색한 레코드가 있으면
+////					if (user_mobile.equals(rs.getString("user_mobile"))) {
+////					check = 1;	//중복
+////				}else {			//검색한 레코드가 없으면
+////					check = 0;	//중복아님
+////				}
+//				
+////			}
+//				
+//			} catch (Exception e) {
+//				System.out.println("userCheck에서 오류 : "+e.getMessage());
+//			}finally {
+//				//자원 해제
+//				try {
+//					if(pstmt != null) pstmt.close();
+//					if(con != null) con.close();
+//					if(rs != null) rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//				
+//			return user_mobile;
+//}
 }
 	
 	
