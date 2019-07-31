@@ -20,8 +20,6 @@
 <link rel="stylesheet" href="/path/to/slick.css">
 <link rel="stylesheet" href="/path/to/slick-theme.css">
 
-
-
 <style type="text/css">
 .subject {
 	height: 70px;

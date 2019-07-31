@@ -28,8 +28,6 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 		String useremail=(String)request.getSession().getAttribute("user_email");
 		forward.setPath("/resercheck/resercheckview.jsp");
 			
-//		잠시
-		
 		Paging pa = new Paging();
 		pa.setNext(true);
 		//전체게시물수 검색해서 변수에 set하기
@@ -40,7 +38,6 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 			
 			pa.setPage(1);
 			pa.setRange(1);
-			System.out.println("이거실행됨");
 			
 			
 		}else {
@@ -57,7 +54,6 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 		ArrayList  list = dao.showAllReservation(useremail,pa.getStartlist(),pa.getListsize());
 		request.setAttribute("reserresult", list);
 		request.setAttribute("paginginfo",pa);
-	
 
 	}
 	

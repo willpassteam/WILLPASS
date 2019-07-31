@@ -1,140 +1,134 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>WILL PASS</title>
+<!-- Bootstrap사용을 위한것 -->
+<jsp:include page="../include/Bootstrap.jsp"></jsp:include>
+<!-- 달력을 위한 css + js -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 아이콘을 위한 css -->
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+<!-- 캐러셀을 위한 css -->
+<link rel="stylesheet" href="/path/to/slick.css">
+<link rel="stylesheet" href="/path/to/slick-theme.css">
+</head>
+<body>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-<link href="../css/resercheckcss.css" rel="stylesheet">
-<script>
-$('#printInvoice').click(function(){
-    Popup($('.invoice')[0].outerHTML);
-    function Popup(data) 
-    {
-        window.print();
-        return true;
-    }
-});
-</script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<!--Author      : @arboshiki-->
 <div class="container">
-<div id="inventory-invoice">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0 ">
+                    <div class="row pt-5 pl-3 pr-3">
+                        <div class="col-md-3 ">
+                              <img src="${pageContext.request.contextPath}/img/Logoicon.png" class="col">
+                        </div>
+                        <div class="col-md-6  text-center pt-3">
+                     	<h4><b>예약상세</b></h4>
+                        </div>
 
-    <div class="toolbar hidden-print">
-        <div class="text-right">
-            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
-            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+                        <div class="col-md-3 text-right">
+                            <p class="font-weight-bold mb-1">예약번호 #550</p>
+                            <p class="text-muted">Due to: 4 Dec, 2019</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <div class="row pb-5 p-5">
+                        <div class="col-md-6">
+                            <p class="font-weight-bold mb-4">Client Information</p>
+                            <p class="mb-1">John Doe, Mrs Emma Downson</p>
+                            <p>Acme Inc</p>
+                            <p class="mb-1">Berlin, Germany</p>
+                            <p class="mb-1">6781 45P</p>
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <p class="font-weight-bold mb-4">Payment Details</p>
+                            <p class="mb-1"><span class="text-muted">VAT: </span> 1425782</p>
+                            <p class="mb-1"><span class="text-muted">VAT ID: </span> 10253642</p>
+                            <p class="mb-1"><span class="text-muted">Payment Type: </span> Root</p>
+                            <p class="mb-1"><span class="text-muted">Name: </span> John Doe</p>
+                        </div>
+                    </div>
+
+                    <div class="row p-5">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="border-0 text-uppercase small font-weight-bold">ID</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Item</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Description</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Quantity</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Unit Cost</th>
+                                        <th class="border-0 text-uppercase small font-weight-bold">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Software</td>
+                                        <td>LTS Versions</td>
+                                        <td>21</td>
+                                        <td>$321</td>
+                                        <td>$3452</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Software</td>
+                                        <td>Support</td>
+                                        <td>234</td>
+                                        <td>$6356</td>
+                                        <td>$23423</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Software</td>
+                                        <td>Sofware Collection</td>
+                                        <td>4534</td>
+                                        <td>$354</td>
+                                        <td>$23434</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row-reverse bg-dark text-white p-4">
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Grand Total</div>
+                            <div class="h2 font-weight-light">$234,234</div>
+                        </div>
+
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Discount</div>
+                            <div class="h2 font-weight-light">10%</div>
+                        </div>
+
+                        <div class="py-3 px-5 text-right">
+                            <div class="mb-2">Sub - Total amount</div>
+                            <div class="h2 font-weight-light">${selectresult[0].reser_date}
+${selectresult[0].reser_givenname}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <hr>
     </div>
-    <div class="invoice overflow-auto">
-        <div style="min-width: 600px">
-            <header>
-                <div class="row">
-                    <div class="col">
-                        <a target="_blank" href="#">
-                            <h1>COMPANY LOGO</h1>
-                            </a>
-                    </div>
-                    <div class="col company-details">
-                        <h2 class="name">
-                            <a target="_blank" href="#">
-                            Company Name
-                            </a>
-                        </h2>
-                        <div>26 Tower Name, City 123456, INDIA</div>
-                        <div>(123) 456-789</div>
-                        <div>info@company.com</div>
-                    </div>
-                </div>
-            </header>
-            <main>
-                <div class="row contacts">
-                    <div class="col invoice-to">
-                        <div class="text-gray-light">INVOICE TO:</div>
-                        <h2 class="to">Rohit Chauhan</h2>
-                        <div class="address">B-56 Bulding Name, City, State - India</div>
-                        <div class="email"><a href="mailto:test@example.com">test@example.com</a></div>
-                    </div>
-                    <div class="col invoice-details">
-                        <h1 class="invoice-id">INVOICE 121</h1>
-                        <div class="date">Date of Invoice: 28/11/2018</div>
-                        <div class="date">Due Date: 28/11/2018</div>
-                    </div>
-                </div>
-                <table border="0" cellspacing="0" cellpadding="0">
-                    <thead>
-                        <tr>
-                            <th>SR NO.</th>
-                            <th class="text-left">DESCRIPTION</th>
-                            <th class="text-right">PRICE</th>
-                            <th class="text-right">TAX (13%)</th>
-                            <th class="text-right">TOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="no">01</td>
-                            <td class="text-left"><h3>Description 1</h3>Testing Description 1</td>
-                            <td class="unit">₹ 0.00</td>
-                            <td class="tax">10%</td>
-                            <td class="total">₹ 0.00</td>
-                        </tr>
-                        <tr>
-                            <td class="no">02</td>
-                            <td class="text-left"><h3>Description 2</h3>Testing Description 2</td>
-                            <td class="unit">₹ 40.00</td>
-                            <td class="tax">13%</td>
-                            <td class="total">₹ 1,200.00</td>
-                        </tr>
-                        <tr>
-                            <td class="no">03</td>
-                            <td class="text-left"><h3>Description 3</h3>Testing Description 3</td>
-                            <td class="unit">₹ 40.00</td>
-                            <td class="tax">13%</td>
-                            <td class="total">₹ 3,200.00</td>
-                        </tr>
-                        <tr>
-                            <td class="no">04</td>
-                            <td class="text-left"><h3>Description 4</h3>Testing Description 4</td>
-                            <td class="unit">₹ 40.00</td>
-                            <td class="tax">13%</td>
-                            <td class="total">₹ 800.00</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">SUBTOTAL</td>
-                            <td>₹ 5,200.00</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">TAX 25%</td>
-                            <td>₹ 1,300.00</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">GRAND TOTAL</td>
-                            <td>₹ 6,500.00</td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div class="thanks">Thank you!</div>
-                <div class="notices">
-                    <div>NOTICE:</div>
-                    <div class="notice">System Generated Invoice.</div>
-                </div>
-            </main>
-            <footer>
-                Invoice was generated on a computer and is valid without the signature and seal.
-            </footer>
-        </div>
-        <div></div>
-    </div>
+    
+    <div class="text-light mt-5 mb-5 text-center small">by : <a class="text-light" target="_blank" href="http://totoprayogo.com">totoprayogo.com</a></div>
+
 </div>
-</div>
+
+
+</body>
+</html>

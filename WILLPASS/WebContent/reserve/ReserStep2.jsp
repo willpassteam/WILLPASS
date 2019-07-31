@@ -63,7 +63,7 @@ $(function(){
 		var nameref=/^[a-zA-Z]{2,10}$/;
 		if(nameref.test($(this).val())==false){
 			
-// 			alert("영문자를 입력해주세요!");
+			alert("영문자를 입력해주세요!");
 			$(this).val("");
 			
 		}
@@ -74,7 +74,7 @@ $(function(){
 		var tel2ref =/^[0-9]{3,4}$/;
 		if(tel2ref.test($(this).val())==false){
 			
-// 			alert("올바른 전화번호를 입력하세요!");
+			alert("올바른 전화번호를 입력하세요!");
 			$(this).val("");
 			
 		}
@@ -85,7 +85,7 @@ $(function(){
 		var tel3ref =/^[0-9]{4}$/;
 		if(tel3ref.test($(this).val())==false){
 			
-// 			alert("올바른 전화번호를 입력하세요.");
+			alert("올바른 전화번호를 입력하세요.");
 			$(this).val("");
 			
 		}
@@ -97,7 +97,7 @@ $(function(){
 		var emailc1ref =/^[0-9a-zA-Z]{2,15}$/;
 		if(emailc1ref.test($(this).val())==false){
 			
-// 			alert("올바른 이메일을 입력하세요.");
+			alert("올바른 이메일을 입력하세요.");
 			$(this).val("");
 			
 		}
@@ -109,7 +109,7 @@ $(function(){
 		var emailc1ref =/^((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 		if(emailc1ref.test($(this).val())==false){
 			
-// 			alert("올바른 이메일을 입력하세요.");
+			alert("올바른 이메일을 입력하세요.");
 			$(this).val("");
 			
 		}
