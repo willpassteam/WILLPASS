@@ -26,7 +26,7 @@ input[type="text"], textarea {
 	padding-left: 0;
 }
 </style>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resercheck/resercheckjs.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resercheck/datejs.js"></script>
 <script type="text/javascript" >
 function fncheckresult(){ //날짜로 예약 검색 할때 
 	
