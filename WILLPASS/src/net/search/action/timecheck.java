@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -30,23 +31,22 @@ public class timecheck extends Thread {
 		this.index = index;
 		this.list = list;
 		String date_1 = "";
-
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+			Calendar cal = Calendar.getInstance();
 			long time;
 			time = (format.parse(date).getTime() - System.currentTimeMillis());
 			long calDateDays = ((time / (24 * 60 * 60 * 1000)) + 1) % 7 - 7;
-			int now = Integer.parseInt(new SimpleDateFormat("yyyyMMdd").format(System.currentTimeMillis()))
-					+ (int) calDateDays;
-			date_1 = Integer.toString(now);
-
+			cal.add(cal.DATE,(int)calDateDays);
+			 
+			this.yy = cal.get(cal.YEAR)+"";
+			this.mm = (cal.get(cal.MONTH)+1)+"";
+			this.dd = cal.get(cal.DATE)+"";
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-		this.yy = date_1.substring(0, 4);
-		this.mm = date_1.substring(4, 6);
-		this.dd = date_1.substring(6);
+		
 
 	}
 

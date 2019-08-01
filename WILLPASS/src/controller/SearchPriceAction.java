@@ -49,16 +49,19 @@ public class SearchPriceAction implements Action {
 							
 			int min1 = 0;
 			int hour1 = 0;
+			for (int i=list.size()-1; i>=0; i--){
+				svo = (searchDTO)list.get(i);
+				if (svo.getTime()==null) {
+					list.remove(i);
+				}
+			}
 			
 			for (int i=0; i<list.size(); i++){
 			
 			svo = (searchDTO)list.get(i);
 			pck1 = sdao.pricecheck(svo.getAirline());
 			String t1 = svo.getTime();
-				if(t1 == null){
-					hour1 = 0;
-					min1 = 0;
-				}else if(t1.contains("시간")){
+				 if(t1.contains("시간")){
 					t1=t1.replace(" ", "");
 					String hr1[] = t1.split("시간"); 
 						if(hr1.length == 1){
@@ -101,14 +104,19 @@ public class SearchPriceAction implements Action {
 			
 		int min2 = 0;
 		int hour2 = 0;
+		
+		for (int i=list2.size()-1; i>=0; i--){
+			svo = (searchDTO)list2.get(i);
+			if (svo.getTime()==null) {
+				list2.remove(i);
+			}
+		}
+		
 		for (int i=0; i<list2.size(); i++){
 			svo = (searchDTO)list2.get(i);
 			pck2 = sdao.pricecheck(svo.getAirline());
 			String t2 = svo.getTime();
-				if(t2 == null){
-					hour2 = 0;
-					min2 = 0;
-				}else if(t2.contains("시간")){
+				 if(t2.contains("시간")){
 					String hr2[] = t2.trim().split("시간"); 
 						if(hr2.length == 1){
 							hour2 = Integer.parseInt(hr2[0].trim())*60;
