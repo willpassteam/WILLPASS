@@ -42,7 +42,7 @@
 			</div>
 			<div class="float-right mb-3">
 				<!-- 수정 삭제는 admin에게만 보임 -->
-				<c:if test="${user_email == 'admin'}">
+				<c:if test="${user_id == 'admin'}">
 					<a href="Update1.Notice?Notice_num=${NoticeDTO.notice_num}" class="btn btn-dark">수정</a>
 					<a href="Delete.Notice?notice_num=${NoticeDTO.notice_num}" class="btn btn-danger">삭제</a> 
 				</c:if>

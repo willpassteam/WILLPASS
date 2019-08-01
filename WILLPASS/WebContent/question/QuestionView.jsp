@@ -23,7 +23,7 @@
 			<h2>문의 사항</h2>
 			<hr>
 			<div class="float-left">
-				<h5>${BoardDTO.BOARD_TITLE } | 작성자 : ${BoardDTO.BOARD_EMAIL }님</h5>
+				<h5>${BoardDTO.BOARD_TITLE } | 작성자 : ${BoardDTO.BOARD_ID }님</h5>
 			</div>
 			<div class="float-right">
 				<h6> 작성일자 ${BoardDTO.BOARD_DATE }</h6>
@@ -34,12 +34,12 @@
 				<p >${BoardDTO.BOARD_CONTENT }</p>
 			</div>
 			<div class="float-right mb-3">
-				<c:if test="${User_email == 'admin' }">
-					<a href="reply.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-danger">답글</a>
+				<c:if test="${user_id == 'admin' }">
+					<a href="reply.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-primary">답글</a>
 				</c:if>	
 				<c:choose>
 					<c:when test="${BoardDTO.BOARD_DEPTH == 1}">
-						<c:if test="${User_email =='admin' }">
+						<c:if test="${user_id =='admin' }">
 							<a href="Delete.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-danger">삭제</a>		
 						</c:if>
 					</c:when>

@@ -1,4 +1,4 @@
-package Board.C;
+package net.question.chat.c;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,17 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Board.DB.BoardDAO;
-import Board.DB.BoardDTO;
-import Board.M.boardLoginCheck;
-import Board.M.deleteBoard;
-import Board.M.getListBoard;
-import Board.M.replyBoard;
-import Board.M.viewBoard;
-import Board.M.writeBoard;
+import net.question.chat.db.chatDAO;
+import net.question.chat.m.ajaxGetAdminList;
+import net.question.chat.m.ajaxGetAllList;
+import net.question.chat.m.ajaxGetUserList;
+import net.question.chat.m.chatLogin;
+import net.question.chat.m.closeChat;
+import net.question.chat.m.writeChat;
 
-@WebServlet("*.Board")
-public class boardController extends HttpServlet {
+@WebServlet("*.chat")
+public class chatController extends HttpServlet {
 	//로그인 여부  그리고 이 게시판은 자기 자신의 게시글만 읽을수 있기에 작성자가 로그인을 하였는지에 대한 확인을 거치는 메소드이다.
 	
 	
@@ -57,43 +56,36 @@ public class boardController extends HttpServlet {
 		ActionForward forward=null;
 		
 		Action action=null;
-		// 이 게시판은 본인의 글만 읽을수 있고 글작성 또한 로그인후 가능하기에 먼저 확인을 거친다.
-		// view 페이지로 이동하는것 또한 boardLoginCheck()객체 안에서 처리함.
+		
+		
+		//로그인여부 확인
 		try {
-			action = new boardLoginCheck();
+			action = new chatLogin();
 			forward= action.execute(req, resp);
-			
-			
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-			if(command.equals("writePage.Board")){//게시판 작성 페이지로 이동
-					
-				forward.setPath("./Questionwrite.jsp");
+		if(forward == null){
+			if(command.equals("ChatStart.chat")){//로그인후 팝업처리
+				forward = new ActionForward();
 				forward.setRedirect(true);
-			}
-			else if(command.equals("write.Board")){//게시판 작성 페이지 작성후 DB 연동 후 -> View 페이지로
+				forward.setPath("./Chatting.jsp");
 				
-				//else if 문 안으로 들어왔는지 확인용 
-				System.out.println("write.Board");
+				
+			}
+			else if(command.equals("getChatContent.chat")){//게시판 작성 페이지 작성후 DB 연동 후 -> View 페이지로
 				
 				try {
-					// action 인터페이스를 구현하고있는 writeBoard 를 action 인터페이스 객체에 넣어주고
-					// action 인터페이스에 구현되어있는 execute 메소드를 이용해 request,response를 넘겨줘서 DB작업이 가능하도록한다.
-					action=new writeBoard();
+					action = new ajaxGetAllList();
 					forward=action.execute(req, resp);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
-			}else if(command.equals("ViewTrue.Board")){// boardLoginCheck() 메소드를 거쳐  작성자와 아이디가 동일할시 넘어옴
-				System.out.println(command);
+			}else if(command.equals("writeChat.chat")){// write ㅐㅊㅅ
 				try {
-					action = new viewBoard();
+					action = new writeChat();
 					forward = action.execute(req, resp);
 					
 				} catch (Exception e) {
@@ -101,43 +93,81 @@ public class boardController extends HttpServlet {
 				}
 				
 				
-			}else if(command.equals("Question.Board")){// Question.jsp 로 이동 할경우
+			}else if(command.equals("close.chat")){// popup창 제거 
 				try {
-					action = new getListBoard();
+					action = new closeChat();
 					forward= action.execute(req, resp);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
 				
-			}else if(command.equals("Delete.Board")){// Delete.Board 작성자가 View 에 들어와 삭제할경우
+			}else if(command.equals("getChatAdmin.chat")){// 갯쳇어드민~
 				
 				try {
-					action = new deleteBoard();
+					action = new ajaxGetAdminList();
 					forward= action.execute(req, resp);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
 				
-			}else if(command.equals("reply.Board")){ //답글 작성시
-				
+			}else if(command.equals("adminOut.chat")){
 				try {
-					BoardDTO dto = new BoardDAO().getBoard(Integer.parseInt(req.getParameter("Board_num")));
-					req.setAttribute("BoardDTO", dto);
+					new chatDAO().outAdmin(Integer.parseInt(req.getParameter("chat_no")));
+					forward = null;
+					System.out.println("상담사 나감");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				forward.setRedirect(false);
-				forward.setPath("./Questionreply.jsp");
-			}else if(command.equals("replyWrite.Board")){
+				
+			}else if(command.equals("adminJoin.chat")){
 				try {
-					action = new replyBoard();
+					String user_email = (String)req.getSession(true).getAttribute("user_email");
+					int chat_no = Integer.parseInt(req.getParameter("chat_no"));
+					chatDAO dao = new chatDAO();
+					dao.writeChat(chat_no, "상담사가 입장했습니다.", user_email, 0);
+					dao.joinAdmin(chat_no);
+					forward = null;
+					System.out.println("상담사 들어옴");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}else if(command.equals("adminSendChat.chat")){
+				try {
+					String user_email = req.getParameter("user_email");
+					String chat_content = req.getParameter("chat_content");
+					int chat_no = Integer.parseInt(req.getParameter("chat_no"));
+					new chatDAO().writeChat(chat_no, chat_content, user_email, 0);
+					forward = null;
+					System.out.println("문자전송");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("adminChatCount.chat")){
+				try {
+					System.out.println("adminChatCount실행");
+					int chat_no = Integer.parseInt(req.getParameter("chat_no"));
+					
+					PrintWriter out =resp.getWriter();
+					out.print(new chatDAO().adminChatCount(chat_no));
+					forward = null;
+					System.out.println("카운팅");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("getChatUser.chat")){
+				try {
+					action = new ajaxGetUserList();
 					forward= action.execute(req, resp);
+					forward = null;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
+		}
+		
 			
 			
 			
@@ -157,6 +187,7 @@ public class boardController extends HttpServlet {
 			}
 			
 		}
+		return;
 		
 		
 		

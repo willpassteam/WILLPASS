@@ -61,7 +61,7 @@ public class timecheck extends Thread {
 			Document flight = Jsoup.connect("https://www.flightstats.com/v2/flight-details/" + sfFlight + "?year=" + yy
 					+ "&month=" + mm + "&date=" + dd).post();
 			Elements timeblock = flight.getElementsByClass("timeBlock");
-			String departure_time = timeblock.get(0).children().last().text();
+			String departure_time = timeblock.get(0).children().get(1).text();
 			String arrival_time = timeblock.get(4).children().last().text();
 			String time = flight.getElementsByClass("flightTimeBlock").get(0).children().last().text();
 			time = time.replace("h", "시간");

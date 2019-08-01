@@ -35,7 +35,7 @@ public class BoardDAO {
 		}
 	}
 	
-	public boolean writeBoard(String Board_title,String Board_content, String Board_email){
+	public boolean writeBoard(String Board_title,String Board_content, String Board_id){
 		boolean result = false;
 		
 		System.out.println("writeBoard Start");
@@ -56,7 +56,7 @@ public class BoardDAO {
 			
 			pstmt.setString(1, Board_title);
 			pstmt.setString(2, Board_content);
-			pstmt.setString(3, Board_email);
+			pstmt.setString(3, Board_id);
 			
 			
 			if(pstmt.executeUpdate()==1)result = true;
@@ -74,7 +74,7 @@ public class BoardDAO {
 		
 	}
 	
-	public boolean checkBoard(int board_num,String board_email){// board_num으로 작성자가 누구인지 확인하는 메소드
+	public boolean checkBoard(int board_num,String board_id){// board_num으로 작성자가 누구인지 확인하는 메소드
 		
 		boolean result = false;
 		
@@ -83,7 +83,7 @@ public class BoardDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "select board_email from board where board_num = ?";
+			String sql = "select board_id from board where board_num = ?";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -93,9 +93,9 @@ public class BoardDAO {
 			
 			if(rs.next()){
 				// 디비에 존재하는 이메일값 넣어주기
-				String DB_board_email = rs.getString(1);
-				if(DB_board_email != null){
-					if(DB_board_email.equals(board_email)){
+				String DB_board_id = rs.getString(1);
+				if(DB_board_id != null){
+					if(DB_board_id.equals(board_id)){
 						result =  true;
 					}
 				}
@@ -136,7 +136,7 @@ public class BoardDAO {
 				
 				dto.setBOARD_CONTENT(rs.getString("board_content"));
 				dto.setBOARD_DATE(rs.getDate("board_date"));
-				dto.setBOARD_EMAIL(rs.getString("board_email"));
+				dto.setBOARD_ID(rs.getString("board_id"));
 				dto.setBOARD_NUM(rs.getInt("board_num"));
 				dto.setBOARD_POS(rs.getInt("board_pos"));
 				dto.setBOARD_DEPTH(rs.getInt("board_depth"));
@@ -174,7 +174,7 @@ public class BoardDAO {
 			if(rs.next()){
 				dto.setBOARD_CONTENT(rs.getString("board_content"));
 				dto.setBOARD_DATE(rs.getDate("board_date"));
-				dto.setBOARD_EMAIL(rs.getString("board_email"));
+				dto.setBOARD_ID(rs.getString("board_id"));
 				dto.setBOARD_NUM(rs.getInt("board_num"));
 				dto.setBOARD_POS(rs.getInt("board_pos"));
 				dto.setBOARD_DEPTH(rs.getInt("board_depth"));
@@ -257,7 +257,7 @@ public class BoardDAO {
 			
 			pstmt.setString(1, board_title);
 			pstmt.setString(2, board_content);
-			pstmt.setString(3, dto.getBOARD_EMAIL());
+			pstmt.setString(3, dto.getBOARD_ID());
 			pstmt.setInt(4, dto.getBOARD_POS()+1);
 			pstmt.setInt(5, dto.getBOARD_DEPTH()+1);
 			
