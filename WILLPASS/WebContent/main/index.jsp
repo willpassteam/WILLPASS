@@ -21,8 +21,6 @@
 <link rel="stylesheet" href="/path/to/slick.css">
 <link rel="stylesheet" href="/path/to/slick-theme.css">
 
-
-
 <style type="text/css">
 .subject {
 	height: 70px;
@@ -71,13 +69,14 @@ input[type="radio"] {
  display: block;  
  opacity: 0.7;  
  background-color: #fff;  
- z-index: 99;  
+ z-index: 95;  
  text-align: center; } 
   
 #loading-image {  
- position: absolute;  
- top: 50%;  
- left: 50%; 
+ position: absolute; 
+ width:400px; 
+ top: 45%;  
+ left: 40%; 
  z-index: 100; }
 
 
@@ -238,7 +237,7 @@ $(window).load(function() {//로딩이미지
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 	<div id="loading"><img id="loading-image" src="../img/loading.gif" alt="Loading..." /></div>
-
+	
 
 	<div class="pt-5" id="ma">
 		<h1 class="text-center maintx-1 ">

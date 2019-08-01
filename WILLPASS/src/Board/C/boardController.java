@@ -72,7 +72,6 @@ public class boardController extends HttpServlet {
 		
 			if(command.equals("writePage.Board")){//게시판 작성 페이지로 이동
 					
-				forward = new ActionForward();
 				forward.setPath("./Questionwrite.jsp");
 				forward.setRedirect(true);
 			}
@@ -147,12 +146,14 @@ public class boardController extends HttpServlet {
 			
 			if(forward.isRedirect()){ //true ->Response.sendRedirect()
 				resp.sendRedirect(forward.getPath());
+				return ;
 				
-				
-			}else {//false->dis.forward(request,response)
+			}else{//false->dis.forward(request,response)
 				
 				RequestDispatcher dis= req.getRequestDispatcher(forward.getPath());
 				dis.forward(req, resp);
+				return ;
+				
 			}
 			
 		}

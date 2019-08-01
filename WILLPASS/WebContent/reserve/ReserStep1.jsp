@@ -9,6 +9,13 @@
    <%
    		request.setCharacterEncoding("UTF-8");
    %>
+
+<c:if test="${!empty newlist2}">
+	<c:set var="roundtrip" value="true"/>
+</c:if>
+<c:if test="${empty newlist2}">
+	<c:set var="roundtrip" value="false"/>
+</c:if>
    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -166,11 +173,42 @@
 			 }
 			});
 		});
+	
+	$(function () {
+			$("#nextBtn").click(function() {
+				if("${roundtrip}" == "true"){
+					if(depart2 != ""){
+		 				if($(".airline1").val() == "" || $(".airline2").val() == ""){
+		 					alert("항공편을 선택해 주세요!");
+						}else if($(".airline1").val() == "" && $(".airline2").val() == ""){
+							alert("항공편을 선택해 주세요!");
+						}else{
+							$("#nextRes").submit();
+						}	
+					}else if(depart1 != ""){
+		 				if($(".airline1").val() == ""){
+		 					alert("항공편을 선택해 주세요!");
+						}else{
+							$("#nextRes").submit();
+						}
+					}
+				}else{
+					if($(".airline1").val() == ""){
+	 					alert("항공편을 선택해 주세요!");
+					}else{
+						$("#nextRes").submit();
+					}
+				} 
+			
+			});
+		}); 
 		
 		function makeComma(str) {
 			var str = String(str);
 			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
 		}
+		
+		
 	</script>
 
 </head>
@@ -246,13 +284,13 @@
 
 
   <div class="row">
-<!--  오른쪽 		 -->
+<!--  오른쪽 -->
   
      <div class="col-md-3 order-md-2 mb-4 mt-5">
      
   <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
       
-	<form action="${contextPath}/reserve1/ReserStep2.do" method="post" > 
+	<form id="nextRes" action="${contextPath}/reserve1/ReserStep2.do" method="post" > 
       	
       <ul class="list-group mb-3" >
               
@@ -357,7 +395,7 @@
     	
     	<%-- </c:if> --%>
     		
-        <input class="btn  btn-lg btn-block text-white" type="submit" value="다음단계 " style="background-color: #D60815">
+        <input class="btn  btn-lg btn-block text-white" id="nextBtn" type="button" value="다음단계 " style="background-color: #D60815" >
         </li>	
       </ul>
      </form> 
@@ -410,6 +448,9 @@
 		<c:when test="${newlist != null}">
 
 		<c:forEach var="air" items="${newlist}">
+			<c:if test="${air.departure_time == null}">
+			</c:if>
+			<c:if test="${air.departure_time != null}">
 			<tr class="select">
 				<td >${air.departure_time} - ${air.arrival_time} (${air.time})</td>
 				<td >${air.airline}</td>
@@ -428,7 +469,9 @@
 			</c:if>	
 				<td style="display: none;">${air.time}</td>
 				<td style="display: none;">${air.price}</td>				
-			</tr>				
+			</tr>			
+			
+			</c:if>	
 		</c:forEach>
 
 	</c:when>
@@ -467,6 +510,9 @@
 		</c:when>
 		<c:when test="${newlist2 != null}">
 		<c:forEach var="air2" items="${newlist2}">
+			<c:if test="${air2.departure_time == null}">
+			</c:if>
+			<c:if test="${air2.departure_time != null}">
 			<tr class="select2">
 				<td >${air2.departure_time} - ${air2.arrival_time} (${air2.time})</td>
 				<td >${air2.airline}</td>
@@ -485,7 +531,8 @@
 			</c:if>		
 				<td style="display: none;">${air2.time}</td>
 				<td style="display: none;">${air2.price}</td>					
-			</tr>				
+			</tr>	
+		</c:if>			
 		</c:forEach>
 	</c:when>		
 	</c:choose>		

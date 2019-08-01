@@ -41,21 +41,24 @@ nav a{
 	position: absolute;
 	
 }
-.menubar>a,dt,li{
+.menubar>a,.menubar>dt,.menubar>li{
 	text-align: center;
 	margin-bottom: 5px
 }
 
 
 
-.menubar> a,dt,dd:HOVER{
+.menubar> a:Hover,.menubar>dt:Hover,.menubar>dd:HOVER{
+branch 'master' of https://github.com/willpassteam/WILLPASS.git
 	cursor: pointer;
+	color: #FACC2E;
 }
 
 
 </style>
 
 <script type="text/javascript">
+//f
 $(function(){
 	$(".nt").on("mouseover",function(){
 		var index = $(".nt").index(this);
@@ -179,7 +182,7 @@ $(function(){
 			<div class="collapse nc w-100">
 				<div class="nv w-100" >
 					<ul class="list-group list-group-horizontal">
-						<li class="list-group-item w-50"><a href="#" class="font-weight-bold">나의 예약조회</a></li>
+						<li class="list-group-item w-50"><a href="${pageContext.request.contextPath}/reservationcheck/viewall" class="font-weight-bold">나의 예약조회</a></li>
 						<li class="list-group-item w-50"><a href="#" class="font-weight-bold">구매내역</a></li>
 						<li class="list-group-item w-50">
 							<dl>

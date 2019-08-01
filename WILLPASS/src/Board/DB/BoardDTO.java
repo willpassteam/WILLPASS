@@ -8,7 +8,7 @@ public class BoardDTO {
 	private String BOARD_TITLE;//제목
 	private String BOARD_CONTENT;//내용
 	private Date BOARD_DATE;//작성날짜
-	private String BOARD_EMAIL;//작성자이메일
+	private String BOARD_ID;//작성자이메일
 	private int BOARD_POS;//글의 위치
 	private int BOARD_DEPTH;//글의 위치
 	
@@ -38,11 +38,11 @@ public class BoardDTO {
 	public void setBOARD_DATE(Date bOARD_DATE) {
 		BOARD_DATE = bOARD_DATE;
 	}
-	public String getBOARD_EMAIL() {
-		return BOARD_EMAIL;
+	public String getBOARD_ID() {
+		return BOARD_ID;
 	}
-	public void setBOARD_EMAIL(String bOARD_EMAIL) {
-		BOARD_EMAIL = bOARD_EMAIL;
+	public void setBOARD_ID(String bOARD_ID) {
+		BOARD_ID = bOARD_ID;
 	}
 	public int getBOARD_POS() {
 		return BOARD_POS;
