@@ -20,13 +20,13 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 	
 	if(request.getSession().getAttribute("user_email")==null){
 		
-	
-		forward.setPath("/user/Userlogin.jsp");
-		
+		forward.setPath(request.getContextPath()+"/user/Userlogin.jsp");
+		forward.setRedirect(true);
 		
 	}else{
 		String useremail=(String)request.getSession().getAttribute("user_email");
 		forward.setPath("/resercheck/resercheckview.jsp");
+		forward.setRedirect(false);
 			
 		Paging pa = new Paging();
 		pa.setNext(true);
@@ -58,7 +58,6 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 	}
 	
 	
-	forward.setRedirect(false);
 	return forward;
 }
 	
