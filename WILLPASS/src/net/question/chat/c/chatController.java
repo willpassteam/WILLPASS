@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import net.question.chat.db.chatDAO;
 import net.question.chat.m.ajaxGetAdminList;
 import net.question.chat.m.ajaxGetAllList;
+import net.question.chat.m.ajaxGetUserList;
 import net.question.chat.m.chatLogin;
 import net.question.chat.m.closeChat;
 import net.question.chat.m.writeChat;
@@ -122,7 +123,11 @@ public class chatController extends HttpServlet {
 				
 			}else if(command.equals("adminJoin.chat")){
 				try {
-					new chatDAO().joinAdmin(Integer.parseInt(req.getParameter("chat_no")));
+					String user_email = (String)req.getSession(true).getAttribute("user_email");
+					int chat_no = Integer.parseInt(req.getParameter("chat_no"));
+					chatDAO dao = new chatDAO();
+					dao.writeChat(chat_no, "상담사가 입장했습니다.", user_email, 0);
+					dao.joinAdmin(chat_no);
 					forward = null;
 					System.out.println("상담사 들어옴");
 				} catch (Exception e) {
@@ -136,7 +141,7 @@ public class chatController extends HttpServlet {
 					int chat_no = Integer.parseInt(req.getParameter("chat_no"));
 					new chatDAO().writeChat(chat_no, chat_content, user_email, 0);
 					forward = null;
-					System.out.println("상담사 들어옴");
+					System.out.println("문자전송");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -148,7 +153,15 @@ public class chatController extends HttpServlet {
 					PrintWriter out =resp.getWriter();
 					out.print(new chatDAO().adminChatCount(chat_no));
 					forward = null;
-					System.out.println("상담사 들어옴");
+					System.out.println("카운팅");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("getChatUser.chat")){
+				try {
+					action = new ajaxGetUserList();
+					forward= action.execute(req, resp);
+					forward = null;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

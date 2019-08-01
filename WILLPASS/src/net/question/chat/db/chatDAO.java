@@ -48,7 +48,6 @@ public class chatDAO {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, chat_no);
-			System.out.println("받아오기");
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				chatDTO dto = new chatDTO();
@@ -65,7 +64,6 @@ public class chatDAO {
 			private Timestamp chat_date;
 			private int chat_no;
 			private boolean chat_who;*/
-			System.out.println("받아오기성공");		
 					
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +90,6 @@ public class chatDAO {
 			/*private int chat_no; 
 			private boolean chat_userjoin,chat_adminjoin;
 			private Timestamp chat_adminouttime;*/
-			System.out.println("유저 조인 완료");
 					
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -115,7 +112,6 @@ public class chatDAO {
 			pstmt.setInt(1, chat_no);
 			
 			if(pstmt.executeUpdate() == 1 ){
-				System.out.println("유저 아웃 완료");
 			}
 					
 			/*private int chat_no; 
@@ -150,7 +146,6 @@ public class chatDAO {
 			if(pstmt.executeUpdate() == 1 ){
 				result = getMax_Chat_no(user_email);
 			}
-				System.out.println("방생성완료");	
 					
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,10 +158,12 @@ public class chatDAO {
 		
 		
 	}
+	//상담사 조인시 "상담사가 입장했습니다" 문구를 띄워줄 메소드 
 	
 	// 상담사 조인 메소드
 	public void joinAdmin(int chat_no){
 		try {
+			
 			con = ds.getConnection();
 			
 			String sql = "update chat_ref set chat_adminjoin = true where chat_no = ?";
@@ -176,7 +173,6 @@ public class chatDAO {
 			pstmt.setInt(1, chat_no);
 			
 			if(pstmt.executeUpdate() == 1 ){
-				System.out.println("어드민 조인 완료");
 			}
 					
 			/*private int chat_no; 
@@ -205,7 +201,6 @@ public class chatDAO {
 		pstmt.setInt(1, chat_no);
 		
 		if(pstmt.executeUpdate() == 1 ){
-			System.out.println("어드민 아웃 완료");
 		}
 				
 		/*private int chat_no; 
@@ -224,17 +219,19 @@ public class chatDAO {
 	// 유저의 대화 내역 가져오기 
 	public ArrayList<ArrayList> getChatAllList(String user_email){
 		ArrayList<ArrayList> result = new ArrayList();
-		ArrayList<chatDTO> dtoList = new ArrayList<>();
+		
 		try {
+			
+			ArrayList<Integer> max = getAll_chat_no(user_email);
 			con = ds.getConnection();
-			int[] max = getAll_chat_no(user_email);
-			for (int i= 0;  i< max.length; i++) {
-				int chat_no = max[i];
+			for (int i= 0;  i< max.size(); i++) {
+				ArrayList<chatDTO> dtoList = new ArrayList<>();
+				int chat_no = max.get(i);
 				
 				String sql = "select * from chat where chat_no = ?";
 				
 				pstmt = con.prepareStatement(sql);
-				
+				pstmt.setInt(1, chat_no);
 				rs = pstmt.executeQuery();
 				while(rs.next()){
 					chatDTO dto = new chatDTO();
@@ -260,26 +257,20 @@ public class chatDAO {
 		return result;
 	}
 	// 유저에 해당하는 chat_no을 모두 가져오는 메소드
-	public int[] getAll_chat_no(String user_email){
-		int[] result = null;
+	public ArrayList<Integer> getAll_chat_no(String user_email){
+		ArrayList<Integer> resultList = new ArrayList<>();
 		try {
 			con = ds.getConnection();
 			
 		
-			String sql = "select chat_no,count(chat_no) as Max from chat_ref where user_email = ?";
+			String sql = "select chat_no from chat_ref where user_email = ?";
 			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, user_email);
 			rs = pstmt.executeQuery();
-			ResultSetMetaData metaData = (ResultSetMetaData)rs;
-			int maxsize = metaData.getColumnCount();
-			result = new int[maxsize];
-			for (int i = 0; i < result.length; i++) {
-				rs.next();
-				
-				result[i] = rs.getInt("chat_no");
-				
+			while(rs.next()){
+				resultList.add(rs.getInt("chat_no"));
 			}
 			/*private String user_email;
 			private String 	chat_content;
@@ -294,7 +285,7 @@ public class chatDAO {
 		}finally {
 			free();
 		}
-		return result;
+		return resultList;
 	}
 	// 모든 chat_no을 가져오는 메소드
 	public int[] getAll_chat_no(){
@@ -403,7 +394,6 @@ public class chatDAO {
 		}finally {
 			free();
 		}
-		System.out.println(result);
 		return result;
 	}
 	//작성 유저용 
@@ -421,7 +411,6 @@ public class chatDAO {
 			pstmt.setString(4, content);
 			
 			if(pstmt.executeUpdate() == 1 ){
-				System.out.println("메시지 db저장완료");
 			}
 					
 					
@@ -436,7 +425,6 @@ public class chatDAO {
 	}
 	//작성 어드민용 
 	public void writeChat(int chat_no, String content,String user_email,int admin) {
-		System.out.println(chat_no+":"+content+":"+user_email+":");
 		int result = 0;
 		try {
 			con = ds.getConnection();
@@ -450,7 +438,6 @@ public class chatDAO {
 			pstmt.setString(4, content);
 			
 			if(pstmt.executeUpdate() == 1 ){
-				System.out.println("메시지 db저장완료");
 			}
 					
 					

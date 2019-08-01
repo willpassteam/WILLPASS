@@ -10,12 +10,125 @@
 
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 </head>
+<style>
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+</style>
 <script type="text/javascript">
-function fnchatStart() {
+var join = false;
+var joinnum = 0;
+var Chatend = 0;
+var ChatStart = 0;
+var joindata;
+var content ="";
+var Allend = 0;
+var AllStart = 0;
+var title = "";
+
+
+$(document).on("click",".chatHead > .border",function(){
+	//a 태그 번호 받아오기
+	joinnum = $(".chatHead > .border").index(this);
+	//join은 fnChatStart()실행하기 위한 조건
+	join = true;
+	
+	ChatStart = 0;
+	//모든내용 초기화
+	$(".chatting").html("");
+	//넣을 정보 초기화
+	content = "";
+});
+
+$(function() {
+	timer = setInterval( function () {
+		$.ajax ({
+			url : "getChatUser.chat",
+			dataType:"json",
+			success : function (data) {
+				joindata = data;
+				Allend = data[0][0].allsize;
+				for (var i = AllStart; AllStart < Allend ;i++) {
+					var count = "";
+					
+					function A (){$.ajax ({
+						url : "adminChatCount.chat",
+						data: {chat_no : data[i][0].chat_no}
+						,
+						success : function (da) {
+							count = da;
+						}
+						,error:function(e){
+							console.log('실패'+e.status+":"+e.responseText);
+						}
+					})};
+					AllStart ++;
+					var chat_lastcount = data[i][0].chat_count-1;
+					var chat_lastcontent = data[i][chat_lastcount].chat_content;
+					var chat_lastdate = data[i][chat_lastcount].chat_date;
+					
+					title += "<div class='border' ><div class='ChatLog' ><a class='btn btn-light btn-outline-secondary' style='width: 255px' ><small class='float-left'>마지막 전송 시간 :"+chat_lastdate+"</small><div class='clear-fix' /><small class='float-left'>내용 :"+chat_lastcontent+"</small></a></div></div>";
+					if(i +1 == Allend ){
+						chatHead(title);
+					}
+				}
+				
+				if(join == true){
+					fnChatStart();
+				}
+			}
+			,error:function(e){
+				console.log('실패'+e.status+":"+e.responseText);
+			}
+		});
+	},3000);
+	
+})
+function chatHead(title_1){
+	$(".chatHead").html(title_1);
+}
+function fnChatStart(){
+	
+	Chatend = joindata[joinnum][0].chat_count;
+	
+	for(var j = ChatStart;ChatStart<Chatend&& join == true;j++){
+		console.log(joindata[joinnum][j].chat_content)
+		ChatStart ++;
+		if(joindata[joinnum][j].chat_who =="true"){
+			content += "<div class='w-100' > <div class='float-right' style='max-width: 450px'><small class='float-left mx-2' style='margin-top:auto'>"+joindata[joinnum][j].chat_date+"</small><small class='float-right border border-success p-1' style='max-width: 360px'>"+joindata[joinnum][j].chat_content+" </small></div></div><div class='clearfix'></div>"
+		}else{
+			content +="<div class='float-left w-75'><div class='header'><small>상담사</small></div><div class='body'><div class='row ml-1'><small class='border w-75 float-left p-1'>"+joindata[joinnum][j].chat_content+"</small><small class='float-right w-25' style='margin-top: auto'>"+joindata[joinnum][j].chat_date+"</small></div></div></div><div class='clearfix my-2 Jul'></div>"
+		}
+	}
+	$(".chatting").html(content);
+	
+}
+function fnchat() {
+	//join은 fnChatStart()실행하기 위한 조건
+	join = false;
+	//넣을 정보 초기화
 	   
 	   window.open("Chatting_popup.jsp", "회원가입","width=500 height=640 menubar=no status=no");
 
 }
+
+
 </script>
 <body>
 
@@ -29,15 +142,48 @@ function fnchatStart() {
 				<div class="col-sm-3 border rounded p-2">
 					<div class="border p-2" style="height: 60px">
 						<h6 class="float-left align-center pt-2">나의 문의내역</h6>
-						<a href="javascript:fnchatStart()" class="btn btn-primary float-right">문의하기</a>
+						<a href="javascript:fnchat()" class="btn btn-primary float-right">문의하기</a>
 					</div>
-					<div class="border" style="height: 600px;overflow-y:auto">
-						<div class="ChatLog" >
-							<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 265px" >2019-07-29/22:14</a>
+					<div class="chatHead" style="height: 600px;overflow-y:auto">
+						<div class="border" >
+							<div class="ChatLog" >
+								<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 250px" >2019-07-29/22:14</a>
+							</div>
+						</div>
+						<div class="border" >
+							<div class="ChatLog" >
+								<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 250px" >2019-07-29/22:14</a>
+							</div>
+						</div>
+						<div class="border" >
+							<div class="ChatLog" >
+								<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 250px" >2019-07-29/22:14</a>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-7 border rounded p-2"></div>
+				<!-- <div class="col-sm-7 border rounded p-2"> -->
+				<div class="col-sm-7 border pt-3 chatBody " style="overflow-y: auto;max-height: 678px;">
+					<!-- 관리자 문자 -->
+					<div class="chatting" style="min-height: 650px; overflow-y:auto;">
+						<div class='float-left w-75'><div class='header'><small>상담사</small></div><div class='body'>	<div class='row ml-1'><small class='border w-75 float-left p-1'>예제</small><small class='float-right w-25' style='margin-top: auto'>날짜</small></div></div></div><div class='clearfix my-2 Jul'></div>
+						
+						<!-- 사용자 문자 -->
+						<div class="w-100" > 
+							<div class="float-right" style="max-width: 450px">
+								<small class="float-left mx-2" style="margin-top:auto">날짜</small><small class="float-right border border-success p-1" style="max-width: 360px">예제</small>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						
+						<!-- <div class ="row">
+							<div class="col-sm-3"></div>
+							<div class='col-sm-9 float-right' style="padding-right: 0px"><div class='row'><small class='' style='margin-top: auto'>"+date+"</small>&nbsp;<small class='border border-success w-75 p-1'>"+contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentv+"</small></div></div><div class='clearfix my-2'></div>
+						</div> -->
+						
+					</div>
+				</div>
+				<!-- </div> -->
 				<div class="col-sm-1"></div>
 
 			</div>
