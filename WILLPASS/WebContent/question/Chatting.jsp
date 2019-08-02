@@ -1,4 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath }"></c:set>
+<c:if test="${user_email == null }">
+	<script type="text/javascript">
+		alert('로그인후 이용하시기 바랍니다.');
+		location.href = '../user/Userlogin.jsp';
+	</script>
+</c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,6 +15,7 @@
 
 <!-- 아이콘 사용을 위한 CDN링크 -->
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
 
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 </head>
@@ -30,6 +39,28 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+#loading {
+ width: 100%;  
+ height: 100%;  
+ top: 0px;
+ left: 0px;
+ position: fixed;  
+ display: block;  
+ opacity: 0.7;  
+ background-color: #fff;  
+ z-index: 95;  
+ text-align: center; } 
+  
+#loading-image {  
+ position: absolute; 
+ width:400px; 
+ top: 45%;  
+ left: 40%; 
+ z-index: 100; }
+
+
+
+
 </style>
 <script type="text/javascript">
 var join = false;
@@ -62,6 +93,7 @@ $(function() {
 			url : "getChatUser.chat",
 			dataType:"json",
 			success : function (data) {
+				$('#loading').hide();
 				joindata = data;
 				Allend = data[0][0].allsize;
 				for (var i = AllStart; AllStart < Allend ;i++) {
@@ -132,9 +164,13 @@ function fnchat() {
 </script>
 <body>
 
+
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
+	
+	<div id="loading"><img id="loading-image" src="../img/loading.gif" alt="Loading..." /></div>
+	
 	<div class="m-3 p-3">
 		<div class="container" style="min-height: 600px; max-height: 700px;">
 			<div class="row">
@@ -145,21 +181,7 @@ function fnchat() {
 						<a href="javascript:fnchat()" class="btn btn-primary float-right">문의하기</a>
 					</div>
 					<div class="chatHead" style="height: 600px;overflow-y:auto">
-						<div class="border" >
-							<div class="ChatLog" >
-								<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 250px" >2019-07-29/22:14</a>
-							</div>
-						</div>
-						<div class="border" >
-							<div class="ChatLog" >
-								<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 250px" >2019-07-29/22:14</a>
-							</div>
-						</div>
-						<div class="border" >
-							<div class="ChatLog" >
-								<a href="#" class="btn btn-light btn-outline-primary" style="font-size: 20px;width: 250px" >2019-07-29/22:14</a>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 				<!-- <div class="col-sm-7 border rounded p-2"> -->

@@ -18,15 +18,13 @@
 
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <!-- 캐러셀을 위한 css -->
-<link rel="stylesheet" href="/path/to/slick.css">
-<link rel="stylesheet" href="/path/to/slick-theme.css">
 
 <style type="text/css">
 .subject {
 	height: 70px;
 }
 #ma {
-	background-image: url("../img/Main/2번.jpg");
+	background-image: url("${path}/img/Main/2번.jpg");
 	height: 800px;
 	background-repeat: no-repeat;
 	background-size: 100% 60%;
@@ -236,7 +234,7 @@ $(window).load(function() {//로딩이미지
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
-	<div id="loading"><img id="loading-image" src="../img/loading.gif" alt="Loading..." /></div>
+	<div id="loading"><img id="loading-image" src="${path}/img/loading.gif" alt="Loading..." /></div>
 	
 
 	<div class="pt-5" id="ma">
@@ -314,19 +312,19 @@ $(window).load(function() {//로딩이미지
 				<br>
 				<div class="row ">
 					<div class="col-sm-3 pushimg">
-						<img alt="" src="../img/Main/바르셀로나.jpg" width="100%">
+						<img alt="" src="${path}/img/Main/바르셀로나.jpg" width="100%">
 						<a class="text-light" style="font-size:25px;position: absolute;bottom:20px;left:28%;">바로셀로나</a>
 					</div>
 					<div class="col-sm-3 pushimg">
-						<img alt="" src="../img/Main/로스앤젤레스.jpg" width="100%">
+						<img alt="" src="${path}/img/Main/로스앤젤레스.jpg" width="100%">
 						<a class="text-light" style="font-size:25px;position: absolute;bottom: 20px;left:24%;">로스앤젤레스</a>
 					</div>
 					<div class="col-sm-3 pushimg">
-						<img alt="" src="../img/Main/런던.jpg" width="100%">
+						<img alt="" src="${path}/img/Main/런던.jpg" width="100%">
 						<a class="text-light" style="font-size:25px;position: absolute;bottom: 20px;left:40%;">런던</a>
 					</div>
 					<div class="col-sm-3 pushimg">
-						<img alt="" src="../img/Main/샌프란시스코.jpg" width="100%">
+						<img alt="" src="${path}/img/Main/샌프란시스코.jpg" width="100%">
 						<a class="text-light" style="color:white;font-size:25px;position: absolute;bottom: 20px;left:40%;">로마</a>
 					</div>
 					

@@ -29,9 +29,9 @@ public class ajaxGetAllList implements Action {
 		for (int i = 0; i < result.size(); i++) {
 			JSONObject obj = new JSONObject();
 			
-			
+			String date = result.get(i).getChat_date().toString().substring(5,16);
 			obj.put("chat_content", result.get(i).getChat_content());
-			obj.put("chat_date","\""+result.get(i).getChat_date()+"\"");
+			obj.put("chat_date",date);
 			obj.put("chat_no", "\""+result.get(i).getChat_no()+"\"");
 			obj.put("user_email", result.get(i).getUser_email());
 			obj.put("chat_who", "\""+result.get(i).isChat_who()+"\"");
@@ -43,7 +43,6 @@ public class ajaxGetAllList implements Action {
 		
 		PrintWriter out = response.getWriter();
 		
-		System.out.println(array.toString());
 		out.print(array.toString());
 		out.close();
 		

@@ -18,6 +18,29 @@
 div {
 	word-breack: break-all;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.cell{
+	margin-bottom: 3px;
+}
+
 </style>
 <script type="text/javascript">
 $(function() {
@@ -89,7 +112,7 @@ function fnclose(){
 		<hr>
 		<div class="clearfix"></div>
 		
-		<div class="chatting w-100" style="min-height: 475px;max-height:500px; overflow-y: auto;">
+		<div class="chatting w-100" style="min-height: 475px;max-height:500px; overflow-y: auto;max-width: 500px">
 			<div class="clearfix my-2 cell"></div>
 		</div>
 		

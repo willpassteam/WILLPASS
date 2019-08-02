@@ -44,14 +44,11 @@ public class chatController extends HttpServlet {
 		
 		
 		String RequestURI= req.getRequestURI();
-		System.out.println("ReqeustURI 요청 :"+RequestURI);
 		
 		String contextPath=req.getContextPath();
-		System.out.println("contextPath 요청 :"+contextPath);
 		
 		//requestURI 내용이  "프로젝트명/폴더/해당하는 jsp페이지" 로 넘어올때 split 으로 폴더 뒷부분의 값만 가져와서 사용
 		String command= RequestURI.split("question/")[1];
-		System.out.println("command 요청 :"+command);
 		
 		ActionForward forward=null;
 		
@@ -73,7 +70,7 @@ public class chatController extends HttpServlet {
 				
 				
 			}
-			else if(command.equals("getChatContent.chat")){//게시판 작성 페이지 작성후 DB 연동 후 -> View 페이지로
+			else if(command.equals("getChatContent.chat")){
 				
 				try {
 					action = new ajaxGetAllList();
@@ -126,7 +123,6 @@ public class chatController extends HttpServlet {
 					String user_email = (String)req.getSession(true).getAttribute("user_email");
 					int chat_no = Integer.parseInt(req.getParameter("chat_no"));
 					chatDAO dao = new chatDAO();
-					dao.writeChat(chat_no, "상담사가 입장했습니다.", user_email, 0);
 					dao.joinAdmin(chat_no);
 					forward = null;
 					System.out.println("상담사 들어옴");
@@ -147,7 +143,6 @@ public class chatController extends HttpServlet {
 				}
 			}else if(command.equals("adminChatCount.chat")){
 				try {
-					System.out.println("adminChatCount실행");
 					int chat_no = Integer.parseInt(req.getParameter("chat_no"));
 					
 					PrintWriter out =resp.getWriter();
