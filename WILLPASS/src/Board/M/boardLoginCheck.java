@@ -27,13 +27,13 @@ public class boardLoginCheck implements Action {
 			
 			request.setAttribute("MSG", "로그인후 이용가능한 페이지입니다.");
 			PrintWriter out = response.getWriter();
+			String getPath = request.getContextPath();
 			out.println("<script type='text/javascript'>");
 			out.println("alert('로그인 후 이용가능한 페이지 입니다.');");
+			out.println("location.href='"+getPath+"';");
 			out.println("</script>");
 			out.close();
-			result.setPath("../user/Userlogin.jsp");
-			result.setRedirect(true);
-			return result;
+			result = null;
 			
 		}else{// 로그인한후 게시글의 board_num 을 가져와 db와 연동확인 과정을 거친다.
 			if(request.getRequestURI().split("question/")[1].equals("View.Board") ){

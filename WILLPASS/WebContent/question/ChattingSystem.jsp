@@ -14,6 +14,25 @@
 div,small,p,pre {
 	word-break:break-all;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
 </style>
 <script type="text/javascript">
@@ -72,6 +91,7 @@ function ChatSend(){
 	title = "";
 	AllStart = 0;
 	var content = $("[name=content]").val();
+	$("[name=content]").val("");
 	$.ajax ({
 		url : "adminSendChat.chat",
 		data: {chat_no : joindata[joinnum][0].chat_no,
@@ -80,6 +100,7 @@ function ChatSend(){
 		,
 		success : function (data) {
 			console.log("메시지 작성완료");
+			
 		}
 		,error:function(e){
 			console.log('실패'+e.status+":"+e.responseText);
@@ -95,6 +116,14 @@ $(function() {
 	}
 	
 	
+	
+	$("input[name=content]").keydown(function (key) {
+		 
+        if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+        	 ChatSend();
+        }
+ 
+    });
 	
 	
 	
@@ -177,9 +206,9 @@ function fnChatStart(){
 				
 				
 			</div>
-			<div class="col-xl-7 border pt-3 chatBody " style="overflow-y: auto;max-height: 600px;">
+			<div class="col-xl-7 border pt-3 chatBody " style="max-height: 600px;">
 				<!-- 관리자 문자 -->
-				<div class="chatting" style="min-height: 530px; overflow-y:auto;">
+				<div class="chatting" style="min-height: 530px;max-height:530px; overflow-y:auto;">
 					<div class='float-left w-75'><div class='header'><small>상담사</small></div><div class='body'>	<div class='row ml-1'><small class='border w-75 float-left p-1'>예제</small><small class='float-right w-25' style='margin-top: auto'>날짜</small></div></div></div><div class='clearfix my-2 Jul'></div>
 					
 					<!-- 사용자 문자 -->
