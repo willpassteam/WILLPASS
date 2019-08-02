@@ -11,6 +11,19 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 $(function() {
+	//약관 3개 체크시 작동하는 메소드
+	$("[name=Check]").on("click",function(){
+		if($("[name=Check]:checked").length == 3){
+			
+			$("[name=Check]").attr('checked', true);
+
+		}
+		
+
+	});
+	
+	
+	
 	$("#user_pwd2").keyup(function(){
 		
 		 if($("#user_pwd").val() != ($("#user_pwd2").val())){ 	
@@ -266,7 +279,7 @@ function checkAll(){
         
         <td width="80%" class="pb-0 pt-0" colspan="3">
         <div class="row mb-0 pb-0 pt-2 pb-1">
-        <input type="text" class="form-control-plaintext col-5 ml-3 border pb-1" id="user_email" name="user_email" >
+        <input type="text" class="form-control-plaintext col-5 ml-3 border pb-1" id="user_email" name="user_email" readonly="readonly" value="${param.user_email }" >
          <p class=" d-inline-block col-6 ml-4 pt-2 small text-success "><b>√ </b>이메일 계정 인증 완료</p>
      	 </div>
      </td>
@@ -309,11 +322,11 @@ function checkAll(){
 
 	<div class="border bg-light mt-0 border-top-0" >
 	<div class="col-7 pl-5 pt-2">
-	  <label class="checkbox-inline pl-3">
-	  					<input type="checkbox" autocomplete="on" onclick="checkAll()" name="Check" class="press" id="allCheck" ><b>아래 약관 및 개인정보 수집,이용 등에 모두 동의 합니다.</b></label><a href="#" class="pull-right">보기</a><br>
-                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >서비스 약관</label><a href="#" class="">보기</a><br>
-                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >개인정보 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
-                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >고유식별정보의 수집,이용 동의</label><a href="#" class="pull-right">보기</a><br>
+	  <label class="checkbox-inline">
+	  					<input type="checkbox" autocomplete="on" onclick="checkAll()" name="Check" class="press" id="allCheck" ><b>아래 약관 및 개인정보 수집,이용 등에 모두 동의 합니다.</b></label><a href="#" class="pl-1 text-success pull-right">보기</a><br>
+                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >서비스 약관</label><a href="#" class="pl-1 text-success pull-right">보기</a><br>
+                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >개인정보 수집,이용 동의</label><a href="#" class="pl-1 text-success pull-right">보기</a><br>
+                        <label class="checkbox-inline" class="press pl-3"><input type="checkbox" name="Check" >고유식별정보의 수집,이용 동의</label><a href="#" class="pl-1 text-success pull-right">보기</a><br>
 	</div>
 	</div>
 	<div class="row mt-3">
