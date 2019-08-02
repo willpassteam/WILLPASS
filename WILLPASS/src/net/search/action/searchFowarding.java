@@ -38,8 +38,6 @@ public class searchFowarding implements Action {
 		String from = request.getParameter("from");
 		String to = request.getParameter("to");
 		String people = request.getParameter("adult");
-		// String people=request.getParameter("adult")+":";
-		// int people=Integer.parseInt(request.getParameter("adult"));
 		String date = "";
 
 		try {
@@ -69,17 +67,11 @@ public class searchFowarding implements Action {
 			String sFlight = tr.get(i).getElementsByTag("td").get(4).text();
 			String sStarting = tr.get(i).getElementsByTag("td").get(6).text().split("->")[0];
 			String sDestination = tr.get(i).getElementsByTag("td").get(6).text().split("->")[1];
-			// String sfFlight =dao.flightcheck(sAirline);
-			// sfFlight=sFlight.replace(sfFlight, sfFlight+"/");
-			// System.out.println("timecheck start");
 
 			vo.setAirline(sAirline);
 			vo.setFlight(sFlight);
 			vo.setStarting(sStarting);
 			vo.setDestination(sDestination);
-			// vo.setDeparture_time(times.getDeparture_time());
-			// vo.setArrival_time(times.getArrival_time());
-			// vo.setTime(times.getTime());
 			vo.setRound_trip(false);
 			vo.setDate(new Date(new SimpleDateFormat("yyyyMMdd").parse(from).getTime()));
 			vo.setPeople(people);
@@ -101,7 +93,6 @@ public class searchFowarding implements Action {
 		 * Thread 시작
 		 */
 		ExecutorService threadPool = Executors.newFixedThreadPool(list.size());
-		// 아직 못 쓴거입니다.
 
 		Thread thread = new Thread();
 		System.out.println("Thread검색시작");
@@ -119,18 +110,11 @@ public class searchFowarding implements Action {
 			
 			System.out.println("나시작");
 			
-//			thread.start();
 			threadPool.submit(thread);
 			
 		}
 		
 		
-//		try {
-//			thread.join();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		// 동기화 synchronizedList를 다시 list로 바꿔줌
 
 		System.out.println("Thread검색종료");
 
@@ -138,14 +122,6 @@ public class searchFowarding implements Action {
 		 * Thread 끝
 		 * 왕복의 경우 시작
 		 */
-//		System.out.println("null제거전"+list.size());
-//		for (int i = 0; i < list.size(); i++) {
-//			searchDTO vo = (searchDTO) list.get(i);
-//			if (vo.getArrival_time() == null) {
-//				list.remove(list.get(i));
-//			}
-//		}
-//		System.out.println("null제거후"+list.size());
 		request.getSession().setAttribute("list1", list);
 
 		if (round_trip == 1) {
@@ -209,30 +185,12 @@ public class searchFowarding implements Action {
 				String date_for = new SimpleDateFormat("yyyyMMdd").format(searchDTO_for.getDate());
 				thread1 = new Thread(new timecheck(sfFlight, date_for, i, list_1));
 
-//				thread1.start();
 				threadPool.submit(thread1);
-
-//				System.out.println("나시작");
 			}
 
-//			try {
-//				thread1.join();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
 
-			// 동기화 synchronizedList를 다시 list로 바꿔줌
 			System.out.println("Thread검색종료");
-			// Thread 저
-//			for (int i = 0; i < list_1.size(); i++) {
-//				searchDTO vo = (searchDTO) list_1.get(i);
-//				if (vo.getArrival_time() == null) {
-//					list_1.remove(list_1.get(i));
-//				}
-//			}
-//예외
 			request.getSession().setAttribute("list2", list_1);
-			// request.setAttribute("list2",list_1);
 		}
 		threadPool.shutdown();
 		threadPool.awaitTermination(20, TimeUnit.SECONDS);
