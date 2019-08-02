@@ -83,7 +83,7 @@ function setParentText(){
 	}
 	if(num==authNum){
 		alert("인증 되었습니다.");
-		opener.location="UserJoinstep2.jsp?email="+$("#user_email").val();
+		opener.location="UserJoinstep2.jsp?user_email="+$("#user_email").val();
 	    window.close();
 	}
     
