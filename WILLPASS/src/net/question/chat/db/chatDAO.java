@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -39,7 +42,7 @@ public class chatDAO {
 		}
 	}
 	//유저의 이메일 기준으로 
-	public ArrayList<chatDTO> getChatList(String user_email,int chat_no){
+	public ArrayList<chatDTO> getChatList(int chat_no){
 		ArrayList<chatDTO> result = new ArrayList();
 		try {
 			con = ds.getConnection();
@@ -163,7 +166,7 @@ public class chatDAO {
 	// 상담사 조인 메소드
 	public void joinAdmin(int chat_no){
 		try {
-			
+			System.out.println("joinAdmint 실행");
 			con = ds.getConnection();
 			
 			String sql = "update chat_ref set chat_adminjoin = true where chat_no = ?";
@@ -192,6 +195,7 @@ public class chatDAO {
 	// 상담사 아웃 메소드
 	public void outAdmin(int chat_no){
 	try {
+		System.out.println("joinOut 실행");
 		con = ds.getConnection();
 		
 		String sql = "update chat_ref set chat_adminjoin = false ,chat_adminouttime = sysdate() where chat_no = ?";
@@ -396,10 +400,50 @@ public class chatDAO {
 		}
 		return result;
 	}
+	//V2 모든 내용과 모든 걸 다가져오니 속도가 느림 -> 해결 이름만 가져오기 + 마지막 내용 + 확인안한 내용까지 
+	public ArrayList getAllChat_List_Name(){
+		ArrayList result = new ArrayList();
+		try {
+			
+			int[] max = getAll_chat_no();
+			
+			con = ds.getConnection();
+			for (int i= 0;  i< max.length; i++) {
+				int chat_no = max[i];
+				
+				String sql = "select *,(select count(chat_date) from chat where chat_who = true AND chat_no = ? AND chat_date > (select chat_adminouttime from chat_ref where chat_no = ? AND chat_adminjoin = false)) AS count from chat where chat_no =?  order by chat_date DESC limit 1;";
+				
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setInt(1, chat_no);
+				pstmt.setInt(2, chat_no);
+				pstmt.setInt(3, chat_no);
+				rs = pstmt.executeQuery();
+				if(rs.next()){
+					HashMap dto = new HashMap<>();
+					dto.put("chat_content",rs.getString("chat_content"));
+					dto.put("chat_date",rs.getTimestamp("chat_date"));
+					dto.put("chat_no",rs.getInt("chat_no"));
+					dto.put("chat_who",rs.getBoolean("chat_who"));
+					dto.put("user_email",rs.getString("user_email"));
+					dto.put("count", rs.getInt("count"));
+					
+					result.add(dto);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}finally {
+			free();
+		}
+		return result;
+	}
 	//작성 유저용 
 	public void writeChat(int chat_no, String content,String user_email) {
 		int result = 0;
 		try {
+			
 			con = ds.getConnection();
 			
 			String sql = "insert into chat(chat_no,chat_who,user_email,chat_date,chat_content) values(?,?,?,sysdate(),?)";

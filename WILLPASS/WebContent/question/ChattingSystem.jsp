@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,20 +37,23 @@ div,small,p,pre {
 <script type="text/javascript">
 var join = false;
 var joinnum = 0;
+var joindata;
 var Chatend = 0;
 var ChatStart = 0;
-var joindata;
 var content ="";
 var Allend = 0;
 var AllStart = 0;
 var title = "";
+var page = 0;
 
 
-$(document).on("click",".chatHead > .border",function(){
+$(document).on("click",".chatHead > .border > a",function(){
 	//아웃먼저
-	adminOut();
+	if(join == true ){
+		adminOut();
+	}
 	//a 태그 번호 받아오기
-	joinnum = $(".chatHead > .border").index(this);
+	joinnum = $(".chatHead > .border > a").index(this);
 	//join은 fnChatStart()실행하기 위한 조건
 	join = true;
 	
@@ -61,11 +63,13 @@ $(document).on("click",".chatHead > .border",function(){
 	//넣을 정보 초기화
 	content = "";
 	adminJoin();
+	
 });
+
 function adminOut(){
 	$.ajax ({
 		url : "adminOut.chat",
-		data: {chat_no : joinnum},
+		data: {chat_no : joindata[joinnum].chat_no},
 		success : function (data) {
 			console.log("상담사 나가버림");
 		}
@@ -73,12 +77,13 @@ function adminOut(){
 			console.log('실패'+e.status+":"+e.responseText);
 		}
 	});
-}
+};
+
 function adminJoin(){
 	//join
 	$.ajax ({
 		url : "adminJoin.chat",
-		data: {chat_no : joinnum},
+		data: {chat_no : joindata[joinnum].chat_no},
 		success : function (data) {
 			console.log("상담사 들어옴");
 		}
@@ -86,20 +91,20 @@ function adminJoin(){
 			console.log('실패'+e.status+":"+e.responseText);
 		}
 	});
-}
+};
+
 function ChatSend(){
-	title = "";
-	AllStart = 0;
-	var content = $("[name=content]").val();
+	var content_get = $("[name=content]").val();
 	$("[name=content]").val("");
 	$.ajax ({
 		url : "adminSendChat.chat",
-		data: {chat_no : joindata[joinnum][0].chat_no,
-				chat_content : content,
-				user_email : joindata[joinnum][0].user_email }
+		data: {chat_no : joindata[joinnum].chat_no,
+				chat_content : content_get,
+				user_email : joindata[joinnum].user_email }
 		,
 		success : function (data) {
 			console.log("메시지 작성완료");
+			
 			
 		}
 		,error:function(e){
@@ -109,14 +114,9 @@ function ChatSend(){
 }
 
 $(function() {
-	var body = document.body
-	var height = Math.max( body.scrollHeight, body.offsetHeight);
-	if(height < 802){
-		
-	}
-	
-	
-	
+	var ajax1 = true;
+	var ajax2 = true;
+	// ajax 작업 완료후 다시 실행 
 	$("input[name=content]").keydown(function (key) {
 		 
         if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
@@ -125,68 +125,89 @@ $(function() {
  
     });
 	
-	
-	
-	
-	
-	timer = setInterval( function () {
+	timer2 = setInterval(function (){
+		if(joinnum > 0 && ajax2 == true){
+			ajax2 = false;
 		$.ajax ({
-			url : "getChatAdmin.chat",
+			url : "ajaxGetAdmin.chat",
 			dataType:"json",
-			success : function (data) {
-				joindata = data;
-				Allend = data[0][0].allsize;
-				title = "";
-				for (var i = AllStart; AllStart < Allend ;i++) {
-					var count = "";
-					
-					function A (){$.ajax ({
-						url : "adminChatCount.chat",
-						data: {chat_no : data[i][0].chat_no}
-						,
-						success : function (da) {
-							count = da;
-						}
-						,error:function(e){
-							console.log('실패'+e.status+":"+e.responseText);
-						}
-					})};
-					AllStart ++;
-					title += "<div class='border'><a href='#'><h6>아이디:"+data[i][0].user_email+"&nbsp;&nbsp;<span class='badge badge-danger'>"+count+"</span></h6><h6><small>"+data[i][data[i][0].chat_count-1].chat_content+"</small></h6></a></div>";
-					if(i +1 == Allend ){
-						chatHead(title);
+			data : {chat_no :joindata[joinnum].chat_no},
+			success : function (datt) {
+				var Change = false;
+				Chatend = datt[0].size;
+				
+				for(var j = ChatStart;ChatStart<Chatend&& join == true;j++){
+					Change =true;
+					ChatStart ++;
+					if(datt[j].chat_who =="\"true\""){
+						content += "<div class='w-100' > <div class='float-right' style='max-width: 450px'><small class='float-left mx-2' style='margin-top:auto'>"+datt[j].chat_date+"</small><small class='float-right border border-success p-1' style='max-width: 360px'>"+datt[j].chat_content+" </small></div></div><div class='clearfix'></div>"
+					}else{
+						content +="<div	 class='float-left w-75'><div class='header'><small>상담사</small></div><div class='body'><div class='row ml-1'><small class='border w-75 float-left p-1'>"+datt[j].chat_content+"</small><small class='float-right w-25' style='margin-top: auto'>"+datt[j].chat_date+"</small></div></div></div><div class='clearfix my-2 Jul'></div>"
 					}
 				}
-				
-				if(join == true){
-					fnChatStart();
+				$(".chatting").html(content);
+				if(Change == true){
+					$(".chatting").scrollTop($(".chatting")[0].scrollHeight);
+					Change = false;
 				}
+				
+				
+				ajax2 = true;
+				
+				
+				
+				
 			}
+				
 			,error:function(e){
 				console.log('실패'+e.status+":"+e.responseText);
 			}
 		});
-	},1000);
+	}},1000);
+	
+	
+	timer = setInterval(function(){
+			if(ajax1 == true){
+				ajax1= false;
+				$.ajax ({
+					url : "getChatAdmin.chat",
+					dataType:"json",
+					success : function (data) {
+						joindata = data;
+						Allend = data[0].allsize;
+						for (var i = AllStart; AllStart < Allend ;i++) {
+							AllStart ++;
+							title += "<div class='border'><a href='#'><h6>아이디:"+data[i].user_email+"/ 보낸 날짜 : "+data[i].chat_date+"&nbsp;&nbsp;<span class='badge badge-danger'>"+data[i].count+"</span></h6><h6><small>"+data[i].chat_content+"</small></h6></a></div>";
+							if(i +1 == Allend ){
+								chatHead(title);
+							}
+						}
+						ajax1= true;
+						
+					}
+					,error:function(e){
+						console.log('실패'+e.status+":"+e.responseText);
+					}
+				})}
+			}	
+			,1000);
+	/* timerOUT = , 1000); */
+
+	
+	
+	
+	
 	
 })
 function chatHead(title_1){
 	$(".chatHead").html(title_1);
 }
-function fnChatStart(){
-	
-	Chatend = joindata[joinnum][0].chat_count;
-	
-	for(var j = ChatStart;ChatStart<Chatend&& join == true;j++){
-		console.log(joindata[joinnum][j].chat_content)
-		ChatStart ++;
-		if(joindata[joinnum][j].chat_who =="true"){
-			content += "<div class='w-100' > <div class='float-right' style='max-width: 450px'><small class='float-left mx-2' style='margin-top:auto'>"+joindata[joinnum][j].chat_date+"</small><small class='float-right border border-success p-1' style='max-width: 360px'>"+joindata[joinnum][j].chat_content+" </small></div></div><div class='clearfix'></div>"
-		}else{
-			content +="<div class='float-left w-75'><div class='header'><small>상담사</small></div><div class='body'><div class='row ml-1'><small class='border w-75 float-left p-1'>"+joindata[joinnum][j].chat_content+"</small><small class='float-right w-25' style='margin-top: auto'>"+joindata[joinnum][j].chat_date+"</small></div></div></div><div class='clearfix my-2 Jul'></div>"
-		}
-	}
-	$(".chatting").html(content);
-	
+function getChatAdmin(){
+	timerId = setTimeout(getChatAdmin(), 1000);
+    PrintTime();
+
+
+
 }
 
 

@@ -14,15 +14,11 @@ import net.question.chat.c.ActionForward;
 import net.question.chat.db.chatDAO;
 import net.question.chat.db.chatDTO;
 
-public class ajaxGetAllList implements Action {
+public class ajaxGetAdminchat implements Action {
+
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ActionForward forward = null;
-		
 		int chat_no = Integer.parseInt(request.getParameter("chat_no"));
-		
-		
-		String user_email = (String)request.getSession(true).getAttribute("user_email");
 		
 		ArrayList<chatDTO> result = new chatDAO().getChatList( chat_no);
 		JSONArray array = new JSONArray();
@@ -45,9 +41,7 @@ public class ajaxGetAllList implements Action {
 		
 		out.print(array.toString());
 		out.close();
-		
-		return forward;
-		
+		return null;
 	}
 
 }

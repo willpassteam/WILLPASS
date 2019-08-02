@@ -88,49 +88,52 @@ $(document).on("click",".chatHead > .border",function(){
 });
 
 $(function() {
-	timer = setInterval( function () {
-		$.ajax ({
-			url : "getChatUser.chat",
-			dataType:"json",
-			success : function (data) {
-				$('#loading').hide();
-				joindata = data;
-				Allend = data[0][0].allsize;
-				for (var i = AllStart; AllStart < Allend ;i++) {
-					var count = "";
-					
-					function A (){$.ajax ({
-						url : "adminChatCount.chat",
-						data: {chat_no : data[i][0].chat_no}
-						,
-						success : function (da) {
-							count = da;
-						}
-						,error:function(e){
-							console.log('실패'+e.status+":"+e.responseText);
-						}
-					})};
-					AllStart ++;
-					var chat_lastcount = data[i][0].chat_count-1;
-					var chat_lastcontent = data[i][chat_lastcount].chat_content;
-					var chat_lastdate = data[i][chat_lastcount].chat_date;
-					
-					title += "<div class='border' ><div class='ChatLog' ><a class='btn btn-light btn-outline-secondary' style='width: 255px' ><small class='float-left'>마지막 전송 시간 :"+chat_lastdate+"</small><div class='clear-fix' /><small class='float-left'>내용 :"+chat_lastcontent+"</small></a></div></div>";
-					if(i +1 == Allend ){
-						chatHead(title);
-					}
-				}
-				
-				if(join == true){
-					fnChatStart();
-				}
-			}
-			,error:function(e){
-				console.log('실패'+e.status+":"+e.responseText);
-			}
-		});
-	},3000);
+	timerId = setInterval(
+		function(){
+			if(join == true){
+				fnChatStart();
+			}}, 500);
+		
+
 	
+	
+	$.ajax ({
+		url : "getChatUser.chat",
+		dataType:"json",
+		success : function (data) {
+			$('#loading').hide();
+			joindata = data;
+			Allend = data[0][0].allsize;
+			for (var i = AllStart; AllStart < Allend ;i++) {
+				var count = "";
+				
+				function A (){$.ajax ({
+					url : "adminChatCount.chat",
+					data: {chat_no : data[i][0].chat_no}
+					,
+					success : function (da) {
+						count = da;
+					}
+					,error:function(e){
+						console.log('실패'+e.status+":"+e.responseText);
+					}
+				})};
+				AllStart ++;
+				var chat_lastcount = data[i][0].chat_count-1;
+				var chat_lastcontent = data[i][chat_lastcount].chat_content;
+				var chat_lastdate = data[i][chat_lastcount].chat_date;
+				
+				title += "<div class='border' ><div class='ChatLog' ><a class='btn btn-light btn-outline-secondary' style='width: 255px' ><small class='float-left'>마지막 전송 시간 :"+chat_lastdate+"</small><div class='clear-fix' /><small class='float-left'>내용 :"+chat_lastcontent+"</small></a></div></div>";
+				if(i +1 == Allend ){
+					chatHead(title);
+				}
+			}
+		}
+		,error:function(e){
+			console.log('실패'+e.status+":"+e.responseText);
+		}
+	});
+
 })
 function chatHead(title_1){
 	$(".chatHead").html(title_1);
@@ -155,7 +158,6 @@ function fnchat() {
 	//join은 fnChatStart()실행하기 위한 조건
 	join = false;
 	//넣을 정보 초기화
-	   
 	   window.open("Chatting_popup.jsp", "회원가입","width=500 height=640 menubar=no status=no");
 
 }

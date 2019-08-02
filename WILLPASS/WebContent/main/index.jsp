@@ -224,10 +224,32 @@ $(window).load(function() {//로딩이미지
 
 
 	});
-	function captureReturnKey(e) {
+	function captureReturnKey(e) {// 엔터키 막는 구간
 	    if(e.keyCode==13)
 	    return false;
 	}
+function fnSubmit(){
+	var check1 = $("[name=starting]").val();
+	var check2 = $("[name=destination]").val();
+	var check3 = $("[name=from]").val();
+	var check4 = $("[name=to]").val();
+	var check5 = $("[name=adult]").val();
+	var check6 = $("[name=child]").val();
+	var check7 = $("[name=baby]").val();
+	var check8 = check5 +check6 +check7;
+	if(check1 != "" &&check2 != "" &&check3 != "" &&check4 != "" &&check5 != "" &&check8 != ""){
+		document.search.submit();
+	}else{
+		for (var i = 0; i < 7; i++) {
+			if($("input[type=text]:eq("+i+")").val() == ""){
+				alert('입력하지 않은 사항이 있습니다.');
+				$("input[type=text]:eq("+i+")").focus();
+				break;
+			}
+		}
+	}
+}
+	
 </script>
 </head>
 <body>
@@ -249,7 +271,7 @@ $(window).load(function() {//로딩이미지
 		<!--잠시 -->
 
 		<div class="container pb-5">
-			<form autocomplete="off" onkeydown="return captureReturnKey(event)" action="searchpro.jin" method="post" name="search">
+			<form autocomplete="off" onkeydown="return captureReturnKey(event)" onsubmit="return false;" action="searchpro.jin" method="post" name="search">
 				<div class="container mt-5 ">
 					<div class="btn-group btn-group-toggle mb-2 round_trip_div" data-toggle="buttons">
 						<label for="round_trip" class="btn btn-outline-dark btn-light active"><input type="radio" name="round_trip" value="1" class="custom-radio mr-0" checked="checked">왕복</input></label> <label
@@ -300,7 +322,7 @@ $(window).load(function() {//로딩이미지
 							</div>
 						</div>
 						<div class="col-sm-6 border border-top-0 border-right-0 border-left-0 border">
-							<input type="submit" class="btn btn-outline-primary " value="항공권 검색">
+							<input type="button" class="btn btn-outline-primary" onclick="fnSubmit()" value="항공권 검색">
 						</div>
 					</div>
 				</div>

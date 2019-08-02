@@ -44,6 +44,15 @@ div {
 </style>
 <script type="text/javascript">
 $(function() {
+	
+	$("input[name=content]").keydown(function (key) {
+		 
+        if(key.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+        	fnSubmit();
+ 
+    }});
+	
+	
 	var start = 0;
 	var end = 0;
 	timer = setInterval( function () {
@@ -84,13 +93,12 @@ function fnJson(who,date,content){
 }
 function fnSubmit(){
 	var content = $("[name=content]").val();
+	$("[name=content]").val("");
 	$.ajax ({
 		type:"post",
 		url : "writeChat.chat",
 		data : {chat_no :'<%=chat_no%>',content : content},
 		success : function (result){ 
-			$("[name=content]").val("");
-			
 		}
 	});
 };

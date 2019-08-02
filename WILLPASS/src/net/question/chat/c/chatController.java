@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import net.question.chat.db.chatDAO;
 import net.question.chat.m.ajaxGetAdminList;
+import net.question.chat.m.ajaxGetAdminchat;
 import net.question.chat.m.ajaxGetAllList;
 import net.question.chat.m.ajaxGetUserList;
 import net.question.chat.m.chatLogin;
@@ -120,7 +121,6 @@ public class chatController extends HttpServlet {
 				
 			}else if(command.equals("adminJoin.chat")){
 				try {
-					String user_email = (String)req.getSession(true).getAttribute("user_email");
 					int chat_no = Integer.parseInt(req.getParameter("chat_no"));
 					chatDAO dao = new chatDAO();
 					dao.joinAdmin(chat_no);
@@ -155,6 +155,14 @@ public class chatController extends HttpServlet {
 			}else if(command.equals("getChatUser.chat")){
 				try {
 					action = new ajaxGetUserList();
+					forward= action.execute(req, resp);
+					forward = null;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(command.equals("ajaxGetAdmin.chat")){
+				try {
+					action = new ajaxGetAdminchat();
 					forward= action.execute(req, resp);
 					forward = null;
 				} catch (Exception e) {
