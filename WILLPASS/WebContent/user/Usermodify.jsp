@@ -41,7 +41,7 @@
 						    <div class="input-group-prepend">
 						      <span class="input-group-text">비밀번호</span>
 						    </div>
-						    <input type="password" class="form-control" value="${mem.user_pwd}" name="user_pwd">
+						    <input type="text" class="form-control" value="${mem.user_pwd}" name="user_pwd">
 						    <div class="input-group-prepend">
 						      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#modifypwd">비밀번호 수정</button>
 						    </div>

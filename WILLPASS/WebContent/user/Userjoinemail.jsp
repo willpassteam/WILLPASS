@@ -32,7 +32,6 @@ function dailyMissionTimer(duration) {
         	alert("인증시간을 초과하였습니다.다시 인증해주세요");
         	self.close();
         }
-
         if (--timer < 0) {
             timer = 0;
             clearInterval(interval);
@@ -40,7 +39,6 @@ function dailyMissionTimer(duration) {
         }
     }, 1000);
 }
-
 //계정인증 버튼을 클릭했을때 타이머함수 실행
 function EmailTimer(){ 
 	
@@ -57,17 +55,16 @@ function EmailTimer(){
 			}
 			else{
 				alert("메일이 발송되었습니다. 인증번호를 확인해주세요.");
+				$("#user_email").attr('readonly',true);
 			authNum=result.authNum;
 			dailyMissionTimer(0.05);
 			}
 			
-
 		}
 	});
 	
 	 
 }
-
 //확인버튼 눌렀을때 부모창으로 email값전달
 function setParentText(){
 	var num=$("#auth").val();
@@ -81,6 +78,7 @@ function setParentText(){
 	if( num != authNum){
 		alert("틀린 인증번호 입니다. 인증번호를 확인하여 다시 입력해주세요");
 		$("#auth").val("");
+
 		return false;
 	}
 	if(num==authNum){
@@ -91,7 +89,11 @@ function setParentText(){
     
 }
 
-
+function fnclick1(){
+	
+	$("#user_email").attr('readonly',false);
+	
+}
 </script>
 </head>
 <body>
@@ -103,9 +105,9 @@ function setParentText(){
  <div class="container">
  <div class="bg-light border text-dark ">
  <ul class="mt-3">
- <li> 입력하신 이메일정보가 일치하지 않을 경우 인증메일이 발송되지 않습니다.</li>
- <li>1분 이내에 이메일이 수신되지 않을 경우 정확한 정보로 재시도해 주시기 바랍니다.</li>
- <li>재시도를 하려면 <a href="#">여기</a>를 클릭해 주세요.</li>
+ <li>입력하신 이메일정보가 일치하지 않을 경우 인증메일이 발송되지 않습니다.</li>
+ <li>3분 이내에 이메일이 수신되지 않을 경우 정확한 정보로 재시도해 주시기 바랍니다.</li>
+ <li>재시도를 하려면 <a onclick="window.location.reload();"><b>여기</b></a>를 클릭해 주세요.</li>
  </ul>
  </div>
  <div class=" mt-4 bg-white border pb-3 pt-3">
