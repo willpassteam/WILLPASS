@@ -290,9 +290,7 @@ function fnpage(clickpage,clickrange){
 														</div>
 
 														<div class="col-md-3 text-right  ">
-															<p class="font-weight-bold mb-1">Invoice #550</p>
-															<p class="text-muted" id="resernum">Due to: 4 Dec,
-																2019</p>
+															<p class="font-weight-bold mb-1" id="resernum">Invoice #550</p>
 														</div>
 													</div>
 
