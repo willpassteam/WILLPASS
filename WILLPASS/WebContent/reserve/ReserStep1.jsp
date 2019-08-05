@@ -349,28 +349,35 @@
 		    if(e.keyCode==13)
 		    return false;
 		}
-	function fnSubmit(){
-		var check1 = $("[name=starting]").val();
-		var check2 = $("[name=destination]").val();
-		var check3 = $("[name=from]").val();
-		var check4 = $("[name=to]").val();
-		var check5 = $("[name=adult]").val();
-		var check6 = $("[name=child]").val();
-		var check7 = $("[name=baby]").val();
-		var check8 = check5 +check6 +check7;
-		if(check1 != "" &&check2 != "" &&check3 != "" &&check4 != "" &&check5 != "" &&check8 != ""){
-			document.search.submit();
-		}else{
-			for (var i = 0; i < 7; i++) {
-				if($("input[type=text]:eq("+i+")").val() == ""){
-					alert('입력하지 않은 사항이 있습니다.');
-					$("input[type=text]:eq("+i+")").focus();
-					break;
+		function fnSubmit(){
+			var check1 = $("[name=starting]").val();
+			var check2 = $("[name=destination]").val();
+			var check3 = $("[name=from]").val();
+			var check4 = $("[name=to]").val();
+			var check5 = $("[name=adult]").val();
+			var check6 = $("[name=child]").val();
+			var check7 = $("[name=baby]").val();
+			var check8 = check5 +check6 +check7;
+			var round_trip = $("[name=round_trip]:checked").val();
+			if(round_trip == "0"){
+				check4 = "값존재";	
+			}
+			
+			if(check1 != "" &&check2 != "" &&check3 != "" &&check4 != "" &&check8 != ""){
+				document.search.submit();
+			}else{
+				for (var i = 0; i < 7; i++) {
+					if($("input[type=text]:eq("+i+")").val() == ""){
+						if(round_trip == "0" && i == 3 ){
+							++i;
+						}				
+						alert('입력하지 않은 사항이 있습니다.');
+						$("input[type=text]:eq("+i+")").focus();
+						break;
+					}
 				}
 			}
 		}
-	}
-		
 	</script>
 
 </head>
