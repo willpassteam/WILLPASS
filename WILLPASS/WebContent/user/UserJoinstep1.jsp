@@ -13,7 +13,7 @@
 //새로운 window창 open
 function emailverif() {
 	   
-	   window.open("Userjoinemail.jsp", "회원가입","width=500 height=600 menubar=no status=no");
+	   window.open("Userjoinemail.jsp", "회원가입","width=550 height=650 menubar=no status=no");
 
 }
 

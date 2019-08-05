@@ -169,10 +169,10 @@ $(function(){
 	<p class="small text-muted">상기 금액은 홈페이지 구매 시 적용되는 운임이며 지점,공항을 통하여 구매하시면 운임이 달라질 수 있습니다.</p>
 	<div class="border">
 	<ul class="list-group">
-	<li class="list-group-item border-right-0"><input type="radio"> 신용카드 [카드사 연결]</li>
-	<li class="list-group-item"><input type="radio"> 해외발행 카드결제</li>
-	<li class="list-group-item"><input type="radio"> 실시간 계좌이체</li>
-	<li class="list-group-item"><input type="radio">네이버페이</li>
+	<li class="list-group-item border-right-0"><input type="radio" name="pay" checked="checked" id="pay1"> <label for="pay1">신용카드 [카드사 연결] </label></li>
+	<li class="list-group-item"><input type="radio" name="pay" id="pay2"> <label for="pay2">해외발행 카드결제</label></li>
+	<li class="list-group-item"><input type="radio" name="pay" id="pay3"><label for="pay3"> 실시간 계좌이체</label></li>
+	<li class="list-group-item"><input type="radio" name="pay" id="pay4"><label for="pay4">네이버페이</label></li>
 	</ul>
 	</div>
 	
