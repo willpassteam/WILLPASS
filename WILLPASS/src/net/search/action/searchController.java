@@ -84,7 +84,7 @@ public class searchController extends HttpServlet {
 		}//회원가입에 성공후 ! 로그인화면으로 이동하라라는 요청이 들어왔을때..
 		//또는
 		//top.jsp에서 login링크를 클릭하여 로그인화면으로 이동하라라는 요청이 들어 왔을때..
-		else if(command.equals("/main/searchpro.jin")){
+		else if(command.equals("/main/searchpro.jin")||command.equals("/reserve/searchpro.jin")){
 			//페이지 이동 방식 여부값, 이동할 페이지 주소값을 저장해서 제공해주는 객체 생성
 			System.out.println("searchpro.jin");
 			try {

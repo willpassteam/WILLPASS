@@ -55,7 +55,11 @@ $(function() {
 	
 	var start = 0;
 	var end = 0;
+	var ajaxCheck = true;
 	timer = setInterval( function () {
+		if(ajaxCheck == true){
+			
+		ajaxCheck= false;
 		$.ajax ({
 			url : "getChatContent.chat",
 			dataType:"json",
@@ -66,6 +70,7 @@ $(function() {
 						start++; 					
 						fnJson(data[i].chat_who,data[i].chat_date,data[i].chat_content);
 					}
+					ajaxCheck = true;
 				
 				
 				
@@ -75,7 +80,7 @@ $(function() {
 				console.log('실패'+e.status+":"+e.responseText);
 			}
 		});
-	},1000);
+	}},1000);
 
 	
 	window.onunload = function () {
