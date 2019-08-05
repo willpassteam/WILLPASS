@@ -219,7 +219,7 @@ function getChatAdmin(){
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 	<div class="container my-3" style="background-color:#f7f7f7 ">
-		<h1 align="center" style="color:#dc3545;">채팅 관리 시스템</h1>
+		<h1 align="center" style="color:#dc3545;">채팅 관리 시스템 <span class="float-right pt-2"><a href="javascript:location.href='./ChattingSystem.jsp'" class="btn btn-danger">리로딩</a></span></h1>
 		<div class="row" >
 			<div class="col-xl-5 scroll chatHead " style="overflow-y: auto;max-height: 600px;">
 				

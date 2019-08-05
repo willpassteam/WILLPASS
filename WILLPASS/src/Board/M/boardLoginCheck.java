@@ -30,7 +30,7 @@ public class boardLoginCheck implements Action {
 			String getPath = request.getContextPath();
 			out.println("<script type='text/javascript'>");
 			out.println("alert('로그인 후 이용가능한 페이지 입니다.');");
-			out.println("location.href='"+getPath+"';");
+			out.println("location.href='"+getPath+"/user/Userlogin.jsp';");
 			out.println("</script>");
 			out.close();
 			result = null;

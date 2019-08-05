@@ -20,7 +20,7 @@
 	<div class="container">
 		<div class="col-sm-12">
 			<br>
-			<h2>문의 사항</h2>
+			<h2>문의 사항 </h2>
 			<hr>
 			<div class="float-left">
 				<h5>${BoardDTO.BOARD_TITLE } | 작성자 : ${BoardDTO.BOARD_ID }님</h5>
@@ -34,7 +34,7 @@
 				<p >${BoardDTO.BOARD_CONTENT }</p>
 			</div>
 			<div class="float-right mb-3">
-				<c:if test="${user_id == 'admin' }">
+				<c:if test="${user_id == 'admin' && BoardDTO.BOARD_DEPTH != 1 }">
 					<a href="reply.Board?Board_num=${BoardDTO.BOARD_NUM }" class="btn btn-primary">답글</a>
 				</c:if>	
 				<c:choose>
