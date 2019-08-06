@@ -11,6 +11,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 	$(function() {
+		
 		var idch=false;
 		var pwdch=false;
 		
@@ -19,8 +20,40 @@
 			$("#user_id").val("");
 			$("#checklabel").html("6~15자의 영문 소문자 ,숫자만 사용가능");
 		});
+		$("#user_id").on("blur",function(){ //id input클릭했을떄 무조건 false로
+			idcheck();
+		});
+		
 		$("#user_pwd").on("blur",function(){ //user_pwd input클릭했을떄 무조건 false로
 			pwdch=false;
+			var getCheck = RegExp(/^[a-z0-9]{7,15}$/);
+			if( getCheck.test($("#user_pwd").val())==false){
+				$("#pwdchekcp").removeClass("text-muted");
+				$("#pwdchekcp").addClass("text-danger");
+				$("#user_pwd").val("");
+			}else{
+				$("#pwdchekcp").removeClass("text-danger");
+						$("#pwdchekcp").addClass("text-muted");
+				
+			}
+			
+			if ($("#user_pwd").val() != ($("#user_pwd2").val())) {
+				$("#passcheck").removeClass("text-success");
+				$("#passcheck").addClass("text-danger");
+				$("#passcheck").html("비밀번호가 틀립니다.");
+				pwdch=false;
+			} else {
+				
+				if($("#user_pwd").val()!=""){
+				$("#passcheck").removeClass("text-danger");
+				$("#passcheck").addClass("text-success");
+				$("#passcheck").html("<b class='text-info'>√ </b>비밀번호가 같습니다.");
+				$("#user_pwd").val();
+				pwdch=true;
+				}
+			}
+			
+		
 		});
 		
 		
@@ -48,19 +81,17 @@
 			}
 		});
 		
-		
-
 
 	});
 
 	function idcheck() {
 		var id = $("#user_id").val();
 		var getId = RegExp(/^[a-z0-9]{6,15}$/);
-
 		if(getId.test($("#user_id").val())==true){
+		
 		$.ajax({
 			type : 'POST',
-			url : '/WILLPASS/idcheck',
+			url : '${pageContext.request.contextPath}/idcheck',
 			data : {
 				id : id
 			}, //{parameterName, data} 형식
@@ -114,16 +145,28 @@
 
 	function checkz() {
 		var hobbyCheck = false;
-		var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-		var getCheck = RegExp(/^[a-z0-9]{10,15}$/);
+		var getCheck = RegExp(/^[a-z0-9]{7,15}$/);
 		var getName = RegExp(/^[가-힣]{2,6}$/); //{2,6}
 		var fmt = RegExp(/^\d{6}[1234]\d{6}$/); //형식 설정
-		var buf = new Array(13); //주민등록번호 배열
-
 		var getId = RegExp(/^[a-z0-9]{6,15}$/);
-
 		var getMobile = RegExp(/^01([0|1|6|7|8|9]?)[0-9]{7,8}$/);
 
+		
+		if ($("#user_pwd").val() != ($("#user_pwd2").val())) {
+			
+			alert("비밀번호를 다시 확인해주세요");
+			$("#user_pwd").val("");
+			$("#user_pwd2").val("");
+			
+			return false;
+		}
+
+		if($("#user_address").val()==""){
+			alert("주소를 입력해주세요");
+			getAddressInfo();
+			return false;
+		}
+		
 		//아이디 공백 확인
 		if ($("#user_id").val() == "") {
 			alert("아이디 입력바람");
@@ -133,8 +176,8 @@
 
 		if (!getId.test($("#user_id").val())) {
 			alert("한글성명은 2자에서 6자 사이입니다");
-			$("#user_id").val("");
-			$("#user_id").focus();
+			$("#user_name").val("");
+			$("#user_name").focus();
 			return false;
 		}
 
@@ -145,20 +188,6 @@
 			return false;
 		}
 
-		//비밀번호
-		if (!getCheck.test($("#user_pwd").val())) {
-			alert("10-15자의 영문,숫자조합으로 가능합니다 ");
-			$("#user_pwd").val("");
-			$("#user_pwd").focus();
-			return false;
-		}
-
-		if (!getMail.test($("#user_email").val())) {
-			alert("이메일형식에 맞게 입력해주세요")
-			$("#user_email").val("");
-			$("#user_email").focus();
-			return false;
-		}
 
 		//mobile
 		if (!getMobile.test($("#user_mobile").val())) {
@@ -173,6 +202,8 @@
 			$("#allCheck").focus();
 			return false;
 		}
+		
+
 	}
 </script>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
@@ -186,7 +217,7 @@
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 	<form action="./member/MemberJoinAction.me" method="post"
-		onSubmit="return checkz()">
+		onSubmit="return checkz();">
 		<input type="hidden" value="1" name="user_non">
 		<div class="bg-light mt-0 pt-5 pb-5">
 			<div class="container border bg-white pb-5 ">
@@ -233,8 +264,7 @@
 										<div class="row mb-0 pb-0 pt-2">
 											<input type="password" placeholder="" id="user_pwd"
 												class="form-control col-5 ml-3" name="user_pwd" required />
-											<p class=" d-inline-block col-5 ml-4 pt-2 small text-muted">10의
-												영문,숫자 조합으로 가능합니다.</p>
+											<p class=" d-inline-block col-5 ml-4 pt-2 small text-muted" id="pwdchekcp">10의 영문,숫자 조합으로 가능합니다.</p>
 										</div>
 									</td>
 								</tr>
@@ -256,7 +286,6 @@
 						</table>
 
 					</div>
-
 
 					<div class="mt-4 col-12">
 						<table class="table table-bordered">
@@ -340,7 +369,7 @@
 									<td width="80%" class="pb-0 pt-0" colspan="3">
 										<div class="input-group col-12 pl-0 pt-1 pb-1">
 											<input type="text" class="form-control col-6"
-												id="user_address" name="user_address" required />
+												id="user_address" name="user_address" required readonly="readonly" />
 											<!--  	<input type="text" id="address" name="address"  class="form-control" placeholder="Address"> -->
 											<div class="input-group-prepend">
 												<button type="button"
