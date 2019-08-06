@@ -43,6 +43,9 @@
 				<a href="ChatStart.chat" class="btn btn-dark w-100 mb-1">1:1 문의</a><br>
 				<a href="../question/Cscenter.jsp" class="btn btn-dark w-100 mb-1">자주 묻는 질문</a><br>
 				<a href="Question.Board" class="btn btn-dark w-100 mb-1">문의 게시판</a>
+				<c:if test="${user_id == 'admin' }">
+					<a href="ChattingSystem.jsp" class="btn btn-danger w-100 mb-1">1:1문의시스템</a><br>
+				</c:if>
 			</div>
 			<div class="col-sm-6" align="center">
 				<br>
