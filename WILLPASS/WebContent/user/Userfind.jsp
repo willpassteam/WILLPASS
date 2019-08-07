@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 
@@ -13,14 +15,14 @@ function idfind() {
 	var user_mobile = $("#user_mobile").val();
 	$.ajax({
 		type : 'POST',
-		url  : '/WILLPASS/mobilecheck', // 여기를 어떻게 바꾸나 ...
+		url  : '${path}/mobilecheck', // 여기를 어떻게 바꾸나 ...
 		//data: { id : id }, //{parameterName, data} 형식
 		data: { user_mobile : user_mobile }, //{parameterName, data} 형식
 		success: function(result){
-			if(result==0){
+			if(result== "0"){
 				alert("없는 번호입니다.");
 			}else{
-				alert(result);
+				alert("해당 번호로 조회된 아이디 :" + result +" 입니다.");
 			}
 					
 		},
@@ -63,15 +65,15 @@ function pwdfind() {
 	
 	$.ajax({
 		type : 'POST',
-		url  : '/WILLPASS/pwdcheck', // 여기를 어떻게 바꾸나 ...
+		url  : '${path}/pwdcheck', // 여기를 어떻게 바꾸나 ...
 		//data: { id : id }, //{parameterName, data} 형식
 		//data: { user_mobile : user_mobile,user_email : user_email}, //{parameterName, data} 형식
 		data: { user_mobile : user_mobile, user_email:user_email }, 
 		success: function(result){
-			if(result==0){
+			if(result== "0"){
 				alert("이메일과 비번이 일치하지않습니다.");
 			}else{
-				alert(result);
+				alert("조회된 비밀번호 :"+result + " 입니다.");
 			}
 					
 		}

@@ -33,6 +33,10 @@
 
 
 	<style type="text/css">
+	.nt{
+		color: black;
+		font-weight: bold;
+	}
 		input[type="text"], textarea {
 		outline: none;
 		box-shadow: none !important;

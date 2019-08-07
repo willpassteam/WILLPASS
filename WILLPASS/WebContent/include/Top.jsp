@@ -49,7 +49,6 @@ nav a{
 
 
 .menubar> a:Hover,.menubar>dt:Hover,.menubar>dd:HOVER{
-branch 'master' of https://github.com/willpassteam/WILLPASS.git
 	cursor: pointer;
 	color: #FACC2E;
 }

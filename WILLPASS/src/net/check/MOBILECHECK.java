@@ -45,7 +45,7 @@ public class MOBILECHECK extends HttpServlet {
 			result="0";
 		}
 		PrintWriter out= resp.getWriter();
-		
+		out.print(result);
 		out.close();
 		
 	}

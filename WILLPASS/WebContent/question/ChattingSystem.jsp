@@ -53,7 +53,7 @@ $(document).on("click",".chatHead > .border > a",function(){
 		adminOut();
 	}
 	//a 태그 번호 받아오기
-	joinnum = $(".chatHead > .border > a").index(this);
+	joinnum = $(".chatHead > .border > a").index(this) +1 ;
 	//join은 fnChatStart()실행하기 위한 조건
 	join = true;
 	
@@ -69,7 +69,7 @@ $(document).on("click",".chatHead > .border > a",function(){
 function adminOut(){
 	$.ajax ({
 		url : "adminOut.chat",
-		data: {chat_no : joindata[joinnum].chat_no},
+		data: {chat_no : joindata[joinnum - 1].chat_no},
 		success : function (data) {
 			console.log("상담사 나가버림");
 		}
@@ -83,7 +83,7 @@ function adminJoin(){
 	//join
 	$.ajax ({
 		url : "adminJoin.chat",
-		data: {chat_no : joindata[joinnum].chat_no},
+		data: {chat_no : joindata[joinnum-1].chat_no},
 		success : function (data) {
 			console.log("상담사 들어옴");
 		}
@@ -98,9 +98,9 @@ function ChatSend(){
 	$("[name=content]").val("");
 	$.ajax ({
 		url : "adminSendChat.chat",
-		data: {chat_no : joindata[joinnum].chat_no,
+		data: {chat_no : joindata[joinnum-1].chat_no,
 				chat_content : content_get,
-				user_email : joindata[joinnum].user_email }
+				user_email : joindata[joinnum-1].user_email }
 		,
 		success : function (data) {
 			console.log("메시지 작성완료");
@@ -131,7 +131,7 @@ $(function() {
 		$.ajax ({
 			url : "ajaxGetAdmin.chat",
 			dataType:"json",
-			data : {chat_no :joindata[joinnum].chat_no},
+			data : {chat_no :joindata[joinnum-1].chat_no},
 			success : function (datt) {
 				var Change = false;
 				Chatend = datt[0].size;

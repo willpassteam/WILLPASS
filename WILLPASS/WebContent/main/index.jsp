@@ -86,9 +86,6 @@ $(window).load(function() {//로딩이미지
     $('#loading').hide();  
    });
 	$(function() {
-		$("[name=search]").submit(function(){
-			$('#loading').show();		
-		})
 		
 
 
@@ -239,12 +236,19 @@ function fnSubmit(){
 	var check6 = $("[name=child]").val();
 	var check7 = $("[name=baby]").val();
 	var check8 = check5 +check6 +check7;
+	var user_email = "${user_email}";
 	var round_trip = $("[name=round_trip]:checked").val();
 	if(round_trip == "0"){
 		check4 = "값존재";	
 	}
+	if(user_email == ""){
+		alert("로그인 후 이용가능합니다.");
+		location.href = '../user/Userlogin.jsp';
+		return;
+	}
 	
-	if(check1 != "" &&check2 != "" &&check3 != "" &&check4 != "" &&check8 != ""){
+	if(check1 != "" &&check2 != "" &&check3 != "" &&check4 != "" &&check8 != "" ){
+		$('#loading').show();	
 		document.search.submit();
 	}else{
 		for (var i = 0; i < 7; i++) {
