@@ -8,7 +8,6 @@
 <title>Insert title here</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
-		.
 
 </head>
 <body>

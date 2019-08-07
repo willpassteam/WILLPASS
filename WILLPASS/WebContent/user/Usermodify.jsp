@@ -75,14 +75,14 @@
 						    <input type="text" class="form-control" value="${mem.user_mobile}" name="user_mobile">
 						</div>
 					</div>
-<!-- 					<div class="col-sm-6"> -->
-<!-- 						<div class="input-group mb-3"> -->
-<!-- 						    <div class="input-group-prepend"> -->
-<!-- 						      <span class="input-group-text">생년월일</span> -->
-<!-- 						    </div> -->
-<!-- 						    <input type="text" class="form-control" value="Userage"> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+					<!-- <div class="col-sm-6">
+						<div class="input-group mb-3">
+						    <div class="input-group-prepend">
+						      <span class="input-group-text">생년월일</span>
+						    </div>
+						    <input type="text" class="form-control" value="Userage">
+						</div>
+					</div> -->
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
