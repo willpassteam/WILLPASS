@@ -21,7 +21,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>1.여정선택</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <!-- 아이콘을 위한 css -->
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
@@ -390,7 +390,7 @@
 	<%-- Top Start --%>
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
-	<div class="container mb-5 mt-3"> 
+	<div class="container mb-5 mt-3  "> 
 		<h2 ><b>국제선 예약</b></h2>
 
 		<form autocomplete="off" onkeydown="return captureReturnKey(event)" onsubmit="return false;" action="searchpro.jin" method="post" name="search">
@@ -451,8 +451,9 @@
 			</form>
 
 	</div>
-
-	<img src="../img/Reser/step1.png" width="100%" class="mb-3">
+<hr size="20px">
+<!-- <hr> -->
+<!-- 	<img src="../img/Reser/step1.png" width="100%" class="mb-3"> -->
 	<div class="container">
 
 
@@ -522,7 +523,6 @@
         <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success small text-danger">
 			상기 운임은 결제완료 전까지 좌석상황에 따라 실시간 변동될 수 있습니다.<br><br>
-			※한국출발 세금(BP)은 국제여객공항이용료 12,000원, 출국납부금 10,000원, 국제빈곤퇴치기여금 1,000원이 포함되어 있습니다.
           </div>
    
         </li>
@@ -577,7 +577,6 @@
 <!--  왼쪽 -->
 
  <div class="col-md-9 order-md-1">
-	<p class="text-danger small mt-2 mb-4">운임규정은 항공권에 따라 상이하며, 자세한 내용은 하단의 운임규정 ‘필독사항’를 통해 확인 바랍니다.</p>
 	<!-- 가격 정렬 버튼 -->
 
  	<div align="right">
@@ -713,30 +712,13 @@
   		</table>	
   	</div>
  	</c:if>
- 		<div class="border bg-light small text-dark">
- 		<ul class="mt-3">
-	<li>상기 운임은 인터넷 전용 운임이며 예약센터, 공항을 통한 결제 및 변경 시 해당운임이 적용되지 않습니다.</li>
-	<li>우측 운임은 유류할증료(홍콩발 전쟁보험료 포함) 및 공항시설사용료(세부 현지 공항시설사용료 제외)가 포함된 총액이며, 구매일/환율 등에 따라 변동될 수 있습니다.</li>
-	<li>구매 후 탑승시점에 유류할증료가 인상되어도 차액을 징수하지 않으며, 인하되어도 환급되지 않습니다.</li>
-	<li>일자 및 항공편 출/도착시각은 현지 기준이며 +1은 다음날 도착을 의미합니다.</li>
-	<li>상기 스케줄은 정부 인가조건으로 불가피하게 사전 예고 없이 변경될 수 있습니다.</li>
-	<li>인터넷 시스템 정기 작업으로 매일 23시50분~00시10분까지 항공권 예매 및 여정변경/환불 서비스가 제한되며, 매주 일요일 23시00분~24시00분까지 시스템 정기점검 시간으로 홈페이지 이용이 불가하오니 이용에 참고하시기 바랍니다.
-	<li>홈페이지를 통한 예약은 최대 9석까지 표시되며, 10인 이상 예약은 단체예약문의를 통해 진행하시기 바랍니다.</li>
-	공통규정
-	<li>항공권상에 명시된 여정 순서대로 사용하는 것을 원칙으로 하며 명의 변경 및 타인양도가 불가합니다.</li>
-	<li>항공권의 유효기간은 항공권 미사용 시 최초 예약일 또는 재발행일로부터 1년이며, 여행개시 후에는 최초 출발일로부터 1년입니다.</li>
-	<li>환불은 항공권 유효기간 만료일로부터 30일 이내에 접수되어야 합니다.</li>
-	<li>수수료는 1인 당 구간별로 징수하며, 좌석을 점유하지 않은 유아는 면제됩니다.</li>
-	<li>여권상의 정보와 상이한 정보로 예약한 경우 탑승이 거절될 수 있습니다.</li>
-	<li>편도항공권 구매 시 복편항공권 미소지 또는 해당 국가의 비자 미소지로 입국이 거절 될 경우 책임은 승객 본인에게 있습니다.  </li>
-	 </ul>
- 		</div>
+
  		
- 		<div class="border small text-dark mt-5">
+ 		<div class="border small text-dark mt-5 bg-light">
  		<ul class="mt-3">
  		<b>안내사항</b>
- 		<li class="mt-2">선택하신 항공편에 따라 항공운임이 상이하오니 클릭 후 지불예상금액을 확인하여 주시기 바랍니다.</li>
-		<li>특가, 실속프로모션 및 이벤트항공권은 UM(보호자 동반 없이 혼자 여행하는 어린이) 신청이 불가합니다.</li>
+ 		<li class="mt-2">이벤트항공권은 예약 변경이 불가능합니다.</li>
+		<li> 선택하신 항공편에 따라 지불예상금액을 확인하여 주시기 바랍니다..</li>
 		</ul>
  		</div>
  
@@ -744,6 +726,9 @@
  	</div>	<!--   왼쪽끝 -->
 	</div><!--  row끝 -->
 	</div><!--  container끝 -->
-
+ <div class="pb-5"></div>
+	<%-- Footer Start --%>
+	<jsp:include page="../include/Footer.jsp"></jsp:include>
+	<%-- Footer End --%>
 </body>
 </html>

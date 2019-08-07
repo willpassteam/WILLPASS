@@ -77,6 +77,7 @@ input[type="radio"] {
  width:400px; 
  top: 45%;  
  left: 40%; 
+ 
  z-index: 100; }
 
 
