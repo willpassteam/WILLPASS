@@ -54,7 +54,6 @@ public class PWDCHECK extends HttpServlet {
 		//PrintWriter out= resp.getWriter();
 		
 		out.println(result);
-		
 		out.close();
 		
 	}
