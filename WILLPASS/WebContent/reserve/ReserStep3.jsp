@@ -300,7 +300,6 @@ $(".partbtn").on("click",function(){ //구간 선택부분 함수
         <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success small text-danger">
 			상기 운임은 결제완료 전까지 좌석상황에 따라 실시간 변동될 수 있습니다.<br><br>
-			※한국출발 세금(BP)은 국제여객공항이용료 12,000원, 출국납부금 10,000원, 국제빈곤퇴치기여금 1,000원이 포함되어 있습니다.
           </div>
    		</li>
  

@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>2.탑승자정보입력</title>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -182,7 +182,6 @@ $(function(){
         <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success small text-danger">
 			상기 운임은 결제완료 전까지 좌석상황에 따라 실시간 변동될 수 있습니다.<br><br>
-			※한국출발 세금(BP)은 국제여객공항이용료 12,000원, 출국납부금 10,000원, 국제빈곤퇴치기여금 1,000원이 포함되어 있습니다.
           </div>
 		</li>
  
@@ -265,9 +264,9 @@ $(function(){
 				 <input type="text" class="form-control  col-2 input-sm ml-2 inbox tel2c"name="tel2" required>&nbsp;&nbsp;_
 				 <input type="text" class="form-control  col-2 input-sm ml-2 inbox tel3c"name="tel3" required>
 				</div>
-				<p class="ml-1 mt-2">
-				연락처 오기입 및 변경 발생 시, 예약센터(1666-3060)을 통해 연락처 수정 바랍니다.
-				연락처를 수정하지 않을실 경우, 운항정보(스케쥴 변경, 지연, 결항 등)에 대한 사전 SMS 서비스 이용이 불가할 수 있습니다.
+				<p class="ml-1 mt-2 text-muted">
+				전화번호를 통해 탑승권 안내 및 예약상황을  알려드립니다.<br>
+				전화번호변경을 원할시 고객센터로 문의해주시기 바랍니다.
 				</p>
 				</td>
 				</tr>
@@ -283,7 +282,7 @@ $(function(){
 				 <input type="text" class="form-control  col-4 input-sm ml-2 inbox emailc2" name="email2" value="${array[1]}" readonly="readonly">
 				 
 				</div>
-				<p class="ml-1 mt-2">
+				<p class="ml-1 mt-2 text-muted">
 				이메일을 통해 예약상황을 알려드립니다.
 				</p>
 				</td>
@@ -297,12 +296,9 @@ $(function(){
     <div class="mb-3 small bg-light text-dark pl-3 pt-3 pr-3 pm-3 border mt-3 mb-5">
 	<b>유의사항</b><br>
 	<ul>
-	<li>국제선 탑승수속을 위한 준비물 확인하기</li>
-	<li><p class="text-danger d-inline-block mb-0">누락된 스탬프는 FLY & STAMP 누락스탬프에서 적립 가능합니다.</p></li>
-	<li>소아/유아의 나이구분은 여행일(탑승일) 기준이며, 나이를 확인 할 수 있는 서류(여권)를 반드시 지참 하시기 바랍니다.</li>
-	<li>동명이인의 경우 인터넷으로 동시 예약이 불가능 하오니, 각 탑승자 별로 인터넷 예약을 진행해 주시기 바랍니다. </li>
-	<li><p class="text-danger d-inline-block mb-0">동시 예약을 하고자 하시는 분은 예약센터(1666-3060)를 통해 예약바랍니다.</p></li>
 	<li>기내반입제한품목을 반드시 확인하시기 바랍니다.</li>
+	<li><p class="text-danger d-inline-block mb-0">소아/유아의 나이구분은 여행일(탑승일) 기준이며, 나이를 확인 할 수 있는 서류(여권)를 반드시 지참 하시기 바랍니다.</p></li>
+	<li><p class="text-danger d-inline-block mb-0">동명이인의 경우 인터넷으로 동시 예약이 불가능 하오니, 각 탑승자 별로 인터넷 예약을 진행해 주시기 바랍니다.</p></li>
 	</ul>
     </div>
     
