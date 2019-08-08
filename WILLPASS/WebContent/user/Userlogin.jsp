@@ -18,6 +18,21 @@ function emailverif() {
 	// 	   openWin.document.getElementById("user_email").value = document.getElementById("emailadr").value;
 
 }
+function fnLogin(){
+	var user_email = $("[name=user_email]").val();
+	var user_pwd = $("[name=user_pwd]").val();
+	
+	if(user_email != "" && user_pwd != ""){
+		document.loginform1.submit();
+	}else if(user_email == ""){
+		alert("아이디를 입력해주세요.");
+	}else{
+		alert("비밀번호를 입력해주세요.");
+	}
+	
+	
+}
+
 
 </script>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
@@ -48,7 +63,7 @@ function emailverif() {
 				<div class="row ">
 					<div class="col-sm-6">
 					
-						<form action="./member/MemberloginAction.me">
+						<form action="./member/MemberloginAction.me" name="loginform1">
 						<div class="row">
 							<div class="col-sm-1"></div>
 							<div class="col-sm-7">
@@ -59,7 +74,7 @@ function emailverif() {
 							</div>
 							<div class="col-sm-3">
 								<br>
-								<input type="submit" class="btn btn-primary btn-lg" value="로그인">
+								<input type="button" class="btn btn-primary btn-lg" onclick="fnLogin();" value="로그인	">
 							</div>
 							<div class="col-sm-1"></div>
 						</div>

@@ -49,7 +49,7 @@ public class MemberDAO {
 			getConnection();
 			//디비연결(Connection얻기)
 			//SQL작성 insert
-			sql = "insert into user(user_id,user_pwd,user_name,user_email,user_mobile,user_address,user_non) values(?,?,?,?,?,?,?)";
+			sql = "insert into user(user_id,user_pwd,user_name,user_email,user_mobile,user_address) values(?,?,?,?,?,?)";
 			//?에 대응되는값을 제외한 위의 sql변수에 저장되어 있는 insert 구문 전체를 PreparedStatement객체에 저장 한 후
 			//PreparedStatement객체를 반환받아 얻기
 			pstmt = con.prepareStatement(sql);
@@ -62,7 +62,6 @@ public class MemberDAO {
 			//pstmt.setDate(5, mb.getUser_age());
 			pstmt.setString(5, mb.getUser_mobile());
 			pstmt.setString(6, mb.getUser_address());
-			pstmt.setString(7,mb.getUser_non());
 			//pstmt.setString(8, mb.getUser_gender());
 			
 			result = pstmt.executeUpdate();	//회원가입 성공 1리턴, 실패 0리턴
