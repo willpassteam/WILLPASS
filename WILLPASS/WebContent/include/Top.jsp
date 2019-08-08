@@ -30,6 +30,7 @@ nav a{
 .nt{
 	font-size: 20;
 	font-weight: bold;
+	color:black;
 	
 	
 }
@@ -112,8 +113,8 @@ $(function(){
 	<div class="container">
 		<div class="row menurow" height="130px" >
 			<div class="col-xl-4">
-				<a href="../main/index.jsp">
-					<img alt="" src="../img/Logo.PNG">
+				<a href="${contextPath}/main/index.jsp">
+					<img alt="" src="${contextPath}/img/Logo.PNG">
 				</a>
 			</div>
 			<div class="col-xl-8 mt">
