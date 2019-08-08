@@ -272,17 +272,14 @@ function fnSubmit(){
 	<jsp:include page="../include/Top.jsp"></jsp:include>
 	<%-- Top End --%>
 	<div id="loading"><img id="loading-image" src="${path}/img/loading.gif" alt="Loading..." /></div>
-	
-
-	<div class="pt-5" id="ma">
+	<div class="pt-5 mb-5" id="ma">
 		<h1 class="text-center maintx-1 ">
 			<b>푸동푸동 타이완</b>
 		</h1>
-		<h4 class="text-center maintx ">두/근/거/림 가득한 여행지 대만</h4>
+		<h4 class="text-center maintx pt-3">두/근/거/림 가득한 여행지 대만</h4>
 		<h4 class="text-center maintx">한달에 한번 ,실속있는 가격으로 구매하는 얼리버드 이벤트</h4>
 		<p class="text-center mb-5 maintx ">이벤트 기간 : 2019.7.10~ 2019.08.11</p>
-
-
+		
 		<!--잠시 -->
 
 		<div class="container pb-5">
