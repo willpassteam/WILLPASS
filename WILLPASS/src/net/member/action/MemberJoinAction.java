@@ -40,7 +40,7 @@ public class MemberJoinAction implements Action{
 		//회원 이름 저장
 //		mb.setUser_age(new SimpleDateFormat("yyyyMMdd").parse(request.getParameter("age")));
 		mb.setUser_address(request.getParameter("user_address")); //회원 주소 저장
-		mb.setUser_non(request.getParameter("user_non"));
+		
 		//mb.setUser_non(Integer.parseInt(request.getParameter("user_non")));
 		//mb.setUser_gender(request.getParameter("user_gender"));
 	
