@@ -45,21 +45,21 @@ public class Resercompleteaction implements Action{
 			{
 				String searnum=onepartseat[i];
 				psdto = (PassengerDTO)pasinfoarr.get(i);
-				String v1=psdto.getPafname();
-				String v2=psdto.getPagender();
-				Date  v3=sreardt.getDate();
-				String v4= psdto.getPaname();
-				String v5= psdto.getPareemail();
-				String v6=sreardt.getAirline();
-				String v7=sreardt.getFlight();
-				String v8=sreardt.getDeparture_time();
-				String v9=sreardt.getStarting();
-				String v11=sreardt.getDestination();
-				String v12= sreardt.getArrival_time();
-				int v13=sreardt.getPrice()+9000+32000;
-				String v14=searnum;
-				reserdto= new ReservationDTO(v1,v2,v3,v4,v5,v6,v7,v8,v9,v11,v12,v13,v14);
-				email=v5;
+				String fname=psdto.getPafname();
+				String gender=psdto.getPagender();
+				Date  bdate=sreardt.getDate();
+				String gname= psdto.getPaname();
+				String paemail= psdto.getPareemail();
+				String airline=sreardt.getAirline();
+				String flight=sreardt.getFlight();
+				String detime=sreardt.getDeparture_time();
+				String starting=sreardt.getStarting();
+				String destination=sreardt.getDestination();
+				String arrivaltime= sreardt.getArrival_time();
+				int price=sreardt.getPrice()+9000+32000;
+				String searnum2=searnum;
+				reserdto= new ReservationDTO(fname,gender,bdate,gname,paemail,airline,flight,detime,starting,destination,arrivaltime,price,searnum2);
+				email=paemail;
 				Reservationarr1.add(reserdto);
 		
 			}
@@ -73,21 +73,21 @@ public class Resercompleteaction implements Action{
 				for(int i=0;i<pasinfoarr.size();i++)
 				{	String searnum=onepartseat[i];
 				psdto = (PassengerDTO)pasinfoarr.get(i);
-				String v1=psdto.getPafname();
-				String v2=psdto.getPagender();
-				Date  v3=sreardt.getDate();
-				String v4= psdto.getPaname();
-				String v5= psdto.getPareemail();
-				String v6=sreardt.getAirline();
-				String v7=sreardt.getFlight();
-				String v8=sreardt.getDeparture_time();
-				String v9=sreardt.getStarting();
-				String v11=sreardt.getDestination();
-				String v12= sreardt.getArrival_time();
-				int v13=sreardt.getPrice()+9000+32000;
-				String v14=searnum;
+				String fname=psdto.getPafname();
+				String gender=psdto.getPagender();
+				Date  bdate=sreardt.getDate();
+				String gname= psdto.getPaname();
+				String paemail= psdto.getPareemail();
+				String airline=sreardt.getAirline();
+				String flight=sreardt.getFlight();
+				String detime=sreardt.getDeparture_time();
+				String starting=sreardt.getStarting();
+				String destination=sreardt.getDestination();
+				String arrivaltime= sreardt.getArrival_time();
+				int price=sreardt.getPrice()+9000+32000;
+				String searnum2=searnum;
 					
-				reserdto= new ReservationDTO(v1,v2,v3,v4,v5,v6,v7,v8,v9,v11,v12,v13,v14);
+				reserdto= new ReservationDTO(fname,gender,bdate,gname,paemail,airline,flight,detime,starting,destination,arrivaltime,price,searnum2);
 				Reservationarr2.add(reserdto);
 					
 				}

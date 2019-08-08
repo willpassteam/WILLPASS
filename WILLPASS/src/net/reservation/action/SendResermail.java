@@ -48,7 +48,7 @@ public class SendResermail {
     		String fromName="WILLPASS 관리자";
     		String to=email;
     		String content="<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Insert title here</title><style>"
-    				+"</style></head><body style='width: 1000px'><div align='center'><div align='center'><img src='https://mail.naver.com/read/image/?mailSN=811&attachIndex=2&contentType=image/png&offset=1449&size=4592&maxSize=200&mimeSN=1565159957.37105.28983.22272&u=bigpark666'><h3 >항공권 예약/결제 확인</h3>"
+    				+"</style></head><body style='width: 1000px'><div align='center'><div align='center'><img src='#'><h3 >항공권 예약/결제 확인</h3>"
     				+"<table style='width: 800px'><tr style='background-color: #dddddd;'><th>탑승일</th><th >탑승구간</th><th>탑승자</th>"
     				+"<th>항공사/항공편</th><th>좌석번호</th></tr>";
     		
