@@ -87,7 +87,7 @@ public class SendResermail {
     		try{
     			Authenticator auth = new Authenticator() {
     				protected PasswordAuthentication getPasswordAuthentication() {
-    					return new PasswordAuthentication("bigpark666@naver.com", "bigpark#");
+    					return new PasswordAuthentication("bigpark666@naver.com", "bigpark6");
     				}
     			};
     		    Session ses = Session.getInstance(p, auth);
