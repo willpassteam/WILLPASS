@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
 <!-- 커스텀 css  -->
 <link rel="stylesheet" href="${contextPath }/css/Ftcustom.css?aftasder">
-<title>Insert title here</title>
-</head>
-<body>
+
 	<!-- 	<div class="container mx-auto footer small " style="margin-top: 100px;"> -->
 	<!-- 		<div class="row"> -->
 	<!-- 			<div class="col-sm-2"> -->
@@ -42,7 +36,7 @@
 	<!-- 		</div> -->
 
 
-	<div class="clear-both"></div>
+	
 	<div class="bg-white Footer">
 		<hr class="mt-0 mb-3 pt-0 pb-0">
 		<div class="container">
@@ -67,6 +61,5 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+
 

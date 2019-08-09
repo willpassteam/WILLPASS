@@ -74,7 +74,7 @@ function fnLogin(){
 							</div>
 							<div class="col-sm-3">
 								<br>
-								<input type="button" class="btn btn-primary btn-lg" onclick="fnLogin();" value="로그인	">
+								<input type="button"  class="btn btn-primary btn-lg" onclick="fnLogin();" value="로그인">
 							</div>
 							<div class="col-sm-1"></div>
 						</div>

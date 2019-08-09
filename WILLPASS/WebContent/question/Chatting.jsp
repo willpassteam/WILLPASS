@@ -111,6 +111,7 @@ $(function() {
 					url : "adminChatCount.chat",
 					data: {chat_no : data[i][0].chat_no}
 					,
+					cache: false,
 					success : function (da) {
 						count = da;
 					}

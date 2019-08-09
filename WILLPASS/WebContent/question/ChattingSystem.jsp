@@ -70,6 +70,7 @@ function adminOut(){
 	$.ajax ({
 		url : "adminOut.chat",
 		data: {chat_no : joindata[joinnum - 1].chat_no},
+		cache: false,
 		success : function (data) {
 			console.log("상담사 나가버림");
 		}
@@ -84,6 +85,7 @@ function adminJoin(){
 	$.ajax ({
 		url : "adminJoin.chat",
 		data: {chat_no : joindata[joinnum-1].chat_no},
+		cache: false,
 		success : function (data) {
 			console.log("상담사 들어옴");
 		}
@@ -98,6 +100,7 @@ function ChatSend(){
 	$("[name=content]").val("");
 	$.ajax ({
 		url : "adminSendChat.chat",
+		cache: false,
 		data: {chat_no : joindata[joinnum-1].chat_no,
 				chat_content : content_get,
 				user_email : joindata[joinnum-1].user_email }
@@ -131,6 +134,7 @@ $(function() {
 		$.ajax ({
 			url : "ajaxGetAdmin.chat",
 			dataType:"json",
+			cache: false,
 			data : {chat_no :joindata[joinnum-1].chat_no},
 			success : function (datt) {
 				var Change = false;
@@ -172,6 +176,7 @@ $(function() {
 				$.ajax ({
 					url : "getChatAdmin.chat",
 					dataType:"json",
+					cache: false,
 					success : function (data) {
 						joindata = data;
 						Allend = data[0].allsize;
