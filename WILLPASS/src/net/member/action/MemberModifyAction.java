@@ -42,17 +42,19 @@ public class MemberModifyAction implements Action{
 		MemberBean mb=new MemberBean();
 		
 		mb.setUser_id(request.getParameter("user_id"));//회원 id 저장
-		mb.setUser_pwd(request.getParameter("user_pwd")); //회원 pass 저장
+		
+		
+		
 		mb.setUser_email(request.getParameter("user_email"));
 		mb.setUser_name(request.getParameter("user_name"));
 		mb.setUser_mobile(request.getParameter("user_mobile"));
 		//회원 이름 저장
 //		mb.setUser_age(new SimpleDateFormat("yyyyMMdd").parse(request.getParameter("age")));
 		mb.setUser_address(request.getParameter("user_address")); //회원 주소 저장
-		mb.setUser_non(request.getParameter("user_non"));
 		//mb.setUser_non(Integer.parseInt(request.getParameter("user_non")));
 		//mb.setUser_gender(request.getParameter("user_gender"));
-	
+		System.out.println(request.getParameter("Check"));
+		System.out.println(request.getParameter("Newpwd1"));
 		//회원가입 성공 여부를 담을 변수 선언
 		boolean result = false;
 		

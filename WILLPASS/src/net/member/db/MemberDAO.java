@@ -203,7 +203,6 @@ public class MemberDAO {
 				mb.setUser_mobile(rs.getString("user_mobile"));
 				//mb.setDate(rs.getTimestamp("date"));
 				mb.setUser_address(rs.getString("user_address"));
-				mb.setUser_non(rs.getString("user_non"));
 				
 			}
 		} catch (Exception e) {

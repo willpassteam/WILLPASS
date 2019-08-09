@@ -62,6 +62,7 @@ $(function() {
 		ajaxCheck= false;
 		$.ajax ({
 			url : "getChatContent.chat",
+			cache: false,
 			dataType:"json",
 			data : {chat_no :'<%=chat_no%>'},
 			success : function (data) {
@@ -101,6 +102,7 @@ function fnSubmit(){
 	$("[name=content]").val("");
 	$.ajax ({
 		type:"post",
+		cache: false,
 		url : "writeChat.chat",
 		data : {chat_no :'<%=chat_no%>',content : content},
 		success : function (result){ 

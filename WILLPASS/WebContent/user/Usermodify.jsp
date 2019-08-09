@@ -6,6 +6,43 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <jsp:include page="../include/Bootstrap.jsp"></jsp:include>
+<script type="text/javascript">
+var newPwdCheck = "";
+function fnModify(){
+	
+	var newPwd1 = $("[name=Newpwd1]").val();
+	var newPwd2 = $("[name=Newpwd2]").val();
+	if(newPwd1 != newPwd2){
+		$(".pwdcheck").show();
+		newPwdCheck = "No";
+	}else{
+		$(".pwdcheck").hide();
+		newPwdCheck = "Check";
+	}
+	
+	
+	
+	
+}
+function fnModifyCheck(){
+	var user_pwd = $("[name=user_pwd]").val()
+	var user_pwd1 = "${mem.user_pwd}";
+	if(user_pwd != user_pwd1){
+		alert("비밀번호가 틀립니다.")
+		return;
+	}else if(user_pwd == user_pwd1 && newPwdCheck =="Check" || newPwdCheck ==""  ){
+		$("[name=Check]").val(newPwdCheck);
+		document.modify.submit();
+	}else if(newPwdCheck =="No"){
+		alert("새로운 비밀번호가 틀립니다.")
+		return;
+	}
+		
+	
+	
+}
+
+</script>
 </head>
 <body>
 
@@ -14,15 +51,15 @@
 	<%-- Top End --%>
 	<br>
 	<br>
-	<div class="container">
+	<div class="container" style="min-height: 640px">
 		<h2 align="center">회원정보 수정</h2>
 		<br>
-		<div class="row">
+		<div class="row ">
 			
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8 p-3">
-				<form action="./MemberUpdateAction.me" method="post">
-				
+				<form action="./MemberUpdateAction.me" method="post" name="modify">
+				<input type="hidden" name="Check" value="">
 				
 <!-- 				<form action="./member/MemberUpdateAction.me"> -->
 <!-- 				<input type="hidden" value="1" name="user_non"> -->
@@ -41,7 +78,7 @@
 						    <div class="input-group-prepend">
 						      <span class="input-group-text">비밀번호</span>
 						    </div>
-						    <input type="text" class="form-control" value="${mem.user_pwd}" name="user_pwd">
+						    <input type="text" class="form-control" name="user_pwd">
 						    <div class="input-group-prepend">
 						      <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#modifypwd">비밀번호 수정</button>
 						    </div>
@@ -54,7 +91,7 @@
 							    <div class="input-group-prepend">
 							      <span class="input-group-text">새로운 비밀번호</span>
 							    </div>
-							    <input type="password" class="form-control" name="Newpwd1">
+							    <input type="password" class="form-control" onchange="fnModify()" name="Newpwd1">
 							</div>
 						</div>
 						<div class="col-sm-6">
@@ -62,9 +99,12 @@
 							    <div class="input-group-prepend">
 							      <span class="input-group-text">새로운 비밀번호 확인</span>
 							    </div>
-							    <input type="password" class="form-control" name="Newpwd2">
+							    <input type="password" class="form-control" onchange="fnModify()" name="Newpwd2">
 							</div>
 						</div>							
+				  	</div>
+				  	<div class="text-danger ml-3 pwdcheck" style="display: none;">
+				  		비밀번호가 다릅니다.
 				  	</div>
 				<div class="row">
 					<div class="col-sm-6">
@@ -107,7 +147,7 @@
 				
 				<div class="row">
 					<div class="col-sm-12" align="center">
-						<input type="submit" value="정보 수정" class="btn btn-primary"> <input type="reset" value="다시 작성" class="btn btn-danger">
+						<input type="button" value="정보 수정" class="btn btn-primary" onclick="fnModifyCheck()"> <input type="reset" value="다시 작성" class="btn btn-danger">
 					</div>
 				</div>
 				

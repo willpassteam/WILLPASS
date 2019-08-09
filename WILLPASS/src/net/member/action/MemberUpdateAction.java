@@ -25,7 +25,11 @@ public class MemberUpdateAction implements Action {
 		//mb.setId(request.getParameter(id));//second
 		
 		mb.setUser_id(request.getParameter("user_id"));			//입력한 회원 id 저장  //third
-		mb.setUser_pwd(request.getParameter("user_pwd"));		//입력한 회원 pass 저장
+		if(request.getParameter("Check").equals("Check")){
+			mb.setUser_pwd(request.getParameter("Newpwd1")); //회원 pass 저장
+		}else{
+			mb.setUser_pwd(request.getParameter("user_pwd"));
+		}
 		mb.setUser_email(request.getParameter("user_email"));
 	    mb.setUser_mobile(request.getParameter("user_mobile"));//입력한 회원 이름 저장
 		//mb.setUser_name(request.getParameter("user_name"));		//입력한 회원 이메일 저장

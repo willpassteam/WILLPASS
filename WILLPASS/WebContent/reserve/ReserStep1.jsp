@@ -183,6 +183,12 @@
 	
 	$(function () {
 			$("#nextBtn").click(function() {
+				var user_email = "${user_email}";
+				if(user_email == ""){
+					alert("로그인 후 이용가능합니다.");
+					location.href = '../user/Userlogin.jsp';
+					return;
+				}
 				if("${roundtrip}" == "true"){
 					if(depart2 != ""){
 		 				if($(".airline1").val() == "" || $(".airline2").val() == ""){
@@ -190,6 +196,7 @@
 						}else if($(".airline1").val() == "" && $(".airline2").val() == ""){
 							alert("항공편을 선택해 주세요!");
 						}else{
+							
 							$("#nextRes").submit();
 						}	
 					}else if(depart1 != ""){
